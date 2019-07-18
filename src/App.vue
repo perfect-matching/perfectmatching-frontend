@@ -1,33 +1,28 @@
 <template>
-  <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-toolbar>
-
+  <v-app id="inspire">
+    <nav-bar></nav-bar>
     <v-content>
-      <router-view />
+      <v-container fluid fill-height>
+        <v-layout justify-center align-center>
+          <v-flex text-xs-center></v-flex>
+        </v-layout>
+      </v-container>
     </v-content>
+    <v-footer color="indigo" app>
+      <span class="white--text">&copy; 2017</span>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
+import NavBar from "./components/NavBar.vue";
 export default {
-  name: "App",
-  data() {
-    return {
-      //
-    };
+  components: {
+    NavBar
+  },
+
+  props: {
+    source: String
   }
 };
 </script>
