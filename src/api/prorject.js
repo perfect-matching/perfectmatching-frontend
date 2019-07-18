@@ -5,4 +5,11 @@ function getProjects() {
   return axios.get(`${backend.baseUrl}/projects`);
 }
 
-export { getProjects };
+function getProjectById(id) {
+  return axios.get(`${backend.baseUrl}/projects/${id}`);
+}
+
+export const project = {
+  getProjects,
+  getProjectById
+};

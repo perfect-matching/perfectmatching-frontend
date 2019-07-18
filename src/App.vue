@@ -2,10 +2,8 @@
   <v-app id="inspire">
     <nav-bar></nav-bar>
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout justify-center align-center>
-          <v-flex text-xs-center></v-flex>
-        </v-layout>
+      <v-container fluid>
+        <router-view></router-view>
       </v-container>
     </v-content>
     <v-footer color="indigo" app>
@@ -26,3 +24,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.v-content {
+  background-color: #f4f6fc !important;
+}
+</style>

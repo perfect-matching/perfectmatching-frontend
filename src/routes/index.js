@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import ProjectItemView from "../views/ProjectItemView.vue";
 
 Vue.use(Router);
 
@@ -12,6 +13,11 @@ export const router = new Router({
       path: "/",
       name: "home",
       component: HomeView
+    },
+    {
+      path: "/projects/:id",
+      name: "proejectItem",
+      component: ProjectItemView
     }
   ]
 });

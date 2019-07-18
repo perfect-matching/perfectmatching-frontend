@@ -15,7 +15,7 @@
             <v-icon>contact_mail</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Contact</v-list-tile-title>
+            <v-list-tile-title>List</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -33,7 +33,7 @@
       </v-btn>
 
       <v-btn icon>
-        <v-avatar :tile="tile" :size="36" color="grey lighten-4">
+        <v-avatar :tile="false" :size="36" color="grey lighten-4">
           <img
             src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
             alt="avatar"
@@ -56,4 +56,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped></style>
