@@ -1,9 +1,6 @@
 <template>
   <v-card class="mx-auto" color="#26c6da" dark>
-    <v-card-text class="headline font-weight-bold"
-      >"백엔드는 스프링을 쓰나요, Node.js 를 쓰나요?"</v-card-text
-    >
-
+    <v-card-text class="headline font-weight-bold">"백엔드는 스프링을 쓰나요, Node.js 를 쓰나요?"</v-card-text>
     <v-card-actions>
       <v-list-tile class="grow">
         <v-list-tile-avatar color="grey darken-3">
@@ -30,6 +27,7 @@
 
 <script>
 export default {
+  name: "commentCard",
   data: () => ({
     //
   })

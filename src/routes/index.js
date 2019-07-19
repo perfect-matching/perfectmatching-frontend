@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import ProjectItemView from "../views/ProjectItemView.vue";
+import ProjectDetailView from "../views/ProjectDetailView.vue";
+import UserDetailView from "../views/UserDetailView.vue";
 
 Vue.use(Router);
 
@@ -11,13 +12,22 @@ export const router = new Router({
   routes: [
     {
       path: "/",
+      redirect: "home"
+    },
+    {
+      path: "/home",
       name: "home",
       component: HomeView
     },
     {
       path: "/projects/:id",
-      name: "proejectItem",
-      component: ProjectItemView
+      name: "projectDetail",
+      component: ProjectDetailView
+    },
+    {
+      path: "/users/:id",
+      name: "userDetail",
+      component: UserDetailView
     }
   ]
 });
