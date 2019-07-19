@@ -2,16 +2,16 @@ import { shallowMount } from "@vue/test-utils";
 import Vuetify from "vuetify";
 import Vue from "vue";
 
-import ProjectItemView from "../../src/views/ProjectItemView.vue";
-import ProjectDetail from "../../src/components/ProjectItemView/ProjectDetail.vue";
-import CommentList from "../../src/components/ProjectItemView/CommentList.vue";
-import CommentCard from "../../src/components/ProjectItemView/CommentCard.vue";
+import ProjectDetailView from "../../src/views/ProjectDetailView.vue";
+import ProjectDetail from "../../src/components/ProjectDetailView/ProjectDetail.vue";
+import CommentList from "../../src/components/ProjectDetailView/CommentList.vue";
+import CommentCard from "../../src/components/ProjectDetailView/CommentCard.vue";
 
-describe("ProjectItemView.vue ", () => {
+describe("ProjectDetailView.vue ", () => {
     let wrapper;
     beforeEach(() => {
         Vue.use(Vuetify);
-        wrapper = shallowMount(ProjectItemView);
+        wrapper = shallowMount(ProjectDetailView);
     });
 
     test('renders a vue instance', () => {

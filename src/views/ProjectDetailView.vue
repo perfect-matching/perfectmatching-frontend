@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import ProjectDetail from "../components/ProjectItemView/ProjectDetail.vue";
-import CommentList from "../components/ProjectItemView/CommentList.vue";
+import ProjectDetail from "../components/ProjectDetailView/ProjectDetail.vue";
+import CommentList from "../components/ProjectDetailView/CommentList.vue";
 export default {
   name: "prjectDetail",
   components: {
