@@ -3,6 +3,7 @@ import Router from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import ProjectDetailView from "../views/ProjectDetailView.vue";
 import UserDetailView from "../views/UserDetailView.vue";
+import MyPageView from "../views/MyPageView.vue";
 
 Vue.use(Router);
 
@@ -28,6 +29,11 @@ export const router = new Router({
       path: "/users/:id",
       name: "userDetail",
       component: UserDetailView
+    },
+    {
+      path: "/my",
+      name: "myPage",
+      component: MyPageView
     }
   ]
 });
