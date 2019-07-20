@@ -7,7 +7,6 @@ import UserInfo from "../../src/components/UserDetailView/UserInfo.vue";
 import UserProjectList from "../../src/components/UserDetailView/UserProjectList.vue";
 import ProjectListItem from "../../src/components/UserDetailView/ProjectListItem.vue";
 
-
 describe('UserDetailView.vue', () => {
     let wrapper;
     beforeEach(() => {
