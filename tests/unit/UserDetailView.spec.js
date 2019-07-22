@@ -8,10 +8,11 @@ import UserProjectList from "../../src/components/UserDetailView/UserProjectList
 import ProjectListItem from "../../src/components/UserDetailView/ProjectListItem.vue";
 
 describe('UserDetailView.vue', () => {
-    let wrapper;
+    let wrapper, userProjectList;
     beforeEach(() => {
         Vue.use(Vuetify);
         wrapper = shallowMount(UserDetailView);
+        userProjectList = shallowMount(UserProjectList);
     });
 
     test('renders a vue instance', () => {
@@ -27,6 +28,6 @@ describe('UserDetailView.vue', () => {
     })
 
     test('check if UserProjectList has ProejctListItem exists', () => {
-        expect(shallowMount(UserProjectList).contains(ProjectListItem)).toBe(true);
+        expect(userProjectList.contains(ProjectListItem)).toBe(true);
     })
 })
