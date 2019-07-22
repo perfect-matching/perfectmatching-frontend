@@ -8,10 +8,11 @@ import MyProjectList from "../../src/components/MyPageView/MyProjectList.vue";
 import MyProjectCard from "../../src/components/MyPageView/MyProjectCard.vue";
 
 describe('MyPageView.vue', () => {
-    let wrapper;
+    let wrapper, myProjectList;
     beforeEach(() => {
         Vue.use(Vuetify);
-        wrapper = shallowMount(MyPageView)
+        wrapper = shallowMount(MyPageView);
+        myProjectList = shallowMount(MyProjectList);
     });
 
     test('renders a vue instance', () => {
@@ -27,6 +28,6 @@ describe('MyPageView.vue', () => {
     })
 
     test('check if MyProjectList has child MyProjectCard', () => {
-        expect(shallowMount(MyProjectList).contains(MyProjectCard)).toBe(true);
+        expect(myProjectList.contains(MyProjectCard)).toBe(true);
     })
 });

@@ -8,10 +8,11 @@ import CommentList from "../../src/components/ProjectDetailView/CommentList.vue"
 import CommentCard from "../../src/components/ProjectDetailView/CommentCard.vue";
 
 describe("ProjectDetailView.vue ", () => {
-    let wrapper;
+    let wrapper, commentList;
     beforeEach(() => {
         Vue.use(Vuetify);
         wrapper = shallowMount(ProjectDetailView);
+        commentList = shallowMount(CommentList);
     });
 
     test('renders a vue instance', () => {
@@ -27,6 +28,6 @@ describe("ProjectDetailView.vue ", () => {
     })
 
     test('check if CommentList has CommentCard', () => {
-        expect(shallowMount(CommentList).contains(CommentCard)).toBe(true);
+        expect(commentList.contains(CommentCard)).toBe(true);
     })
 });
