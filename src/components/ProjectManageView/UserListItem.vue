@@ -1,26 +1,39 @@
 <template>
-  <v-container class="user_item_container">
-    <v-layout text-xs-center align-center>
-      <v-card class="mx-auto user_card" color="#26c6da" dark>
-        <v-layout text-xs-center align-center>
-          <v-flex>
-            <v-avatar :tile="false" :size="56" color="grey lighten-4">
-              <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar" />
-            </v-avatar>
-          </v-flex>
-          <v-flex xs5>
-            <v-card-title class="title" primary-title>
-              <div class="headline">권영근 jkljkl1793</div>
-            </v-card-title>
-          </v-flex>
-          <v-flex>2019년 01월 01일</v-flex>
-          <v-flex>모집중</v-flex>
-        </v-layout>
-      </v-card>
-      <v-btn depressed color="primary">Primary</v-btn>
-      <v-btn depressed color="primary">Primary</v-btn>
+  <v-card class="user_card">
+    <v-layout align-center justify-center row fill-height>
+      <v-card-title primary-title>
+        <div>
+          <h3 class="headline mb-0">권영근</h3>
+          <v-chip color="primary" text-color="white">대기중</v-chip>
+        </div>
+      </v-card-title>
+
+      <!-- <v-card-actions>
+      <v-btn flat color="orange">수락</v-btn>
+      <v-btn flat color="orange">거절</v-btn>
+      </v-card-actions>-->
+      <v-spacer></v-spacer>
+
+      <div>
+        <v-card-actions>
+          <v-btn icon>
+            <v-icon>more_horiz</v-icon>
+          </v-btn>
+        </v-card-actions>
+        <v-avatar
+          class="user_photo"
+          :tile="false"
+          :size="50"
+          color="grey lighten-4"
+        >
+          <img
+            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
+            alt="avatar"
+          />
+        </v-avatar>
+      </div>
     </v-layout>
-  </v-container>
+  </v-card>
 </template>
 
 <script>
@@ -31,12 +44,17 @@ export default {};
 .user_item_container {
   padding: 0;
 }
+
 .headline {
   width: 100%;
 }
 
 .user_card {
-  width: 800px;
+  width: 100%;
   margin: 0;
+}
+
+.user_photo {
+  margin-right: 15px;
 }
 </style>
