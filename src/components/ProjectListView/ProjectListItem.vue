@@ -1,34 +1,94 @@
 <template>
-  <v-card color="cyan darken-2" class="project_card white--text">
-    <v-layout text-xs-center align-center>
-      <v-flex>
-        <v-avatar :tile="false" :size="56" color="grey lighten-4">
-          <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar" />
-        </v-avatar>
-      </v-flex>
-      <v-flex xs5>
-        <v-card-title class="title" primary-title>
-          <div
-            class="headline"
-          >이건 엄청나게 긴 프로젝트 이름이건 엄청나게 긴 프로젝트 이름이건 엄청나게 긴 프로젝트 이름이건 엄청나게 긴 프로젝트 이름이건 엄청나게 긴 프로젝트 이름이건 엄청나게 긴 프로젝트 이름</div>
-        </v-card-title>
-      </v-flex>
-      <v-flex xs2>2019년 02월 03일</v-flex>
-      <v-flex xs2>2019년 01월 01일</v-flex>
-      <v-flex xs1>모집중</v-flex>
-    </v-layout>
-  </v-card>
+  <v-hover>
+    <v-card
+      slot-scope="{ hover }"
+      :class="`elevation-${hover ? 12 : 2}`"
+      class="project_card"
+    >
+      <!-- <v-img
+          src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+          aspect-ratio="2.75"
+      ></v-img>-->
+      <v-layout class="project_leader_info" align-center>
+        <v-flex>
+          <v-avatar
+            class="card_avatar"
+            :tile="false"
+            :size="70"
+            color="grey lighten-4"
+          >
+            <img
+              src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
+              alt="avatar"
+            />
+          </v-avatar>
+        </v-flex>
+        <v-flex class="user_nick">권영근 jkljkl1793</v-flex>
+      </v-layout>
+
+      <v-card-title class="project_info" primary-title>
+        <h3 class="project_info_item headline mb-0">Kangaroo Valley Safari</h3>
+        <div class="project_info_item">
+          <div class="project_date">2019년 02월 20일</div>
+          <v-chip class="status" small color="grey" text-color="white"
+            >마감</v-chip
+          >
+        </div>
+        <div class="project_info_item proejct_summery">
+          <p>{{ card_text }}</p>
+        </div>
+      </v-card-title>
+    </v-card>
+  </v-hover>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      card_text:
+        "Lorem ipsum dolor sit amet, brute iriure accusata ne mea. Eos suavitate referrentur ad, te duo agam libris qualisque, utroque quaestio accommodare no qui. Et percipit laboramus usu, no invidunt verterem nominati mel. Dolorem ancillae an mei, ut putant invenire splendide mel, ea nec propriae adipisci. Ignota salutandi accusamus in sed, et per malis fuisset, qui id ludus appareat."
+    };
+  }
+};
 </script>
 
 <style scoped>
-.headline {
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+h3 {
+  margin: 20px 0;
+}
+.project_card {
+  max-width: 300px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.project_leader_info {
+  position: absolute;
+  top: 20px;
+  left: -30px;
+}
+
+.card_avatar img {
+  border: 7px solid #fff;
+}
+
+.project_info {
+  padding-top: 100px;
+}
+
+.project_info_item {
+  margin-bottom: 20px;
+}
+
+.user_nick {
+  margin-left: 20px;
+}
+
+.status {
+  margin: 0;
+}
+
+.proejct_summery {
 }
 </style>

@@ -3,7 +3,10 @@
     <v-layout text-xs-center align-center>
       <v-flex>
         <v-avatar :tile="false" :size="56" color="grey lighten-4">
-          <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar" />
+          <img
+            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
+            alt="avatar"
+          />
         </v-avatar>
       </v-flex>
       <v-flex>
