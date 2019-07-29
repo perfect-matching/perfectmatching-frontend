@@ -4,19 +4,24 @@
       <h3>프로젝트 이력</h3>
       <v-layout row wrap>
         <v-flex d-flex xs12 sm6 md4>
-          <my-project-card></my-project-card>
+          <router-link to="/my/projects/1">
+            <my-project-card></my-project-card>
+          </router-link>
         </v-flex>
         <v-flex d-flex xs12 sm6 md4>
-          <my-project-card></my-project-card>
+          <router-link to="/my/projects/1">
+            <my-project-card></my-project-card>
+          </router-link>
         </v-flex>
         <v-flex d-flex xs12 sm6 md4>
-          <my-project-card></my-project-card>
+          <router-link to="/my/projects/1">
+            <my-project-card></my-project-card>
+          </router-link>
         </v-flex>
         <v-flex d-flex xs12 sm6 md4>
-          <my-project-card></my-project-card>
-        </v-flex>
-        <v-flex d-flex xs12 sm6 md4>
-          <my-project-card></my-project-card>
+          <router-link to="/my/projects/1">
+            <my-project-card></my-project-card>
+          </router-link>
         </v-flex>
       </v-layout>
     </v-container>
@@ -36,6 +41,9 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+}
 article {
   width: 100%;
 }
