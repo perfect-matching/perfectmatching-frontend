@@ -17,23 +17,36 @@
     </v-layout>-->
     <v-layout class="project_list_container">
       <ul class="project_list">
-        <v-layout wrap>
-          <li class="list_item">
+        <li class="list_item">
+          <router-link to="/projects/1">
             <project-list-item></project-list-item>
-          </li>
-          <li class="list_item">
+          </router-link>
+        </li>
+        <li class="list_item">
+          <router-link to="/projects/1">
             <project-list-item></project-list-item>
-          </li>
-          <li class="list_item">
+          </router-link>
+        </li>
+        <li class="list_item">
+          <router-link to="/projects/1">
             <project-list-item></project-list-item>
-          </li>
-          <li class="list_item">
+          </router-link>
+        </li>
+        <li class="list_item">
+          <router-link to="/projects/1">
             <project-list-item></project-list-item>
-          </li>
-          <li class="list_item">
+          </router-link>
+        </li>
+        <li class="list_item">
+          <router-link to="/projects/1">
             <project-list-item></project-list-item>
-          </li>
-        </v-layout>
+          </router-link>
+        </li>
+        <li class="list_item">
+          <router-link to="/projects/1">
+            <project-list-item></project-list-item>
+          </router-link>
+        </li>
       </ul>
     </v-layout>
     <v-btn block color="secondary" dark>더 보기</v-btn>
@@ -52,6 +65,9 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+}
 ul {
   list-style: none;
   padding: 0;
@@ -66,10 +82,15 @@ li {
 }
 
 .project_list_container {
+  padding: 0;
   width: 100%;
 }
+
+.project_list {
+  1max-width: 1660px;
+}
+
 .list_item {
-  margin-right: 50px; /* 모바일 시 margin: 0 auto;*/
-  margin-bottom: 30px;
+  margin: 30px;
 }
 </style>

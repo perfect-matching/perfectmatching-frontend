@@ -9,7 +9,7 @@
           src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
           aspect-ratio="2.75"
       ></v-img>-->
-      <v-layout class="project_leader_info">
+      <v-layout class="project_leader_info" align-center row>
         <v-flex>
           <v-avatar
             class="card_avatar"
@@ -29,8 +29,12 @@
       <v-card-title class="project_info" primary-title>
         <h3 class="project_info_item headline mb-0">Kangaroo Valley Safari</h3>
         <div class="project_info_item">
-          <div class="project_date">2019년 02월 20일</div>
-          <v-chip class="status" small color="grey" text-color="white"
+          <div class="project_date project_info_item">2019년 02월 20일</div>
+          <v-chip
+            class="status project_info_item"
+            small
+            color="grey"
+            text-color="white"
             >마감</v-chip
           >
         </div>
@@ -55,7 +59,7 @@ export default {
 
 <style scoped>
 h3 {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 .project_card {
   max-width: 350px;
@@ -78,11 +82,11 @@ h3 {
 }
 
 .project_info_item {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .user_nick {
-  margin-left: 20px;
+  margin-left: 5px;
 }
 
 .status {
