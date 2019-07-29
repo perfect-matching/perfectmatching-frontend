@@ -9,7 +9,7 @@
           src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
           aspect-ratio="2.75"
       ></v-img>-->
-      <v-layout class="project_leader_info" align-center>
+      <v-layout class="project_leader_info">
         <v-flex>
           <v-avatar
             class="card_avatar"
@@ -58,7 +58,7 @@ h3 {
   margin: 20px 0;
 }
 .project_card {
-  max-width: 300px;
+  max-width: 350px;
   position: relative;
   margin: 0 auto;
 }

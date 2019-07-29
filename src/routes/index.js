@@ -6,6 +6,7 @@ import UserDetailView from "../views/UserDetailView.vue";
 import MyPageView from "../views/MyPageView.vue";
 import ProjectListView from "../views/ProjectListView.vue";
 import ProfileEditView from "../views/ProfileEditView.vue";
+import ProjectManageView from "../views/ProjectManageView.vue";
 
 Vue.use(Router);
 
@@ -46,6 +47,11 @@ export const router = new Router({
       path: "/my/edit",
       name: "profileEdit",
       component: ProfileEditView
+    },
+    {
+      path: "/my/projects/:id",
+      name: "projectManage",
+      component: ProjectManageView
     }
   ]
 });

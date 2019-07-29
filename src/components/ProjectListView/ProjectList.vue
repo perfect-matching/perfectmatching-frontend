@@ -15,34 +15,24 @@
       <v-flex xs2>모집 공고일</v-flex>
       <v-flex xs1>상태</v-flex>
     </v-layout>-->
-    <v-layout>
+    <v-layout class="project_list_container">
       <ul class="project_list">
         <v-layout wrap>
-          <v-flex>
-            <li class="list_item">
-              <project-list-item></project-list-item>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <project-list-item></project-list-item>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <project-list-item></project-list-item>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <project-list-item></project-list-item>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <project-list-item></project-list-item>
-            </li>
-          </v-flex>
+          <li class="list_item">
+            <project-list-item></project-list-item>
+          </li>
+          <li class="list_item">
+            <project-list-item></project-list-item>
+          </li>
+          <li class="list_item">
+            <project-list-item></project-list-item>
+          </li>
+          <li class="list_item">
+            <project-list-item></project-list-item>
+          </li>
+          <li class="list_item">
+            <project-list-item></project-list-item>
+          </li>
         </v-layout>
       </ul>
     </v-layout>
@@ -67,11 +57,19 @@ ul {
   padding: 0;
 }
 
+li {
+  display: inline-block;
+}
+
 .info_bar {
   text-align: center;
 }
 
+.project_list_container {
+  width: 100%;
+}
 .list_item {
+  margin-right: 50px; /* 모바일 시 margin: 0 auto;*/
   margin-bottom: 30px;
 }
 </style>
