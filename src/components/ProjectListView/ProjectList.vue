@@ -18,19 +18,34 @@
     <v-layout class="project_list_container">
       <ul class="project_list">
         <li class="list_item">
-          <project-list-item></project-list-item>
+          <router-link to="/projects/1">
+            <project-list-item></project-list-item>
+          </router-link>
         </li>
         <li class="list_item">
-          <project-list-item></project-list-item>
+          <router-link to="/projects/1">
+            <project-list-item></project-list-item>
+          </router-link>
         </li>
         <li class="list_item">
-          <project-list-item></project-list-item>
+          <router-link to="/projects/1">
+            <project-list-item></project-list-item>
+          </router-link>
         </li>
         <li class="list_item">
-          <project-list-item></project-list-item>
+          <router-link to="/projects/1">
+            <project-list-item></project-list-item>
+          </router-link>
         </li>
         <li class="list_item">
-          <project-list-item></project-list-item>
+          <router-link to="/projects/1">
+            <project-list-item></project-list-item>
+          </router-link>
+        </li>
+        <li class="list_item">
+          <router-link to="/projects/1">
+            <project-list-item></project-list-item>
+          </router-link>
         </li>
       </ul>
     </v-layout>
@@ -50,6 +65,9 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+}
 ul {
   list-style: none;
   padding: 0;
