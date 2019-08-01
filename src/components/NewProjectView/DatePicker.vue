@@ -16,6 +16,7 @@
         v-model="date"
         :label="labelName"
         prepend-icon="event"
+        :error-messages="errorMessages"
         readonly
         v-on="on"
       ></v-text-field>
@@ -23,7 +24,7 @@
     <v-date-picker v-model="date" no-title scrollable>
       <v-spacer></v-spacer>
       <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-      <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+      <v-btn flat color="primary" @click="setDate()">OK</v-btn>
     </v-date-picker>
   </v-menu>
 </template>
@@ -31,13 +32,21 @@
 <script>
 export default {
   props: {
-    labelName: String
+    labelName: String,
+    errorMessages: Array
   },
 
   data: () => ({
     date: new Date().toISOString().substr(0, 10),
     menu: false
-  })
+  }),
+
+  methods: {
+    setDate() {
+      this.$refs.menu.save(this.date);
+      this.$emit("input", this.date);
+    }
+  }
 };
 </script>
 

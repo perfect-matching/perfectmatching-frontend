@@ -38,11 +38,10 @@
         <date-picker :labelName="'프로젝트 시작일'"></date-picker>
         <date-picker :labelName="'프로젝트 종료일'"></date-picker>
       </v-layout>
-
       <!-- <position-check :labelName="'개발자'"></position-check> 타입을 number로 해도 문자를 받아버림 -->
 
       <v-layout>
-        <v-felx>
+        <v-flex>
           <v-select
             v-model="developer"
             :items="numbers"
@@ -53,8 +52,8 @@
             @blur="$v.checkbox.$touch()"
             outline
           ></v-select>
-        </v-felx>
-        <v-felx>
+        </v-flex>
+        <v-flex>
           <v-select
             v-model="designer"
             :items="numbers"
@@ -65,8 +64,8 @@
             @blur="$v.checkbox.$touch()"
             outline
           ></v-select>
-        </v-felx>
-        <v-felx>
+        </v-flex>
+        <v-flex>
           <v-select
             v-model="planner"
             :items="numbers"
@@ -77,8 +76,8 @@
             @blur="$v.checkbox.$touch()"
             outline
           ></v-select>
-        </v-felx>
-        <v-felx>
+        </v-flex>
+        <v-flex>
           <v-select
             v-model="marketer"
             :items="numbers"
@@ -89,9 +88,13 @@
             @blur="$v.checkbox.$touch()"
             outline
           ></v-select>
-        </v-felx>
+        </v-flex>
       </v-layout>
-      <date-picker :labelName="'팀원 모집 마감일'"></date-picker>
+      <date-picker
+        v-model="deadline"
+        :labelName="'팀원 모집 마감일'"
+        :error-messages="deadlineErrors"
+      ></date-picker>
       <v-btn @click="submit">submit</v-btn>
       <v-btn @click="clear">clear</v-btn>
     </form>
@@ -138,6 +141,12 @@ export default {
       checked(val) {
         return val;
       }
+    },
+
+    deadline: {
+      required,
+      minValue: value => value > new Date().toISOString(),
+      maxValue: (value, startDate) => value < startDate
     }
   },
 
@@ -147,8 +156,8 @@ export default {
     email: "",
     location: null,
     locations: ["지역 1", "지역 2", "지역 3", "지역 4"],
-    start_date: null,
-    end_date: null,
+    startDate: null,
+    endDate: null,
     deadline: null,
     numbers: [0, 1, 2, 3, 4, 5],
     developer: false,
@@ -218,6 +227,19 @@ export default {
 
       !this.$v.content.required &&
         errors.push("프로젝트 내용을 반드시 입력해주세요.");
+
+      return errors;
+    },
+
+    deadlineErrors() {
+      const errors = [];
+      if (!this.$v.content.$dirty) return errors;
+
+      !this.$v.deadline.minValue &&
+        errors.push("오늘 이후의 날짜를 선택해주세요");
+
+      !this.$v.deadline.maxValue &&
+        errors.push("프로젝트 시작일 이전 날짜를 선택해주세요.");
 
       return errors;
     }
