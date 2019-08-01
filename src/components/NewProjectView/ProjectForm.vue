@@ -35,8 +35,16 @@
       ></v-select>
 
       <v-layout>
-        <date-picker :labelName="'프로젝트 시작일'"></date-picker>
-        <date-picker :labelName="'프로젝트 종료일'"></date-picker>
+        <date-picker
+          v-model="startDate"
+          :labelName="'프로젝트 시작일'"
+          :error-messages="startDateErrors"
+        ></date-picker>
+        <date-picker
+          v-model="endDate"
+          :labelName="'프로젝트 종료일'"
+          :error-messages="endDateErrors"
+        ></date-picker>
       </v-layout>
       <!-- <position-check :labelName="'개발자'"></position-check> 타입을 number로 해도 문자를 받아버림 -->
 
@@ -143,6 +151,17 @@ export default {
       }
     },
 
+    startDate: {
+      required,
+      minValue: value => value > new Date().toISOString(),
+      maxValue: (value, endDate) => value < endDate
+    },
+
+    endDate: {
+      required,
+      minValue: (value, startDate) => value > startDate
+    },
+
     deadline: {
       required,
       minValue: value => value > new Date().toISOString(),
@@ -228,6 +247,24 @@ export default {
       !this.$v.content.required &&
         errors.push("프로젝트 내용을 반드시 입력해주세요.");
 
+      return errors;
+    },
+
+    startDateErrors() {
+      const errors = [];
+      if (!this.$v.startDate.$dirty) return errors;
+
+      !this.$v.startDate.minValue &&
+        errors.push("오늘 이후의 날짜를 선택해주세요.");
+
+      !this.$v.startDate.maxValue &&
+        errors.push("프로젝트 종료일 이전 날짜를 선택해주세요.");
+
+      return errors;
+    },
+
+    endDateErrors() {
+      const errors = [];
       return errors;
     },
 

@@ -37,6 +37,7 @@ export default {
   },
 
   data: () => ({
+    // date: new Date(),
     date: new Date().toISOString().substr(0, 10),
     menu: false
   }),
