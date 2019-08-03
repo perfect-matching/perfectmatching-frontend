@@ -8,6 +8,7 @@ import ProjectListView from "../views/ProjectListView.vue";
 import ProfileEditView from "../views/ProfileEditView.vue";
 import ProjectManageView from "../views/ProjectManageView.vue";
 import NewProjectView from "../views/NewProjectView.vue";
+import ApplicationView from "../views/ApplicationView.vue";
 
 Vue.use(Router);
 
@@ -58,6 +59,11 @@ export const router = new Router({
       path: "/my/projects/:id",
       name: "projectManage",
       component: ProjectManageView
+    },
+    {
+      path: "/projects/:id/application",
+      name: "projectApplication",
+      component: ApplicationView
     }
   ]
 });
