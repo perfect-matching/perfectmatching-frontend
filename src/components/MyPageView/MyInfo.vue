@@ -13,6 +13,9 @@
       <div class="info_change_btn">
         <v-btn depressed small to="/my/edit">정보 수정</v-btn>
       </div>
+      <div class="introduce">
+        <p>안녕하세요~~~ 저는 프론트엔드 개발자이고, vue.js 좋아해요</p>
+      </div>
     </v-flex>
   </v-container>
 </template>
