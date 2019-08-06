@@ -13,7 +13,7 @@
       v-model="nickName"
       :error-messages="nickNameErrors"
       :counter="20"
-      label="Nick Name"
+      label="닉네임"
       required
       @input="$v.nickName.$touch()"
       @blur="$v.nickName.$touch()"
@@ -27,6 +27,8 @@
       label="자기소개"
       required
       value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
+      @input="$v.introduce.$touch()"
+      @blur="$v.introduce.$touch()"
     ></v-textarea>
     <v-checkbox
       v-model="checkbox"
@@ -99,9 +101,8 @@ export default {
     },
     clear() {
       this.$v.$reset();
-      this.name = "";
-      this.email = "";
-      this.select = null;
+      this.nickName = "";
+      this.introduce = "";
       this.checkbox = false;
     }
   }
