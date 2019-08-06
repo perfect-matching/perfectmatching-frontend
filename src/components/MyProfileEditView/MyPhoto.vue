@@ -4,7 +4,10 @@
       <v-flex class="user_info" text-xs-center>
         <div>
           <v-avatar :tile="false" :size="170" color="black lighten-4">
-            <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar" />
+            <img
+              src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
+              alt="avatar"
+            />
           </v-avatar>
         </div>
         <div class="user_nick">user nick name</div>

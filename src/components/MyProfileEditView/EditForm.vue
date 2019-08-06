@@ -1,31 +1,33 @@
 <template>
   <form>
     <v-text-field
-      v-model="name"
-      :error-messages="nameErrors"
-      :counter="10"
-      label="Name"
-      required
-      @input="$v.name.$touch()"
-      @blur="$v.name.$touch()"
+      outline
+      v-model="email"
+      label="E-mail"
+      value="jkljkl17@naver.com"
+      disabled
+      placeholder="jkljkl17@naver.com"
     ></v-text-field>
     <v-text-field
-      v-model="email"
-      :error-messages="emailErrors"
-      label="E-mail"
+      outline
+      v-model="nickName"
+      :error-messages="nickNameErrors"
+      :counter="20"
+      label="Nick Name"
       required
-      @input="$v.email.$touch()"
-      @blur="$v.email.$touch()"
+      @input="$v.nickName.$touch()"
+      @blur="$v.nickName.$touch()"
     ></v-text-field>
-    <v-select
-      v-model="select"
-      :items="items"
-      :error-messages="selectErrors"
-      label="Item"
+    <v-textarea
+      outline
+      v-model="introduce"
+      :error-messages="introduceErrors"
+      :counter="500"
+      name="introduce"
+      label="자기소개"
       required
-      @change="$v.select.$touch()"
-      @blur="$v.select.$touch()"
-    ></v-select>
+      value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
+    ></v-textarea>
     <v-checkbox
       v-model="checkbox"
       :error-messages="checkboxErrors"
@@ -42,15 +44,14 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, maxLength, email } from "vuelidate/lib/validators";
+import { required, maxLength } from "vuelidate/lib/validators";
 
 export default {
   mixins: [validationMixin],
 
   validations: {
-    name: { required, maxLength: maxLength(10) },
-    email: { required, email },
-    select: { required },
+    nickName: { required, maxLength: maxLength(20) },
+    introduce: { required, maxLength: maxLength(500) },
     checkbox: {
       checked(val) {
         return val;
@@ -59,10 +60,9 @@ export default {
   },
 
   data: () => ({
-    name: "",
+    nickName: "",
     email: "",
-    select: null,
-    items: ["Item 1", "Item 2", "Item 3", "Item 4"],
+    introduce: "",
     checkbox: false
   }),
 
@@ -73,31 +73,28 @@ export default {
       !this.$v.checkbox.checked && errors.push("You must agree to continue!");
       return errors;
     },
-    selectErrors() {
+    nickNameErrors() {
       const errors = [];
-      if (!this.$v.select.$dirty) return errors;
-      !this.$v.select.required && errors.push("Item is required");
+      if (!this.$v.nickName.$dirty) return errors;
+      !this.$v.nickName.maxLength &&
+        errors.push("닉네임은 최대 20자 이내이어야 합니다.");
+      !this.$v.nickName.required && errors.push("닉네임을 입력해주세요.");
       return errors;
     },
-    nameErrors() {
+    introduceErrors() {
       const errors = [];
-      if (!this.$v.name.$dirty) return errors;
-      !this.$v.name.maxLength &&
-        errors.push("Name must be at most 10 characters long");
-      !this.$v.name.required && errors.push("Name is required.");
-      return errors;
-    },
-    emailErrors() {
-      const errors = [];
-      if (!this.$v.email.$dirty) return errors;
-      !this.$v.email.email && errors.push("Must be valid e-mail");
-      !this.$v.email.required && errors.push("E-mail is required");
+      if (!this.$v.introduce.$dirty) return errors;
+      !this.$v.introduce.maxLength &&
+        errors.push("최대 500자 이내이어야 합니다.");
+      !this.$v.introduce.required && errors.push("자기소개를 입력해주세요.");
       return errors;
     }
   },
 
   methods: {
     submit() {
+      console.log(this.nickName);
+      console.log(this.email);
       this.$v.$touch();
     },
     clear() {
