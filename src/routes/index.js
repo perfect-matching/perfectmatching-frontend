@@ -6,6 +6,7 @@ import UserDetailView from "../views/UserDetailView.vue";
 import MyPageView from "../views/MyPageView.vue";
 import ProjectListView from "../views/ProjectListView.vue";
 import ProfileEditView from "../views/ProfileEditView.vue";
+import MyProjectsView from "../views/MyProjectsView.vue";
 import ProjectManageView from "../views/ProjectManageView.vue";
 import NewProjectView from "../views/NewProjectView.vue";
 import ApplicationView from "../views/ApplicationView.vue";
@@ -54,6 +55,11 @@ export const router = new Router({
       path: "/my/edit",
       name: "profileEdit",
       component: ProfileEditView
+    },
+    {
+      path: "/my/projects",
+      name: "myProjects",
+      component: MyProjectsView
     },
     {
       path: "/my/projects/:id",
