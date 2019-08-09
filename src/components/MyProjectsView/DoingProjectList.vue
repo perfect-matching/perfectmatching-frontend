@@ -6,22 +6,37 @@
         <v-layout wrap>
           <v-flex>
             <li class="list_item">
-              <project-list-item></project-list-item>
+              <router-link to="/my/projects/:id">
+                <project-list-item></project-list-item>
+              </router-link>
             </li>
           </v-flex>
           <v-flex>
             <li class="list_item">
-              <project-list-item></project-list-item>
+              <router-link to="/my/projects/:id">
+                <project-list-item></project-list-item>
+              </router-link>
             </li>
           </v-flex>
           <v-flex>
             <li class="list_item">
-              <project-list-item></project-list-item>
+              <router-link to="/my/projects/:id">
+                <project-list-item></project-list-item>
+              </router-link>
             </li>
           </v-flex>
           <v-flex>
             <li class="list_item">
-              <project-list-item></project-list-item>
+              <router-link to="/my/projects/:id">
+                <project-list-item></project-list-item>
+              </router-link>
+            </li>
+          </v-flex>
+          <v-flex>
+            <li class="list_item">
+              <router-link to="/my/projects/:id">
+                <project-list-item></project-list-item>
+              </router-link>
             </li>
           </v-flex>
         </v-layout>
@@ -39,6 +54,9 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+}
 ul,
 li {
   list-style: none;

@@ -5,18 +5,16 @@
     </div>
     <div class="project_content">
       내용:
-      <p>
-        ㄴ릐ㅏ므랃ㅈ미ㅡㄹㅁ지ㅏㄴ릐ㅏ므랃ㅈ미ㅡㄹㅁ지ㅏㄴ릐ㅏ므랃ㅈ미ㅡㄹㅁ지ㅏㄴ릐ㅏ므랃ㅈ미ㅡㄹㅁ지ㅏㄴ릐ㅏ므랃ㅈ미ㅡㄹㅁ지ㅏㄴ릐ㅏ므랃ㅈ미ㅡㄹㅁ지ㅏ
-      </p>
+      <p>이 프로젝트는 모든 정보를 얻는 프로젝트입니다!</p>
     </div>
     <div class="project_date">
       프로젝트 일정: 2019년 6월 10일 ~ 2019년 8월 20일
     </div>
 
     <v-layout wrap>
-      <v-btn depressed color="primary">Primary</v-btn>
-      <v-btn depressed color="primary">Primary</v-btn>
-      <v-btn depressed color="primary">Primary</v-btn>
+      <v-btn depressed color="primary">프로젝트 삭제</v-btn>
+      <v-btn depressed color="primary">프로젝트 수정</v-btn>
+      <v-btn depressed color="primary">지원 취소</v-btn>
     </v-layout>
   </v-container>
 </template>
