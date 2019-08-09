@@ -19,7 +19,7 @@ export const router = new Router({
   routes: [
     {
       path: "/",
-      redirect: "home"
+      redirect: "projects"
     },
     {
       path: "/home",

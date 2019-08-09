@@ -1,9 +1,6 @@
 <template>
   <v-card class="project_card" to="manage/projects/1">
-    <v-img
-      src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
-      aspect-ratio="2.75"
-    ></v-img>
+    <v-img src="https://cdn.vuetifyjs.com/images/cards/desert.jpg" aspect-ratio="2.75"></v-img>
 
     <v-card-title primary-title class="card_container">
       <h3 class="headline mb-0">
@@ -26,9 +23,11 @@ export default {};
 .project_card {
   width: 100%;
 }
+
 .card_container {
   width: 100%;
 }
+
 .headline {
   overflow: hidden;
   text-overflow: ellipsis;

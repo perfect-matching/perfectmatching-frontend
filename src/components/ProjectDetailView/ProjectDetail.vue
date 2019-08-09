@@ -110,7 +110,14 @@
           Needs
           <br />개발자:3 디자이너:3 기획자:3 마케터:3
         </div>
-        <v-btn class="apply_btn" block color="secondary" dark>지원 하기</v-btn>
+        <v-btn
+          class="apply_btn"
+          block
+          color="secondary"
+          dark
+          to="/projects/:id/application"
+          >지원 하기</v-btn
+        >
       </v-flex>
     </v-layout>
   </v-container>

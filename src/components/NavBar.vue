@@ -2,20 +2,28 @@
   <header>
     <v-navigation-drawer v-model="drawer" fixed app>
       <v-list dense>
-        <v-list-tile @click>
+        <v-list-tile to="/project/new">
           <v-list-tile-action>
             <v-icon>home</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Home</v-list-tile-title>
+            <v-list-tile-title>프로젝트 개설</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click>
+        <v-list-tile to="/projects">
           <v-list-tile-action>
             <v-icon>contact_mail</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>List</v-list-tile-title>
+            <v-list-tile-title>프로젝트 리스트</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile to="/my/projects">
+          <v-list-tile-action>
+            <v-icon>contact_mail</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>프로젝트 관리</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -32,7 +40,7 @@
         <v-icon>mail_outline</v-icon>
       </v-btn>
 
-      <v-btn icon>
+      <v-btn icon to="/my">
         <v-avatar :tile="false" :size="36" color="grey lighten-4">
           <img
             src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
