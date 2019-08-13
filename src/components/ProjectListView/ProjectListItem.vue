@@ -1,49 +1,25 @@
 <template>
-  <v-hover>
-    <v-card
-      slot-scope="{ hover }"
-      :class="`elevation-${hover ? 12 : 2}`"
-      class="project_card"
-    >
-      <!-- <v-img
-          src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
-          aspect-ratio="2.75"
-      ></v-img>-->
-      <v-layout class="project_leader_info" align-center row>
-        <v-flex>
-          <v-avatar
-            class="card_avatar"
-            :tile="false"
-            :size="70"
-            color="grey lighten-4"
-          >
+  <v-card class="project_card">
+    <v-card-title primary-title>
+      <div>
+        <div class="leader_info">
+          <v-avatar :tile="false" :size="56" color="grey lighten-4">
             <img
               src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
               alt="avatar"
             />
           </v-avatar>
-        </v-flex>
-        <v-flex class="user_nick">권영근 jkljkl1793</v-flex>
-      </v-layout>
+          <div class="leader_name">우우우</div>
+        </div>
 
-      <v-card-title class="project_info" primary-title>
-        <h3 class="project_info_item headline mb-0">Kangaroo Valley Safari</h3>
-        <div class="project_info_item">
-          <div class="project_date project_info_item">2019년 02월 20일</div>
-          <v-chip
-            class="status project_info_item"
-            small
-            color="grey"
-            text-color="white"
-            >마감</v-chip
-          >
-        </div>
-        <div class="project_info_item proejct_summery">
-          <p>{{ card_text }}</p>
-        </div>
-      </v-card-title>
-    </v-card>
-  </v-hover>
+        <h3 class="headline mb-0">프로젝트 타이틀</h3>
+        <v-chip color="primary" text-color="white" class="status"
+          >진행중</v-chip
+        >
+        <div>{{ card_text }}</div>
+      </div>
+    </v-card-title>
+  </v-card>
 </template>
 
 <script>
@@ -58,41 +34,18 @@ export default {
 </script>
 
 <style scoped>
-h3 {
-  margin: 10px 0;
-}
 .project_card {
-  max-width: 350px;
-  position: relative;
-  margin: 0 auto;
+  max-width: 300px;
 }
 
-.project_leader_info {
-  position: absolute;
-  top: 20px;
-  left: -30px;
-}
-
-.card_avatar img {
-  border: 7px solid #fff;
-}
-
-.project_info {
-  padding-top: 100px;
-}
-
-.project_info_item {
-  margin-bottom: 10px;
-}
-
-.user_nick {
-  margin-left: 5px;
+.leader_info {
 }
 
 .status {
-  margin: 0;
+  height: 28px;
 }
 
-.proejct_summery {
+.share_button {
+  color: black;
 }
 </style>
