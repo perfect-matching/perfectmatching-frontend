@@ -17,3 +17,9 @@ export default {
   }
 };
 </script>
+<style scoped>
+.project_detail_section {
+  max-width: 800px;
+  margin: auto;
+}
+</style>

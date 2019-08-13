@@ -8,45 +8,59 @@
         <drop-down :title="'직군'"></drop-down>
       </v-flex>
     </v-layout>
-    <!-- <v-layout class="info_bar">
-      <v-flex>주최자</v-flex>
-      <v-flex xs5>프로젝트 명</v-flex>
-      <v-flex xs2>모집 마감일</v-flex>
-      <v-flex xs2>모집 공고일</v-flex>
-      <v-flex xs1>상태</v-flex>
-    </v-layout>-->
     <v-layout class="project_list_container">
       <ul class="project_list">
-        <li class="list_item">
-          <router-link to="/projects/1">
-            <project-list-item></project-list-item>
-          </router-link>
-        </li>
-        <li class="list_item">
-          <router-link to="/projects/1">
-            <project-list-item></project-list-item>
-          </router-link>
-        </li>
-        <li class="list_item">
-          <router-link to="/projects/1">
-            <project-list-item></project-list-item>
-          </router-link>
-        </li>
-        <li class="list_item">
-          <router-link to="/projects/1">
-            <project-list-item></project-list-item>
-          </router-link>
-        </li>
-        <li class="list_item">
-          <router-link to="/projects/1">
-            <project-list-item></project-list-item>
-          </router-link>
-        </li>
-        <li class="list_item">
-          <router-link to="/projects/1">
-            <project-list-item></project-list-item>
-          </router-link>
-        </li>
+        <v-layout wrap>
+          <v-flex>
+            <li class="list_item">
+              <router-link to="/projects/1">
+                <project-list-item></project-list-item>
+              </router-link>
+            </li>
+          </v-flex>
+          <v-flex>
+            <li class="list_item">
+              <router-link to="/projects/1">
+                <project-list-item></project-list-item>
+              </router-link>
+            </li>
+          </v-flex>
+          <v-flex>
+            <li class="list_item">
+              <router-link to="/projects/1">
+                <project-list-item></project-list-item>
+              </router-link>
+            </li>
+          </v-flex>
+          <v-flex>
+            <li class="list_item">
+              <router-link to="/projects/1">
+                <project-list-item></project-list-item>
+              </router-link>
+            </li>
+          </v-flex>
+          <v-flex>
+            <li class="list_item">
+              <router-link to="/projects/1">
+                <project-list-item></project-list-item>
+              </router-link>
+            </li>
+          </v-flex>
+          <v-flex>
+            <li class="list_item">
+              <router-link to="/projects/1">
+                <project-list-item></project-list-item>
+              </router-link>
+            </li>
+          </v-flex>
+          <v-flex>
+            <li class="list_item">
+              <router-link to="/projects/1">
+                <project-list-item></project-list-item>
+              </router-link>
+            </li>
+          </v-flex>
+        </v-layout>
       </ul>
     </v-layout>
     <v-btn block color="secondary" dark>더 보기</v-btn>
@@ -60,6 +74,10 @@ export default {
   components: {
     DropDown,
     ProjectListItem
+  },
+
+  created() {
+    this.$store.dispatch("FETCH_PROJECTS");
   }
 };
 </script>

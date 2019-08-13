@@ -6,7 +6,7 @@
         <router-view></router-view>
       </v-container>
     </v-content>
-    <v-footer color="indigo" app>
+    <v-footer color="black" app>
       <span class="white--text">&copy; 2017</span>
     </v-footer>
   </v-app>
@@ -25,11 +25,15 @@ export default {
 };
 </script>
 <style scoped>
+#inspire {
+  font-family: "Sunflower", sans-serif !important;
+}
 .v-content {
-  background-color: #f4f6fc !important;
+  background-color: #fafafa !important;
 }
 
 .view_wrapper {
-  max-width: 1800px;
+  padding: 0;
+  margin: 0 auto;
 }
 </style>

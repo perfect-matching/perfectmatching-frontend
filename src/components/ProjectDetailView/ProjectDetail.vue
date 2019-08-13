@@ -1,126 +1,77 @@
 <template>
-  <v-container class="project_dtail_container" fluid fill-height>
-    <v-layout row wrap>
-      <v-flex class="prject_info" grow>
-        <h3 class="project_title">프로젝트 명</h3>
-        <div class="project_content">
-          <h4>우리는~~</h4>
-          <strong>룰루랄라</strong>
-          <br />
-          <img src="../../assets/test.jpg" alt="테스트 이미지" />
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-          <p>우리는 이런 프로젝트야~~</p>
-        </div>
-      </v-flex>
-      <v-flex class="prject_detail" shrink text-xs-center>
-        <div>
-          <v-btn icon>
-            <v-avatar :tile="false" :size="56" color="grey lighten-4">
-              <img
-                src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
-                alt="avatar"
-              />
-            </v-avatar>
-          </v-btn>
-        </div>
-        <v-btn icon>
-          <v-icon>mail_outline</v-icon>
-        </v-btn>
-        <div>status</div>
-        <div>
-          모집 마감일
-          <br />2019년 01월 01일
-        </div>
-        <div>
-          지역
-          <br />부산
-        </div>
-        <div>
-          Needs
-          <br />개발자:3 디자이너:3 기획자:3 마케터:3
-        </div>
-        <v-btn
-          class="apply_btn"
-          block
-          color="secondary"
-          dark
-          to="/projects/:id/application"
-          >지원 하기</v-btn
-        >
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <div class="prject_info" grow>
+    <div class="detail_header" justify-center>
+      <v-layout align-center justify-center>
+        <v-chip class="status" color="primary" text-color="white">진행중</v-chip>
+        <div class="create_date">2019.02.03 - 2019.03.02</div>
+      </v-layout>
+
+      <h3 class="project_title">킬 카페인 팀원 구해요</h3>
+      <v-layout class="proejct_detail" justify-center>
+        <div class="location">부산광역시</div>&nbsp|&nbsp
+        <div class="deadline">모집 마감일: 2019년 01월 01일</div>&nbsp|&nbsp
+        <div class="need_position">개발자:3 디자이너:3 기획자:3 마케터:3 기타:0</div>
+      </v-layout>
+    </div>
+
+    <div class="project_content">
+      <h4>우리는~~</h4>
+      <strong>룰루랄라</strong>
+      <br />
+      <img src="../../assets/test.jpg" alt="테스트 이미지" />
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+      <p>우리는 이런 프로젝트야~~</p>
+    </div>
+    <div class="leader_info">
+      <div>팀장</div>
+      <router-link to="/users/1">
+        <v-avatar :tile="false" :size="56" color="grey lighten-4">
+          <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar" />
+        </v-avatar>
+      </router-link>
+
+      <div>nick_name</div>
+
+      <v-btn icon>
+        <v-icon>mail_outline</v-icon>
+      </v-btn>
+
+      <v-btn class="apply_btn" block color="secondary" dark to="/projects/:id/application">지원 하기</v-btn>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -132,49 +83,33 @@ img {
   max-width: 100%;
   height: auto;
 }
+.project_dtail_container {
+  width: 100%;
+}
+.detail_header {
+  text-align: center;
+  padding: 0 0 70px 0;
+}
+
+.status {
+  height: 28px;
+}
+
+.project_title {
+  font-size: 30px;
+}
+
+.planned_date {
+  margin-bottom: 10px;
+}
+
 .prject_info {
   border: 2px solid red;
   1margin-right: 5px;
 }
 
-.prject_detail {
-  width: 30%;
-  border: 2px solid red;
-}
-
-.apply_btn {
-  box-sizing: border-box;
-}
-
-/* Extra small devices (portrait phones, less than 576px) */
-@media (max-width: 575.98px) {
-  .prject_detail {
-    width: 100%;
-  }
-}
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) and (max-width: 767.98px) {
-  .prject_detail {
-    width: 100%;
-  }
-}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-  .prject_detail {
-    width: 100%;
-  }
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) and (max-width: 1199.98px) {
-  .prject_detail {
-    width: 100%;
-  }
-}
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
+.leader_info {
+  width: 100%;
+  text-align: center;
 }
 </style>

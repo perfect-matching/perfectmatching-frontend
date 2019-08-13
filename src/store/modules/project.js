@@ -2,17 +2,28 @@ import { project } from "../../api/prorject.js";
 
 export const projectModule = {
   state: {
-    projectItem: {}
+    projects: {}
   },
-  getters: {},
+  getters: {
+    FETCHED_PROJECTS(state) {
+      return state.projects;
+    }
+  },
   mutations: {
-    SET_PROJECT_ITEM(state, projectData) {}
+    SET_PROJECTS(state, projectDatas) {
+      state.projects = projectDatas;
+    }
   },
   actions: {
-    FETCH_PROJECT_ITEM({ commit }, { id }) {
-      return project.getProjectById(id).then(({ data }) => {
-        console.log(data);
-      });
+    FETCH_PROJECTS({ commit }) {
+      return project
+        .getProjects()
+        .then(({ data }) => {
+          commit("SET_PROJECTS", data._embedded.projectsDTOList);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
