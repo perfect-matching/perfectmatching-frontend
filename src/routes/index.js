@@ -32,7 +32,7 @@ export const router = new Router({
       component: ProjectListView
     },
     {
-      path: "/projects/:id",
+      path: "/project/:idx",
       name: "projectDetail",
       component: ProjectDetailView
     },
