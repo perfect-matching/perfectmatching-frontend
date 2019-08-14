@@ -29,7 +29,8 @@ export default {
   font-family: "Sunflower", sans-serif !important;
 }
 .v-content {
-  background-color: #fafafa !important;
+  1background-color: #fafafa !important;
+  background-color: #fff !important;
 }
 
 .view_wrapper {
