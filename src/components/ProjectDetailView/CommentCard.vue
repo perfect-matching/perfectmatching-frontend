@@ -1,6 +1,8 @@
 <template>
-  <v-card class="mx-auto" color="#26c6da" dark>
-    <v-card-text class="headline font-weight-bold">"백엔드는 스프링을 쓰나요, Node.js 를 쓰나요?"</v-card-text>
+  <v-card class="comment_card mx-auto" color="#fff" flat dark>
+    <v-card-text class="headline font-weight-bold">{{
+      comment.content
+    }}</v-card-text>
     <v-card-actions>
       <v-list-tile class="grow">
         <v-list-tile-avatar color="grey darken-3">
@@ -15,10 +17,14 @@
         </v-list-tile-avatar>
 
         <v-list-tile-content>
-          <v-list-tile-title>Nick name</v-list-tile-title>
+          <v-list-tile-title class="nick_name">
+            {{ comment.userName }}
+          </v-list-tile-title>
         </v-list-tile-content>
         <v-layout align-center justify-end>
-          <span class="subheading mr-2">2019년 02월 03일</span>
+          <span class="create_date subheading mr-2">
+            {{ comment.createdDate }}
+          </span>
         </v-layout>
       </v-list-tile>
     </v-card-actions>
@@ -28,10 +34,24 @@
 <script>
 export default {
   name: "commentCard",
-  data: () => ({
-    //
-  })
+  props: {
+    comment: {
+      type: Object,
+      required: true
+    }
+  }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.headline {
+  color: #898989;
+  font-size: 17px !important;
+}
+.nick_name {
+  color: #232323;
+}
+.create_date {
+  color: #b6b6b6;
+}
+</style>
