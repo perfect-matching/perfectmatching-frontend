@@ -5,59 +5,22 @@
       <div class="create_date">2019.02.03 - 2019.03.02</div>
     </v-layout>
     <div class="detail_header" justify-center>
-      <h3 class="project_title">사이드 프로젝트 팀원 플랫폼 팀원 구해요</h3>
+      <h3 class="project_title">{{ project.title }}</h3>
       <v-layout class="proejct_detail" justify-center>
         부산광역시 &nbsp;|&nbsp; 모집 마감일: 2019년 01월 01일 &nbsp;|&nbsp;
         개발자:3 디자이너:3 기획자:3 마케터:3 기타:0
       </v-layout>
     </div>
 
-    <div class="project_content">
-      <h4>우리는~~</h4>
-      <strong>룰루랄라</strong>
-      <br />
-      <img src="../../assets/test.jpg" alt="테스트 이미지" />
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-      <p>우리는 이런 프로젝트야~~</p>
-    </div>
+    <div class="project_content">{{ project.content }}</div>
     <div class="leader_info">
       <div>팀장</div>
       <router-link to="/users/1">
         <v-avatar :tile="false" :size="56" color="grey lighten-4">
-          <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar" />
+          <img
+            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
+            alt="avatar"
+          />
         </v-avatar>
       </router-link>
 
@@ -67,13 +30,27 @@
         <v-icon>mail_outline</v-icon>
       </v-btn>
 
-      <v-btn class="apply_btn" block color="secondary" dark to="/projects/:id/application">지원 하기</v-btn>
+      <v-btn
+        class="apply_btn"
+        block
+        color="secondary"
+        dark
+        to="/projects/:id/application"
+        >지원 하기</v-btn
+      >
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    project: {
+      type: Object,
+      required: true
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -102,6 +79,7 @@ img {
   height: 15px;
   1border: 1px solid red;
 }
+
 /* .detail_header {
   text-align: center;
   padding: 100px 0 70px 0;

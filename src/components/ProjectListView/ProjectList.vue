@@ -13,49 +13,42 @@
         <v-layout wrap>
           <v-flex>
             <li class="list_item">
-              <router-link to="/projects/1">
+              <router-link to="/project/1">
                 <project-list-item></project-list-item>
               </router-link>
             </li>
           </v-flex>
           <v-flex>
             <li class="list_item">
-              <router-link to="/projects/1">
+              <router-link to="/project/1">
                 <project-list-item></project-list-item>
               </router-link>
             </li>
           </v-flex>
           <v-flex>
             <li class="list_item">
-              <router-link to="/projects/1">
+              <router-link to="/project/1">
                 <project-list-item></project-list-item>
               </router-link>
             </li>
           </v-flex>
           <v-flex>
             <li class="list_item">
-              <router-link to="/projects/1">
+              <router-link to="/project/1">
                 <project-list-item></project-list-item>
               </router-link>
             </li>
           </v-flex>
           <v-flex>
             <li class="list_item">
-              <router-link to="/projects/1">
+              <router-link to="/project/1">
                 <project-list-item></project-list-item>
               </router-link>
             </li>
           </v-flex>
           <v-flex>
             <li class="list_item">
-              <router-link to="/projects/1">
-                <project-list-item></project-list-item>
-              </router-link>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <router-link to="/projects/1">
+              <router-link to="/project/1">
                 <project-list-item></project-list-item>
               </router-link>
             </li>

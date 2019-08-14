@@ -1,23 +1,12 @@
 <template>
   <v-container class="comment_container" fluid fill-height>
     <ul class="comment_list">
-      <li class="list_item comment">
-        <comment-card></comment-card>
-      </li>
-      <li class="list_item comment">
-        <comment-card></comment-card>
-      </li>
-      <li class="list_item comment">
-        <comment-card></comment-card>
-      </li>
-      <li class="list_item comment">
-        <comment-card></comment-card>
-      </li>
-      <li class="list_item comment">
-        <comment-card></comment-card>
-      </li>
-      <li class="list_item comment">
-        <comment-card></comment-card>
+      <li
+        class="list_item comment"
+        v-for="(comment, index) in comments"
+        :key="index"
+      >
+        <comment-card :comment="comment"></comment-card>
       </li>
     </ul>
   </v-container>
@@ -26,6 +15,12 @@
 <script>
 import CommentCard from "./CommentCard.vue";
 export default {
+  props: {
+    comments: {
+      Type: Array,
+      required: true
+    }
+  },
   components: {
     CommentCard
   }
