@@ -13,7 +13,7 @@
             </v-avatar>
             <div class="leader_name">{{ project.leader }}</div>
           </v-layout>
-
+          <div class="card_content">
           <h3 class="headline mb-0">{{ project.title }}</h3>
           <div class="create_date">
             {{ setLLFormat(project.deadline) }} 까지 모집
@@ -22,6 +22,7 @@
             project.status
           }}</v-chip>
           <div class="summery">{{ project.summary }}</div>
+          </div>
         </div>
       </v-card-title>
     </v-card>
@@ -51,8 +52,12 @@ export default {
 <style scoped>
 .project_card {
   position: relative;
-  max-width: 300px;
+  max-width: 410px;
   border: 2px solid black;
+}
+
+.headline{
+  margin-top: 17px;
 }
 
 .deadline {
@@ -75,15 +80,22 @@ export default {
 .leader_name {
   margin-left: 10px;
 }
+
 .create_date {
   color: #9a9a9a;
 }
+
+.card_content{
+text-align:left;
+}
+
 .status {
   margin: 5px 0 10px 0;
   height: 28px;
 }
 
-.share_button {
-  color: black;
+.summery{
+  margin-top:40px;
 }
+
 </style>

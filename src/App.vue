@@ -26,7 +26,7 @@ export default {
 </script>
 <style scoped>
 #inspire {
-  font-family: "Sunflower", sans-serif !important;
+  font-family: 'Nanum Gothic', sans-serif !important;
 }
 .v-content {
   1background-color: #fafafa !important;
