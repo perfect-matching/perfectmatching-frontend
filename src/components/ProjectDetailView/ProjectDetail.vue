@@ -1,14 +1,20 @@
 <template>
   <div class="prject_info" grow>
     <v-layout class="project_status_container" align-center justify-center>
-      <v-chip class="status" color="primary" text-color="white">진행중</v-chip>
-      <div class="create_date">2019.02.03 - 2019.03.02</div>
+      <v-chip class="status" color="primary" text-color="white">
+        {{ project.status }}
+      </v-chip>
+      <div class="create_date">
+        {{ setDateFormat(project.startDate) }} -
+        {{ setDateFormat(project.endDate) }}
+      </div>
     </v-layout>
     <div class="detail_header" justify-center>
       <h3 class="project_title">{{ project.title }}</h3>
       <v-layout class="proejct_detail" justify-center>
-        부산광역시 &nbsp;|&nbsp; 모집 마감일: 2019년 01월 01일 &nbsp;|&nbsp;
-        개발자:3 디자이너:3 기획자:3 마케터:3 기타:0
+        {{ project.location }} &nbsp;|&nbsp; 모집 마감일:
+        {{ setDateFormat(project.deadline) }}
+        &nbsp;|&nbsp; 개발자 :3 디자이너:3 기획자:3 마케터:3 기타:0
       </v-layout>
     </div>
 
@@ -49,6 +55,12 @@ export default {
       type: Object,
       required: true
     }
+  },
+
+  methods: {
+    setDateFormat(date) {
+      return this.$_moment(date).format("ll");
+    }
   }
 };
 </script>
@@ -77,7 +89,6 @@ img {
   display: inline-block;
   width: 80%;
   height: 15px;
-  1border: 1px solid red;
 }
 
 /* .detail_header {

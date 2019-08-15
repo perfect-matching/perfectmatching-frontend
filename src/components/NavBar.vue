@@ -10,7 +10,7 @@
       </v-btn>
       <v-spacer></v-spacer>
       <v-toolbar-items class="menu hidden-sm-and-down">
-        <v-btn flat to="/project/new">프로젝트 개설</v-btn>
+        <v-btn flat to="/new/project">프로젝트 개설</v-btn>
         <v-btn flat to="/projects">프로젝트 리스트</v-btn>
         <v-btn flat to="/my/projects">프로젝트 관리</v-btn>
       </v-toolbar-items>

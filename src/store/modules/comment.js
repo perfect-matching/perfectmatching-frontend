@@ -22,7 +22,7 @@ export const commentModule = {
       return comment
         .getCommentsByProejectIdx(idx)
         .then(({ data }) => {
-          commit("SET_COMMENTS", data._embedded.commentDTOList);
+          commit("SET_COMMENTS", data._embedded.datas);
         })
         .catch(err => {
           console.log(err);

@@ -3,14 +3,19 @@
     <v-layout text-xs-center align-center>
       <v-flex>
         <v-avatar :tile="false" :size="56" color="grey lighten-4">
-          <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar" />
+          <img
+            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
+            alt="avatar"
+          />
         </v-avatar>
       </v-flex>
       <v-flex xs5>
         <v-card-title class="title" primary-title>
-          <div
-            class="headline"
-          >이건 엄청나게 긴 프로젝트 이름이건 엄청나게 긴 프로젝트 이름이건 엄청나게 긴 프로젝트 이름이건 엄청나게 긴 프로젝트 이름이건 엄청나게 긴 프로젝트 이름이건 엄청나게 긴 프로젝트 이름</div>
+          <div class="headline">
+            이건 엄청나게 긴 프로젝트 이름이건 엄청나게 긴 프로젝트 이름이건
+            엄청나게 긴 프로젝트 이름이건 엄청나게 긴 프로젝트 이름이건 엄청나게
+            긴 프로젝트 이름이건 엄청나게 긴 프로젝트 이름
+          </div>
         </v-card-title>
       </v-flex>
       <v-flex xs2>2019년 02월 03일</v-flex>
