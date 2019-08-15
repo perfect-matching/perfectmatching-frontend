@@ -17,19 +17,19 @@ export const projectModule = {
   },
 
   mutations: {
-    // SET_PROJECTS(state, projects) {
-    //   state.projects = projects.content;
-    //   state.nextUrl = projects.links[1].href;
-    // },
+    SET_PROJECTS(state, projects) {
+      state.projects = projects.datas;
+      state.nextUrl = projects.nextUrl;
+    },
 
     SET_PROJECT_DETAIL(state, projectDetail) {
       state.projectDetail = projectDetail;
-    }
+    },
 
-    // ADD_MORE_PROJECTS(state, projects) {
-    //   state.projects = state.projects.concat(projects.content);
-    //   state.nextUrl = projects.links[1].href;
-    // }
+    ADD_MORE_PROJECTS(state, projects) {
+      state.projects = state.projects.concat(projects.datas);
+      state.nextUrl = projects.nextUrl;
+    }
   },
 
   actions: {
@@ -37,8 +37,11 @@ export const projectModule = {
       return project
         .getProjects()
         .then(({ data }) => {
-          console.log(data.content);
-          commit("SET_PROJECTS", data);
+          const projects = {
+            datas: data._embedded.datas,
+            nextUrl: data._links.next.href
+          };
+          commit("SET_PROJECTS", projects);
         })
         .catch(err => {
           console.log(err);
@@ -54,17 +57,22 @@ export const projectModule = {
         .catch(err => {
           console.log(err);
         });
-    }
+    },
 
-    // FETCH_NEXT_PROJECTS({ commit }, { nextUrl }) {
-    //   return project
-    //     .getNextProjects(nextUrl)
-    //     .then(({ data }) => {
-    //       commit("ADD_MORE_PROJECTS", data);
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //     });
-    // }
+    FETCH_NEXT_PROJECTS({ commit }, { nextUrl }) {
+      return project
+        .getNextProjects(nextUrl)
+        .then(({ data }) => {
+          console.log(data);
+          const projects = {
+            datas: data._embedded.datas,
+            nextUrl: data._links.next.href
+          };
+          commit("ADD_MORE_PROJECTS", projects);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 };

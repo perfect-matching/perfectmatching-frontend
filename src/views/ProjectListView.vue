@@ -18,19 +18,19 @@ export default {
     ...mapGetters({
       projects: "fetchedProjects"
     })
+  },
+
+  created() {
+    this.$store.dispatch("FETCH_PROJECTS");
+  },
+
+  methods: {
+    nextProjects() {
+      this.$store.dispatch("FETCH_NEXT_PROJECTS", {
+        nextUrl: this.$store.state.projectModule.nextUrl
+      });
+    }
   }
-
-  // created() {
-  //   this.$store.dispatch("FETCH_PROJECTS");
-  // },
-
-  // methods: {
-  //   nextProjects() {
-  //     this.$store.dispatch("FETCH_NEXT_PROJECTS", {
-  //       nextUrl: this.$store.state.projectModule.nextUrl
-  //     });
-  //   }
-  // }
 };
 </script>
 
