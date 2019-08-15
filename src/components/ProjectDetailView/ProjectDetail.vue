@@ -77,7 +77,6 @@ img {
   display: inline-block;
   width: 80%;
   height: 15px;
-  1border: 1px solid red;
 }
 
 /* .detail_header {

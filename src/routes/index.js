@@ -37,7 +37,7 @@ export const router = new Router({
       component: ProjectDetailView
     },
     {
-      path: "/project/new",
+      path: "/new/project",
       name: "NewProjectView",
       component: NewProjectView
     },
@@ -71,5 +71,8 @@ export const router = new Router({
       name: "projectApplication",
       component: ApplicationView
     }
-  ]
+  ],
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  }
 });

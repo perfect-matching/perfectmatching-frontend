@@ -30,7 +30,8 @@ export const projectModule = {
       return project
         .getProjects()
         .then(({ data }) => {
-          commit("SET_PROJECTS", data._embedded.projectsDTOList);
+          console.log(data.content);
+          commit("SET_PROJECTS", data.content);
         })
         .catch(err => {
           console.log(err);

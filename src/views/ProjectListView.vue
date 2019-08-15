@@ -6,10 +6,21 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import ProjectList from "../components/ProjectListView/ProjectList.vue";
 export default {
   components: {
     ProjectList
+  },
+
+  computed: {
+    ...mapGetters({
+      projects: "fetchedProjects"
+    })
+  },
+
+  created() {
+    this.$store.dispatch("FETCH_PROJECTS");
   }
 };
 </script>
