@@ -12,58 +12,19 @@
       <ul class="project_list">
         <v-layout wrap>
           <v-flex>
-            <li class="list_item">
+            <li
+              class="list_item"
+              v-for="(project, index) in projects"
+              :key="index"
+            >
               <router-link to="/project/1">
-                <project-list-item></project-list-item>
-              </router-link>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <router-link to="/project/1">
-                <project-list-item></project-list-item>
-              </router-link>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <router-link to="/project/1">
-                <project-list-item></project-list-item>
-              </router-link>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <router-link to="/project/1">
-                <project-list-item></project-list-item>
-              </router-link>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <router-link to="/project/1">
-                <project-list-item></project-list-item>
-              </router-link>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <router-link to="/project/1">
-                <project-list-item></project-list-item>
-              </router-link>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <router-link to="/project/1">
-                <project-list-item></project-list-item>
+                <project-list-item :project="project"></project-list-item>
               </router-link>
             </li>
           </v-flex>
         </v-layout>
       </ul>
     </v-layout>
-    <v-btn block color="secondary" dark>더 보기</v-btn>
   </v-container>
 </template>
 
@@ -76,8 +37,11 @@ export default {
     ProjectListItem
   },
 
-  created() {
-    this.$store.dispatch("FETCH_PROJECTS");
+  props: {
+    projects: {
+      type: Array,
+      required: true
+    }
   }
 };
 </script>

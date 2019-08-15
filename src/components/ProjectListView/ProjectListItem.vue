@@ -3,7 +3,7 @@
     <v-card class="project_card" :elevation="hover ? 5 : 1">
       <v-card-title primary-title>
         <div>
-          <div class="deadline">1시간 전</div>
+          <div class="deadline">{{ setFromNow(project.createdDate) }}</div>
           <v-layout class="leader_info" align-center>
             <v-avatar :tile="false" :size="40" color="grey lighten-4">
               <img
@@ -11,15 +11,17 @@
                 alt="avatar"
               />
             </v-avatar>
-            <div class="leader_name">우우우</div>
+            <div class="leader_name">{{ project.leader }}</div>
           </v-layout>
 
-          <h3 class="headline mb-0">사이드 프로젝트 팀원 구하기</h3>
-          <div class="create_date">2019년 02월 10일 까지 모집</div>
-          <v-chip color="primary" text-color="white" class="status"
-            >진행중</v-chip
-          >
-          <div class="summery">{{ card_text }}</div>
+          <h3 class="headline mb-0">{{ project.title }}</h3>
+          <div class="create_date">
+            {{ setLLFormat(project.deadline) }} 까지 모집
+          </div>
+          <v-chip color="primary" text-color="white" class="status">{{
+            project.status
+          }}</v-chip>
+          <div class="summery">{{ project.summary }}</div>
         </div>
       </v-card-title>
     </v-card>
@@ -28,11 +30,20 @@
 
 <script>
 export default {
-  data() {
-    return {
-      card_text:
-        "Lorem ipsum dolor sit amet, brute iriure accusata ne mea. Eos suavitate referrentur ad, te duo agam libris qualisque, utroque quaestio accommodare no qui. Et percipit laboramus usu, no invidunt verterem nominati mel. Dolorem ancillae an mei, ut putant invenire splendide mel, , ut putant invenire splendide mel, , ut putant invenire splendide mel, "
-    };
+  props: {
+    project: {
+      type: Object,
+      require: true
+    }
+  },
+
+  methods: {
+    setLLFormat(date) {
+      return this.$_moment(date).format("LL");
+    },
+    setFromNow(date) {
+      return this.$_moment(date).fromNow();
+    }
   }
 };
 </script>
@@ -48,7 +59,6 @@ export default {
   position: absolute;
   top: -10px;
   right: 5px;
-  1text-align: right;
   background-color: #fff;
   padding: 0 3px 0 10px;
 }
@@ -56,7 +66,7 @@ export default {
 .leader_info {
   position: absolute;
   top: -20px;
-  width: 120px; /* 닉네임 입력 최대 숫자가 정해지면 max-width로 설정할 것*/
+  width: 135px; /* 닉네임 입력 최대 숫자가 정해지면 max-width로 설정할 것*/
   margin-bottom: 10px;
   padding-left: 5px;
   background-color: #fff;
@@ -65,7 +75,9 @@ export default {
 .leader_name {
   margin-left: 10px;
 }
-
+.create_date {
+  color: #9a9a9a;
+}
 .status {
   margin: 5px 0 10px 0;
   height: 28px;
