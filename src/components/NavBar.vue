@@ -1,6 +1,6 @@
 <template>
   <header>
-    <v-toolbar flat>
+    <v-toolbar class="tool_bar" flat>
       <v-toolbar-side-icon
         class="hidden-md-and-up"
         @click="toggleDrawer"
@@ -81,11 +81,14 @@ export default {
 </script>
 
 <style scoped>
-.v-toolbar {
+.tool_bar {
   border-bottom: 1px solid #cfcfcf;
   background-color: #fff;
+  1background-color:#232323;
+    
 }
 .menu {
-  color: #cfcfcf;
+  1color: #cfcfcf;
+  color: #fff;
 }
 </style>
