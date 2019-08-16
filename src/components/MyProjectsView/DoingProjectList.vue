@@ -3,43 +3,31 @@
     <article class="doing_project_article">
       <h3>진행중인 프로젝트</h3>
       <ul class="doing_project_list">
-        <v-layout wrap>
-          <v-flex>
-            <li class="list_item">
-              <router-link to="/my/projects/:id">
-                <project-list-item></project-list-item>
-              </router-link>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <router-link to="/my/projects/:id">
-                <project-list-item></project-list-item>
-              </router-link>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <router-link to="/my/projects/:id">
-                <project-list-item></project-list-item>
-              </router-link>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <router-link to="/my/projects/:id">
-                <project-list-item></project-list-item>
-              </router-link>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <router-link to="/my/projects/:id">
-                <project-list-item></project-list-item>
-              </router-link>
-            </li>
-          </v-flex>
-        </v-layout>
+        <li class="list_item">
+          <router-link to="/my/projects/:id">
+            <project-list-item></project-list-item>
+          </router-link>
+        </li>
+        <li class="list_item">
+          <router-link to="/my/projects/:id">
+            <project-list-item></project-list-item>
+          </router-link>
+        </li>
+        <li class="list_item">
+          <router-link to="/my/projects/:id">
+            <project-list-item></project-list-item>
+          </router-link>
+        </li>
+        <li class="list_item">
+          <router-link to="/my/projects/:id">
+            <project-list-item></project-list-item>
+          </router-link>
+        </li>
+        <li class="list_item">
+          <router-link to="/my/projects/:id">
+            <project-list-item></project-list-item>
+          </router-link>
+        </li>
       </ul>
     </article>
   </v-container>

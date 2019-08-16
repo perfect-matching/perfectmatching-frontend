@@ -17,4 +17,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.my_projects_section {
+  background-color: #fafafa;
+}
+</style>

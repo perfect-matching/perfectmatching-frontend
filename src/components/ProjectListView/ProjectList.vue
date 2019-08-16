@@ -65,7 +65,8 @@ li {
 
 .project_list_container {
   padding: 0;
-  width: 100%;
+  width: 100%;    
+  text-align: center;
 }
 
 .project_list {
