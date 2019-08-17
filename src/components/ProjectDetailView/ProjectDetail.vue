@@ -14,7 +14,7 @@
       <v-layout class="proejct_detail" justify-center>
         {{ project.location }} &nbsp;|&nbsp; 모집 마감일:
         {{ setDateFormat(project.deadline) }}
-        &nbsp;|&nbsp; 개발자 :3 디자이너:3 기획자:3 마케터:3 기타:0
+        &nbsp;|&nbsp; 개발자 :1/3 디자이너:0/3 기획자:3/3 마케터:2/3 기타:0
       </v-layout>
     </div>
 
@@ -30,7 +30,7 @@
         </v-avatar>
       </router-link>
 
-      <div>nick_name</div>
+      <div>{{ project.leader }}</div>
 
       <v-btn icon>
         <v-icon>mail_outline</v-icon>

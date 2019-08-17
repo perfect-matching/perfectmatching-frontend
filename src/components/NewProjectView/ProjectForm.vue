@@ -45,63 +45,19 @@
         @blur="$v.content.$touch()"
         outline
       ></v-textarea>
-
+      <tags-input
+        element-id="tags"
+        v-model="selectedTags"
+        :existing-tags="preTags"
+        :typeahead="true"
+        :typeahead-style="'badges'"
+        :limit="3"
+        only-existing-tags
+      ></tags-input>
       <v-layout>
         <date-picker v-model="startDate" :labelName="'프로젝트 시작일'" :error-messages="startDateErrors"></date-picker>
-        <date-picker v-model="endDate" :labelName="'프로젝트 종료일'" :error-messages="endDateErrors"></date-picker>
       </v-layout>
-      <!-- <position-check :labelName="'개발자'"></position-check> 타입을 number로 해도 문자를 받아버림 -->
 
-      <v-layout>
-        <v-flex>
-          <v-select
-            v-model="developer"
-            :items="numbers"
-            :error-messages="positionErrors"
-            label="개발자"
-            required
-            @change="$v.checkbox.$touch()"
-            @blur="$v.checkbox.$touch()"
-            outline
-          ></v-select>
-        </v-flex>
-        <v-flex>
-          <v-select
-            v-model="designer"
-            :items="numbers"
-            :error-messages="positionErrors"
-            label="디자이너"
-            required
-            @change="$v.checkbox.$touch()"
-            @blur="$v.checkbox.$touch()"
-            outline
-          ></v-select>
-        </v-flex>
-        <v-flex>
-          <v-select
-            v-model="planner"
-            :items="numbers"
-            :error-messages="positionErrors"
-            label="기획자"
-            required
-            @change="$v.checkbox.$touch()"
-            @blur="$v.checkbox.$touch()"
-            outline
-          ></v-select>
-        </v-flex>
-        <v-flex>
-          <v-select
-            v-model="marketer"
-            :items="numbers"
-            :error-messages="positionErrors"
-            label="마케터"
-            required
-            @change="$v.checkbox.$touch()"
-            @blur="$v.checkbox.$touch()"
-            outline
-          ></v-select>
-        </v-flex>
-      </v-layout>
       <date-picker v-model="deadline" :labelName="'팀원 모집 마감일'" :error-messages="deadlineErrors"></date-picker>
       <v-btn @click="submit">submit</v-btn>
       <v-btn @click="clear">clear</v-btn>
@@ -110,14 +66,14 @@
 </template>
 <script>
 import DatePicker from "./DatePicker.vue";
-// import PositionCheck from "./PositionCheck.vue";
+import VoerroTagsInput from "@voerro/vue-tagsinput";
 import { validationMixin } from "vuelidate";
 import { required, maxLength } from "vuelidate/lib/validators";
 
 export default {
   components: {
-    DatePicker
-    // PositionCheck
+    DatePicker,
+    "tags-input": VoerroTagsInput
   },
   mixins: [validationMixin],
 
@@ -126,41 +82,11 @@ export default {
     summery: { required, maxLength: maxLength(500) },
     content: { maxLength: maxLength(500) },
     location: { required },
-    // developer: {
-    //   checked(val) {
-    //     return val;
-    //   }
-    // },
-    // designer: {
-    //   checked(val) {
-    //     return val;
-    //   }
-    // },
-    // planner: {
-    //   checked(val) {
-    //     return val;
-    //   }
-    // },
-    // marketer: {
-    //   checked(val) {
-    //     return val;
-    //   }
-    // },
-    checkbox: {
-      checked(val) {
-        return val;
-      }
-    },
 
     startDate: {
       required,
       minValue: value => value > new Date().toISOString(),
       maxValue: (value, endDate) => value < endDate
-    },
-
-    endDate: {
-      required,
-      minValue: (value, startDate) => value > startDate
     },
 
     deadline: {
@@ -179,14 +105,14 @@ export default {
     location: null,
     locations: ["지역 1", "지역 2", "지역 3", "지역 4"],
     startDate: "",
-    endDate: "",
+    preTags: [
+      { key: "web-development", value: "Web Development" },
+      { key: "php", value: "PHP" },
+      { key: "javascript", value: "JavaScript" },
+      { key: "vue", value: "Vue.js" }
+    ],
     deadline: null,
-    numbers: [0, 1, 2, 3, 4, 5],
-    developer: false,
-    designer: false,
-    planner: false,
-    marketer: false,
-    checkbox: false
+    selectedTags: []
   }),
 
   computed: {
