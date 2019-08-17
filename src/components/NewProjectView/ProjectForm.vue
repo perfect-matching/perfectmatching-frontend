@@ -50,7 +50,7 @@
         class="tag_input"
         v-model="secondtag"
         :tags="secondtags"
-        @tags-changed="newTags => (tags = newTags)"
+        @tags-changed="newTags => (secondtags = newTags)"
         :autocomplete-items="filteredItems"
         add-only-from-autocomplete
       />
@@ -265,10 +265,7 @@ export default {
 
     clear() {
       this.$v.$reset();
-      this.name = "";
-      this.email = "";
-      this.select = null;
-      this.checkbox = false;
+      // 초기화 코드 작성
     }
   }
 };
