@@ -45,20 +45,28 @@
         @blur="$v.content.$touch()"
         outline
       ></v-textarea>
-      <tags-input
-        element-id="tags"
-        v-model="selectedTags"
-        :existing-tags="preTags"
-        :typeahead="true"
-        :typeahead-style="'badges'"
-        :limit="3"
-        only-existing-tags
-      ></tags-input>
+
+      <vue-tags-input
+        class="tag_input"
+        v-model="secondtag"
+        :tags="secondtags"
+        @tags-changed="newTags => (tags = newTags)"
+        :autocomplete-items="filteredItems"
+        add-only-from-autocomplete
+      />
       <v-layout>
-        <date-picker v-model="startDate" :labelName="'프로젝트 시작일'" :error-messages="startDateErrors"></date-picker>
+        <date-picker
+          v-model="startDate"
+          :labelName="'프로젝트 시작일'"
+          :error-messages="startDateErrors"
+        ></date-picker>
       </v-layout>
 
-      <date-picker v-model="deadline" :labelName="'팀원 모집 마감일'" :error-messages="deadlineErrors"></date-picker>
+      <date-picker
+        v-model="deadline"
+        :labelName="'팀원 모집 마감일'"
+        :error-messages="deadlineErrors"
+      ></date-picker>
       <v-btn @click="submit">submit</v-btn>
       <v-btn @click="clear">clear</v-btn>
     </form>
@@ -66,14 +74,16 @@
 </template>
 <script>
 import DatePicker from "./DatePicker.vue";
-import VoerroTagsInput from "@voerro/vue-tagsinput";
+
+import VueTagsInput from "@johmun/vue-tags-input";
 import { validationMixin } from "vuelidate";
 import { required, maxLength } from "vuelidate/lib/validators";
 
 export default {
   components: {
     DatePicker,
-    "tags-input": VoerroTagsInput
+
+    VueTagsInput
   },
   mixins: [validationMixin],
 
@@ -105,17 +115,45 @@ export default {
     location: null,
     locations: ["지역 1", "지역 2", "지역 3", "지역 4"],
     startDate: "",
-    preTags: [
-      { key: "web-development", value: "Web Development" },
-      { key: "php", value: "PHP" },
-      { key: "javascript", value: "JavaScript" },
-      { key: "vue", value: "Vue.js" }
+
+    secondtag: "",
+    secondtags: [],
+    autocompleteItems: [
+      {
+        text: "Spain"
+      },
+      {
+        text: "France"
+      },
+      {
+        text: "USA"
+      },
+      {
+        text: "Germany"
+      },
+      {
+        text: "China"
+      },
+      {
+        text: "한글"
+      },
+      {
+        text: "앱 기획"
+      }
     ],
-    deadline: null,
-    selectedTags: []
+
+    deadline: null
   }),
 
   computed: {
+    filteredItems() {
+      return this.autocompleteItems.filter(i => {
+        return (
+          i.text.toLowerCase().indexOf(this.secondtag.toLowerCase()) !== -1
+        );
+      });
+    },
+
     checkboxErrors() {
       const errors = [];
       if (!this.$v.checkbox.$dirty) return errors;
@@ -236,4 +274,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.tag_input {
+  max-width: 100% !important;
+}
+</style>
