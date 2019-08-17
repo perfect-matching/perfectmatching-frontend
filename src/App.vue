@@ -26,11 +26,11 @@ export default {
 </script>
 <style scoped>
 #inspire {
-  font-family: 'Nanum Gothic', sans-serif !important;
+  font-family: "Nanum Gothic", sans-serif !important;
 }
 .v-content {
-  1background-color: #fafafa !important;
-  background-color: #fff !important;
+  background-color: #fafafa !important;
+  1background-color: #fff !important;
 }
 
 .view_wrapper {

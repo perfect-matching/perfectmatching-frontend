@@ -1,30 +1,28 @@
 <template>
   <v-hover v-slot:default="{ hover }">
-    <v-card class="project_card" :elevation="hover ? 5 : 1">
-      <v-card-title primary-title>
-        <div>
-          <div class="deadline">{{ setFromNow(project.createdDate) }}</div>
-          <v-layout class="leader_info" align-center>
-            <v-avatar :tile="false" :size="40" color="grey lighten-4">
-              <img
-                src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
-                alt="avatar"
-              />
-            </v-avatar>
-            <div class="leader_name">{{ project.leader }}</div>
-          </v-layout>
-          <div class="card_content">
-          <h3 class="headline mb-0">{{ project.title }}</h3>
-          <div class="create_date">
-            {{ setLLFormat(project.deadline) }} 까지 모집
-          </div>
-          <v-chip color="primary" text-color="white" class="status">{{
-            project.status
-          }}</v-chip>
-          <div class="summery">{{ project.summary }}</div>
-          </div>
-        </div>
-      </v-card-title>
+    <v-card class="project_card" flat :elevation="hover ? 3 : 0">
+      <div class="deadline">{{ setFromNow(project.createdDate) }}</div>
+      <v-layout class="leader_info" justify-center align-center>
+        <v-avatar :tile="false" :size="40" color="grey lighten-4">
+          <img
+            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
+            alt="avatar"
+          />
+        </v-avatar>
+        <div class="leader_name">{{ project.leader }}</div>
+      </v-layout>
+      <v-card-title class="headline">{{ project.title }}</v-card-title>
+      <div class="create_date">
+        {{ setLLFormat(project.deadline) }} 까지 모집
+      </div>
+      <v-card-text>
+        요약정보입니다. 요약정보입니다. 요약정보입니다. 요약정보입니다.
+        요약정보입니다. 요약정보입니다. 요약정보입니다. 요약정보입니다.
+        요약정보입니다. 요약정보입니다. 요약정보입니다.
+      </v-card-text>
+      <div class="require_skill">
+        <v-chip v-for="tag in tags" :key="tag">{{ tag }}</v-chip>
+      </div>
     </v-card>
   </v-hover>
 </template>
@@ -37,6 +35,19 @@ export default {
       require: true
     }
   },
+  data: () => ({
+    tags: [
+      "Work",
+      "Home Improvement",
+      "Vacation",
+      "Food",
+      "Drawers",
+      "Shopping",
+      "Art",
+      "Tech",
+      "Creative Writing"
+    ]
+  }),
 
   methods: {
     setLLFormat(date) {
@@ -53,28 +64,24 @@ export default {
 .project_card {
   position: relative;
   max-width: 410px;
-  border: 2px solid black;
+  border: 1px solid grey;
 }
 
-.headline{
-  margin-top: 17px;
+.headline {
+  padding-bottom: 0;
+  text-align: center;
 }
 
 .deadline {
   position: absolute;
-  top: -10px;
+  top: -15px;
   right: 5px;
-  background-color: #fff;
+  background-color: #fafafa;
   padding: 0 3px 0 10px;
 }
 
 .leader_info {
-  position: absolute;
-  top: -20px;
-  width: 135px; /* 닉네임 입력 최대 숫자가 정해지면 max-width로 설정할 것*/
-  margin-bottom: 10px;
-  padding-left: 5px;
-  background-color: #fff;
+  padding-top: 20px;
 }
 
 .leader_name {
@@ -85,8 +92,8 @@ export default {
   color: #9a9a9a;
 }
 
-.card_content{
-text-align:left;
+.card_content {
+  text-align: left;
 }
 
 .status {
@@ -94,8 +101,11 @@ text-align:left;
   height: 28px;
 }
 
-.summery{
-  margin-top:40px;
+.summery {
+  margin-top: 40px;
 }
 
+.require_skill {
+  padding: 0 20px 20px 20px;
+}
 </style>
