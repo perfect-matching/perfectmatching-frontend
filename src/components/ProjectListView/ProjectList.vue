@@ -17,7 +17,7 @@
               v-for="(project, index) in projects"
               :key="index"
             >
-              <router-link to="/project/1">
+              <router-link :to="`/project/${project.projectIdx}`">
                 <project-list-item :project="project"></project-list-item>
               </router-link>
             </li>
@@ -65,7 +65,7 @@ li {
 
 .project_list_container {
   padding: 0;
-  width: 100%;    
+  width: 100%;
   text-align: center;
 }
 

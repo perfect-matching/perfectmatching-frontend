@@ -47,8 +47,16 @@
       ></v-textarea>
 
       <v-layout>
-        <date-picker v-model="startDate" :labelName="'프로젝트 시작일'" :error-messages="startDateErrors"></date-picker>
-        <date-picker v-model="endDate" :labelName="'프로젝트 종료일'" :error-messages="endDateErrors"></date-picker>
+        <date-picker
+          v-model="startDate"
+          :labelName="'프로젝트 시작일'"
+          :error-messages="startDateErrors"
+        ></date-picker>
+        <date-picker
+          v-model="endDate"
+          :labelName="'프로젝트 종료일'"
+          :error-messages="endDateErrors"
+        ></date-picker>
       </v-layout>
       <!-- <position-check :labelName="'개발자'"></position-check> 타입을 number로 해도 문자를 받아버림 -->
 
@@ -102,7 +110,11 @@
           ></v-select>
         </v-flex>
       </v-layout>
-      <date-picker v-model="deadline" :labelName="'팀원 모집 마감일'" :error-messages="deadlineErrors"></date-picker>
+      <date-picker
+        v-model="deadline"
+        :labelName="'팀원 모집 마감일'"
+        :error-messages="deadlineErrors"
+      ></date-picker>
       <v-btn @click="submit">submit</v-btn>
       <v-btn @click="clear">clear</v-btn>
     </form>

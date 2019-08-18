@@ -23,7 +23,7 @@
         </v-list-tile-content>
         <v-layout align-center justify-end>
           <span class="create_date subheading mr-2">
-            {{ comment.createdDate }}
+            {{ setDateFormat(comment.createdDate) }}
           </span>
         </v-layout>
       </v-list-tile>
@@ -38,6 +38,12 @@ export default {
     comment: {
       type: Object,
       required: true
+    }
+  },
+
+  methods: {
+    setDateFormat(date) {
+      return this.$_moment(date).format("ll");
     }
   }
 };

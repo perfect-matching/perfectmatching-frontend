@@ -30,6 +30,23 @@
       @input="$v.introduce.$touch()"
       @blur="$v.introduce.$touch()"
     ></v-textarea>
+    <vue-tags-input
+      class="tag_input"
+      v-model="tag"
+      :tags="tags"
+      @tags-changed="newTags => (tags = newTags)"
+      :autocomplete-items="filteredItems"
+      add-only-from-autocomplete
+    />
+    <div class="time">
+      <v-subheader class="pl-0">투자시간(?)</v-subheader>
+      <v-slider v-model="time" thumb-label="always" min="0" max="24"></v-slider>
+      <div>
+        저는 하루 중
+        <span style="color:red;">{{ time }}시간</span> 정도 사이드 프로젝트에
+        투자하고 싶어요 :D
+      </div>
+    </div>
     <v-checkbox
       v-model="checkbox"
       :error-messages="checkboxErrors"
@@ -46,10 +63,14 @@
 
 <script>
 import { validationMixin } from "vuelidate";
+import VueTagsInput from "@johmun/vue-tags-input";
 import { required, maxLength } from "vuelidate/lib/validators";
 
 export default {
   mixins: [validationMixin],
+  components: {
+    VueTagsInput
+  },
 
   validations: {
     nickName: { required, maxLength: maxLength(20) },
@@ -65,10 +86,53 @@ export default {
     nickName: "",
     email: "",
     introduce: "",
+    tag: "",
+    tags: [],
+    autocompleteItems: [
+      {
+        id: 1,
+        text: "Spain"
+      },
+      {
+        id: 2,
+        text: "France"
+      },
+      {
+        id: 3,
+        text: "USA"
+      },
+      {
+        id: 4,
+        text: "Germany"
+      },
+      {
+        id: 5,
+        text: "China"
+      },
+      {
+        id: 6,
+        text: "한글"
+      },
+      {
+        id: 7,
+        text: "앱 기획"
+      },
+      {
+        id: 8,
+        text: "웹 기획"
+      }
+    ],
+    time: 12,
     checkbox: false
   }),
 
   computed: {
+    filteredItems() {
+      return this.autocompleteItems.filter(i => {
+        return i.text.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
+      });
+    },
+
     checkboxErrors() {
       const errors = [];
       if (!this.$v.checkbox.$dirty) return errors;
@@ -94,19 +158,29 @@ export default {
   },
 
   methods: {
+    clearDatas() {
+      this.nickName = "";
+      this.email = "";
+      this.introduce = "";
+      this.tag = "";
+      this.tags = [];
+      this.time = 12;
+      this.checkbox = false;
+    },
     submit() {
-      console.log(this.nickName);
-      console.log(this.email);
       this.$v.$touch();
+      this.clearDatas();
     },
     clear() {
       this.$v.$reset();
-      this.nickName = "";
-      this.introduce = "";
-      this.checkbox = false;
+      this.clearDatas();
     }
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.tag_input {
+  max-width: 100% !important;
+}
+</style>

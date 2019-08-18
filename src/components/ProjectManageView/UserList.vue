@@ -1,77 +1,28 @@
 <template>
   <article>
-    <v-container class="user_list">
+    <v-container class="user_list_container">
       <h3>지원자 목록:</h3>
-      <v-layout wrap justify-center>
-        <v-flex>
-          <ul class="developer_list applicant_list">
-            개발자
-            <li>
-              <user-list-item></user-list-item>
-            </li>
-            <li>
-              <user-list-item></user-list-item>
-            </li>
-            <li>
-              <user-list-item></user-list-item>
-            </li>
-            <li>
-              <user-list-item></user-list-item>
-            </li>
-            <li>
-              <user-list-item></user-list-item>
-            </li>
-          </ul>
-        </v-flex>
-        <v-flex>
-          <ul class="designer_list applicant_list">
-            디자이너
-            <li>
-              <user-list-item></user-list-item>
-            </li>
-            <li>
-              <user-list-item></user-list-item>
-            </li>
-            <li>
-              <user-list-item></user-list-item>
-            </li>
-            <li>
-              <user-list-item></user-list-item>
-            </li>
-          </ul>
-        </v-flex>
-        <v-flex>
-          <ul class="planner_list applicant_list">
-            기획자
-            <li>
-              <user-list-item></user-list-item>
-            </li>
-          </ul>
-        </v-flex>
-        <v-flex>
-          <ul class="marketer_list applicant_list">
-            마케터
-            <li>
-              <user-list-item></user-list-item>
-            </li>
-            <li>
-              <user-list-item></user-list-item>
-            </li>
-            <li>
-              <user-list-item></user-list-item>
-            </li>
-            <li>
-              <user-list-item></user-list-item>
-            </li>
-            <li>
-              <user-list-item></user-list-item>
-            </li>
-            <li>
-              <user-list-item></user-list-item>
-            </li>
-          </ul>
-        </v-flex>
-      </v-layout>
+
+      <ul class="applicant_list">
+        <li class="list_item">
+          <user-list-item></user-list-item>
+        </li>
+        <li class="list_item">
+          <user-list-item></user-list-item>
+        </li>
+        <li class="list_item">
+          <user-list-item></user-list-item>
+        </li>
+        <li class="list_item">
+          <user-list-item></user-list-item>
+        </li>
+        <li class="list_item">
+          <user-list-item></user-list-item>
+        </li>
+        <li class="list_item">
+          <user-list-item></user-list-item>
+        </li>
+      </ul>
     </v-container>
   </article>
 </template>
@@ -88,19 +39,20 @@ export default {
 <style scoped>
 ul {
   margin: 0;
-  padding: 10px;
+  padding: 10px 0;
   list-style: none;
   background-color: #ebebed;
 }
 
-li {
-  margin: 0;
-  padding: 0;
-  margin-bottom: 10px;
+.list_item {
+  margin-top: -1px;
+  border-color: #b6b6b6;
+  border-style: solid;
+  border-width: 1px 0 1px 0;
 }
 
 .applicant_list {
-  max-width: 406px; /* 반응형 필요, 위 라인이 3개가 될 때 위의 라인과 크기가 일정하도록*/
+  max-width: 100%;
   margin: 10px;
 }
 </style>

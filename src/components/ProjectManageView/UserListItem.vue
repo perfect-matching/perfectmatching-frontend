@@ -1,60 +1,41 @@
 <template>
-  <v-card class="user_card">
-    <v-layout align-center justify-center row fill-height>
-      <v-card-title primary-title>
-        <div>
-          <h3 class="headline mb-0">권영근</h3>
-          <v-chip color="primary" text-color="white">대기중</v-chip>
-        </div>
-      </v-card-title>
-
-      <!-- <v-card-actions>
-      <v-btn flat color="orange">수락</v-btn>
-      <v-btn flat color="orange">거절</v-btn>
-      </v-card-actions>-->
+  <v-card class="user_card mx-auto" flat>
+    <v-card-title>
+      <v-avatar :tile="false" :size="36" color="black lighten-4">
+        <img
+          src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
+          alt="avatar"
+        />
+      </v-avatar>
+      <div class="my_nick">후아 닉네임!</div>
       <v-spacer></v-spacer>
-
-      <div>
-        <v-card-actions>
-          <v-btn icon>
-            <v-icon>more_horiz</v-icon>
-          </v-btn>
-        </v-card-actions>
-        <v-avatar
-          class="user_photo"
-          :tile="false"
-          :size="50"
-          color="grey lighten-4"
-        >
-          <img
-            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
-            alt="avatar"
-          />
-        </v-avatar>
-      </div>
-    </v-layout>
+      <div class="create_date">하루 전</div>
+    </v-card-title>
+    <v-card-text class="content">
+      전 스프링 개발자에요전 스프링 개발자에요전 스프링 개발자에요전 스프링
+      개발자에요전 스프링 개발자에요전 스프링 개발자에요전 스프링 개발자에요전
+      스프링 개발자에요전 스프링 개발자에요
+    </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn flat text>수락</v-btn>
+      <v-btn flat>거절</v-btn>
+    </v-card-actions>
   </v-card>
 </template>
-
 <script>
 export default {};
 </script>
 
 <style scoped>
-.user_item_container {
-  padding: 0;
+.my_nick {
+  margin-left: 10px;
 }
-
-.headline {
-  width: 100%;
+.create_date {
+  color: #b6b6b6;
 }
-
-.user_card {
-  width: 100%;
-  margin: 0;
-}
-
-.user_photo {
-  margin-right: 15px;
+.content {
+  padding: 0 16px;
+  color: #898989;
 }
 </style>
