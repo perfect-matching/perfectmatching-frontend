@@ -52,7 +52,6 @@
           투자하고 싶어요 :D
         </div>
       </div>
-      <v-btn to="/my/projects">프로젝트 관리</v-btn>
     </v-flex>
   </v-container>
 </template>

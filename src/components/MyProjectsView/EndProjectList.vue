@@ -1,40 +1,34 @@
 <template>
   <v-container>
     <article class="end_project_article">
-      <h3>마감된 프로젝트</h3>
+      <h3>진행했던 프로젝트</h3>
       <ul class="end_project_list">
-        <v-layout wrap>
-          <v-flex>
-            <li class="list_item">
-              <project-list-item></project-list-item>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <project-list-item></project-list-item>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <project-list-item></project-list-item>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <project-list-item></project-list-item>
-            </li>
-          </v-flex>
-        </v-layout>
+        <li class="list_item">
+          <end-project-item></end-project-item>
+        </li>
+        <li class="list_item">
+          <end-project-item></end-project-item>
+        </li>
+        <li class="list_item">
+          <end-project-item></end-project-item>
+        </li>
+        <li class="list_item">
+          <end-project-item></end-project-item>
+        </li>
+        <li class="list_item">
+          <end-project-item></end-project-item>
+        </li>
       </ul>
     </article>
+    <v-btn block color="secondary" dark>프로젝트 추가하기</v-btn>
   </v-container>
 </template>
 
 <script>
-import ProjectListItem from "./ProjectListItem.vue";
+import EndProjectItem from "./EndProjectItem";
 
 export default {
-  components: { ProjectListItem }
+  components: { EndProjectItem }
 };
 </script>
 
@@ -47,6 +41,6 @@ li {
 }
 
 .list_item {
-  margin: 15px;
+  margin-bottom: 10px;
 }
 </style>
