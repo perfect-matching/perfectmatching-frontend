@@ -1,51 +1,37 @@
 <template>
   <v-container>
-    <article class="project_article">
-      <h3 class="article_title">프로젝트 이력</h3>
-
-      <ul class="project_list">
-        <v-layout wrap>
-          <v-flex>
-            <li class="list_item">
-              <project-list-item></project-list-item>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <project-list-item></project-list-item>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <project-list-item></project-list-item>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <project-list-item></project-list-item>
-            </li>
-          </v-flex>
-          <v-flex>
-            <li class="list_item">
-              <project-list-item></project-list-item>
-            </li>
-          </v-flex>
-        </v-layout>
+    <article class="end_project_article">
+      <h3>진행했던 프로젝트</h3>
+      <ul class="end_project_list">
+        <li class="list_item">
+          <end-project-item></end-project-item>
+        </li>
+        <li class="list_item">
+          <end-project-item></end-project-item>
+        </li>
+        <li class="list_item">
+          <end-project-item></end-project-item>
+        </li>
+        <li class="list_item">
+          <end-project-item></end-project-item>
+        </li>
+        <li class="list_item">
+          <end-project-item></end-project-item>
+        </li>
       </ul>
     </article>
+    <v-btn block color="secondary" dark>프로젝트 추가하기</v-btn>
   </v-container>
 </template>
 
 <script>
-import ProjectListItem from "./ProjectListItem.vue";
-export default {
-  name: "userProjectList",
+import EndProjectItem from "./EndProjectItem";
 
-  components: {
-    ProjectListItem
-  }
+export default {
+  components: { EndProjectItem }
 };
 </script>
+
 <style scoped>
 ul,
 li {
@@ -53,7 +39,8 @@ li {
   margin: 0;
   padding: 0;
 }
+
 .list_item {
-  margin: 20px;
+  margin-bottom: 10px;
 }
 </style>
