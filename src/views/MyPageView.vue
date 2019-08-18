@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <h2>My Page</h2>
+  <section class="mypage_section">
+    <h2 class="section_title">My Page</h2>
     <my-info></my-info>
   </section>
 </template>
@@ -15,4 +15,4 @@ export default {
   }
 };
 </script>
-
+<style scoped></style>

@@ -1,79 +1,85 @@
 <template>
-  <v-container>
-    <form>
-      <v-text-field
-        v-model="title"
-        :error-messages="titleErrors"
-        :counter="20"
-        label="Title"
-        placeholder="프로젝트 명을 입력해주세요."
-        required
-        @input="$v.title.$touch()"
-        @blur="$v.title.$touch()"
-        outline
-      ></v-text-field>
-      <v-select
-        v-model="location"
-        :items="locations"
-        :error-messages="locationErrors"
-        label="location"
-        required
-        @change="$v.location.$touch()"
-        @blur="$v.location.$touch()"
-        outline
-      ></v-select>
-      <v-textarea
-        v-model="summery"
-        :error-messages="summeryErrors"
-        :counter="500"
-        label="Summery"
-        placeholder="요약 내용을 입력해주세요"
-        required
-        @input="$v.summery.$touch()"
-        @blur="$v.summery.$touch()"
-        outline
-      ></v-textarea>
-      <v-switch v-model="detailSwitch" :label="`상세 정보`"></v-switch>
-      <v-textarea
-        v-if="detailSwitch"
-        v-model="content"
-        :error-messages="contentErrors"
-        :counter="500"
-        label="Content"
-        placeholder="프로젝트 내용을 입력해주세요"
-        @input="$v.content.$touch()"
-        @blur="$v.content.$touch()"
-        outline
-      ></v-textarea>
-      <tags-input
-        element-id="tags"
-        v-model="selectedTags"
-        :existing-tags="preTags"
-        :typeahead="true"
-        :typeahead-style="'badges'"
-        :limit="3"
-        only-existing-tags
-      ></tags-input>
-      <v-layout>
-        <date-picker v-model="startDate" :labelName="'프로젝트 시작일'" :error-messages="startDateErrors"></date-picker>
-      </v-layout>
+  <form>
+    <v-text-field
+      v-model="title"
+      :error-messages="titleErrors"
+      :counter="20"
+      label="Title"
+      placeholder="프로젝트 명을 입력해주세요."
+      required
+      @input="$v.title.$touch()"
+      @blur="$v.title.$touch()"
+      outline
+    ></v-text-field>
+    <v-select
+      v-model="location"
+      :items="locations"
+      :error-messages="locationErrors"
+      label="location"
+      required
+      @change="$v.location.$touch()"
+      @blur="$v.location.$touch()"
+      outline
+    ></v-select>
+    <v-textarea
+      v-model="summery"
+      :error-messages="summeryErrors"
+      :counter="500"
+      label="Summery"
+      placeholder="요약 내용을 입력해주세요"
+      required
+      @input="$v.summery.$touch()"
+      @blur="$v.summery.$touch()"
+      outline
+    ></v-textarea>
+    <v-switch v-model="detailSwitch" :label="`상세 정보`"></v-switch>
+    <v-textarea
+      v-if="detailSwitch"
+      v-model="content"
+      :error-messages="contentErrors"
+      :counter="500"
+      label="Content"
+      placeholder="프로젝트 내용을 입력해주세요"
+      @input="$v.content.$touch()"
+      @blur="$v.content.$touch()"
+      outline
+    ></v-textarea>
 
-      <date-picker v-model="deadline" :labelName="'팀원 모집 마감일'" :error-messages="deadlineErrors"></date-picker>
-      <v-btn @click="submit">submit</v-btn>
-      <v-btn @click="clear">clear</v-btn>
-    </form>
-  </v-container>
+    <vue-tags-input
+      class="tag_input"
+      v-model="tag"
+      :tags="tags"
+      @tags-changed="newTags => (tags = newTags)"
+      :autocomplete-items="filteredItems"
+      add-only-from-autocomplete
+    />
+    <v-layout>
+      <date-picker
+        v-model="startDate"
+        :labelName="'프로젝트 시작일'"
+        :error-messages="startDateErrors"
+      ></date-picker>
+    </v-layout>
+
+    <date-picker
+      v-model="deadline"
+      :labelName="'팀원 모집 마감일'"
+      :error-messages="deadlineErrors"
+    ></date-picker>
+    <v-btn @click="submit">submit</v-btn>
+    <v-btn @click="clear">clear</v-btn>
+  </form>
 </template>
 <script>
 import DatePicker from "./DatePicker.vue";
-import VoerroTagsInput from "@voerro/vue-tagsinput";
+import VueTagsInput from "@johmun/vue-tags-input";
 import { validationMixin } from "vuelidate";
 import { required, maxLength } from "vuelidate/lib/validators";
 
 export default {
   components: {
     DatePicker,
-    "tags-input": VoerroTagsInput
+    VueTagsInput
   },
   mixins: [validationMixin],
 
@@ -101,21 +107,57 @@ export default {
     summery: "",
     detailSwitch: false,
     content: "",
-    email: "",
     location: null,
     locations: ["지역 1", "지역 2", "지역 3", "지역 4"],
     startDate: "",
-    preTags: [
-      { key: "web-development", value: "Web Development" },
-      { key: "php", value: "PHP" },
-      { key: "javascript", value: "JavaScript" },
-      { key: "vue", value: "Vue.js" }
+
+    tag: "",
+    tags: [],
+    autocompleteItems: [
+      {
+        id: 1,
+        text: "Spain"
+      },
+      {
+        id: 2,
+        text: "France"
+      },
+      {
+        id: 3,
+        text: "USA"
+      },
+      {
+        id: 4,
+        text: "Germany"
+      },
+      {
+        id: 5,
+        text: "China"
+      },
+      {
+        id: 6,
+        text: "한글"
+      },
+      {
+        id: 7,
+        text: "앱 기획"
+      },
+      {
+        id: 8,
+        text: "웹 기획"
+      }
     ],
-    deadline: null,
-    selectedTags: []
+
+    deadline: null
   }),
 
   computed: {
+    filteredItems() {
+      return this.autocompleteItems.filter(i => {
+        return i.text.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
+      });
+    },
+
     checkboxErrors() {
       const errors = [];
       if (!this.$v.checkbox.$dirty) return errors;
@@ -221,19 +263,34 @@ export default {
   },
 
   methods: {
+    clearDatas() {
+      this.title = "";
+      this.summery = "";
+      this.content = "";
+      this.location = null;
+      this.startDate = "";
+      this.tag = "";
+      this.tags = [];
+      this.deadline = null;
+    },
     submit() {
       this.$v.$touch();
     },
 
     clear() {
       this.$v.$reset();
-      this.name = "";
-      this.email = "";
-      this.select = null;
-      this.checkbox = false;
+      console.log(this.tags);
+      this.clearDatas();
     }
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.form_container {
+  padding: 25px;
+}
+.tag_input {
+  max-width: 100% !important;
+}
+</style>

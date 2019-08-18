@@ -11,7 +11,9 @@
         </v-avatar>
         <div class="leader_name">{{ project.leader }}</div>
       </v-layout>
+
       <v-card-title class="headline">{{ project.title }}</v-card-title>
+      <v-chip class="status" color="green" text-color="white">진행중</v-chip>
       <div class="create_date">
         {{ setLLFormat(project.deadline) }} 까지 모집
       </div>

@@ -1,8 +1,10 @@
 <template>
   <section class="project_manage_section">
-    <h2>프로젝트 관리</h2>
-    <project-detail></project-detail>
-    <user-list></user-list>
+    <div>
+      <h2>프로젝트 관리</h2>
+      <project-detail></project-detail>
+      <user-list></user-list>
+    </div>
   </section>
 </template>
 
@@ -17,4 +19,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.project_manage_section {
+  max-width: 800px;
+  margin: 0 auto;
+}
+</style>

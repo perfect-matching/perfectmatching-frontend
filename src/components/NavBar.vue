@@ -33,7 +33,7 @@
     </v-toolbar>
     <v-navigation-drawer v-model="drawer" app dark temporary>
       <v-list dense>
-        <v-list-tile to="/project/new">
+        <v-list-tile to="/new/project">
           <v-list-tile-action>
             <v-icon>home</v-icon>
           </v-list-tile-action>
@@ -84,8 +84,7 @@ export default {
 .tool_bar {
   border-bottom: 1px solid #cfcfcf;
   background-color: #fff;
-  1background-color:#232323;
-    
+  1background-color: #232323;
 }
 .menu {
   1color: #cfcfcf;
