@@ -1,74 +1,93 @@
 <template>
   <v-container class="application_form_container">
     <form>
-      <v-layout wrap justify-space-around>
-        <v-flex xs12>직군:</v-flex>
-        <v-radio-group v-model="position" required row>
-          <v-radio label="개발자" value="developer"></v-radio>
-          <v-radio label="디자이너" value="designer"></v-radio>
-          <v-radio label="기획자" value="planner"></v-radio>
-          <v-radio label="마케터" value="marketer"></v-radio>
-        </v-radio-group>
-        <v-flex xs12>내가 선택한 position: {{ position }}</v-flex>
+      <v-textarea
+        outline
+        name="주최자에게 하고 싶은 말"
+        label="주최자에게 하고 싶은 말"
+        v-model="content"
+        :error-messages="contentErrors"
+        :counter="500"
+        placeholder="주최자에게 하고 싶은 말을 전하세요. 기술스택이나 궁금한 점도 좋아요 :)"
+        @input="$v.content.$touch()"
+        @blur="$v.content.$touch()"
+      ></v-textarea>
 
-        <v-flex xs12></v-flex>
-        <v-textarea
-          outline
-          name="주최자에게 하고 싶은 말"
-          label="주최자에게 하고 싶은 말"
-          v-model="content"
-          placeholder="주최자에게 하고 싶은 말을 전하세요. 기술스택이나 궁금한 점도 좋아요 :)"
-        ></v-textarea>
-        <v-flex xs12></v-flex>
-        <v-btn @click="submit">submit</v-btn>
-        <v-btn @click="clear">clear</v-btn>
-      </v-layout>
+      <v-btn @click="submit">지원하기</v-btn>
+      <v-btn @click="clear">취소</v-btn>
     </form>
   </v-container>
 </template>
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required } from "vuelidate/lib/validators";
+import { required, maxLength } from "vuelidate/lib/validators";
 
 export default {
   mixins: [validationMixin],
 
-  validations: {
-    checkbox: {
-      checked(val) {
-        return val;
-      }
-    }
-  },
+  validations: { content: { required, maxLength: maxLength(500) } },
 
   data: () => ({
-    position: "",
     content: ""
   }),
 
   computed: {
-    checkboxErrors() {
+    contentErrors() {
       const errors = [];
-      if (!this.$v.checkbox.$dirty) return errors;
-      !this.$v.checkbox.checked && errors.push("You must agree to continue!");
+      if (!this.$v.content.$dirty) return errors;
+
+      !this.$v.content.maxLength &&
+        errors.push("내용은 반드시 500자 이내이어야 합니다.");
+
+      !this.$v.content.required && errors.push("내용을 반드시 입력해주세요.");
+
       return errors;
     }
   },
 
   methods: {
+    clearDatas() {
+      this.content = "";
+    },
     submit() {
       this.$v.$touch();
     },
     clear() {
       this.$v.$reset();
-      this.name = "";
-      this.email = "";
-      this.select = null;
-      this.checkbox = false;
+      this.clearDatas();
     }
   }
 };
 </script>
 
-<style></style>
+<style scoped>
+.project_card {
+  padding: 20px;
+}
+
+.project_title {
+  font-size: 30px;
+}
+
+.project_date {
+  margin-bottom: 20px;
+}
+
+.project_summery {
+  color: #898989;
+}
+
+.content_title {
+  font-size: 16px;
+  color: black;
+}
+
+.require_skill {
+  margin-bottom: 10px;
+}
+
+.v-chip {
+  margin: 5px 5px 5px 0;
+}
+</style>

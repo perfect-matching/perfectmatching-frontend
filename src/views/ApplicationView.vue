@@ -17,4 +17,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.application_section {
+  margin: 0 auto;
+  max-width: 800px;
+}
+</style>

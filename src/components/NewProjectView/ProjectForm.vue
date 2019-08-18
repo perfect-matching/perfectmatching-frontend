@@ -275,7 +275,6 @@ export default {
     },
     submit() {
       this.$v.$touch();
-      this.clearDatas();
     },
 
     clear() {
