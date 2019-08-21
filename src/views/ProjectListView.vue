@@ -2,7 +2,9 @@
   <section class="project_list_section">
     <h2 class="section_title">프로젝트 리스트</h2>
     <project-list :projects="projects"></project-list>
-    <v-btn block color="secondary" dark @click="nextProjects">더 보기</v-btn>
+    <v-btn class="next_btn" block color="secondary" dark @click="nextProjects"
+      >더 보기</v-btn
+    >
   </section>
 </template>
 
@@ -34,4 +36,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.next_btn {
+  margin-bottom: 20px;
+}
+</style>

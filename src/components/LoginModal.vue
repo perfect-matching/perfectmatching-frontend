@@ -27,10 +27,9 @@
             :type="showPassword ? 'text' : 'password'"
             name="password"
             label="password"
-            hint="At least 8 characters"
             class="input-group--focused"
-            @input="$v.email.$touch()"
-            @blur="$v.email.$touch()"
+            @input="$v.password.$touch()"
+            @blur="$v.password.$touch()"
             @click:append="showPassword = !showPassword"
           ></v-text-field>
           <div class="form_buttons">
@@ -38,7 +37,9 @@
             <v-btn flat color="secondary" dark @click="clear">취소</v-btn>
             <div>
               퍼펙트 매칭이 처음이신가요?
-              <a href>회원가입</a>
+              <router-link to="/join" @click.native="clickedJoin"
+                >회원가입</router-link
+              >
             </div>
           </div>
         </form>
@@ -110,8 +111,15 @@ export default {
     submit() {
       this.$v.$touch();
     },
+
     clear() {
       this.$v.$reset();
+      this.email = "";
+      this.password = "";
+      this.dialog = false;
+    },
+
+    clickedJoin() {
       this.email = "";
       this.password = "";
       this.dialog = false;

@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import HomeView from "../views/HomeView.vue";
-
+import JoinView from "../views/JoinView.vue";
 import ProjectDetailView from "../views/ProjectDetailView.vue";
 import UserDetailView from "../views/UserDetailView.vue";
 import MyPageView from "../views/MyPageView.vue";
@@ -26,6 +26,11 @@ export const router = new Router({
       path: "/home",
       name: "home",
       component: HomeView
+    },
+    {
+      path: "/join",
+      name: "join",
+      component: JoinView
     },
     {
       path: "/projects",

@@ -15,7 +15,7 @@
         <v-btn flat to="/my/projects">프로젝트 관리</v-btn>
       </v-toolbar-items>
       <div class="login">
-        <modal></modal>
+        <login-modal></login-modal>
       </div>
       <div class="loggedin_user" v-if="loggedin">
         <v-btn icon>
@@ -68,11 +68,11 @@
 </template>
 
 <script>
-import Modal from "./Modal.vue";
+import LoginModal from "./LoginModal.vue";
 export default {
   name: "navBar",
   components: {
-    Modal
+    LoginModal
   },
   data() {
     return {

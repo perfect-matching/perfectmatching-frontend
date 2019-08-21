@@ -4,14 +4,19 @@
       <div class="deadline">{{ setFromNow(project.createdDate) }}</div>
       <v-layout class="leader_info" justify-center align-center>
         <v-avatar :tile="false" :size="40" color="grey lighten-4">
-          <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar" />
+          <img
+            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
+            alt="avatar"
+          />
         </v-avatar>
         <div class="leader_name">{{ project.leader }}</div>
       </v-layout>
 
       <v-card-title class="headline">{{ project.title }}</v-card-title>
       <v-chip class="status" color="green" text-color="white">진행중</v-chip>
-      <div class="create_date">{{ setLLFormat(project.deadline) }} 까지 모집</div>
+      <div class="create_date">
+        {{ setLLFormat(project.deadline) }} 까지 모집
+      </div>
       <v-card-text>
         요약정보입니다. 요약정보입니다. 요약정보입니다. 요약정보입니다.
         요약정보입니다. 요약정보입니다. 요약정보입니다. 요약정보입니다.
