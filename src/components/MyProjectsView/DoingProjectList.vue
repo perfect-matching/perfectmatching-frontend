@@ -13,21 +13,6 @@
             <project-list-item></project-list-item>
           </router-link>
         </li>
-        <li class="list_item">
-          <router-link to="/my/projects/:id">
-            <project-list-item></project-list-item>
-          </router-link>
-        </li>
-        <li class="list_item">
-          <router-link to="/my/projects/:id">
-            <project-list-item></project-list-item>
-          </router-link>
-        </li>
-        <li class="list_item">
-          <router-link to="/my/projects/:id">
-            <project-list-item></project-list-item>
-          </router-link>
-        </li>
       </ul>
     </article>
   </v-container>

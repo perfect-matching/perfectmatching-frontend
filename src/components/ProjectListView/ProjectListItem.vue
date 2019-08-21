@@ -72,6 +72,7 @@ export default {
 .headline {
   padding-bottom: 0;
   text-align: center;
+  font-weight: bold;
 }
 
 .deadline {
