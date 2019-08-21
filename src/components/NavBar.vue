@@ -14,22 +14,27 @@
         <v-btn flat to="/projects">프로젝트 리스트</v-btn>
         <v-btn flat to="/my/projects">프로젝트 관리</v-btn>
       </v-toolbar-items>
-      <v-btn icon>
-        <v-icon>notifications_none</v-icon>
-      </v-btn>
+      <div class="login">
+        <modal></modal>
+      </div>
+      <div class="loggedin_user" v-if="loggedin">
+        <v-btn icon>
+          <v-icon>notifications_none</v-icon>
+        </v-btn>
 
-      <v-btn icon>
-        <v-icon>mail_outline</v-icon>
-      </v-btn>
+        <v-btn icon>
+          <v-icon>mail_outline</v-icon>
+        </v-btn>
 
-      <v-btn icon to="/my">
-        <v-avatar :tile="false" :size="36" color="grey lighten-4">
-          <img
-            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
-            alt="avatar"
-          />
-        </v-avatar>
-      </v-btn>
+        <v-btn icon to="/my">
+          <v-avatar :tile="false" :size="36" color="grey lighten-4">
+            <img
+              src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
+              alt="avatar"
+            />
+          </v-avatar>
+        </v-btn>
+      </div>
     </v-toolbar>
     <v-navigation-drawer v-model="drawer" app dark temporary>
       <v-list dense>
@@ -63,12 +68,16 @@
 </template>
 
 <script>
+import Modal from "./Modal.vue";
 export default {
   name: "navBar",
-
+  components: {
+    Modal
+  },
   data() {
     return {
-      drawer: null
+      drawer: null,
+      loggedin: false
     };
   },
 

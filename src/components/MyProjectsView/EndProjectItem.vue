@@ -16,10 +16,11 @@
 
       <div class="github">
         <div class="github_title content_title">깃허브 저장소</div>
-        <a
-          href="https://github.com/perfect-matching/perfectmatching-frontend"
-        >https://github.com/perfect-matching/perfectmatching-frontend</a>
+        <a href="https://github.com/perfect-matching/perfectmatching-frontend"
+          >https://github.com/perfect-matching/perfectmatching-frontend</a
+        >
       </div>
+      <br />
 
       <div class="project_detail">
         <div class="detail_title content_title">상세설명</div>
@@ -60,10 +61,12 @@ export default {
 }
 
 .project_title {
+  font-weight: bold;
   font-size: 30px;
 }
 
 .project_date {
+  color: grey;
   margin-bottom: 20px;
 }
 
@@ -72,6 +75,7 @@ export default {
 }
 
 .content_title {
+  font-weight: 600;
   font-size: 16px;
   color: black;
 }

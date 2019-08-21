@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import HomeView from "../views/HomeView.vue";
+
 import ProjectDetailView from "../views/ProjectDetailView.vue";
 import UserDetailView from "../views/UserDetailView.vue";
 import MyPageView from "../views/MyPageView.vue";
