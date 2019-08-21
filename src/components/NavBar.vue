@@ -1,6 +1,6 @@
 <template>
   <header>
-    <v-toolbar class="tool_bar" flat>
+    <v-toolbar class="tool_bar" flat fixed>
       <v-toolbar-side-icon
         class="hidden-md-and-up"
         @click="toggleDrawer"

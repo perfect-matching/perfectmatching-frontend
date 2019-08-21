@@ -49,6 +49,7 @@ export default {
 <style scoped>
 .project_card {
   padding: 10px 10px 10px 10px;
+  border: 1px solid #dbdbdb;
 }
 .project_leader_info {
   border-bottom: 1px solid #cfcfcf;

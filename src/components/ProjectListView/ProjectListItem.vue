@@ -66,7 +66,7 @@ export default {
 .project_card {
   position: relative;
   max-width: 410px;
-  border: 1px solid grey;
+  border: 1px solid #dbdbdb;
 }
 
 .headline {

@@ -16,9 +16,9 @@
 
       <div class="github">
         <div class="github_title content_title">깃허브 저장소</div>
-        <a href="https://github.com/perfect-matching/perfectmatching-frontend"
-          >https://github.com/perfect-matching/perfectmatching-frontend</a
-        >
+        <a
+          href="https://github.com/perfect-matching/perfectmatching-frontend"
+        >https://github.com/perfect-matching/perfectmatching-frontend</a>
       </div>
 
       <div class="project_detail">
@@ -56,6 +56,7 @@ export default {
 <style scoped>
 .project_card {
   padding: 20px;
+  border: 1px solid #dbdbdb;
 }
 
 .project_title {
