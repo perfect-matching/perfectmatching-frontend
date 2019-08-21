@@ -34,7 +34,7 @@ export default {
 }
 
 .view_wrapper {
-  padding: 0;
+  padding: 60px 0 0 0;
   margin: 0 auto;
 }
 </style>
