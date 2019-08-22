@@ -139,6 +139,7 @@ export default {
       !this.$v.checkbox.checked && errors.push("You must agree to continue!");
       return errors;
     },
+
     nickNameErrors() {
       const errors = [];
       if (!this.$v.nickName.$dirty) return errors;
@@ -147,6 +148,7 @@ export default {
       !this.$v.nickName.required && errors.push("닉네임을 입력해주세요.");
       return errors;
     },
+
     introduceErrors() {
       const errors = [];
       if (!this.$v.introduce.$dirty) return errors;
@@ -167,10 +169,15 @@ export default {
       this.time = 12;
       this.checkbox = false;
     },
+
     submit() {
-      this.$v.$touch();
-      this.clearDatas();
+      if (this.$v.$invalid) {
+        console.log("형식 불일치");
+      } else {
+        console.log("제출!!:");
+      }
     },
+
     clear() {
       this.$v.$reset();
       this.clearDatas();

@@ -218,6 +218,12 @@ export default {
   methods: {
     submit() {
       this.$v.$touch();
+
+      if (this.$v.$invalid) {
+        console.log("형식 불일치");
+      } else {
+        console.log("제출!!:");
+      }
     },
 
     clear() {
