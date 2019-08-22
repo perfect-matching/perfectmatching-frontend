@@ -11,6 +11,7 @@ import MyProjectsView from "../views/MyProjectsView.vue";
 import ProjectManageView from "../views/ProjectManageView.vue";
 import NewProjectView from "../views/NewProjectView.vue";
 import ApplicationView from "../views/ApplicationView.vue";
+import CompleteProjectView from "../views/CompleteProjectView.vue";
 
 Vue.use(Router);
 
@@ -76,6 +77,11 @@ export const router = new Router({
       path: "/projects/:id/application",
       name: "projectApplication",
       component: ApplicationView
+    },
+    {
+      path: "/new/complete",
+      name: "completeProjectForm",
+      component: CompleteProjectView
     }
   ],
   scrollBehavior() {

@@ -11,16 +11,7 @@
       @blur="$v.title.$touch()"
       outline
     ></v-text-field>
-    <v-select
-      v-model="location"
-      :items="locations"
-      :error-messages="locationErrors"
-      label="location"
-      required
-      @change="$v.location.$touch()"
-      @blur="$v.location.$touch()"
-      outline
-    ></v-select>
+
     <v-textarea
       v-model="summery"
       :error-messages="summeryErrors"
@@ -30,18 +21,6 @@
       required
       @input="$v.summery.$touch()"
       @blur="$v.summery.$touch()"
-      outline
-    ></v-textarea>
-    <v-switch v-model="detailSwitch" :label="`상세 내용 입력`"></v-switch>
-    <v-textarea
-      v-if="detailSwitch"
-      v-model="content"
-      :error-messages="contentErrors"
-      :counter="500"
-      label="Content"
-      placeholder="프로젝트 내용을 입력해주세요"
-      @input="$v.content.$touch()"
-      @blur="$v.content.$touch()"
       outline
     ></v-textarea>
 
@@ -54,7 +33,27 @@
       add-only-from-autocomplete
     />
 
-    <date-picker v-model="deadline" :labelName="'팀원 모집 마감일'" :error-messages="deadlineErrors"></date-picker>
+    <v-textarea
+      class="content_input"
+      v-model="content"
+      :error-messages="contentErrors"
+      :counter="500"
+      label="Content"
+      placeholder="프로젝트 내용을 입력해주세요"
+      @input="$v.content.$touch()"
+      @blur="$v.content.$touch()"
+      outline
+    ></v-textarea>
+    <date-picker
+      v-model="startDate"
+      :labelName="'프로젝트 시작일'"
+      :error-messages="deadlineErrors"
+    ></date-picker>
+    <date-picker
+      v-model="endDate"
+      :labelName="'프로젝트 종료일'"
+      :error-messages="deadlineErrors"
+    ></date-picker>
     <v-layout>
       <v-spacer></v-spacer>
       <v-btn flat @click="submit">submit</v-btn>
@@ -84,7 +83,6 @@ export default {
     title: { required, maxLength: maxLength(20) },
     summery: { required, maxLength: maxLength(500) },
     content: { maxLength: maxLength(500) },
-    location: { required },
 
     deadline: {
       required,
@@ -95,10 +93,7 @@ export default {
   data: () => ({
     title: "",
     summery: "",
-    detailSwitch: false,
     content: "",
-    location: null,
-    locations: ["지역 1", "지역 2", "지역 3", "지역 4"],
     tag: "",
     tags: [],
     autocompleteItems: [
@@ -136,7 +131,8 @@ export default {
       }
     ],
 
-    deadline: null
+    startDate: "",
+    endDate: ""
   }),
 
   computed: {
@@ -144,13 +140,6 @@ export default {
       return this.autocompleteItems.filter(i => {
         return i.text.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
       });
-    },
-
-    locationErrors() {
-      const errors = [];
-      if (!this.$v.location.$dirty) return errors;
-      !this.$v.location.required && errors.push("지역을 선택해주세요.");
-      return errors;
     },
 
     positionErrors() {
@@ -233,10 +222,10 @@ export default {
       this.title = "";
       this.summery = "";
       this.content = "";
-      this.location = null;
       this.tag = "";
       this.tags = [];
-      this.deadline = null;
+      this.startDate = "";
+      this.endDate = "";
     },
 
     submit() {
@@ -249,10 +238,10 @@ export default {
           title: this.title,
           summery: this.summery,
           content: this.content,
-          location: this.location,
           tag: this.tag,
           tags: this.tags,
-          deadline: this.deadline
+          startDate: this.startDate,
+          endDate: this.endDate
         };
         console.log("제출!!:", project);
       }
