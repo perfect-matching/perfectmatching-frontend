@@ -2,19 +2,22 @@
   <section class="user_detail_section">
     <h2>User Detail View</h2>
     <user-info></user-info>
-    <user-project-list></user-project-list>
+    <doing-project-list></doing-project-list>
+    <end-project-list></end-project-list>
   </section>
 </template>
 
 <script>
 import UserInfo from "../components/UserDetailView/UserInfo.vue";
-import UserProjectList from "../components/UserDetailView/UserProjectList.vue";
+import DoingProjectList from "../components/MyProjectsView/DoingProjectList.vue";
+import EndProjectList from "../components/MyProjectsView/EndProjectList.vue";
 
 export default {
   name: "userDetail",
   components: {
     UserInfo,
-    UserProjectList
+    DoingProjectList,
+    EndProjectList
   }
 };
 </script>
