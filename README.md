@@ -71,5 +71,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 | /my/projects/:idx/edit    | [프로젝트 수정 페이지](https://perfectmatching.netlify.com/my/projects/1/edit)            |
 | /my/projects/:idx/done    | [프로젝트 완료 폼 페이지](https://perfectmatching.netlify.com/my/projects/1/done)         |
 | /new/done                 | [진행했던 프로젝트 추가 페이지](https://perfectmatching.netlify.com/new/done)             |
-| /my/done/:idx/edit        | [진행했던 프로젝트 수정 페이지](https://perfectmatching.netlify.com/my/complete/1/update) |
+| /my/done/:idx/edit        | [진행했던 프로젝트 수정 페이지](https://perfectmatching.netlify.com/my/done/1/edit) |
 | /users/:idx               | [유저 상세페이지](https://perfectmatching.netlify.com/users/1)                            |
