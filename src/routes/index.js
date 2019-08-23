@@ -11,7 +11,7 @@ import MyProjectsView from "../views/MyProjectsView.vue";
 import ProjectManageView from "../views/ProjectManageView.vue";
 import NewProjectView from "../views/NewProjectView.vue";
 import ApplicationView from "../views/ApplicationView.vue";
-import CompleteProjectView from "../views/CompleteProjectView.vue";
+import DoneProjectView from "../views/DoneProjectView.vue";
 
 Vue.use(Router);
 
@@ -74,8 +74,8 @@ export const router = new Router({
       component: ProjectManageView
     },
     {
-      path: "/my/projects/:id/update",
-      name: "updateProject",
+      path: "/my/projects/:id/edit",
+      name: "editProject",
       component: NewProjectView // 컴포넌트 이름 수정하기
     },
     {
@@ -84,19 +84,19 @@ export const router = new Router({
       component: ApplicationView
     },
     {
-      path: "/my/projects/:id/complete",
-      name: "completeProject",
-      component: CompleteProjectView
+      path: "/my/projects/:id/done",
+      name: "doneProject",
+      component: DoneProjectView
     },
     {
-      path: "/new/complete",
-      name: "newCompleteProject",
-      component: CompleteProjectView
+      path: "/new/done",
+      name: "newDoneProject",
+      component: DoneProjectView
     },
     {
-      path: "/my/complete/:id/update",
-      name: "updateCompleteProject",
-      component: CompleteProjectView
+      path: "/my/done/:id/edit",
+      name: "editDoneProject",
+      component: DoneProjectView
     }
   ],
   scrollBehavior() {

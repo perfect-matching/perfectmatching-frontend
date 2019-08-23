@@ -25,7 +25,7 @@
       block
       color="secondary"
       dark
-      to="/new/complete"
+      to="/new/done"
       >프로젝트 추가하기</v-btn
     >
   </v-container>
