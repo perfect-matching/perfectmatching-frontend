@@ -13,10 +13,10 @@
 
       <v-layout wrap>
         <v-btn depressed color="grey">프로젝트 삭제</v-btn>
-        <v-btn depressed color="grey" to="/my/projects/:id/update"
+        <v-btn depressed color="grey" to="/my/projects/:id/edit"
           >프로젝트 수정</v-btn
         >
-        <v-btn depressed color="grey" to="/my/projects/:id/complete"
+        <v-btn depressed color="grey" to="/my/projects/:id/done"
           >프로젝트 완료</v-btn
         >
         <v-spacer></v-spacer>

@@ -11,16 +11,16 @@
         프로젝트 수정하기
       </h2>
       <h2 class="section_title" v-else>프로젝트 완료</h2>
-      <complete-project-form></complete-project-form>
+      <done-project-form></done-project-form>
     </v-card>
   </section>
 </template>
 
 <script>
-import CompleteProjectForm from "../components/CompleteProjectForm.vue";
+import DoneProjectForm from "../components/DoneProjectForm.vue";
 export default {
   components: {
-    CompleteProjectForm
+    DoneProjectForm
   },
 
   created() {}
