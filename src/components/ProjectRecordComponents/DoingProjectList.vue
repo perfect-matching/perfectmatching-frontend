@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import ProjectListItem from "./ProjectListItem.vue";
+import ProjectListItem from "./DoingProjectItem.vue";
 
 export default {
   components: { ProjectListItem }
@@ -30,6 +30,7 @@ export default {
 a {
   text-decoration: none;
 }
+
 ul,
 li {
   list-style: none;
