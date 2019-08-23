@@ -70,6 +70,9 @@
       @input="$v.introduce.$touch()"
       @blur="$v.introduce.$touch()"
     ></v-textarea>
+
+    <v-text-field outline v-model="url" label="소셜 URL"></v-text-field>
+
     <div class="time">
       <v-subheader class="pl-0">투자시간(?)</v-subheader>
       <v-slider v-model="time" thumb-label="always" min="0" max="24"></v-slider>
@@ -80,10 +83,11 @@
       </div>
     </div>
 
-    <div class="form_buttons">
+    <v-layout class="form_buttons">
+      <v-spacer></v-spacer>
       <v-btn flat color="secondary" dark @click="submit">회원가입</v-btn>
       <v-btn flat color="secondary" dark @click="clear">취소</v-btn>
-    </div>
+    </v-layout>
   </form>
 </template>
 <script>
@@ -122,6 +126,7 @@ export default {
     password: "",
     repeatPassword: "",
     introduce: "",
+    url: "",
     time: 12,
     tag: "",
     tags: [],
@@ -247,5 +252,9 @@ export default {
 
 .time {
   text-align: center;
+}
+
+.form_buttons {
+  margin-top: 20px;
 }
 </style>

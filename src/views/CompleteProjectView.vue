@@ -1,7 +1,16 @@
 <template>
   <section class="complete_project_section">
     <v-card>
-      <h2 class="section_title">프로젝트 완성</h2>
+      <h2 class="section_title" v-if="this.$route.name == 'newCompleteProject'">
+        프로젝트 추가하기
+      </h2>
+      <h2
+        class="section_title"
+        v-else-if="this.$route.name == 'updateCompleteProject'"
+      >
+        프로젝트 수정하기
+      </h2>
+      <h2 class="section_title" v-else>프로젝트 완료</h2>
       <complete-project-form></complete-project-form>
     </v-card>
   </section>

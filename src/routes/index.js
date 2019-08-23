@@ -74,13 +74,28 @@ export const router = new Router({
       component: ProjectManageView
     },
     {
+      path: "/my/projects/:id/update",
+      name: "updateProject",
+      component: NewProjectView // 컴포넌트 이름 수정하기
+    },
+    {
       path: "/projects/:id/application",
       name: "projectApplication",
       component: ApplicationView
     },
     {
+      path: "/my/projects/:id/complete",
+      name: "completeProject",
+      component: CompleteProjectView
+    },
+    {
       path: "/new/complete",
-      name: "completeProjectForm",
+      name: "newCompleteProject",
+      component: CompleteProjectView
+    },
+    {
+      path: "/my/complete/:id/update",
+      name: "updateCompleteProject",
       component: CompleteProjectView
     }
   ],

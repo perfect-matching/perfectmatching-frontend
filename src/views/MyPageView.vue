@@ -7,11 +7,10 @@
 
 <script>
 import MyInfo from "../components/MyPageView/MyInfo.vue";
-// import MyProjectList from "../components/MyPageView/MyProjectList.vue";
+
 export default {
   components: {
     MyInfo
-    // MyProjectList
   }
 };
 </script>
