@@ -20,7 +20,12 @@
         </li>
       </ul>
     </article>
-    <v-btn block color="secondary" dark to="/new/complete"
+    <v-btn
+      v-if="this.$route.name == 'myProjects'"
+      block
+      color="secondary"
+      dark
+      to="/new/complete"
       >프로젝트 추가하기</v-btn
     >
   </v-container>

@@ -4,12 +4,12 @@
       <h3>진행중인 프로젝트</h3>
       <ul class="doing_project_list">
         <li class="list_item">
-          <router-link to="/my/projects/:id">
+          <router-link :to="url">
             <project-list-item></project-list-item>
           </router-link>
         </li>
         <li class="list_item">
-          <router-link to="/my/projects/:id">
+          <router-link :to="url">
             <project-list-item></project-list-item>
           </router-link>
         </li>
@@ -19,10 +19,24 @@
 </template>
 
 <script>
-import ProjectListItem from "./ProjectListItem.vue";
+import ProjectListItem from "./DoingProjectItem.vue";
 
 export default {
-  components: { ProjectListItem }
+  components: { ProjectListItem },
+
+  data() {
+    return {
+      url: ""
+    };
+  },
+
+  created() {
+    if (this.$route.name == "myProjects") {
+      this.url = "/my/projects/:id";
+    } else if (this.$route.name == "userDetail") {
+      this.url = "/project/1";
+    }
+  }
 };
 </script>
 
@@ -30,6 +44,7 @@ export default {
 a {
   text-decoration: none;
 }
+
 ul,
 li {
   list-style: none;

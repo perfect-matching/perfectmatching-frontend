@@ -20,11 +20,20 @@
           >https://github.com/perfect-matching/perfectmatching-frontend</a
         >
       </div>
+      <br />
 
       <div class="project_detail">
         <div class="detail_title content_title">상세설명</div>
         <p>이 프로젝트는 모든 정보를 얻는 프로젝트입니다!</p>
       </div>
+
+      <v-layout wrap v-if="this.$route.name == 'myProjects'">
+        <v-spacer></v-spacer>
+        <v-btn depressed color="grey">프로젝트 삭제</v-btn>
+        <v-btn depressed color="grey" to="/my/complete/:id/update"
+          >프로젝트 수정</v-btn
+        >
+      </v-layout>
     </v-card>
   </v-container>
 </template>
@@ -50,13 +59,16 @@ export default {
 <style scoped>
 .project_card {
   padding: 20px;
+  border: 1px solid #dbdbdb;
 }
 
 .project_title {
+  font-weight: bold;
   font-size: 30px;
 }
 
 .project_date {
+  color: grey;
   margin-bottom: 20px;
 }
 
@@ -65,6 +77,7 @@ export default {
 }
 
 .content_title {
+  font-weight: 600;
   font-size: 16px;
   color: black;
 }
