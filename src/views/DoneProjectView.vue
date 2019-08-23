@@ -1,12 +1,12 @@
 <template>
-  <section class="complete_project_section">
+  <section class="done_project_section">
     <v-card>
-      <h2 class="section_title" v-if="this.$route.name == 'newCompleteProject'">
+      <h2 class="section_title" v-if="this.$route.name == 'newDoneProject'">
         프로젝트 추가하기
       </h2>
       <h2
         class="section_title"
-        v-else-if="this.$route.name == 'updateCompleteProject'"
+        v-else-if="this.$route.name == 'editDoneProject'"
       >
         프로젝트 수정하기
       </h2>
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style scoped>
-.complete_project_section {
+.done_project_section {
   margin: 0 auto;
   padding: 20px 0 50px 0;
   max-width: 800px;
