@@ -1,7 +1,7 @@
 <template>
   <section class="new_project_section">
     <v-card>
-      <h2 class="section_title" v-if="this.$route.name == 'updateProject'">
+      <h2 class="section_title" v-if="this.$route.name == 'editProject'">
         프로젝트 수정
       </h2>
       <h2 class="section_title" v-else>프로젝트 개설</h2>
