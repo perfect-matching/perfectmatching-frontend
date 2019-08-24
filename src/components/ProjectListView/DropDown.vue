@@ -1,20 +1,25 @@
 <template>
   <div class="drop_box">
-    <p>{{ title }}</p>
-    <v-overflow-btn
-      :items="dropdown_font"
-      label="Overflow Btn"
-      target="#dropdown-example"
-    ></v-overflow-btn>
+    <v-select
+      :items="items"
+      :label="title"
+      :value="value"
+      @change="selectValue"
+    ></v-select>
   </div>
 </template>
 <script>
 export default {
   props: {
-    title: String
+    title: String,
+    value: String,
+    items: Array
   },
-  data: () => ({
-    dropdown_font: ["Arial", "Calibri", "Courier", "Verdana"]
-  })
+
+  methods: {
+    selectValue(value) {
+      this.$emit("input", value);
+    }
+  }
 };
 </script>
