@@ -44,7 +44,7 @@
       @blur="$v.content.$touch()"
       outline
     ></v-textarea>
-
+    <v-text-field outline v-model="url" label="소셜 URL"></v-text-field>
     <vue-tags-input
       class="tag_input"
       v-model="tag"
@@ -54,7 +54,11 @@
       add-only-from-autocomplete
     />
 
-    <date-picker v-model="deadline" :labelName="'팀원 모집 마감일'" :error-messages="deadlineErrors"></date-picker>
+    <!-- <date-picker
+      v-model="deadline"
+      :labelName="'팀원 모집 마감일'"
+      :error-messages="deadlineErrors"
+    ></date-picker>-->
     <v-layout>
       <v-spacer></v-spacer>
       <v-btn flat @click="submit">submit</v-btn>
@@ -63,7 +67,7 @@
   </form>
 </template>
 <script>
-import DatePicker from "./DatePicker.vue";
+// import DatePicker from "./DatePicker.vue";
 import VueTagsInput from "@johmun/vue-tags-input";
 import { validationMixin } from "vuelidate";
 import { required, maxLength } from "vuelidate/lib/validators";
@@ -75,7 +79,7 @@ export default {
     }
   },
   components: {
-    DatePicker,
+    // DatePicker,
     VueTagsInput
   },
   mixins: [validationMixin],
@@ -97,8 +101,23 @@ export default {
     summery: "",
     detailSwitch: false,
     content: "",
+    url: "",
     location: null,
-    locations: ["지역 1", "지역 2", "지역 3", "지역 4"],
+    locations: [
+      "서울",
+      "부산",
+      "대구",
+      "광주",
+      "대전",
+      "울산",
+      "충청북도",
+      "충청남도",
+      "전라북도",
+      "전라남도",
+      "경상북도",
+      "경상남도",
+      "제주도"
+    ],
     tag: "",
     tags: [],
     autocompleteItems: [

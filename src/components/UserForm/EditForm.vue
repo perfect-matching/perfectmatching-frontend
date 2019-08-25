@@ -4,10 +4,10 @@
       outline
       v-model="email"
       label="E-mail"
-      value="jkljkl17@naver.com"
-      disabled
-      placeholder="jkljkl17@naver.com"
+      :disabled="this.$route.name === 'profileEdit'"
+      :placeholder="'로그인한 유저의 이메일'"
     ></v-text-field>
+
     <v-text-field
       outline
       v-model="password"
@@ -36,6 +36,7 @@
       @blur="$v.repeatPassword.$touch()"
       @click:append="showPassword = !showPassword"
     ></v-text-field>
+
     <v-text-field
       outline
       v-model="nickName"
@@ -46,6 +47,7 @@
       @input="$v.nickName.$touch()"
       @blur="$v.nickName.$touch()"
     ></v-text-field>
+
     <v-textarea
       outline
       v-model="introduce"
@@ -58,7 +60,9 @@
       @input="$v.introduce.$touch()"
       @blur="$v.introduce.$touch()"
     ></v-textarea>
+
     <v-text-field outline v-model="url" label="소셜 URL"></v-text-field>
+
     <vue-tags-input
       class="tag_input"
       v-model="tag"
@@ -67,6 +71,7 @@
       :autocomplete-items="filteredItems"
       add-only-from-autocomplete
     />
+
     <div class="time">
       <v-subheader class="pl-0">투자시간(?)</v-subheader>
       <v-slider v-model="time" thumb-label="always" min="0" max="24"></v-slider>
@@ -76,6 +81,7 @@
         투자하고 싶어요 :D
       </div>
     </div>
+
     <v-checkbox
       v-model="checkbox"
       :error-messages="checkboxErrors"
@@ -85,7 +91,7 @@
       @blur="$v.checkbox.$touch()"
     ></v-checkbox>
 
-    <v-btn @click="submit">submit</v-btn>
+    <v-btn @click="submit">가입하기</v-btn>
     <v-btn @click="clear">clear</v-btn>
   </form>
 </template>
