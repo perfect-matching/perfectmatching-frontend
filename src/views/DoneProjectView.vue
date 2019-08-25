@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import DoneProjectForm from "../components/DoneProjectForm.vue";
+import DoneProjectForm from "../components/ProjectForm/DoneProjectForm.vue";
 export default {
   components: {
     DoneProjectForm
