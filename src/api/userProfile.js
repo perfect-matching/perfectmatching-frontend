@@ -14,8 +14,13 @@ function getUserProjectsByUserIdx(userIdx) {
   return axios.get(`${backend.baseUrl}/profile/${userIdx}/projects`);
 }
 
+function getDoneProjectsByUserIdx(userIdx) {
+  return axios.get(`${backend.baseUrl}/profile/${userIdx}/doneprojects`);
+}
+
 export const userProfile = {
   getUserProfileByIdx,
   getUserSkillsByUserIdx,
-  getUserProjectsByUserIdx
+  getUserProjectsByUserIdx,
+  getDoneProjectsByUserIdx
 };

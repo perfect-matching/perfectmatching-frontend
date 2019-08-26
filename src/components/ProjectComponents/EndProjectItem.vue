@@ -1,12 +1,15 @@
 <template>
   <v-container class="project_detail_container">
     <v-card flat class="project_card">
-      <v-chip class="status" color="green" text-color="white">진행중</v-chip>
-      <div class="project_title">모든 정보를 다 얻을 수 있는 몽땅</div>
-      <div class="project_date">2019년 03월 30일 - 2019년 04월 22일</div>
+      <!-- <v-chip class="status" color="green" text-color="white">진행중</v-chip> -->
+      <div class="project_title">{{ project.title }}</div>
+      <div class="project_date">
+        {{ setDateFormat(project.startDate) }} -
+        {{ setDateFormat(project.endDate) }}
+      </div>
       <div class="project_summery">
         <div class="summery_title content_title">요약내용</div>
-        <p>이 프로젝트는 모든 정보를 얻는 프로젝트입니다!</p>
+        <p>{{ project.summary }}}</p>
       </div>
 
       <div class="require_skill">
@@ -16,15 +19,16 @@
 
       <div class="github">
         <div class="github_title content_title">깃허브 저장소</div>
-        <a href="https://github.com/perfect-matching/perfectmatching-frontend"
-          >https://github.com/perfect-matching/perfectmatching-frontend</a
+        <a
+          href="https://github.com/perfect-matching/perfectmatching-frontend"
+          >{{ project.socialUrl }}</a
         >
       </div>
       <br />
 
       <div class="project_detail">
         <div class="detail_title content_title">상세설명</div>
-        <p>이 프로젝트는 모든 정보를 얻는 프로젝트입니다!</p>
+        <p>{{ project.content }}</p>
       </div>
 
       <v-layout wrap v-if="this.$route.name == 'myProjects'">
@@ -40,6 +44,13 @@
 
 <script>
 export default {
+  props: {
+    project: {
+      type: Object,
+      required: true
+    }
+  },
+
   data: () => ({
     tags: [
       "Work",
@@ -52,7 +63,13 @@ export default {
       "Tech",
       "Creative Writing"
     ]
-  })
+  }),
+
+  methods: {
+    setDateFormat(date) {
+      return this.$_moment(date).format("LL");
+    }
+  }
 };
 </script>
 

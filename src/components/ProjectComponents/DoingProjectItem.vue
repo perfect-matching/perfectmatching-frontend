@@ -19,7 +19,7 @@
         </v-avatar>
         <div class="user_nick">{{ project.leaderNick }}</div>
         <v-spacer></v-spacer>
-        <div class="create_date">{{ project.createdDate }}</div>
+        <div class="create_date">{{ setDateFormat(project.createdDate) }}</div>
       </v-layout>
       <v-card-title class="card_title">{{ project.title }}</v-card-title>
       <v-chip class="status ma-2" color="red" text-color="white">{{
@@ -37,6 +37,12 @@ export default {
     project: {
       type: Object,
       required: true
+    }
+  },
+
+  methods: {
+    setDateFormat(date) {
+      return this.$_moment(date).format("LL");
     }
   }
 };
