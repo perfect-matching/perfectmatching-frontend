@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import MyPhoto from "../components/MyProfileEditView/MyPhoto.vue";
-import EditForm from "../components/MyProfileEditView/EditForm.vue";
+import MyPhoto from "../components/UserForm/MyPhoto.vue";
+import EditForm from "../components/UserForm/EditForm.vue";
 
 export default {
   components: {

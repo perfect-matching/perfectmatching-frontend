@@ -3,21 +3,9 @@
     <v-text-field
       outline
       v-model="email"
-      :error-messages="emailErrors"
       label="E-mail"
-      required
-      @input="$v.email.$touch()"
-      @blur="$v.email.$touch()"
-    ></v-text-field>
-
-    <v-text-field
-      outline
-      v-model="nickName"
-      :error-messages="nickNameErrors"
-      label="닉네임"
-      required
-      @input="$v.nickName.$touch()"
-      @blur="$v.nickName.$touch()"
+      :disabled="this.$route.name === 'profileEdit'"
+      :placeholder="'로그인한 유저의 이메일'"
     ></v-text-field>
 
     <v-text-field
@@ -48,17 +36,19 @@
       @blur="$v.repeatPassword.$touch()"
       @click:append="showPassword = !showPassword"
     ></v-text-field>
-    <vue-tags-input
-      class="tag_input"
-      v-model="tag"
-      :tags="tags"
-      :placeholder="'가지고 있는 능력을 입력해주세요!'"
-      @tags-changed="newTags => (tags = newTags)"
-      :autocomplete-items="filteredItems"
-      add-only-from-autocomplete
-    />
+
+    <v-text-field
+      outline
+      v-model="nickName"
+      :error-messages="nickNameErrors"
+      :counter="20"
+      label="닉네임"
+      required
+      @input="$v.nickName.$touch()"
+      @blur="$v.nickName.$touch()"
+    ></v-text-field>
+
     <v-textarea
-      class="introduce_input"
       outline
       v-model="introduce"
       :error-messages="introduceErrors"
@@ -73,6 +63,15 @@
 
     <v-text-field outline v-model="url" label="소셜 URL"></v-text-field>
 
+    <vue-tags-input
+      class="tag_input"
+      v-model="tag"
+      :tags="tags"
+      @tags-changed="newTags => (tags = newTags)"
+      :autocomplete-items="filteredItems"
+      add-only-from-autocomplete
+    />
+
     <div class="time">
       <v-subheader class="pl-0">투자시간(?)</v-subheader>
       <v-slider v-model="time" thumb-label="always" min="0" max="24"></v-slider>
@@ -83,51 +82,59 @@
       </div>
     </div>
 
-    <v-layout class="form_buttons">
-      <v-spacer></v-spacer>
-      <v-btn flat color="secondary" dark @click="submit">회원가입</v-btn>
-      <v-btn flat color="secondary" dark @click="clear">취소</v-btn>
-    </v-layout>
+    <v-checkbox
+      v-model="checkbox"
+      :error-messages="checkboxErrors"
+      label="Do you agree?"
+      required
+      @change="$v.checkbox.$touch()"
+      @blur="$v.checkbox.$touch()"
+    ></v-checkbox>
+
+    <v-btn @click="submit">가입하기</v-btn>
+    <v-btn @click="clear">clear</v-btn>
   </form>
 </template>
+
 <script>
-import VueTagsInput from "@johmun/vue-tags-input";
 import { validationMixin } from "vuelidate";
+import VueTagsInput from "@johmun/vue-tags-input";
 import {
   required,
-  minLength,
   maxLength,
   sameAs,
-  email
+  minLength
 } from "vuelidate/lib/validators";
 
 export default {
+  mixins: [validationMixin],
   components: {
     VueTagsInput
   },
 
-  mixins: [validationMixin],
-
   validations: {
     nickName: { required, maxLength: maxLength(20) },
-    email: { required, email, maxLength: maxLength(50) },
     password: { required, minLength: minLength(8) },
     repeatPassword: {
       sameAsPassword: sameAs("password")
     },
-    introduce: { required, maxLength: maxLength(500) }
+    introduce: { required, maxLength: maxLength(500) },
+    checkbox: {
+      checked(val) {
+        return val;
+      }
+    }
   },
 
   data: () => ({
+    nickName: "",
+    email: "",
     valid: false,
     showPassword: false,
-    email: "",
-    nickName: "",
     password: "",
     repeatPassword: "",
     introduce: "",
     url: "",
-    time: 12,
     tag: "",
     tags: [],
     autocompleteItems: [
@@ -163,7 +170,9 @@ export default {
         id: 8,
         text: "웹 기획"
       }
-    ]
+    ],
+    time: 12,
+    checkbox: false
   }),
 
   computed: {
@@ -173,22 +182,19 @@ export default {
       });
     },
 
+    checkboxErrors() {
+      const errors = [];
+      if (!this.$v.checkbox.$dirty) return errors;
+      !this.$v.checkbox.checked && errors.push("You must agree to continue!");
+      return errors;
+    },
+
     nickNameErrors() {
       const errors = [];
       if (!this.$v.nickName.$dirty) return errors;
       !this.$v.nickName.maxLength &&
-        errors.push("닉네임은 20자 이내이어야 합니다.");
-      !this.$v.email.required && errors.push("닉네임을 입력해주세요.");
-      return errors;
-    },
-
-    emailErrors() {
-      const errors = [];
-      if (!this.$v.email.$dirty) return errors;
-      !this.$v.email.maxLength &&
-        errors.push("이메일은 50자 이내이어야 합니다.");
-      !this.$v.email.email && errors.push("이메일 형식이 틀렸습니다.");
-      !this.$v.email.required && errors.push("이메일을 입력해주세요.");
+        errors.push("닉네임은 최대 20자 이내이어야 합니다.");
+      !this.$v.nickName.required && errors.push("닉네임을 입력해주세요.");
       return errors;
     },
 
@@ -221,9 +227,17 @@ export default {
   },
 
   methods: {
-    submit() {
-      this.$v.$touch();
+    clearDatas() {
+      this.nickName = "";
+      this.email = "";
+      this.introduce = "";
+      this.tag = "";
+      this.tags = [];
+      this.time = 12;
+      this.checkbox = false;
+    },
 
+    submit() {
       if (this.$v.$invalid) {
         console.log("형식 불일치");
       } else {
@@ -233,28 +247,14 @@ export default {
 
     clear() {
       this.$v.$reset();
-      this.nickName = "";
-      this.email = "";
-      this.password = "";
-      this.repeatPassword = "";
+      this.clearDatas();
     }
   }
 };
 </script>
+
 <style scoped>
 .tag_input {
   max-width: 100% !important;
-}
-
-.introduce_input {
-  margin-top: 30px;
-}
-
-.time {
-  text-align: center;
-}
-
-.form_buttons {
-  margin-top: 20px;
 }
 </style>
