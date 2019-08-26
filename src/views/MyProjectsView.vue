@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import DoingProjectList from "../components/MyProjectsView/DoingProjectList.vue";
-import EndProjectList from "../components/MyProjectsView/EndProjectList.vue";
+import DoingProjectList from "../components/ProjectComponents/DoingProjectList.vue";
+import EndProjectList from "../components/ProjectComponents/EndProjectList.vue";
 export default {
   components: {
     DoingProjectList,

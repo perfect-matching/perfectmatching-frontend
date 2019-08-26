@@ -63,12 +63,27 @@ export const projectModule = {
       return project
         .getNextProjects(nextUrl)
         .then(({ data }) => {
-          console.log(data);
           const projects = {
             datas: data._embedded.datas,
             nextUrl: data._links.next.href
           };
           commit("ADD_MORE_PROJECTS", projects);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
+    FETCH_PROJECTS_WITH_QURIES({ commit }, { location }) {
+      return project
+        .getProjectsWithQueries(location)
+        .then(({ data }) => {
+          const projects = {
+            datas: data._embedded.datas,
+            nextUrl: data._links.next.href
+          };
+
+          commit("SET_PROJECTS", projects);
         })
         .catch(err => {
           console.log(err);

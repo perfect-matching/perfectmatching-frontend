@@ -32,7 +32,7 @@
       @blur="$v.summery.$touch()"
       outline
     ></v-textarea>
-    <v-switch v-model="detailSwitch" :label="`상세 정보`"></v-switch>
+    <v-switch v-model="detailSwitch" :label="`상세 내용 입력`"></v-switch>
     <v-textarea
       v-if="detailSwitch"
       v-model="content"
@@ -44,7 +44,7 @@
       @blur="$v.content.$touch()"
       outline
     ></v-textarea>
-
+    <v-text-field outline v-model="url" label="소셜 URL"></v-text-field>
     <vue-tags-input
       class="tag_input"
       v-model="tag"
@@ -53,32 +53,33 @@
       :autocomplete-items="filteredItems"
       add-only-from-autocomplete
     />
-    <v-layout>
-      <date-picker
-        v-model="startDate"
-        :labelName="'프로젝트 시작일'"
-        :error-messages="startDateErrors"
-      ></date-picker>
-    </v-layout>
 
-    <date-picker
+    <!-- <date-picker
       v-model="deadline"
       :labelName="'팀원 모집 마감일'"
       :error-messages="deadlineErrors"
-    ></date-picker>
-    <v-btn @click="submit">submit</v-btn>
-    <v-btn @click="clear">clear</v-btn>
+    ></date-picker>-->
+    <v-layout>
+      <v-spacer></v-spacer>
+      <v-btn flat @click="submit">submit</v-btn>
+      <v-btn flat @click="clear">clear</v-btn>
+    </v-layout>
   </form>
 </template>
 <script>
-import DatePicker from "./DatePicker.vue";
+// import DatePicker from "./DatePicker.vue";
 import VueTagsInput from "@johmun/vue-tags-input";
 import { validationMixin } from "vuelidate";
 import { required, maxLength } from "vuelidate/lib/validators";
 
 export default {
+  props: {
+    project: {
+      type: Object
+    }
+  },
   components: {
-    DatePicker,
+    // DatePicker,
     VueTagsInput
   },
   mixins: [validationMixin],
@@ -89,16 +90,9 @@ export default {
     content: { maxLength: maxLength(500) },
     location: { required },
 
-    startDate: {
-      required,
-      minValue: value => value > new Date().toISOString(),
-      maxValue: (value, endDate) => value < endDate
-    },
-
     deadline: {
       required,
-      minValue: value => value > new Date().toISOString(),
-      maxValue: (value, startDate) => value < startDate
+      minValue: value => value > new Date().toISOString()
     }
   },
 
@@ -107,10 +101,23 @@ export default {
     summery: "",
     detailSwitch: false,
     content: "",
+    url: "",
     location: null,
-    locations: ["지역 1", "지역 2", "지역 3", "지역 4"],
-    startDate: "",
-
+    locations: [
+      "서울",
+      "부산",
+      "대구",
+      "광주",
+      "대전",
+      "울산",
+      "충청북도",
+      "충청남도",
+      "전라북도",
+      "전라남도",
+      "경상북도",
+      "경상남도",
+      "제주도"
+    ],
     tag: "",
     tags: [],
     autocompleteItems: [
@@ -156,13 +163,6 @@ export default {
       return this.autocompleteItems.filter(i => {
         return i.text.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
       });
-    },
-
-    checkboxErrors() {
-      const errors = [];
-      if (!this.$v.checkbox.$dirty) return errors;
-      !this.$v.checkbox.checked && errors.push("You must agree to continue!");
-      return errors;
     },
 
     locationErrors() {
@@ -220,25 +220,13 @@ export default {
 
       return errors;
     },
+
     contentErrors() {
       const errors = [];
       if (!this.$v.content.$dirty) return errors;
 
       !this.$v.content.maxLength &&
         errors.push("내용은 반드시 500자 이내이어야 합니다.");
-
-      return errors;
-    },
-
-    startDateErrors() {
-      const errors = [];
-      if (!this.$v.startDate.$dirty) return errors;
-
-      !this.$v.startDate.minValue &&
-        errors.push("오늘 이후의 날짜를 선택해주세요.");
-
-      !this.$v.startDate.maxValue &&
-        errors.push("프로젝트 종료일 이전 날짜를 선택해주세요.");
 
       return errors;
     },
@@ -255,9 +243,6 @@ export default {
       !this.$v.deadline.minValue &&
         errors.push("오늘 이후의 날짜를 선택해주세요");
 
-      !this.$v.deadline.maxValue &&
-        errors.push("프로젝트 시작일 이전 날짜를 선택해주세요.");
-
       return errors;
     }
   },
@@ -268,13 +253,28 @@ export default {
       this.summery = "";
       this.content = "";
       this.location = null;
-      this.startDate = "";
       this.tag = "";
       this.tags = [];
       this.deadline = null;
     },
+
     submit() {
       this.$v.$touch();
+
+      if (this.$v.$invalid) {
+        console.log("형식 불일치");
+      } else {
+        const project = {
+          title: this.title,
+          summery: this.summery,
+          content: this.content,
+          location: this.location,
+          tag: this.tag,
+          tags: this.tags,
+          deadline: this.deadline
+        };
+        console.log("제출!!:", project);
+      }
     },
 
     clear() {
@@ -292,5 +292,6 @@ export default {
 }
 .tag_input {
   max-width: 100% !important;
+  margin-bottom: 20px;
 }
 </style>
