@@ -4,7 +4,8 @@ export const userProfileModule = {
   state: {
     userProfile: {},
     userSkills: [],
-    userProjects: []
+    userProjects: [],
+    DoneProjects: []
   },
 
   getters: {
@@ -18,6 +19,10 @@ export const userProfileModule = {
 
     fetchedUserProjects(state) {
       return state.userProjects;
+    },
+
+    fetchedDoneProjects(state) {
+      return state.DoneProjects;
     }
   },
 
@@ -32,6 +37,10 @@ export const userProfileModule = {
 
     SET_USER_PROJECTS(state, datas) {
       state.userProjects = datas;
+    },
+
+    SET_DONE_PROJECTS(state, datas) {
+      state.DoneProjects = datas;
     }
   },
 
@@ -63,6 +72,16 @@ export const userProfileModule = {
         .then(({ data }) => {
           const userProjects = data._embedded.datas;
           commit("SET_USER_PROJECTS", userProjects);
+        })
+        .catch(err => console.log(err));
+    },
+
+    GET_DONE_PROJECTS_BY_USER_IDX({ commit }, { idx }) {
+      return userProfile
+        .getDoneProjectsByUserIdx(idx)
+        .then(({ data }) => {
+          const doneProjects = data._embedded.datas;
+          commit("SET_DONE_PROJECTS", doneProjects);
         })
         .catch(err => console.log(err));
     }

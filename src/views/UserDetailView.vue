@@ -3,7 +3,7 @@
     <h2>User Detail View</h2>
     <user-info :userProfile="userProfile" :userSkills="userSkills"></user-info>
     <doing-project-list :projects="doingProjects"></doing-project-list>
-    <end-project-list></end-project-list>
+    <end-project-list :projects="doneProjects"></end-project-list>
   </section>
 </template>
 
@@ -25,7 +25,8 @@ export default {
     ...mapGetters({
       userProfile: "fetchedUserProfile",
       userSkills: "fetchedUserSkills",
-      doingProjects: "fetchedUserProjects"
+      doingProjects: "fetchedUserProjects",
+      doneProjects: "fetchedDoneProjects"
     })
   },
 
@@ -34,6 +35,7 @@ export default {
     this.$store.dispatch("GET_USER_PROFILE_BY_IDX", { idx });
     this.$store.dispatch("GET_USER_SKILLS_BY_USER_IDX", { idx });
     this.$store.dispatch("GET_USER_PROJECTS_BY_USER_IDX", { idx });
+    this.$store.dispatch("GET_DONE_PROJECTS_BY_USER_IDX", { idx });
   }
 };
 </script>
