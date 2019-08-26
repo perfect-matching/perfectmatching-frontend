@@ -49,7 +49,7 @@ export const router = new Router({
       component: NewProjectView
     },
     {
-      path: "/users/:id",
+      path: "/profile/:idx",
       name: "userDetail",
       component: UserDetailView
     },

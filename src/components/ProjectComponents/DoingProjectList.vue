@@ -3,14 +3,13 @@
     <article class="doing_project_article">
       <h3>진행중인 프로젝트</h3>
       <ul class="doing_project_list">
-        <li class="list_item">
-          <router-link :to="url">
-            <project-list-item></project-list-item>
-          </router-link>
-        </li>
-        <li class="list_item">
-          <router-link :to="url">
-            <project-list-item></project-list-item>
+        <li
+          class="list_item"
+          v-for="project in projects"
+          :key="project.projectIdx"
+        >
+          <router-link :to="{ path: `${url}/${project.projectIdx}` }">
+            <project-list-item :project="project"></project-list-item>
           </router-link>
         </li>
       </ul>
@@ -23,6 +22,12 @@ import ProjectListItem from "./DoingProjectItem.vue";
 
 export default {
   components: { ProjectListItem },
+  props: {
+    projects: {
+      type: Array,
+      required: true
+    }
+  },
 
   data() {
     return {
@@ -34,7 +39,7 @@ export default {
     if (this.$route.name == "myProjects") {
       this.url = "/my/projects/:id";
     } else if (this.$route.name == "userDetail") {
-      this.url = "/project/1";
+      this.url = "/project";
     }
   }
 };
