@@ -1,25 +1,31 @@
 <template>
-  <section class="done_project_section">
+  <section class="project_edit_section">
     <v-card>
-      <h2 class="section_title">프로젝트 추가하기</h2>
-      <done-project-form></done-project-form>
+      <h2 class="section_title">프로젝트 완료</h2>
+      <done-project-form :project="doingProject"></done-project-form>
     </v-card>
   </section>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import DoneProjectForm from "../components/ProjectForm/DoneProjectForm.vue";
+
 export default {
   components: {
     DoneProjectForm
   },
 
-  created() {}
+  computed: {
+    ...mapGetters({
+      doingProject: "fetchedMyProject"
+    })
+  }
 };
 </script>
 
 <style scoped>
-.done_project_section {
+.project_edit_section {
   margin: 0 auto;
   padding: 20px 0 50px 0;
   max-width: 800px;

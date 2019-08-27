@@ -8,8 +8,10 @@ export const myModule = {
     myDoingProjects: [],
     myDoneProjects: [],
     myProject: {},
+    myDoneProject: {},
     myProjectEditData: {}
   },
+
   getters: {
     fetchedMyProfile(state) {
       return state.myProfile;
@@ -29,8 +31,13 @@ export const myModule = {
 
     fetchedMyProject(state) {
       return state.myProject;
+    },
+
+    fetchedMyDoneProject(state) {
+      return state.myDoneProject;
     }
   },
+
   mutations: {
     SET_MY_PROFILE(state, data) {
       state.myProfile = data;
@@ -52,10 +59,11 @@ export const myModule = {
       state.myProject = data;
     },
 
-    SET_EDIT_PROJECT_DATA(state, data) {
-      state.myProjectEditData = data;
+    SET_MY_DONE_PROJECT(state, data) {
+      state.myDoneProject = data;
     }
   },
+
   actions: {
     GET_MY_PROFILE({ commit }, { idx }) {
       return my
@@ -103,6 +111,15 @@ export const myModule = {
         .getProjectByIdx(idx)
         .then(({ data }) => {
           commit("SET_MY_PROJECT", data);
+        })
+        .catch(err => console.log(err));
+    },
+
+    GET_MY_DONE_PROJECT_BY_IDX({ commit }, { doneProjectIdx }) {
+      return project
+        .getDoneProjectByIdx(doneProjectIdx)
+        .then(({ data }) => {
+          commit("SET_MY_DONE_PROJECT", data);
         })
         .catch(err => console.log(err));
     }

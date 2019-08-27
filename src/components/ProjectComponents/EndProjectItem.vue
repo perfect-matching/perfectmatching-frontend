@@ -33,8 +33,11 @@
 
       <v-layout wrap v-if="this.$route.name == 'myProjects'">
         <v-spacer></v-spacer>
-        <v-btn depressed color="grey">프로젝트 삭제</v-btn>
-        <v-btn depressed color="grey" to="/my/done/:id/edit"
+        <v-btn depressed color="grey" @click="hahaha">프로젝트 삭제</v-btn>
+        <v-btn
+          depressed
+          color="grey"
+          :to="`/my/done/${project.doneProjectIdx}/edit`"
           >프로젝트 수정</v-btn
         >
       </v-layout>
@@ -68,6 +71,9 @@ export default {
   methods: {
     setDateFormat(date) {
       return this.$_moment(date).format("LL");
+    },
+    hahaha() {
+      console.log(this.project);
     }
   }
 };

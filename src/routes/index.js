@@ -13,6 +13,8 @@ import ProjectManageView from "../views/ProjectManageView.vue";
 import NewProjectView from "../views/NewProjectView.vue";
 import ApplicationView from "../views/ApplicationView.vue";
 import DoneProjectView from "../views/DoneProjectView.vue";
+import DoneProjectEditView from "../views/DoneProjectEditView.vue";
+import DoneProjectStateChangeView from "../views/DoneProjectStateChangeView.vue";
 
 Vue.use(Router);
 
@@ -86,8 +88,8 @@ export const router = new Router({
     },
     {
       path: "/my/projects/:idx/done",
-      name: "doneProject",
-      component: DoneProjectView
+      name: "doneProjectStateChange",
+      component: DoneProjectStateChangeView
     },
     {
       path: "/new/done",
@@ -97,7 +99,7 @@ export const router = new Router({
     {
       path: "/my/done/:idx/edit",
       name: "editDoneProject",
-      component: DoneProjectView
+      component: DoneProjectEditView
     }
   ],
   scrollBehavior() {
