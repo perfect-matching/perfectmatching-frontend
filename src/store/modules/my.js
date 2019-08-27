@@ -7,7 +7,8 @@ export const myModule = {
     mySkills: [],
     myDoingProjects: [],
     myDoneProjects: [],
-    myProject: {}
+    myProject: {},
+    myProjectEditData: {}
   },
   getters: {
     fetchedMyProfile(state) {
@@ -49,6 +50,10 @@ export const myModule = {
 
     SET_MY_PROJECT(state, data) {
       state.myProject = data;
+    },
+
+    SET_EDIT_PROJECT_DATA(state, data) {
+      state.myProjectEditData = data;
     }
   },
   actions: {

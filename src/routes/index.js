@@ -8,6 +8,7 @@ import MyPageView from "../views/MyPageView.vue";
 import ProjectListView from "../views/ProjectListView.vue";
 import ProfileEditView from "../views/ProfileEditView.vue";
 import MyProjectsView from "../views/MyProjectsView.vue";
+import MyProjectEditView from "../views/MyProjectEditView.vue";
 import ProjectManageView from "../views/ProjectManageView.vue";
 import NewProjectView from "../views/NewProjectView.vue";
 import ApplicationView from "../views/ApplicationView.vue";
@@ -74,17 +75,17 @@ export const router = new Router({
       component: ProjectManageView
     },
     {
-      path: "/my/projects/:id/edit",
+      path: "/my/projects/:idx/edit",
       name: "editProject",
-      component: NewProjectView // 컴포넌트 이름 수정하기
+      component: MyProjectEditView
     },
     {
-      path: "/projects/:id/application",
+      path: "/projects/:idx/application",
       name: "projectApplication",
       component: ApplicationView
     },
     {
-      path: "/my/projects/:id/done",
+      path: "/my/projects/:idx/done",
       name: "doneProject",
       component: DoneProjectView
     },
@@ -94,7 +95,7 @@ export const router = new Router({
       component: DoneProjectView
     },
     {
-      path: "/my/done/:id/edit",
+      path: "/my/done/:idx/edit",
       name: "editDoneProject",
       component: DoneProjectView
     }
