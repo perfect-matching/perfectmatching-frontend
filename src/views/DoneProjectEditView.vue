@@ -1,24 +1,29 @@
 <template>
   <section class="project_edit_section">
     <v-card>
-      <h2 class="section_title">프로젝트 수정</h2>
-      <project-form :project="project"></project-form>
+      <h2 class="section_title">프로젝트 수정하기</h2>
+      <done-project-form :project="doneProject"></done-project-form>
     </v-card>
   </section>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import ProjectForm from "../components/ProjectForm/ProjectForm.vue";
+import DoneProjectForm from "../components/ProjectForm/DoneProjectForm.vue";
 export default {
   components: {
-    ProjectForm
+    DoneProjectForm
   },
 
   computed: {
     ...mapGetters({
-      project: "fetchedMyProject"
+      doneProject: "fetchedMyDoneProject"
     })
+  },
+
+  created() {
+    const doneProjectIdx = this.$route.params.idx;
+    this.$store.dispatch("GET_MY_DONE_PROJECT_BY_IDX", { doneProjectIdx });
   }
 };
 </script>

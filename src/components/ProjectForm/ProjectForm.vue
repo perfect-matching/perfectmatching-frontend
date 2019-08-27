@@ -22,14 +22,14 @@
       outline
     ></v-select>
     <v-textarea
-      v-model="summery"
-      :error-messages="summeryErrors"
+      v-model="summary"
+      :error-messages="summaryErrors"
       :counter="500"
-      label="Summery"
+      label="Summary"
       placeholder="요약 내용을 입력해주세요"
       required
-      @input="$v.summery.$touch()"
-      @blur="$v.summery.$touch()"
+      @input="$v.summary.$touch()"
+      @blur="$v.summary.$touch()"
       outline
     ></v-textarea>
     <v-switch v-model="detailSwitch" :label="`상세 내용 입력`"></v-switch>
@@ -44,7 +44,7 @@
       @blur="$v.content.$touch()"
       outline
     ></v-textarea>
-    <v-text-field outline v-model="url" label="소셜 URL"></v-text-field>
+    <v-text-field outline v-model="socialUrl" label="소셜 URL"></v-text-field>
     <vue-tags-input
       class="tag_input"
       v-model="tag"
@@ -54,11 +54,6 @@
       add-only-from-autocomplete
     />
 
-    <!-- <date-picker
-      v-model="deadline"
-      :labelName="'팀원 모집 마감일'"
-      :error-messages="deadlineErrors"
-    ></date-picker>-->
     <v-layout>
       <v-spacer></v-spacer>
       <v-btn flat @click="submit">submit</v-btn>
@@ -67,7 +62,6 @@
   </form>
 </template>
 <script>
-// import DatePicker from "./DatePicker.vue";
 import VueTagsInput from "@johmun/vue-tags-input";
 import { validationMixin } from "vuelidate";
 import { required, maxLength } from "vuelidate/lib/validators";
@@ -75,88 +69,99 @@ import { required, maxLength } from "vuelidate/lib/validators";
 export default {
   props: {
     project: {
-      type: Object
+      type: Object,
+      required: false
     }
   },
+
   components: {
-    // DatePicker,
     VueTagsInput
   },
+
   mixins: [validationMixin],
 
   validations: {
     title: { required, maxLength: maxLength(20) },
-    summery: { required, maxLength: maxLength(500) },
+    summary: { required, maxLength: maxLength(500) },
     content: { maxLength: maxLength(500) },
-    location: { required },
+    location: { required }
+  },
 
-    deadline: {
-      required,
-      minValue: value => value > new Date().toISOString()
+  created() {
+    console.log(this.project);
+    if (this.isPropsExist(this.project)) {
+      const propsData = this.project;
+      this.title = propsData.title;
+      this.location = propsData.location;
+      this.summary = propsData.summary;
+      this.content = propsData.content;
+      this.socialUrl = propsData.socialUrl;
     }
   },
 
-  data: () => ({
-    title: "",
-    summery: "",
-    detailSwitch: false,
-    content: "",
-    url: "",
-    location: null,
-    locations: [
-      "서울",
-      "부산",
-      "대구",
-      "광주",
-      "대전",
-      "울산",
-      "충청북도",
-      "충청남도",
-      "전라북도",
-      "전라남도",
-      "경상북도",
-      "경상남도",
-      "제주도"
-    ],
-    tag: "",
-    tags: [],
-    autocompleteItems: [
-      {
-        id: 1,
-        text: "Spain"
-      },
-      {
-        id: 2,
-        text: "France"
-      },
-      {
-        id: 3,
-        text: "USA"
-      },
-      {
-        id: 4,
-        text: "Germany"
-      },
-      {
-        id: 5,
-        text: "China"
-      },
-      {
-        id: 6,
-        text: "한글"
-      },
-      {
-        id: 7,
-        text: "앱 기획"
-      },
-      {
-        id: 8,
-        text: "웹 기획"
-      }
-    ],
+  data() {
+    return {
+      title: "",
+      summary: "",
+      detailSwitch: false,
+      content: "",
+      socialUrl: "",
+      location: null,
+      locations: [
+        "서울",
+        "부산",
+        "대구",
+        "광주",
+        "대전",
+        "울산",
+        "충청북도",
+        "충청남도",
+        "전라북도",
+        "전라남도",
+        "경상북도",
+        "경상남도",
+        "제주도"
+      ],
+      tag: "",
+      tags: [],
+      autocompleteItems: [
+        {
+          id: 1,
+          text: "Spain"
+        },
+        {
+          id: 2,
+          text: "France"
+        },
+        {
+          id: 3,
+          text: "USA"
+        },
+        {
+          id: 4,
+          text: "Germany"
+        },
+        {
+          id: 5,
+          text: "China"
+        },
+        {
+          id: 6,
+          text: "한글"
+        },
+        {
+          id: 7,
+          text: "앱 기획"
+        },
+        {
+          id: 8,
+          text: "웹 기획"
+        }
+      ],
 
-    deadline: null
-  }),
+      deadline: null
+    };
+  },
 
   computed: {
     filteredItems() {
@@ -208,14 +213,14 @@ export default {
       return errors;
     },
 
-    summeryErrors() {
+    summaryErrors() {
       const errors = [];
-      if (!this.$v.summery.$dirty) return errors;
+      if (!this.$v.summary.$dirty) return errors;
 
-      !this.$v.summery.maxLength &&
+      !this.$v.summary.maxLength &&
         errors.push("내용은 반드시 500자 이내이어야 합니다.");
 
-      !this.$v.summery.required &&
+      !this.$v.summary.required &&
         errors.push("요약 정보를 반드시 입력해주세요.");
 
       return errors;
@@ -250,7 +255,7 @@ export default {
   methods: {
     clearDatas() {
       this.title = "";
-      this.summery = "";
+      this.summary = "";
       this.content = "";
       this.location = null;
       this.tag = "";
@@ -260,13 +265,13 @@ export default {
 
     submit() {
       this.$v.$touch();
-
+      console.log(this.project);
       if (this.$v.$invalid) {
         console.log("형식 불일치");
       } else {
         const project = {
           title: this.title,
-          summery: this.summery,
+          summary: this.summary,
           content: this.content,
           location: this.location,
           tag: this.tag,
@@ -275,6 +280,10 @@ export default {
         };
         console.log("제출!!:", project);
       }
+    },
+
+    isPropsExist(props) {
+      return typeof props !== "undefined";
     },
 
     clear() {

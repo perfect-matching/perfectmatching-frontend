@@ -1,11 +1,14 @@
 <template>
   <v-container class="project_detail_container">
     <v-card flat class="project_card">
-      <v-chip class="status" color="green" text-color="white">진행중</v-chip>
-      <div class="project_title">모든 정보를 다 얻을 수 있는 몽땅</div>
-      <div class="deadline">2019년 03월 30일 까지 모집</div>
+      <v-chip class="status" color="green" text-color="white">{{
+        project.status
+      }}</v-chip>
+      <div class="project_title">{{ project.title }}</div>
+      <div class="deadline">{{ setDateFormat(project.createdDate) }} 개설</div>
       <div class="project_content">
-        <p>이 프로젝트는 모든 정보를 얻는 프로젝트입니다!</p>
+        <p>{{ project.summary }}</p>
+        <p>{{ project.content }}</p>
       </div>
       <div class="require_skill">
         <v-chip v-for="tag in tags" :key="tag">{{ tag }}</v-chip>
@@ -13,10 +16,16 @@
 
       <v-layout wrap>
         <v-btn depressed color="grey">프로젝트 삭제</v-btn>
-        <v-btn depressed color="grey" to="/my/projects/:id/edit"
+        <v-btn
+          depressed
+          color="grey"
+          :to="`/my/projects/${project.projectIdx}/edit`"
           >프로젝트 수정</v-btn
         >
-        <v-btn depressed color="grey" to="/my/projects/:id/done"
+        <v-btn
+          depressed
+          color="grey"
+          :to="`/my/projects/${project.projectIdx}/done`"
           >프로젝트 완료</v-btn
         >
         <v-spacer></v-spacer>
@@ -28,6 +37,12 @@
 
 <script>
 export default {
+  props: {
+    project: {
+      type: Object,
+      required: true
+    }
+  },
   data: () => ({
     tags: [
       "Work",
@@ -40,7 +55,13 @@ export default {
       "Tech",
       "Creative Writing"
     ]
-  })
+  }),
+
+  methods: {
+    setDateFormat(date) {
+      return this.$_moment(date).format("LL");
+    }
+  }
 };
 </script>
 
@@ -50,6 +71,7 @@ export default {
 }
 
 .project_title {
+  font-weight: bold;
   font-size: 30px;
 }
 

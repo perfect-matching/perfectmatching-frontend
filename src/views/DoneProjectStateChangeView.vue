@@ -1,23 +1,24 @@
 <template>
   <section class="project_edit_section">
     <v-card>
-      <h2 class="section_title">프로젝트 수정</h2>
-      <project-form :project="project"></project-form>
+      <h2 class="section_title">프로젝트 완료</h2>
+      <done-project-form :project="doingProject"></done-project-form>
     </v-card>
   </section>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import ProjectForm from "../components/ProjectForm/ProjectForm.vue";
+import DoneProjectForm from "../components/ProjectForm/DoneProjectForm.vue";
+
 export default {
   components: {
-    ProjectForm
+    DoneProjectForm
   },
 
   computed: {
     ...mapGetters({
-      project: "fetchedMyProject"
+      doingProject: "fetchedMyProject"
     })
   }
 };

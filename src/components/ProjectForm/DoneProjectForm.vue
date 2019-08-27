@@ -13,14 +13,14 @@
     ></v-text-field>
 
     <v-textarea
-      v-model="summery"
-      :error-messages="summeryErrors"
+      v-model="summary"
+      :error-messages="summaryErrors"
       :counter="500"
-      label="Summery"
+      label="summary"
       placeholder="요약 내용을 입력해주세요"
       required
-      @input="$v.summery.$touch()"
-      @blur="$v.summery.$touch()"
+      @input="$v.summary.$touch()"
+      @blur="$v.summary.$touch()"
       outline
     ></v-textarea>
 
@@ -70,18 +70,21 @@ import { required, maxLength } from "vuelidate/lib/validators";
 export default {
   props: {
     project: {
-      type: Object
+      type: Object,
+      required: false
     }
   },
+
   components: {
     DatePicker,
     VueTagsInput
   },
+
   mixins: [validationMixin],
 
   validations: {
     title: { required, maxLength: maxLength(20) },
-    summery: { required, maxLength: maxLength(500) },
+    summary: { required, maxLength: maxLength(500) },
     content: { maxLength: maxLength(500) },
 
     deadline: {
@@ -92,7 +95,7 @@ export default {
 
   data: () => ({
     title: "",
-    summery: "",
+    summary: "",
     content: "",
     tag: "",
     tags: [],
@@ -134,6 +137,18 @@ export default {
     startDate: "",
     endDate: ""
   }),
+
+  created() {
+    console.log(this.project);
+    if (this.isPropsExist(this.project)) {
+      const propsData = this.project;
+      this.title = propsData.title;
+      this.location = propsData.location;
+      this.summary = propsData.summary;
+      this.content = propsData.content;
+      this.socialUrl = propsData.socialUrl;
+    }
+  },
 
   computed: {
     filteredItems() {
@@ -178,14 +193,14 @@ export default {
       return errors;
     },
 
-    summeryErrors() {
+    summaryErrors() {
       const errors = [];
-      if (!this.$v.summery.$dirty) return errors;
+      if (!this.$v.summary.$dirty) return errors;
 
-      !this.$v.summery.maxLength &&
+      !this.$v.summary.maxLength &&
         errors.push("내용은 반드시 500자 이내이어야 합니다.");
 
-      !this.$v.summery.required &&
+      !this.$v.summary.required &&
         errors.push("요약 정보를 반드시 입력해주세요.");
 
       return errors;
@@ -220,7 +235,7 @@ export default {
   methods: {
     clearDatas() {
       this.title = "";
-      this.summery = "";
+      this.summary = "";
       this.content = "";
       this.tag = "";
       this.tags = [];
@@ -236,7 +251,7 @@ export default {
       } else {
         const project = {
           title: this.title,
-          summery: this.summery,
+          summary: this.summary,
           content: this.content,
           tag: this.tag,
           tags: this.tags,
@@ -251,6 +266,10 @@ export default {
       this.$v.$reset();
       console.log(this.tags);
       this.clearDatas();
+    },
+
+    isPropsExist(props) {
+      return typeof props !== "undefined";
     }
   }
 };
