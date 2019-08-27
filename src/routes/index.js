@@ -69,7 +69,7 @@ export const router = new Router({
       component: MyProjectsView
     },
     {
-      path: "/my/projects/:id",
+      path: "/my/projects/:idx",
       name: "projectManage",
       component: ProjectManageView
     },

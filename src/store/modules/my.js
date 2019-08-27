@@ -1,11 +1,13 @@
 import { my } from "../../api/my.js";
+import { project } from "../../api/prorject.js";
 
 export const myModule = {
   state: {
     myProfile: {},
     mySkills: [],
     myDoingProjects: [],
-    myDoneProjects: []
+    myDoneProjects: [],
+    myProject: {}
   },
   getters: {
     fetchedMyProfile(state) {
@@ -22,6 +24,10 @@ export const myModule = {
 
     fetchedMyDoneProjects(state) {
       return state.myDoneProjects;
+    },
+
+    fetchedMyProject(state) {
+      return state.myProject;
     }
   },
   mutations: {
@@ -39,6 +45,10 @@ export const myModule = {
 
     SET_DONE_PROJECTS(state, data) {
       state.myDoneProjects = data;
+    },
+
+    SET_MY_PROJECT(state, data) {
+      state.myProject = data;
     }
   },
   actions: {
@@ -79,6 +89,15 @@ export const myModule = {
         .then(({ data }) => {
           const myDoneProjects = data._embedded.datas;
           commit("SET_DONE_PROJECTS", myDoneProjects);
+        })
+        .catch(err => console.log(err));
+    },
+
+    GET_MY_PROJECT_BY_IDX({ commit }, { idx }) {
+      return project
+        .getProjectByIdx(idx)
+        .then(({ data }) => {
+          commit("SET_MY_PROJECT", data);
         })
         .catch(err => console.log(err));
     }
