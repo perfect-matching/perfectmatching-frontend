@@ -107,7 +107,10 @@ import {
   helpers
 } from "vuelidate/lib/validators";
 
-const strength = helpers.regex("strength", /^[a-zA-Z]*$/);
+const strength = helpers.regex(
+  "strength",
+  /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,22}$/
+);
 
 export default {
   mixins: [validationMixin],
@@ -208,7 +211,7 @@ export default {
         errors.push("비밀번호는 최소 8자 이상이어야 합니다.");
 
       !this.$v.password.strength &&
-        errors.push("영문과 숫자가 섞여있어야 합니다.");
+        errors.push("영문,숫자 그리고 특수문자로 이루어져 있어야 합니다.");
 
       !this.$v.password.required && errors.push("비밀번호를 입력해주세요");
       return errors;

@@ -1,9 +1,9 @@
 <template>
   <div class="prject_info" grow>
     <v-layout class="project_status_container" align-center justify-center>
-      <v-chip class="status" color="primary" text-color="white">
-        {{ project.status }}
-      </v-chip>
+      <v-chip class="status" color="primary" text-color="white">{{
+        project.status
+      }}</v-chip>
       <div class="create_date">
         {{ setDateFormat(project.startDate) }} -
         {{ setDateFormat(project.endDate) }}
@@ -14,7 +14,19 @@
       <v-layout class="proejct_detail" justify-center>
         {{ project.location }} &nbsp;|&nbsp; 모집 마감일:
         {{ setDateFormat(project.deadline) }}
-        &nbsp;|&nbsp; 개발자 :1/3 디자이너:0/3 기획자:3/3 마케터:2/3 기타:0
+        &nbsp;|&nbsp; 개발자 :{{ project.currentDeveloper }}/{{
+          project.developerRecruits
+        }}
+        디자이너:{{ project.currentDesigner }}/{{
+          project.designerRecruits
+        }}
+        기획자:{{ project.currentPlanner }}/{{
+          project.plannerRecruits
+        }}
+        마케터:{{ project.currentMarketer }}/{{
+          project.marketerRecruits
+        }}
+        기타:{{ project.currentEtc }}/{{ project.etcRecruits }}
       </v-layout>
     </div>
 
@@ -41,7 +53,7 @@
         block
         color="secondary"
         dark
-        to="/projects/:id/application"
+        :to="`/projects/${project.projectIdx}/application`"
         >지원 하기</v-btn
       >
     </div>
