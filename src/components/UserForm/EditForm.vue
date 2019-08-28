@@ -103,8 +103,11 @@ import {
   required,
   maxLength,
   sameAs,
-  minLength
+  minLength,
+  helpers
 } from "vuelidate/lib/validators";
+
+const strength = helpers.regex("strength", /^[a-zA-Z]*$/);
 
 export default {
   mixins: [validationMixin],
@@ -114,7 +117,7 @@ export default {
 
   validations: {
     nickName: { required, maxLength: maxLength(20) },
-    password: { required, minLength: minLength(8) },
+    password: { required, minLength: minLength(8), strength },
     repeatPassword: {
       sameAsPassword: sameAs("password")
     },
@@ -203,6 +206,9 @@ export default {
       if (!this.$v.password.$dirty) return errors;
       !this.$v.password.minLength &&
         errors.push("비밀번호는 최소 8자 이상이어야 합니다.");
+
+      !this.$v.password.strength &&
+        errors.push("영문과 숫자가 섞여있어야 합니다.");
 
       !this.$v.password.required && errors.push("비밀번호를 입력해주세요");
       return errors;

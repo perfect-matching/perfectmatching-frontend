@@ -18,7 +18,7 @@ function getProjectsWithQueries(location) {
 }
 
 function getDoneProjectByIdx(doneProjectIdx) {
-  return axios.get(`${backend.baseUrl}/doneProject/${doneProjectIdx}`);
+  return axios.get(`${backend.baseUrl}/doneproject/${doneProjectIdx}`);
 }
 
 export const project = {
