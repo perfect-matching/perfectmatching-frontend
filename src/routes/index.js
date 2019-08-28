@@ -15,7 +15,7 @@ import ApplicationView from "../views/ApplicationView.vue";
 import DoneProjectView from "../views/DoneProjectView.vue";
 import DoneProjectEditView from "../views/DoneProjectEditView.vue";
 import DoneProjectStateChangeView from "../views/DoneProjectStateChangeView.vue";
-
+import { store } from "../store/index.js";
 Vue.use(Router);
 
 export const router = new Router({
@@ -39,7 +39,10 @@ export const router = new Router({
     {
       path: "/projects",
       name: "projectList",
-      component: ProjectListView
+      component: ProjectListView,
+      beforeEnter: (to, from, next) => {
+        store.dispatch("FETCH_PROJECTS").then(() => next());
+      }
     },
     {
       path: "/project/:idx",
