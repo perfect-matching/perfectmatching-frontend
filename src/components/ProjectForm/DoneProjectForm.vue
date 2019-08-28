@@ -44,16 +44,8 @@
       @blur="$v.content.$touch()"
       outline
     ></v-textarea>
-    <date-picker
-      v-model="startDate"
-      :labelName="'프로젝트 시작일'"
-      :error-messages="deadlineErrors"
-    ></date-picker>
-    <date-picker
-      v-model="endDate"
-      :labelName="'프로젝트 종료일'"
-      :error-messages="deadlineErrors"
-    ></date-picker>
+    <date-picker v-model="startDate" :labelName="'프로젝트 시작일'" :error-messages="deadlineErrors"></date-picker>
+    <date-picker v-model="endDate" :labelName="'프로젝트 종료일'" :error-messages="deadlineErrors"></date-picker>
     <v-layout>
       <v-spacer></v-spacer>
       <v-btn flat @click="submit">submit</v-btn>
@@ -62,6 +54,7 @@
   </form>
 </template>
 <script>
+import { mapGetters } from "vuex";
 import DatePicker from "./DatePicker.vue";
 import VueTagsInput from "@johmun/vue-tags-input";
 import { validationMixin } from "vuelidate";
@@ -85,72 +78,60 @@ export default {
   validations: {
     title: { required, maxLength: maxLength(20) },
     summary: { required, maxLength: maxLength(500) },
-    content: { maxLength: maxLength(500) },
-
-    deadline: {
-      required,
-      minValue: value => value > new Date().toISOString()
-    }
+    content: { maxLength: maxLength(500) }
   },
 
-  data: () => ({
-    title: "",
-    summary: "",
-    content: "",
-    tag: "",
-    tags: [],
-    autocompleteItems: [
-      {
-        id: 1,
-        text: "Spain"
-      },
-      {
-        id: 2,
-        text: "France"
-      },
-      {
-        id: 3,
-        text: "USA"
-      },
-      {
-        id: 4,
-        text: "Germany"
-      },
-      {
-        id: 5,
-        text: "China"
-      },
-      {
-        id: 6,
-        text: "한글"
-      },
-      {
-        id: 7,
-        text: "앱 기획"
-      },
-      {
-        id: 8,
-        text: "웹 기획"
-      }
-    ],
-
-    startDate: "",
-    endDate: ""
-  }),
-
-  created() {
-    console.log(this.project);
-    if (this.isPropsExist(this.project)) {
-      const propsData = this.project;
-      this.title = propsData.title;
-      this.location = propsData.location;
-      this.summary = propsData.summary;
-      this.content = propsData.content;
-      this.socialUrl = propsData.socialUrl;
-    }
+  data() {
+    return {
+      title: "",
+      summary: "",
+      content: "",
+      tags: [],
+      startDate: "",
+      endDate: "",
+      tag: "",
+      autocompleteItems: [
+        {
+          id: 1,
+          text: "Spain"
+        },
+        {
+          id: 2,
+          text: "France"
+        },
+        {
+          id: 3,
+          text: "USA"
+        },
+        {
+          id: 4,
+          text: "Germany"
+        },
+        {
+          id: 5,
+          text: "China"
+        },
+        {
+          id: 6,
+          text: "한글"
+        },
+        {
+          id: 7,
+          text: "앱 기획"
+        },
+        {
+          id: 8,
+          text: "웹 기획"
+        }
+      ]
+    };
   },
 
   computed: {
+    ...mapGetters({
+      doneProject: "fetchedMyDoneProject"
+    }),
+
     filteredItems() {
       return this.autocompleteItems.filter(i => {
         return i.text.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;

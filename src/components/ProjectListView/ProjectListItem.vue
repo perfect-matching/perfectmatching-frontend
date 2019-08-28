@@ -13,10 +13,16 @@
       </v-layout>
 
       <v-card-title class="headline">{{ project.title }}</v-card-title>
-      <v-chip class="status" color="green" text-color="white">진행중</v-chip>
-      <div class="create_date">
+      <v-chip
+        class="status"
+        :color="setChipColor(project.status)"
+        text-color="white"
+        >{{ project.status }}</v-chip
+      >
+      <div class="location">{{ project.location }}</div>
+      <!-- <div class="create_date">
         {{ setLLFormat(project.deadline) }} 까지 모집
-      </div>
+      </div>-->
       <v-card-text>
         요약정보입니다. 요약정보입니다. 요약정보입니다. 요약정보입니다.
         요약정보입니다. 요약정보입니다. 요약정보입니다. 요약정보입니다.
@@ -57,6 +63,15 @@ export default {
     },
     setFromNow(date) {
       return this.$_moment(date).fromNow();
+    },
+    setChipColor(status) {
+      const colors = {
+        모집중: "primary",
+        진행중: "green",
+        완료: ""
+      };
+
+      return colors[status];
     }
   }
 };
@@ -89,6 +104,11 @@ export default {
 
 .leader_name {
   margin-left: 10px;
+}
+
+.location {
+  font-weight: bold;
+  color: #9a9a9a;
 }
 
 .create_date {

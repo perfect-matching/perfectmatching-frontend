@@ -3,7 +3,7 @@
     <v-text-field
       v-model="title"
       :error-messages="titleErrors"
-      :counter="20"
+      :counter="255"
       label="Title"
       placeholder="프로젝트 명을 입력해주세요."
       required
@@ -24,7 +24,7 @@
     <v-textarea
       v-model="summary"
       :error-messages="summaryErrors"
-      :counter="500"
+      :counter="100"
       label="Summary"
       placeholder="요약 내용을 입력해주세요"
       required
@@ -37,7 +37,7 @@
       v-if="detailSwitch"
       v-model="content"
       :error-messages="contentErrors"
-      :counter="500"
+      :counter="5000"
       label="Content"
       placeholder="프로젝트 내용을 입력해주세요"
       @input="$v.content.$touch()"
@@ -53,6 +53,63 @@
       :autocomplete-items="filteredItems"
       add-only-from-autocomplete
     />
+    <v-layout>필요 직군( 단위: 명 )</v-layout>
+    <v-layout wrap>
+      <v-flex>
+        <v-text-field
+          class="job_input"
+          label="개발자"
+          v-model="developerRecruits"
+          type="number"
+          onkeydown="return event.keyCode !== 69"
+          outline
+        ></v-text-field>
+      </v-flex>
+
+      <v-flex>
+        <v-text-field
+          class="job_input"
+          label="디자이너"
+          v-model="designerRecruits"
+          type="number"
+          onkeydown="return event.keyCode !== 69"
+          outline
+        ></v-text-field>
+      </v-flex>
+
+      <v-flex>
+        <v-text-field
+          class="job_input"
+          label="기획자"
+          type="number"
+          v-model="plannerRecruits"
+          onkeydown="return event.keyCode !== 69"
+          outline
+        ></v-text-field>
+      </v-flex>
+
+      <v-flex>
+        <v-text-field
+          class="job_input"
+          label="마케터"
+          type="number"
+          v-model="marketerRecruits"
+          onkeydown="return event.keyCode !== 69"
+          outline
+        ></v-text-field>
+      </v-flex>
+
+      <v-flex>
+        <v-text-field
+          class="job_input"
+          label="기타"
+          type="number"
+          v-model="etcRecruits"
+          onkeydown="return event.keyCode !== 69"
+          outline
+        ></v-text-field>
+      </v-flex>
+    </v-layout>
 
     <v-layout>
       <v-spacer></v-spacer>
@@ -81,9 +138,9 @@ export default {
   mixins: [validationMixin],
 
   validations: {
-    title: { required, maxLength: maxLength(20) },
-    summary: { required, maxLength: maxLength(500) },
-    content: { maxLength: maxLength(500) },
+    title: { required, maxLength: maxLength(255) },
+    summary: { required, maxLength: maxLength(100) },
+    content: { maxLength: maxLength(5000) },
     location: { required }
   },
 
@@ -107,6 +164,13 @@ export default {
       content: "",
       socialUrl: "",
       location: null,
+      tags: [],
+      developerRecruits: 0,
+      designerRecruits: 0,
+      plannerRecruits: 0,
+      marketerRecruits: 0,
+      etcRecruits: 0,
+
       locations: [
         "서울",
         "부산",
@@ -123,7 +187,6 @@ export default {
         "제주도"
       ],
       tag: "",
-      tags: [],
       autocompleteItems: [
         {
           id: 1,
@@ -157,9 +220,7 @@ export default {
           id: 8,
           text: "웹 기획"
         }
-      ],
-
-      deadline: null
+      ]
     };
   },
 
@@ -206,7 +267,7 @@ export default {
       if (!this.$v.title.$dirty) return errors;
 
       !this.$v.title.maxLength &&
-        errors.push("프로젝트 명은 반드시 20자 이내이어야 합니다.");
+        errors.push("프로젝트 명은 반드시 255자 이내이어야 합니다.");
 
       !this.$v.title.required &&
         errors.push("프로젝트 명은 반드시 입력해주세요.");
@@ -218,7 +279,7 @@ export default {
       if (!this.$v.summary.$dirty) return errors;
 
       !this.$v.summary.maxLength &&
-        errors.push("내용은 반드시 500자 이내이어야 합니다.");
+        errors.push("내용은 반드시 100자 이내이어야 합니다.");
 
       !this.$v.summary.required &&
         errors.push("요약 정보를 반드시 입력해주세요.");
@@ -231,23 +292,13 @@ export default {
       if (!this.$v.content.$dirty) return errors;
 
       !this.$v.content.maxLength &&
-        errors.push("내용은 반드시 500자 이내이어야 합니다.");
+        errors.push("내용은 반드시 5000자 이내이어야 합니다.");
 
       return errors;
     },
 
     endDateErrors() {
       const errors = [];
-      return errors;
-    },
-
-    deadlineErrors() {
-      const errors = [];
-      if (!this.$v.content.$dirty) return errors;
-
-      !this.$v.deadline.minValue &&
-        errors.push("오늘 이후의 날짜를 선택해주세요");
-
       return errors;
     }
   },
@@ -260,7 +311,6 @@ export default {
       this.location = null;
       this.tag = "";
       this.tags = [];
-      this.deadline = null;
     },
 
     submit() {
@@ -275,8 +325,7 @@ export default {
           content: this.content,
           location: this.location,
           tag: this.tag,
-          tags: this.tags,
-          deadline: this.deadline
+          tags: this.tags
         };
         console.log("제출!!:", project);
       }
@@ -302,5 +351,9 @@ export default {
 .tag_input {
   max-width: 100% !important;
   margin-bottom: 20px;
+}
+
+.job_input {
+  max-width: 130px;
 }
 </style>

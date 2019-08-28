@@ -8,8 +8,7 @@ export const myModule = {
     myDoingProjects: [],
     myDoneProjects: [],
     myProject: {},
-    myDoneProject: {},
-    myProjectEditData: {}
+    myDoneProject: {}
   },
 
   getters: {
