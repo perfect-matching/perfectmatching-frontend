@@ -13,18 +13,25 @@
       </v-flex>
     </v-layout>
     <project-list :projects="projects"></project-list>
-    <v-btn class="next_btn" block color="secondary" dark @click="nextProjects"
+    <infinite-loading
+      :identifier="infiniteId"
+      @infinite="infiniteHandler"
+    ></infinite-loading>
+    <!-- <v-btn class="next_btn" block color="secondary" dark @click="nextProjects"
       >더 보기</v-btn
-    >
+    >-->
   </section>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import InfiniteLoading from "vue-infinite-loading";
+
 import ProjectList from "../components/ProjectListView/ProjectList.vue";
 export default {
   components: {
-    ProjectList
+    ProjectList,
+    InfiniteLoading
   },
 
   data() {
@@ -44,7 +51,8 @@ export default {
         "경상북도",
         "경상남도",
         "제주도"
-      ]
+      ],
+      infiniteId: +new Date()
     };
   },
 
@@ -80,12 +88,27 @@ export default {
       this.$store.dispatch("FETCH_PROJECTS_WITH_QURIES", {
         location: locations[this.location]
       });
+
+      this.infiniteId += 1;
     },
 
     nextProjects() {
       this.$store.dispatch("FETCH_NEXT_PROJECTS", {
         nextUrl: this.$store.state.projectModule.nextUrl
       });
+    },
+
+    infiniteHandler($state) {
+      this.$store
+        .dispatch("FETCH_NEXT_PROJECTS", {
+          nextUrl: this.$store.state.projectModule.nextUrl
+        })
+        .then(() => {
+          $state.loaded();
+        })
+        .catch(() => {
+          $state.complete();
+        });
     }
   }
 };
