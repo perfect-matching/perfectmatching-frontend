@@ -3,12 +3,13 @@
     <v-card>
       <h2 class="section_title">회원 정보 수정</h2>
       <my-photo></my-photo>
-      <edit-form></edit-form>
+      <edit-form :myProfile="myProfile"></edit-form>
     </v-card>
   </section>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import MyPhoto from "../components/UserForm/MyPhoto.vue";
 import EditForm from "../components/UserForm/EditForm.vue";
 
@@ -16,6 +17,17 @@ export default {
   components: {
     MyPhoto,
     EditForm
+  },
+
+  computed: {
+    ...mapGetters({
+      myProfile: "fetchedMyProfile"
+    })
+  },
+
+  created() {
+    const idx = 1;
+    this.$store.dispatch("GET_MY_PROFILE", { idx });
   }
 };
 </script>

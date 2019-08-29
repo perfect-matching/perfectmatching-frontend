@@ -22,8 +22,7 @@ export default {
         content: "",
         tags: [],
         startDate: "",
-        endDate: "",
-        tag: ""
+        endDate: ""
       }
     };
   }

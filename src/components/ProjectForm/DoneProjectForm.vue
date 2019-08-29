@@ -90,7 +90,6 @@ export default {
 
   data() {
     return {
-      // tags: [],
       tag: "",
       autocompleteItems: [
         {

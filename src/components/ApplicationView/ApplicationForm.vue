@@ -1,12 +1,36 @@
 <template>
   <v-container class="application_form_container">
     <form>
-      <v-radio-group v-model="position" :mandatory="true" :error-messages="positionErrors">
-        <v-radio label="개발자" value="DEVELOPER" v-if="developerAvailable"></v-radio>
-        <v-radio label="디자이너" value="DESIGNER" v-if="designerAvailable"></v-radio>
-        <v-radio label="마케터" value="MARKETER" checked="checked"></v-radio>
-        <v-radio label="기획자" value="PLANNER"></v-radio>
-        <v-radio label="기타" value="ETC"></v-radio>
+      <v-radio-group
+        v-model="position"
+        label="신청 직군"
+        :mandatory="true"
+        :error-messages="positionErrors"
+      >
+        <v-layout class="position_group">
+          <v-radio
+            label="개발자"
+            value="DEVELOPER"
+            v-if="developerAvailable"
+          ></v-radio>
+          <v-radio
+            label="디자이너"
+            value="DESIGNER"
+            v-if="designerAvailable"
+          ></v-radio>
+          <v-radio
+            label="마케터"
+            value="MARKETER"
+            checked="checked"
+            v-if="marketerAvailable"
+          ></v-radio>
+          <v-radio
+            label="기획자"
+            value="PLANNER"
+            v-if="plannerAvailable"
+          ></v-radio>
+          <v-radio label="기타" value="ETC" v-if="etcAvailable"></v-radio>
+        </v-layout>
       </v-radio-group>
       <v-textarea
         outline
@@ -128,32 +152,8 @@ export default {
 </script>
 
 <style scoped>
-.project_card {
-  padding: 20px;
-}
-
-.project_title {
-  font-size: 30px;
-}
-
-.project_date {
-  margin-bottom: 20px;
-}
-
-.project_summery {
-  color: #898989;
-}
-
-.content_title {
-  font-size: 16px;
-  color: black;
-}
-
-.require_skill {
-  margin-bottom: 10px;
-}
-
-.v-chip {
-  margin: 5px 5px 5px 0;
+.position_group {
+  margin: 0 auto;
+  text-align: center;
 }
 </style>
