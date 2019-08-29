@@ -17,9 +17,6 @@
       :identifier="infiniteId"
       @infinite="infiniteHandler"
     ></infinite-loading>
-    <!-- <v-btn class="next_btn" block color="secondary" dark @click="nextProjects"
-      >더 보기</v-btn
-    >-->
   </section>
 </template>
 
@@ -61,10 +58,6 @@ export default {
       projects: "fetchedProjects"
     })
   },
-
-  // created() {
-  //   this.$store.dispatch("FETCH_PROJECTS");
-  // },
 
   methods: {
     // 지역 쿼리를 영어로 넘기기로 하였음. 선택한 한글 지역 이름을 영어로 리턴하는 함수

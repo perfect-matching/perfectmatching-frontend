@@ -1,51 +1,57 @@
 <template>
   <form>
     <v-text-field
-      v-model="title"
+      v-model="project.title"
       :error-messages="titleErrors"
       :counter="20"
       label="Title"
       placeholder="프로젝트 명을 입력해주세요."
       required
-      @input="$v.title.$touch()"
-      @blur="$v.title.$touch()"
+      @input="$v.project.title.$touch()"
+      @blur="$v.project.title.$touch()"
       outline
     ></v-text-field>
 
     <v-textarea
-      v-model="summary"
+      v-model="project.summary"
       :error-messages="summaryErrors"
       :counter="500"
       label="summary"
       placeholder="요약 내용을 입력해주세요"
       required
-      @input="$v.summary.$touch()"
-      @blur="$v.summary.$touch()"
+      @input="$v.project.summary.$touch()"
+      @blur="$v.project.summary.$touch()"
       outline
     ></v-textarea>
 
     <vue-tags-input
       class="tag_input"
       v-model="tag"
-      :tags="tags"
-      @tags-changed="newTags => (tags = newTags)"
+      :tags="project.tags"
+      @tags-changed="newTags => (project.tags = newTags)"
       :autocomplete-items="filteredItems"
       add-only-from-autocomplete
     />
 
     <v-textarea
       class="content_input"
-      v-model="content"
+      v-model="project.content"
       :error-messages="contentErrors"
       :counter="500"
       label="Content"
       placeholder="프로젝트 내용을 입력해주세요"
-      @input="$v.content.$touch()"
-      @blur="$v.content.$touch()"
+      @input="$v.project.content.$touch()"
+      @blur="$v.project.content.$touch()"
       outline
     ></v-textarea>
-    <date-picker v-model="startDate" :labelName="'프로젝트 시작일'" :error-messages="deadlineErrors"></date-picker>
-    <date-picker v-model="endDate" :labelName="'프로젝트 종료일'" :error-messages="deadlineErrors"></date-picker>
+    <date-picker
+      v-model="project.startDate"
+      :labelName="'프로젝트 시작일'"
+    ></date-picker>
+    <date-picker
+      v-model="project.endDate"
+      :labelName="'프로젝트 종료일'"
+    ></date-picker>
     <v-layout>
       <v-spacer></v-spacer>
       <v-btn flat @click="submit">submit</v-btn>
@@ -54,7 +60,6 @@
   </form>
 </template>
 <script>
-import { mapGetters } from "vuex";
 import DatePicker from "./DatePicker.vue";
 import VueTagsInput from "@johmun/vue-tags-input";
 import { validationMixin } from "vuelidate";
@@ -76,19 +81,16 @@ export default {
   mixins: [validationMixin],
 
   validations: {
-    title: { required, maxLength: maxLength(20) },
-    summary: { required, maxLength: maxLength(500) },
-    content: { maxLength: maxLength(500) }
+    project: {
+      title: { required, maxLength: maxLength(20) },
+      summary: { required, maxLength: maxLength(500) },
+      content: { required, maxLength: maxLength(500) }
+    }
   },
 
   data() {
     return {
-      title: "",
-      summary: "",
-      content: "",
-      tags: [],
-      startDate: "",
-      endDate: "",
+      // tags: [],
       tag: "",
       autocompleteItems: [
         {
@@ -128,10 +130,6 @@ export default {
   },
 
   computed: {
-    ...mapGetters({
-      doneProject: "fetchedMyDoneProject"
-    }),
-
     filteredItems() {
       return this.autocompleteItems.filter(i => {
         return i.text.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
@@ -164,24 +162,24 @@ export default {
 
     titleErrors() {
       const errors = [];
-      if (!this.$v.title.$dirty) return errors;
+      if (!this.$v.project.title.$dirty) return errors;
 
-      !this.$v.title.maxLength &&
+      !this.$v.project.title.maxLength &&
         errors.push("프로젝트 명은 반드시 20자 이내이어야 합니다.");
 
-      !this.$v.title.required &&
+      !this.$v.project.title.required &&
         errors.push("프로젝트 명은 반드시 입력해주세요.");
       return errors;
     },
 
     summaryErrors() {
       const errors = [];
-      if (!this.$v.summary.$dirty) return errors;
+      if (!this.$v.project.summary.$dirty) return errors;
 
-      !this.$v.summary.maxLength &&
+      !this.$v.project.summary.maxLength &&
         errors.push("내용은 반드시 500자 이내이어야 합니다.");
 
-      !this.$v.summary.required &&
+      !this.$v.project.summary.required &&
         errors.push("요약 정보를 반드시 입력해주세요.");
 
       return errors;
@@ -189,10 +187,13 @@ export default {
 
     contentErrors() {
       const errors = [];
-      if (!this.$v.content.$dirty) return errors;
+      if (!this.$v.project.content.$dirty) return errors;
 
-      !this.$v.content.maxLength &&
+      !this.$v.project.content.maxLength &&
         errors.push("내용은 반드시 500자 이내이어야 합니다.");
+
+      !this.$v.project.content.required &&
+        errors.push("상세업무 및 성과를 반드시 입력해주세요.");
 
       return errors;
     },
@@ -200,46 +201,26 @@ export default {
     endDateErrors() {
       const errors = [];
       return errors;
-    },
-
-    deadlineErrors() {
-      const errors = [];
-      if (!this.$v.content.$dirty) return errors;
-
-      !this.$v.deadline.minValue &&
-        errors.push("오늘 이후의 날짜를 선택해주세요");
-
-      return errors;
     }
   },
 
   methods: {
     clearDatas() {
-      this.title = "";
-      this.summary = "";
-      this.content = "";
-      this.tag = "";
-      this.tags = [];
-      this.startDate = "";
-      this.endDate = "";
+      this.project.title = "";
+      this.project.summary = "";
+      this.project.content = "";
+      this.project.tags = [];
+      this.project.startDate = "";
+      this.project.endDate = "";
     },
 
     submit() {
       this.$v.$touch();
-
+      console.log(this.project);
       if (this.$v.$invalid) {
         console.log("형식 불일치");
       } else {
-        const project = {
-          title: this.title,
-          summary: this.summary,
-          content: this.content,
-          tag: this.tag,
-          tags: this.tags,
-          startDate: this.startDate,
-          endDate: this.endDate
-        };
-        console.log("제출!!:", project);
+        console.log("제출!!:");
       }
     },
 
@@ -247,10 +228,6 @@ export default {
       this.$v.$reset();
       console.log(this.tags);
       this.clearDatas();
-    },
-
-    isPropsExist(props) {
-      return typeof props !== "undefined";
     }
   }
 };
