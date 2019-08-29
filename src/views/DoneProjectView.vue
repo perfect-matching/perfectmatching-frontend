@@ -2,7 +2,7 @@
   <section class="done_project_section">
     <v-card>
       <h2 class="section_title">프로젝트 추가하기</h2>
-      <done-project-form></done-project-form>
+      <done-project-form :project="project"></done-project-form>
     </v-card>
   </section>
 </template>
@@ -14,7 +14,18 @@ export default {
     DoneProjectForm
   },
 
-  created() {}
+  data() {
+    return {
+      project: {
+        title: "",
+        summary: "",
+        content: "",
+        tags: [],
+        startDate: "",
+        endDate: ""
+      }
+    };
+  }
 };
 </script>
 

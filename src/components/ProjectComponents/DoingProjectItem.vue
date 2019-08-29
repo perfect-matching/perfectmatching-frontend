@@ -22,9 +22,12 @@
         <div class="create_date">{{ setDateFormat(project.createdDate) }}</div>
       </v-layout>
       <v-card-title class="card_title">{{ project.title }}</v-card-title>
-      <v-chip class="status ma-2" color="red" text-color="white">{{
-        project.status
-      }}</v-chip>
+      <v-chip
+        class="status ma-2"
+        :color="setChipColor(project.status)"
+        text-color="white"
+        >{{ project.status }}</v-chip
+      >
 
       <v-card-text>{{ project.summary }}</v-card-text>
     </v-card>
@@ -43,6 +46,16 @@ export default {
   methods: {
     setDateFormat(date) {
       return this.$_moment(date).format("LL");
+    },
+
+    setChipColor(status) {
+      const colors = {
+        모집중: "primary",
+        진행중: "green",
+        완료: ""
+      };
+
+      return colors[status];
     }
   }
 };

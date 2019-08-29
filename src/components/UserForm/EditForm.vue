@@ -2,15 +2,18 @@
   <form>
     <v-text-field
       outline
-      v-model="email"
+      v-model="myProfile.email"
+      :error-messages="emailErrors"
       label="E-mail"
+      required
+      @input="$v.myProfile.email.$touch()"
+      @blur="$v.myProfile.email.$touch()"
       :disabled="this.$route.name === 'profileEdit'"
-      :placeholder="'로그인한 유저의 이메일'"
     ></v-text-field>
 
     <v-text-field
       outline
-      v-model="password"
+      v-model="myProfile.password"
       :error-messages="passwordErrors"
       :append-icon="showPassword ? 'visibility' : 'visibility_off'"
       :type="showPassword ? 'text' : 'password'"
@@ -18,8 +21,8 @@
       label="비밀번호"
       hint="At least 8 characters"
       class="input-group--focused"
-      @input="$v.password.$touch()"
-      @blur="$v.password.$touch()"
+      @input="$v.myProfile.password.$touch()"
+      @blur="$v.myProfile.password.$touch()"
       @click:append="showPassword = !showPassword"
     ></v-text-field>
 
@@ -39,46 +42,55 @@
 
     <v-text-field
       outline
-      v-model="nickName"
+      v-model="myProfile.nickname"
       :error-messages="nickNameErrors"
       :counter="20"
       label="닉네임"
       required
-      @input="$v.nickName.$touch()"
-      @blur="$v.nickName.$touch()"
+      @input="$v.myProfile.nickname.$touch()"
+      @blur="$v.myProfile.nickname.$touch()"
     ></v-text-field>
 
     <v-textarea
       outline
-      v-model="introduce"
-      :error-messages="introduceErrors"
+      v-model="myProfile.summary"
+      :error-messages="summaryErrors"
       :counter="500"
-      name="introduce"
+      name="summary"
       label="자기소개"
       required
       value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
-      @input="$v.introduce.$touch()"
-      @blur="$v.introduce.$touch()"
+      @input="$v.myProfile.summary.$touch()"
+      @blur="$v.myProfile.summary.$touch()"
     ></v-textarea>
 
-    <v-text-field outline v-model="url" label="소셜 URL"></v-text-field>
+    <v-text-field
+      outline
+      v-model="myProfile.socialUrl"
+      label="소셜 URL"
+    ></v-text-field>
 
     <vue-tags-input
       class="tag_input"
       v-model="tag"
-      :tags="tags"
-      @tags-changed="newTags => (tags = newTags)"
+      :tags="myProfile.tags"
+      @tags-changed="newTags => (myProfile.tags = newTags)"
       :autocomplete-items="filteredItems"
       add-only-from-autocomplete
     />
 
     <div class="time">
       <v-subheader class="pl-0">투자시간(?)</v-subheader>
-      <v-slider v-model="time" thumb-label="always" min="0" max="24"></v-slider>
+      <v-slider
+        v-model="myProfile.investTime"
+        thumb-label="always"
+        min="0"
+        max="24"
+      ></v-slider>
       <div>
         저는 하루 중
-        <span style="color:red;">{{ time }}시간</span> 정도 사이드 프로젝트에
-        투자하고 싶어요 :D
+        <span style="color:red;">{{ myProfile.investTime }}시간</span> 정도
+        사이드 프로젝트에 투자하고 싶어요 :D
       </div>
     </div>
 
@@ -101,6 +113,7 @@ import { validationMixin } from "vuelidate";
 import VueTagsInput from "@johmun/vue-tags-input";
 import {
   required,
+  email,
   maxLength,
   sameAs,
   minLength,
@@ -113,18 +126,29 @@ const strength = helpers.regex(
 );
 
 export default {
+  props: {
+    myProfile: {
+      type: Object,
+      required: false
+    }
+  },
   mixins: [validationMixin],
   components: {
     VueTagsInput
   },
 
   validations: {
-    nickName: { required, maxLength: maxLength(20) },
-    password: { required, minLength: minLength(8), strength },
-    repeatPassword: {
-      sameAsPassword: sameAs("password")
+    myProfile: {
+      email: { required, email, maxLength: maxLength(50) },
+      nickname: { required, maxLength: maxLength(20) },
+      password: { required, minLength: minLength(8), strength },
+      summary: { required, maxLength: maxLength(500) }
     },
-    introduce: { required, maxLength: maxLength(500) },
+
+    repeatPassword: {
+      sameAsPassword: sameAs("myProfile.password")
+    },
+
     checkbox: {
       checked(val) {
         return val;
@@ -133,16 +157,10 @@ export default {
   },
 
   data: () => ({
-    nickName: "",
-    email: "",
     valid: false,
     showPassword: false,
-    password: "",
     repeatPassword: "",
-    introduce: "",
-    url: "",
     tag: "",
-    tags: [],
     autocompleteItems: [
       {
         id: 1,
@@ -177,7 +195,7 @@ export default {
         text: "웹 기획"
       }
     ],
-    time: 12,
+
     checkbox: false
   }),
 
@@ -186,6 +204,18 @@ export default {
       return this.autocompleteItems.filter(i => {
         return i.text.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
       });
+    },
+
+    emailErrors() {
+      const errors = [];
+      if (!this.$v.myProfile.email.$dirty) return errors;
+      !this.$v.myProfile.email.maxLength &&
+        errors.push("이메일은 50자 이내이어야 합니다.");
+      !this.$v.myProfile.email.email &&
+        errors.push("이메일 형식이 틀렸습니다.");
+      !this.$v.myProfile.email.required &&
+        errors.push("이메일을 입력해주세요.");
+      return errors;
     },
 
     checkboxErrors() {
@@ -197,23 +227,25 @@ export default {
 
     nickNameErrors() {
       const errors = [];
-      if (!this.$v.nickName.$dirty) return errors;
-      !this.$v.nickName.maxLength &&
+      if (!this.$v.myProfile.nickname.$dirty) return errors;
+      !this.$v.myProfile.nickname.maxLength &&
         errors.push("닉네임은 최대 20자 이내이어야 합니다.");
-      !this.$v.nickName.required && errors.push("닉네임을 입력해주세요.");
+      !this.$v.myProfile.nickname.required &&
+        errors.push("닉네임을 입력해주세요.");
       return errors;
     },
 
     passwordErrors() {
       const errors = [];
-      if (!this.$v.password.$dirty) return errors;
-      !this.$v.password.minLength &&
+      if (!this.$v.myProfile.password.$dirty) return errors;
+      !this.$v.myProfile.password.minLength &&
         errors.push("비밀번호는 최소 8자 이상이어야 합니다.");
 
-      !this.$v.password.strength &&
+      !this.$v.myProfile.password.strength &&
         errors.push("영문,숫자 그리고 특수문자로 이루어져 있어야 합니다.");
 
-      !this.$v.password.required && errors.push("비밀번호를 입력해주세요");
+      !this.$v.myProfile.password.required &&
+        errors.push("비밀번호를 입력해주세요");
       return errors;
     },
 
@@ -225,28 +257,23 @@ export default {
       return errors;
     },
 
-    introduceErrors() {
+    summaryErrors() {
       const errors = [];
-      if (!this.$v.introduce.$dirty) return errors;
-      !this.$v.introduce.maxLength &&
+      if (!this.$v.myProfile.summary.$dirty) return errors;
+      !this.$v.myProfile.summary.maxLength &&
         errors.push("최대 500자 이내이어야 합니다.");
-      !this.$v.introduce.required && errors.push("자기소개를 입력해주세요.");
+      !this.$v.myProfile.summary.required &&
+        errors.push("자기소개를 입력해주세요.");
       return errors;
     }
   },
 
   methods: {
-    clearDatas() {
-      this.nickName = "";
-      this.email = "";
-      this.introduce = "";
-      this.tag = "";
-      this.tags = [];
-      this.time = 12;
-      this.checkbox = false;
-    },
+    clearDatas() {},
 
     submit() {
+      this.$v.$touch();
+      console.log(this.myProfile);
       if (this.$v.$invalid) {
         console.log("형식 불일치");
       } else {

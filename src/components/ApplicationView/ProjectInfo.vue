@@ -1,8 +1,8 @@
 <template>
   <v-card flat class="project_card">
-    <v-chip class="status" color="green" text-color="white">
-      {{ project.status }}
-    </v-chip>
+    <v-chip class="status" color="green" text-color="white">{{
+      project.status
+    }}</v-chip>
     <div class="project_title">{{ project.title }}</div>
     <div class="project_date">
       {{ setDateFormat(project.createdDate) }} 개설
@@ -57,6 +57,7 @@ export default {
 <style scoped>
 .project_card {
   padding: 20px;
+  border: 1px solid #dbdbdb;
 }
 
 .project_title {
