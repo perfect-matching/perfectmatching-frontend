@@ -6,4 +6,16 @@ function authRequest(user) {
   return axios.post(`${backend.baseUrl}/login`, user);
 }
 
-export const auth = { authRequest };
+function authLogout(token) {
+  return axios.post(
+    `${backend.baseUrl}/login`,
+    {},
+    { headers: { Authorization: token } }
+  );
+  // return delete axios.defaults.headers.common["Authorization"];
+}
+
+export const auth = {
+  authRequest,
+  authLogout
+};

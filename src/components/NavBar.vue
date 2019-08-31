@@ -17,7 +17,7 @@
       <div class="login">
         <login-modal></login-modal>
       </div>
-      <div class="loggedin_user" v-if="loggedin">
+      <div class="loggedin_user" v-if="loggedIn">
         <v-btn icon>
           <v-icon>notifications_none</v-icon>
         </v-btn>
@@ -68,16 +68,21 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import LoginModal from "./LoginModal.vue";
 export default {
   name: "navBar",
   components: {
     LoginModal
   },
+
+  computed: {
+    ...mapGetters({ loggedIn: "isAuthenticated" })
+  },
+
   data() {
     return {
-      drawer: null,
-      loggedin: false
+      drawer: null
     };
   },
 

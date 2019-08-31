@@ -27,6 +27,11 @@ export const authModule = {
 
     AUTH_ERROR(state) {
       state.status = "error";
+    },
+
+    AUTH_LOGOUT(state) {
+      state.status = "";
+      state.token = "";
     }
   },
 
@@ -44,7 +49,8 @@ export const authModule = {
             const token = res.headers.authorization;
             localStorage.setItem("user-token", token);
             commit("AUTH_SUCCESS", token); // 로컬스토리지에 토큰을 저장하는거 까지 구현된 상태
-            // dispatch("USER_REQUEST");
+
+            // dispatch("GET_MY_PROFILE",);
             resolve(res);
           })
           .catch(err => {
@@ -52,6 +58,21 @@ export const authModule = {
             localStorage.removeItem("user-token"); // 로그인 실패시 가능성 있는 모든 토큰 삭제
             reject(err);
           });
+      });
+    },
+
+    AUTH_LOGOUT({ commit, dispatch }) {
+      return new Promise((resolve, reject) => {
+        console.log("로그아웃 해뿟다");
+        commit("AUTH_LOGOUT");
+        // const token = localStorage.getItem("user-token");
+        localStorage.removeItem("user-token");
+
+        // auth.authLogout(token).then(res => { // 굳이 필요한 작업일까?
+        //   console.log("엑시오스 로그아웃:", res);
+        // });
+
+        resolve();
       });
     }
   }
