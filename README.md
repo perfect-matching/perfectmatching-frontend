@@ -52,7 +52,29 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - 백엔들 개발자확인용
 - [테스트 보러가기](https://perfectmatching.netlify.com/)
 
-<<<<<<< HEAD
+### URL 명세
+
+#### 메인페이지
+
+| URL                       | 페이지 이름                                                                         |
+| ------------------------- | ----------------------------------------------------------------------------------- |
+| /home                     | [메인 페이지](https://perfectmatching.netlify.com/home)                             |
+| /join                     | [가입 페이지](https://perfectmatching.netlify.com/join)                             |
+| /projects                 | [프로젝트 리스트](https://perfectmatching.netlify.com/projects)                     |
+| /project/:idx             | [프로젝트 상세페이지](https://perfectmatching.netlify.com/project/1)                |
+| /project/:idx/application | [프로젝트 지원페이지](https://perfectmatching.netlify.com/projects/1/application)   |
+| /new/project              | [프로젝트 개설페이지](https://perfectmatching.netlify.com/new/project)              |
+| /my                       | [마이페이지](https://perfectmatching.netlify.com/my)                                |
+| /my/edit                  | [정보 수정페이지](https://perfectmatching.netlify.com/my/edit)                      |
+| /my/projects              | [나의 프로젝트 페이지](https://perfectmatching.netlify.com/my/projects)             |
+| /my/projects/:idx         | [프로젝트 관리 페이지](https://perfectmatching.netlify.com/my/projects/1)           |
+| /my/projects/:idx/edit    | [프로젝트 수정 페이지](https://perfectmatching.netlify.com/my/projects/1/edit)      |
+| /my/projects/:idx/done    | [프로젝트 완료 폼 페이지](https://perfectmatching.netlify.com/my/projects/1/done)   |
+| /new/done                 | [진행했던 프로젝트 추가 페이지](https://perfectmatching.netlify.com/new/done)       |
+| /my/done/:idx/edit        | [진행했던 프로젝트 수정 페이지](https://perfectmatching.netlify.com/my/done/1/edit) |
+| /profile/:idx             | [유저 상세페이지](https://perfectmatching.netlify.com/profile/1)                    |
+
+---
 ## Git 컨벤션
 
 ### 공통사항
@@ -75,28 +97,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
   git commit -m "Update: HomeView, add login button"
   git commit -m "Add: LoginModal.vue"
   ```
-=======
 ---
-
-### URL 명세
-
-#### 메인페이지
-
-| URL                       | 페이지 이름                                                                         |
-| ------------------------- | ----------------------------------------------------------------------------------- |
-| /home                     | [메인 페이지](https://perfectmatching.netlify.com/home)                             |
-| /join                     | [가입 페이지](https://perfectmatching.netlify.com/join)                             |
-| /projects                 | [프로젝트 리스트](https://perfectmatching.netlify.com/projects)                     |
-| /project/:idx             | [프로젝트 상세페이지](https://perfectmatching.netlify.com/project/1)                |
-| /project/:idx/application | [프로젝트 지원페이지](https://perfectmatching.netlify.com/projects/1/application)   |
-| /new/project              | [프로젝트 개설페이지](https://perfectmatching.netlify.com/new/project)              |
-| /my                       | [마이페이지](https://perfectmatching.netlify.com/my)                                |
-| /my/edit                  | [정보 수정페이지](https://perfectmatching.netlify.com/my/edit)                      |
-| /my/projects              | [나의 프로젝트 페이지](https://perfectmatching.netlify.com/my/projects)             |
-| /my/projects/:idx         | [프로젝트 관리 페이지](https://perfectmatching.netlify.com/my/projects/1)           |
-| /my/projects/:idx/edit    | [프로젝트 수정 페이지](https://perfectmatching.netlify.com/my/projects/1/edit)      |
-| /my/projects/:idx/done    | [프로젝트 완료 폼 페이지](https://perfectmatching.netlify.com/my/projects/1/done)   |
-| /new/done                 | [진행했던 프로젝트 추가 페이지](https://perfectmatching.netlify.com/new/done)       |
-| /my/done/:idx/edit        | [진행했던 프로젝트 수정 페이지](https://perfectmatching.netlify.com/my/done/1/edit) |
-| /profile/:idx             | [유저 상세페이지](https://perfectmatching.netlify.com/profile/1)                    |
->>>>>>> df8bedea455bf39c6d38ec410fd57815b4840200
