@@ -15,7 +15,9 @@ import ApplicationView from "../views/ApplicationView.vue";
 import DoneProjectView from "../views/DoneProjectView.vue";
 import DoneProjectEditView from "../views/DoneProjectEditView.vue";
 import DoneProjectStateChangeView from "../views/DoneProjectStateChangeView.vue";
+import ErrorView from "../views/ErrorView.vue";
 import { store } from "../store/index.js";
+
 Vue.use(Router);
 
 export const router = new Router({
@@ -103,6 +105,11 @@ export const router = new Router({
       path: "/my/done/:idx/edit",
       name: "editDoneProject",
       component: DoneProjectEditView
+    },
+    {
+      path: "*",
+      name: "Error",
+      component: ErrorView
     }
   ],
   scrollBehavior() {

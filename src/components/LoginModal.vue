@@ -110,6 +110,11 @@ export default {
   methods: {
     submit() {
       this.$v.$touch();
+      const { email, password } = this;
+      this.$store.dispatch("AUTH_REQUEST", { email, password }).then(() => {
+        console.log("로그인 개성공!");
+        this.$router.push("/");
+      });
     },
 
     clear() {
@@ -123,6 +128,14 @@ export default {
       this.email = "";
       this.password = "";
       this.dialog = false;
+    },
+
+    login() {
+      const { email, password } = this;
+      this.$store.dispatch("AUTH_REQUEST", { email, password }).then(() => {
+        console.log("로그인 개성공!");
+        this.$router.push("/");
+      });
     }
   }
 };

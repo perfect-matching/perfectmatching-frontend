@@ -21,7 +21,12 @@ function getDoneProjectByIdx(doneProjectIdx) {
   return axios.get(`${backend.baseUrl}/doneproject/${doneProjectIdx}`);
 }
 
+function postProject() {
+  return axios.post(`${backend.baseUrl}/project`, {});
+}
+
 export const project = {
+  postProject,
   getProjects,
   getNextProjects,
   getProjectByIdx,

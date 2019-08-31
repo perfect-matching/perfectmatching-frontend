@@ -1,4 +1,5 @@
 import { project } from "../../api/prorject.js";
+import { handleException } from "../../utils/errorHandler.js";
 
 export const projectModule = {
   state: {
@@ -55,7 +56,7 @@ export const projectModule = {
           commit("SET_PROJECT_DETAIL", data);
         })
         .catch(err => {
-          console.log(err);
+          handleException(err);
         });
     },
 
