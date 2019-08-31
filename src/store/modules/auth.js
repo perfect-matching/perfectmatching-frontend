@@ -43,7 +43,7 @@ export const authModule = {
           .then(res => {
             const token = res.headers.authorization;
             localStorage.setItem("user-token", token);
-            commit("AUTH_SUCCESS", token);
+            commit("AUTH_SUCCESS", token); // 로컬스토리지에 토큰을 저장하는거 까지 구현된 상태
             // dispatch("USER_REQUEST");
             resolve(res);
           })

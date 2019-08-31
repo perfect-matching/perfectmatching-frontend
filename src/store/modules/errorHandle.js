@@ -3,7 +3,7 @@ import { router } from "../../routes/index.js";
 export const errorModule = {
   state: {
     error: {
-      status: "",
+      status: null,
       message: ""
     }
   },
@@ -17,7 +17,7 @@ export const errorModule = {
   mutations: {
     SET_ERROR(state, error) {
       state.error.status = error.status;
-      state.error.message = "하...죄송..";
+      state.error.message = "에러다!";
     }
   },
 

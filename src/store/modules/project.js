@@ -34,6 +34,12 @@ export const projectModule = {
   },
 
   actions: {
+    POST_PROJECT(project) {
+      return project
+        .postProject(project)
+        .then()
+        .catch();
+    },
     FETCH_PROJECTS({ commit }) {
       return project
         .getProjects()

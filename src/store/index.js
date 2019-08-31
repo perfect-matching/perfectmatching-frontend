@@ -6,7 +6,7 @@ import { commentModule } from "./modules/comment.js";
 import { myModule } from "./modules/my.js";
 import { userProfileModule } from "./modules/userProfile.js";
 import { authModule } from "./modules/auth.js";
-// import { errorHandle } from "./modules/errorHandle.js";
+import { errorModule } from "./modules/errorHandle.js";
 
 Vue.use(Vuex);
 
@@ -16,7 +16,7 @@ export const store = new Vuex.Store({
     projectModule,
     commentModule,
     myModule,
-    userProfileModule
-    // errorHandle
+    userProfileModule,
+    errorModule
   }
 });
