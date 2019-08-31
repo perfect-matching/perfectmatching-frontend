@@ -21,7 +21,7 @@
     <div class="project_content">{{ project.content }}</div>
     <div class="leader_info">
       <div>팀장</div>
-      <router-link to="/users/1">
+      <router-link :to="`/profile/${project.leaderIdx}`">
         <v-avatar :tile="false" :size="56" color="grey lighten-4">
           <img
             src="https://vuetifyjs.com/apple-touch-icon-180x180.png"

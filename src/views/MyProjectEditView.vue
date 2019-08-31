@@ -1,10 +1,7 @@
 <template>
-  <section class="new_project_section">
+  <section class="project_edit_section">
     <v-card>
-      <h2 class="section_title" v-if="this.$route.name == 'editProject'">
-        프로젝트 수정
-      </h2>
-      <h2 class="section_title" v-else>프로젝트 개설</h2>
+      <h2 class="section_title">프로젝트 수정</h2>
       <project-form></project-form>
     </v-card>
   </section>
@@ -20,7 +17,7 @@ export default {
 </script>
 
 <style scoped>
-.new_project_section {
+.project_edit_section {
   margin: 0 auto;
   padding: 20px 0 50px 0;
   max-width: 800px;

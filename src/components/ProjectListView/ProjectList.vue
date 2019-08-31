@@ -1,13 +1,5 @@
 <template>
   <v-container class="project_list_container">
-    <v-layout>
-      <v-flex xs12 sm4>
-        <drop-down :title="'지역'"></drop-down>
-      </v-flex>
-      <v-flex xs12 sm4>
-        <drop-down :title="'직군'"></drop-down>
-      </v-flex>
-    </v-layout>
     <v-layout class="project_list_container">
       <ul class="project_list">
         <v-layout wrap>
@@ -29,11 +21,9 @@
 </template>
 
 <script>
-import DropDown from "./DropDown.vue";
 import ProjectListItem from "./ProjectListItem.vue";
 export default {
   components: {
-    DropDown,
     ProjectListItem
   },
 

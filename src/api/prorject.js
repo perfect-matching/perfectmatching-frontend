@@ -13,8 +13,13 @@ function getProjectByIdx(idx) {
   return axios.get(`${backend.baseUrl}/project/${idx}`);
 }
 
+function getProjectsWithQueries(location) {
+  return axios.get(`${backend.baseUrl}/projects/?location=${location}`);
+}
+
 export const project = {
   getProjects,
   getNextProjects,
-  getProjectByIdx
+  getProjectByIdx,
+  getProjectsWithQueries
 };

@@ -2,15 +2,17 @@
   <section class="join_section">
     <v-card>
       <h2 class="section_title">회원가입</h2>
-      <join-form></join-form>
+      <my-photo></my-photo>
+      <edit-form></edit-form>
     </v-card>
   </section>
 </template>
 
 <script>
-import JoinForm from "../components/JoinView/JoinForm.vue";
+import MyPhoto from "../components/UserForm/MyPhoto.vue";
+import EditForm from "../components/UserForm/EditForm.vue";
 export default {
-  components: { JoinForm }
+  components: { MyPhoto, EditForm }
 };
 </script>
 
