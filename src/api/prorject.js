@@ -9,12 +9,14 @@ function getNextProjects(url) {
   return axios.get(url);
 }
 
-function getProjectByIdx(idx) {
-  return axios.get(`${backend.baseUrl}/project/${idx}`);
+function getProjectByIdx(idx, token) {
+  return axios.get(`${backend.baseUrl}/project/${idx}`, {
+    headers: { Authorization: token }
+  });
 }
 
 function getProjectsWithQueries(location) {
-  return axios.get(`${backend.baseUrl}/projects/?location=${location}`);
+  return axios.get(`${backend.baseUrl}/projects?location=${location}`);
 }
 
 function getDoneProjectByIdx(doneProjectIdx) {

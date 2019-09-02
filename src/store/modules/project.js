@@ -40,6 +40,7 @@ export const projectModule = {
         .then()
         .catch();
     },
+
     FETCH_PROJECTS({ commit }) {
       return project
         .getProjects()
@@ -56,8 +57,9 @@ export const projectModule = {
     },
 
     FETCH_PROJECT_BY_IDX({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
       return project
-        .getProjectByIdx(idx)
+        .getProjectByIdx(idx, token)
         .then(({ data }) => {
           commit("SET_PROJECT_DETAIL", data);
         })

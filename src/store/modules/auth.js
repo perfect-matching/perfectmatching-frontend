@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import { auth } from "../../api/login.js";
 
 export const authModule = {
@@ -49,8 +50,7 @@ export const authModule = {
             const token = res.headers.authorization;
             localStorage.setItem("user-token", token);
             commit("AUTH_SUCCESS", token); // 로컬스토리지에 토큰을 저장하는거 까지 구현된 상태
-
-            // dispatch("GET_MY_PROFILE",);
+            // dispatch("GET_MY_PROFILE");
             resolve(res);
           })
           .catch(err => {

@@ -17,6 +17,7 @@ import DoneProjectEditView from "../views/DoneProjectEditView.vue";
 import DoneProjectStateChangeView from "../views/DoneProjectStateChangeView.vue";
 import ErrorView from "../views/ErrorView.vue";
 import { store } from "../store/index.js";
+import { needLogin } from "./guards.js";
 
 Vue.use(Router);
 
@@ -49,7 +50,8 @@ export const router = new Router({
     {
       path: "/project/:idx",
       name: "projectDetail",
-      component: ProjectDetailView
+      component: ProjectDetailView,
+      beforeEnter: needLogin
     },
     {
       path: "/new/project",

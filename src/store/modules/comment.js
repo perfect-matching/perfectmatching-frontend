@@ -19,8 +19,9 @@ export const commentModule = {
 
   actions: {
     FETCH_COMMENTS({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
       return comment
-        .getCommentsByProejectIdx(idx)
+        .getCommentsByProejectIdx(idx, token)
         .then(({ data }) => {
           commit("SET_COMMENTS", data._embedded.datas);
         })
