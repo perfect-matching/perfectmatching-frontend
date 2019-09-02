@@ -65,8 +65,9 @@ export const myModule = {
 
   actions: {
     GET_MY_PROFILE({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
       return my
-        .getUserProfileByIdx(idx)
+        .getUserProfileByIdx(idx, token)
         .then(({ data }) => {
           commit("SET_MY_PROFILE", data);
         })
@@ -86,18 +87,20 @@ export const myModule = {
     },
 
     GET_MY_DOING_PROJECTS_BY_IDX({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
       return my
-        .getUserProjectsByUserIdx(idx)
+        .getUserProjectsByUserIdx(idx, token)
         .then(({ data }) => {
           const myDoingProjects = data._embedded.datas;
-          commit("SET_MY_DOING_PROJECTS", myDoingProjects);
+          commit("SET_MY_DOING_PROJECTS", myDoingProjects, token);
         })
         .catch(err => console.log(err));
     },
 
     GET_MY_DONE_PROJECTS_BY_IDX({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
       return my
-        .getDoneProjectsByUserIdx(idx)
+        .getDoneProjectsByUserIdx(idx, token)
         .then(({ data }) => {
           const myDoneProjects = data._embedded.datas;
           commit("SET_DONE_PROJECTS", myDoneProjects);
@@ -106,8 +109,9 @@ export const myModule = {
     },
 
     GET_MY_PROJECT_BY_IDX({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
       return project
-        .getProjectByIdx(idx)
+        .getProjectByIdx(idx, token)
         .then(({ data }) => {
           commit("SET_MY_PROJECT", data);
         })

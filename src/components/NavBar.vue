@@ -1,11 +1,17 @@
 <template>
   <header>
     <v-toolbar class="tool_bar" flat fixed>
-      <v-toolbar-side-icon class="hidden-md-and-up" @click="toggleDrawer"></v-toolbar-side-icon>
+      <v-toolbar-side-icon
+        class="hidden-md-and-up"
+        @click="toggleDrawer"
+      ></v-toolbar-side-icon>
       <v-btn flat to="/">
         <v-toolbar-title>퍼펙트 매칭</v-toolbar-title>
       </v-btn>
-      <spinner></spinner>
+      <v-layout>
+        <spinner></spinner>
+      </v-layout>
+
       <v-spacer></v-spacer>
       <v-toolbar-items class="menu hidden-sm-and-down">
         <v-btn flat to="/new/project">프로젝트 개설</v-btn>
@@ -27,7 +33,10 @@
 
         <v-btn icon to="/my">
           <v-avatar :tile="false" :size="36" color="grey lighten-4">
-            <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar" />
+            <img
+              src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
+              alt="avatar"
+            />
           </v-avatar>
         </v-btn>
       </div>

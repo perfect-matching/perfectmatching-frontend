@@ -16,6 +16,7 @@ import DoneProjectView from "../views/DoneProjectView.vue";
 import DoneProjectEditView from "../views/DoneProjectEditView.vue";
 import DoneProjectStateChangeView from "../views/DoneProjectStateChangeView.vue";
 import ErrorView from "../views/ErrorView.vue";
+
 import { store } from "../store/index.js";
 import { needLogin } from "./guards.js";
 
@@ -56,57 +57,68 @@ export const router = new Router({
     {
       path: "/new/project",
       name: "NewProjectView",
-      component: NewProjectView
+      component: NewProjectView,
+      beforeEnter: needLogin
     },
     {
       path: "/profile/:idx",
       name: "userDetail",
-      component: UserDetailView
+      component: UserDetailView,
+      beforeEnter: needLogin
     },
     {
       path: "/my",
       name: "myPage",
-      component: MyPageView
+      component: MyPageView,
+      beforeEnter: needLogin
     },
     {
       path: "/my/edit",
       name: "profileEdit",
-      component: ProfileEditView
+      component: ProfileEditView,
+      beforeEnter: needLogin
     },
     {
       path: "/my/projects",
       name: "myProjects",
-      component: MyProjectsView
+      component: MyProjectsView,
+      beforeEnter: needLogin
     },
     {
       path: "/my/projects/:idx",
       name: "projectManage",
-      component: ProjectManageView
+      component: ProjectManageView,
+      beforeEnter: needLogin
     },
     {
       path: "/my/projects/:idx/edit",
       name: "editProject",
-      component: MyProjectEditView
+      component: MyProjectEditView,
+      beforeEnter: needLogin
     },
     {
       path: "/projects/:idx/application",
       name: "projectApplication",
-      component: ApplicationView
+      component: ApplicationView,
+      beforeEnter: needLogin
     },
     {
       path: "/my/projects/:idx/done",
       name: "doneProjectStateChange",
-      component: DoneProjectStateChangeView
+      component: DoneProjectStateChangeView,
+      beforeEnter: needLogin
     },
     {
       path: "/new/done",
       name: "newDoneProject",
-      component: DoneProjectView
+      component: DoneProjectView,
+      beforeEnter: needLogin
     },
     {
       path: "/my/done/:idx/edit",
       name: "editDoneProject",
-      component: DoneProjectEditView
+      component: DoneProjectEditView,
+      beforeEnter: needLogin
     },
     {
       path: "*",

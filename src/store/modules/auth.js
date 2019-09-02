@@ -49,8 +49,11 @@ export const authModule = {
           .then(res => {
             const token = res.headers.authorization;
             localStorage.setItem("user-token", token);
-            commit("AUTH_SUCCESS", token); // 로컬스토리지에 토큰을 저장하는거 까지 구현된 상태
-            // dispatch("GET_MY_PROFILE");
+            commit("AUTH_SUCCESS", token);
+            var newToken = token.substring(7, token.length); // Bearer 삭제
+            const decoded = jwt.decode(newToken, { complete: true });
+            console.log(decoded);
+            dispatch("GET_MY_PROFILE", { idx: decoded.payload.idx, token });
             resolve(res);
           })
           .catch(err => {
