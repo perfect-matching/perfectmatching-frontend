@@ -8,10 +8,12 @@
 </template>
 
 <script>
+import { store } from "../store/index.js";
 import { mapGetters } from "vuex";
 import ProjectDetail from "../components/ProjectDetailView/ProjectDetail.vue";
 import CommentForm from "../components/ProjectDetailView/CommentForm.vue";
 import CommentList from "../components/ProjectDetailView/CommentList.vue";
+
 export default {
   name: "prjectDetail",
   components: {
@@ -26,10 +28,12 @@ export default {
       comments: "fetchedComments"
     })
   },
-  created() {
-    const idx = this.$route.params.idx;
-    this.$store.dispatch("FETCH_PROJECT_BY_IDX", { idx });
-    this.$store.dispatch("FETCH_COMMENTS", { idx });
+
+  async beforeRouteEnter(to, from, next) {
+    const idx = to.params.idx;
+    await store.dispatch("FETCH_PROJECT_BY_IDX", { idx });
+    await store.dispatch("FETCH_COMMENTS", { idx });
+    next();
   }
 };
 </script>
