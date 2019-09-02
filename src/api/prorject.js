@@ -19,8 +19,10 @@ function getProjectsWithQueries(location) {
   return axios.get(`${backend.baseUrl}/projects?location=${location}`);
 }
 
-function getDoneProjectByIdx(doneProjectIdx) {
-  return axios.get(`${backend.baseUrl}/doneproject/${doneProjectIdx}`);
+function getDoneProjectByIdx(doneProjectIdx, token) {
+  return axios.get(`${backend.baseUrl}/doneproject/${doneProjectIdx}`, {
+    headers: { Authorization: token }
+  });
 }
 
 function postProject(project) {
