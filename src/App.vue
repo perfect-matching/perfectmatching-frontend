@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import bus from "./utils/bus.js";
 import NavBar from "./components/NavBar.vue";
 export default {
   components: {
@@ -18,10 +19,6 @@ export default {
 
   props: {
     source: String
-  },
-
-  creaetd() {
-    // this.$store.dispatch( 토큰이 만료되었는지 확인하는 액션 );
   }
 };
 </script>

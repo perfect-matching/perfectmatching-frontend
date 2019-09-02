@@ -10,6 +10,7 @@
 <script>
 import { store } from "../store/index.js";
 import { mapGetters } from "vuex";
+import bus from "../utils/bus.js";
 import ProjectDetail from "../components/ProjectDetailView/ProjectDetail.vue";
 import CommentForm from "../components/ProjectDetailView/CommentForm.vue";
 import CommentList from "../components/ProjectDetailView/CommentList.vue";
@@ -30,10 +31,17 @@ export default {
   },
 
   async beforeRouteEnter(to, from, next) {
-    const idx = to.params.idx;
-    await store.dispatch("FETCH_PROJECT_BY_IDX", { idx });
-    await store.dispatch("FETCH_COMMENTS", { idx });
-    next();
+    bus.$emit("start:spinner");
+    try {
+      const idx = to.params.idx;
+      await store.dispatch("FETCH_PROJECT_BY_IDX", { idx });
+      await store.dispatch("FETCH_COMMENTS", { idx });
+      bus.$emit("end:spinner");
+      next();
+    } catch {
+      console.log("to: ", to);
+      bus.$emit("end:spinner");
+    }
   }
 };
 </script>
