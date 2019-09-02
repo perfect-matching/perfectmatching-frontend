@@ -28,15 +28,15 @@
 
     <v-text-field
       outline
-      v-model="repeatPassword"
+      v-model="myProfile.repeatPassword"
       :error-messages="repeatPasswordErrors"
       :append-icon="showPassword ? 'visibility' : 'visibility_off'"
       :type="showPassword ? 'text' : 'password'"
       name="repeat password"
       label="비밀번호 확인"
       class="input-group--focused"
-      @input="$v.repeatPassword.$touch()"
-      @blur="$v.repeatPassword.$touch()"
+      @input="$v.myProfile.repeatPassword.$touch()"
+      @blur="$v.myProfile.repeatPassword.$touch()"
       @click:append="showPassword = !showPassword"
     ></v-text-field>
 
@@ -142,11 +142,10 @@ export default {
       email: { required, email, maxLength: maxLength(50) },
       nickname: { required, maxLength: maxLength(20) },
       password: { required, minLength: minLength(8), strength },
+      repeatPassword: {
+        sameAsPassword: sameAs("password")
+      },
       summary: { required, maxLength: maxLength(500) }
-    },
-
-    repeatPassword: {
-      sameAsPassword: sameAs("myProfile.password")
     },
 
     checkbox: {
@@ -251,8 +250,8 @@ export default {
 
     repeatPasswordErrors() {
       const errors = [];
-      if (!this.$v.repeatPassword.$dirty) return errors;
-      !this.$v.repeatPassword.sameAsPassword &&
+      if (!this.$v.myProfile.repeatPassword.$dirty) return errors;
+      !this.$v.myProfile.repeatPassword.sameAsPassword &&
         errors.push("비밀번호가 일치하지 않습니다.");
       return errors;
     },
