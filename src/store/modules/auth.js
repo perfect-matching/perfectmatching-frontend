@@ -1,4 +1,5 @@
 import { auth } from "../../api/login.js";
+import { handleException } from "../../utils/errorHandler.js";
 
 export const authModule = {
   state: {

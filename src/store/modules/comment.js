@@ -1,4 +1,5 @@
 import { comment } from "../../api/comment.js";
+import { handleException } from "../../utils/errorHandler.js";
 
 export const commentModule = {
   state: {

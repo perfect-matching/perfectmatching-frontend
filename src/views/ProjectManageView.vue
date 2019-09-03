@@ -3,7 +3,7 @@
     <div>
       <h2>프로젝트 관리</h2>
       <project-detail :project="project"></project-detail>
-      <user-list></user-list>
+      <user-list :members="members"></user-list>
     </div>
   </section>
 </template>
@@ -22,7 +22,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      project: "fetchedMyProject"
+      project: "fetchedMyProject",
+      members: "fetchedMyProjectMembers"
     })
   },
 
@@ -32,7 +33,7 @@ export default {
       const idx = to.params.idx;
 
       await store.dispatch("GET_MY_PROJECT_BY_IDX", { idx });
-
+      await store.dispatch("GET_MY_PROJECT_MEMBERS_BY_IDX", { idx });
       bus.$emit("end:spinner");
       next();
     } catch {

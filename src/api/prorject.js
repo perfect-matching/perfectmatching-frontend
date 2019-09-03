@@ -35,6 +35,12 @@ function getProjectTags(token) {
   });
 }
 
+function getProjectMemebersByIdx(idx, token) {
+  return axios.get(`${backend.baseUrl}/project/${idx}/members`, {
+    headers: { Authorization: token }
+  });
+}
+
 export const project = {
   postProject,
   getProjects,
@@ -42,5 +48,6 @@ export const project = {
   getProjectByIdx,
   getProjectsWithQueries,
   getDoneProjectByIdx,
-  getProjectTags
+  getProjectTags,
+  getProjectMemebersByIdx
 };

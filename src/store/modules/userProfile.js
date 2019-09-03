@@ -1,4 +1,5 @@
 import { userProfile } from "../../api/userProfile.js";
+import { handleException } from "../../utils/errorHandler.js";
 
 export const userProfileModule = {
   state: {

@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { my } from "../../api/my.js";
 import { project } from "../../api/prorject.js";
+import { handleException } from "../../utils/errorHandler.js";
 
 export const myModule = {
   state: {
@@ -9,6 +10,7 @@ export const myModule = {
     myDoingProjects: [],
     myDoneProjects: [],
     myProject: {},
+    myProjectMembers: [],
     myDoneProject: {}
   },
 
@@ -31,6 +33,10 @@ export const myModule = {
 
     fetchedMyProject(state) {
       return state.myProject;
+    },
+
+    fetchedMyProjectMembers(state) {
+      return state.myProjectMembers;
     },
 
     fetchedMyDoneProject(state) {
@@ -61,6 +67,10 @@ export const myModule = {
 
     SET_MY_DONE_PROJECT(state, data) {
       state.myDoneProject = data;
+    },
+
+    SET_MY_PROJECT_MEMBERS(state, members) {
+      state.myProjectMembers = members;
     }
   },
 
@@ -122,6 +132,21 @@ export const myModule = {
           commit("SET_MY_PROJECT", data);
         })
         .catch(err => console.log(err));
+    },
+
+    GET_MY_PROJECT_MEMBERS_BY_IDX({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .getProjectMemebersByIdx(idx, token)
+        .then(({ data }) => {
+          const members = data._embedded.datas;
+          commit("SET_MY_PROJECT_MEMBERS", members);
+        })
+        .catch(err => {
+          // 멤버가 없어도 일로 옴
+          commit("SET_MY_PROJECT_MEMBERS", []);
+          console.log(err);
+        });
     },
 
     GET_MY_DONE_PROJECT_BY_IDX({ commit }, { doneProjectIdx }) {

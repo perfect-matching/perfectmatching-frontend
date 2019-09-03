@@ -4,6 +4,7 @@ import { handleException } from "../../utils/errorHandler.js";
 export const projectModule = {
   state: {
     projects: [],
+    projectMembers: {},
     projectDetail: {},
     nextUrl: "",
     tags: []
@@ -38,6 +39,10 @@ export const projectModule = {
 
     SET_RPOJECT_TAGS(state, tags) {
       state.tags = tags;
+    },
+
+    SET_PROJECT_MEMBERS(state, members) {
+      state.projectMembers = members;
     }
   },
 
@@ -96,6 +101,19 @@ export const projectModule = {
           };
 
           commit("SET_PROJECTS", projects);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
+    FETCH_PROJECT_MEMBERS({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .getProjectMemebersByIdx(idx, token)
+        .then(({ data }) => {
+          const members = data._embedded.datas;
+          commit("SET_PROJECT_MEMBERS", members);
         })
         .catch(err => {
           console.log(err);
