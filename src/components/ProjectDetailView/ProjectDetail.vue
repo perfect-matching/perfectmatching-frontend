@@ -1,9 +1,9 @@
 <template>
   <div class="prject_info" grow>
     <v-layout class="project_status_container" align-center justify-center>
-      <v-chip class="status" color="primary" text-color="white">{{
-        project.status
-      }}</v-chip>
+      <v-chip class="status" color="primary" text-color="white">
+        {{ project.status }}
+      </v-chip>
       <div class="create_date">
         {{ setDateFormat(project.startDate) }} -
         {{ setDateFormat(project.endDate) }}
@@ -96,18 +96,12 @@ img {
   position: absolute;
   left: 10%;
 
-  background-color: #fff;
+  background-color: #fafafa;
   content: "";
   display: inline-block;
   width: 80%;
   height: 15px;
 }
-
-/* .detail_header {
-  text-align: center;
-  padding: 100px 0 70px 0;
-  border-bottom: 1px solid #b6b6b6;
-} */
 
 .proejct_detail {
   padding: 0 7px;

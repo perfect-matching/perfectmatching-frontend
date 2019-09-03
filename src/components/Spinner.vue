@@ -38,13 +38,7 @@ export default {
 };
 </script>
 <style scoped>
-/* .spinner {
-  position: absolute;
-  top: 20%;
-  left: 45%;
-  z-index: 99;
+.v-progress-linear {
+  top: 40px;
 }
-.v-progress-circular {
-  margin: 1rem;
-} */
 </style>

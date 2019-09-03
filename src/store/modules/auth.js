@@ -1,4 +1,3 @@
-import jwt from "jsonwebtoken";
 import { auth } from "../../api/login.js";
 
 export const authModule = {
@@ -50,10 +49,7 @@ export const authModule = {
             const token = res.headers.authorization;
             localStorage.setItem("user-token", token);
             commit("AUTH_SUCCESS", token);
-            var newToken = token.substring(7, token.length); // Bearer 삭제
-            const decoded = jwt.decode(newToken, { complete: true });
-            console.log(decoded);
-            dispatch("GET_MY_PROFILE", { idx: decoded.payload.idx, token });
+            dispatch("GET_MY_PROFILE");
             resolve(res);
           })
           .catch(err => {

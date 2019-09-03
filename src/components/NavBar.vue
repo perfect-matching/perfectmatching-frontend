@@ -1,16 +1,10 @@
 <template>
   <header>
     <v-toolbar class="tool_bar" flat fixed>
-      <v-toolbar-side-icon
-        class="hidden-md-and-up"
-        @click="toggleDrawer"
-      ></v-toolbar-side-icon>
+      <v-toolbar-side-icon class="hidden-md-and-up" @click="toggleDrawer"></v-toolbar-side-icon>
       <v-btn flat to="/">
         <v-toolbar-title>퍼펙트 매칭</v-toolbar-title>
       </v-btn>
-      <v-layout>
-        <spinner></spinner>
-      </v-layout>
 
       <v-spacer></v-spacer>
       <v-toolbar-items class="menu hidden-sm-and-down">
@@ -23,9 +17,9 @@
       </div>
 
       <div class="loggedin_user" v-if="loggedIn">
-        <v-btn icon>
+        <!-- <v-btn icon>
           <v-icon>notifications_none</v-icon>
-        </v-btn>
+        </v-btn>-->
 
         <v-btn icon>
           <v-icon>mail_outline</v-icon>
@@ -33,15 +27,12 @@
 
         <v-btn icon to="/my">
           <v-avatar :tile="false" :size="36" color="grey lighten-4">
-            <img
-              src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
-              alt="avatar"
-            />
+            <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar" />
           </v-avatar>
         </v-btn>
       </div>
     </v-toolbar>
-
+    <spinner></spinner>
     <v-navigation-drawer v-model="drawer" app dark temporary>
       <v-list dense>
         <v-list-tile to="/new/project">
@@ -111,5 +102,9 @@ export default {
 .menu {
   1color: #cfcfcf;
   color: #fff;
+}
+
+.loggedin_user {
+  display: flex;
 }
 </style>

@@ -2,7 +2,7 @@
   <section class="project_detail_section">
     <h2 class="section_title">프로젝트 상세정보</h2>
     <project-detail :project="project"></project-detail>
-    <comment-form></comment-form>
+    <comment-form :comment="comment"></comment-form>
     <comment-list :comments="comments"></comment-list>
   </section>
 </template>
@@ -21,6 +21,15 @@ export default {
     ProjectDetail,
     CommentForm,
     CommentList
+  },
+
+  data() {
+    return {
+      comment: {
+        nickname: store.state.myModule.myProfile.nickname,
+        content: ""
+      }
+    };
   },
 
   computed: {

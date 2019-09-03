@@ -8,8 +8,10 @@ function getUserProfileByIdx(userIdx, token) {
   });
 }
 
-function getUserSkillsByUserIdx(userIdx) {
-  return axios.get(`${backend.baseUrl}/profile/${userIdx}/skills`);
+function getUserSkillsByUserIdx(userIdx, token) {
+  return axios.get(`${backend.baseUrl}/profile/${userIdx}/skills`, {
+    headers: { Authorization: token }
+  });
 }
 
 function getUserProjectsByUserIdx(userIdx, token) {

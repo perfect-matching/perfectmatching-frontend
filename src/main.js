@@ -12,5 +12,8 @@ Vue.use(Moment);
 new Vue({
   router,
   store,
+  beforeCreate() {
+    this.$store.dispatch("GET_MY_PROFILE");
+  },
   render: h => h(App)
 }).$mount("#app");

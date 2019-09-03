@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import bus from "./utils/bus.js";
 import NavBar from "./components/NavBar.vue";
 export default {
   components: {
@@ -19,6 +18,10 @@ export default {
 
   props: {
     source: String
+  },
+
+  beforeDestroy() {
+    this.$store.dispatch("AUTH_LOGOUT");
   }
 };
 </script>

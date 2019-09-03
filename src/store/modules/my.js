@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import { my } from "../../api/my.js";
 import { project } from "../../api/prorject.js";
 
@@ -64,10 +65,12 @@ export const myModule = {
   },
 
   actions: {
-    GET_MY_PROFILE({ commit }, { idx }) {
+    GET_MY_PROFILE({ commit }) {
       const token = localStorage.getItem("user-token");
+      const newToken = token.substring(7, token.length); // Bearer 삭제
+      const decoded = jwt.decode(newToken, { complete: true });
       return my
-        .getUserProfileByIdx(idx, token)
+        .getUserProfileByIdx(decoded.payload.idx, token)
         .then(({ data }) => {
           commit("SET_MY_PROFILE", data);
         })
@@ -76,9 +79,12 @@ export const myModule = {
         });
     },
 
-    GET_MY_SKILLS_BY_IDX({ commit }, { idx }) {
+    GET_MY_SKILLS_BY_IDX({ commit }) {
+      const token = localStorage.getItem("user-token");
+      const newToken = token.substring(7, token.length); // Bearer 삭제
+      const decoded = jwt.decode(newToken, { complete: true });
       return my
-        .getUserSkillsByUserIdx(idx)
+        .getUserSkillsByUserIdx(decoded.payload.idx, token)
         .then(({ data }) => {
           const mySkills = data._embedded.datas;
           commit("SET_MY_SKILLS", mySkills);

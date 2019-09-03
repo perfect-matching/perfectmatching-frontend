@@ -26,7 +26,7 @@ export const commentModule = {
           commit("SET_COMMENTS", data._embedded.datas);
         })
         .catch(err => {
-          console.log(err);
+          commit("SET_COMMENTS", {}); // 이전 댓글 state를 지워야함
         });
     }
   }
