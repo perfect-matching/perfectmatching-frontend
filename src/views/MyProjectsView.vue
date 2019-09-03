@@ -7,7 +7,9 @@
 </template>
 
 <script>
+import { store } from "../store/index.js";
 import { mapGetters } from "vuex";
+import bus from "../utils/bus.js";
 import DoingProjectList from "../components/ProjectComponents/DoingProjectList.vue";
 import EndProjectList from "../components/ProjectComponents/EndProjectList.vue";
 export default {
@@ -23,9 +25,19 @@ export default {
     })
   },
 
-  created() {
-    this.$store.dispatch("GET_MY_DOING_PROJECTS_BY_IDX", { idx: 1 });
-    this.$store.dispatch("GET_MY_DONE_PROJECTS_BY_IDX", { idx: 1 });
+  async beforeRouteEnter(to, from, next) {
+    bus.$emit("start:spinner");
+    try {
+      const idx = store.state.myModule.myProfile.userIdx;
+
+      await store.dispatch("GET_MY_DOING_PROJECTS_BY_IDX", { idx });
+      await store.dispatch("GET_MY_DONE_PROJECTS_BY_IDX", { idx });
+      bus.$emit("end:spinner");
+      next();
+    } catch {
+      console.log("to: ", to);
+      bus.$emit("end:spinner");
+    }
   }
 };
 </script>

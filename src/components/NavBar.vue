@@ -1,13 +1,11 @@
 <template>
   <header>
     <v-toolbar class="tool_bar" flat fixed>
-      <v-toolbar-side-icon
-        class="hidden-md-and-up"
-        @click="toggleDrawer"
-      ></v-toolbar-side-icon>
+      <v-toolbar-side-icon class="hidden-md-and-up" @click="toggleDrawer"></v-toolbar-side-icon>
       <v-btn flat to="/">
         <v-toolbar-title>퍼펙트 매칭</v-toolbar-title>
       </v-btn>
+
       <v-spacer></v-spacer>
       <v-toolbar-items class="menu hidden-sm-and-down">
         <v-btn flat to="/new/project">프로젝트 개설</v-btn>
@@ -17,10 +15,11 @@
       <div class="login">
         <login-modal></login-modal>
       </div>
-      <div class="loggedin_user" v-if="loggedin">
-        <v-btn icon>
+
+      <div class="loggedin_user" v-if="loggedIn">
+        <!-- <v-btn icon>
           <v-icon>notifications_none</v-icon>
-        </v-btn>
+        </v-btn>-->
 
         <v-btn icon>
           <v-icon>mail_outline</v-icon>
@@ -28,14 +27,12 @@
 
         <v-btn icon to="/my">
           <v-avatar :tile="false" :size="36" color="grey lighten-4">
-            <img
-              src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
-              alt="avatar"
-            />
+            <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar" />
           </v-avatar>
         </v-btn>
       </div>
     </v-toolbar>
+    <spinner></spinner>
     <v-navigation-drawer v-model="drawer" app dark temporary>
       <v-list dense>
         <v-list-tile to="/new/project">
@@ -59,7 +56,7 @@
             <v-icon>contact_mail</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>프로젝트 관리</v-list-tile-title>
+            <v-list-tile-title>나의 프로젝트</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -68,16 +65,23 @@
 </template>
 
 <script>
+import Spinner from "./Spinner.vue";
+import { mapGetters } from "vuex";
 import LoginModal from "./LoginModal.vue";
 export default {
   name: "navBar",
   components: {
+    Spinner,
     LoginModal
   },
+
+  computed: {
+    ...mapGetters({ loggedIn: "isAuthenticated" })
+  },
+
   data() {
     return {
-      drawer: null,
-      loggedin: false
+      drawer: null
     };
   },
 
@@ -98,5 +102,9 @@ export default {
 .menu {
   1color: #cfcfcf;
   color: #fff;
+}
+
+.loggedin_user {
+  display: flex;
 }
 </style>

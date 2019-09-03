@@ -7,7 +7,7 @@
           alt="avatar"
         />
       </v-avatar>
-      <div class="my_nick">후아 닉네임!</div>
+      <div class="my_nick">{{ member.memberNick }}</div>
       <v-spacer></v-spacer>
       <div class="create_date">하루 전</div>
     </v-card-title>
@@ -24,7 +24,14 @@
   </v-card>
 </template>
 <script>
-export default {};
+export default {
+  props: {
+    member: {
+      type: Object,
+      required: false
+    }
+  }
+};
 </script>
 
 <style scoped>

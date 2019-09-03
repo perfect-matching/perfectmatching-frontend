@@ -1,14 +1,21 @@
 import axios from "axios";
-// import { backend } from "./config.js";
+import { backend } from "./config.js";
 
-function authRequest(body) {
-  /*
-    body 양식
-    {
-        "username": "test1@email.com",
-        "password": "testpassword"
-    }
-     */
-  return axios.post("https://donghun-dev.kro.kr:8084/api/login", body);
+function authRequest(user) {
+  console.log("요청함수 진입! user: ", user);
+  return axios.post(`${backend.baseUrl}/login`, user);
 }
-export const comment = { authRequest };
+
+function authLogout(token) {
+  return axios.post(
+    `${backend.baseUrl}/login`,
+    {},
+    { headers: { Authorization: token } }
+  );
+  // return delete axios.defaults.headers.common["Authorization"];
+}
+
+export const auth = {
+  authRequest,
+  authLogout
+};

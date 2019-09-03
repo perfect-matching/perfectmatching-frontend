@@ -4,23 +4,8 @@
       <h3>지원자 목록:</h3>
 
       <ul class="applicant_list">
-        <li class="list_item">
-          <user-list-item></user-list-item>
-        </li>
-        <li class="list_item">
-          <user-list-item></user-list-item>
-        </li>
-        <li class="list_item">
-          <user-list-item></user-list-item>
-        </li>
-        <li class="list_item">
-          <user-list-item></user-list-item>
-        </li>
-        <li class="list_item">
-          <user-list-item></user-list-item>
-        </li>
-        <li class="list_item">
-          <user-list-item></user-list-item>
+        <li class="list_item" v-for="member in members" :key="member.memberIdx">
+          <user-list-item :member="member"></user-list-item>
         </li>
       </ul>
     </v-container>
@@ -32,6 +17,13 @@ import UserListItem from "./UserListItem.vue";
 export default {
   components: {
     UserListItem
+  },
+
+  props: {
+    members: {
+      type: Array,
+      required: false
+    }
   }
 };
 </script>

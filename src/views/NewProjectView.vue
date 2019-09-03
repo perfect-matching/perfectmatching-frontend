@@ -2,7 +2,7 @@
   <section class="new_project_section">
     <v-card>
       <h2 class="section_title">프로젝트 개설</h2>
-      <project-form></project-form>
+      <project-form :project="project"></project-form>
     </v-card>
   </section>
 </template>
@@ -12,6 +12,24 @@ import ProjectForm from "../components/ProjectForm/ProjectForm.vue";
 export default {
   components: {
     ProjectForm
+  },
+
+  data() {
+    return {
+      project: {
+        title: "",
+        location: "",
+        summary: "",
+        content: "",
+        socialUrl: "",
+        tags: [],
+        developerRecruits: 0,
+        designerRecruits: 0,
+        plannerRecruits: 0,
+        marketerRecruits: 0,
+        etcRecruits: 0
+      }
+    };
   }
 };
 </script>

@@ -18,6 +18,10 @@ export default {
 
   props: {
     source: String
+  },
+
+  beforeDestroy() {
+    this.$store.dispatch("AUTH_LOGOUT");
   }
 };
 </script>

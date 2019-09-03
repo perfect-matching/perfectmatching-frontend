@@ -3,13 +3,15 @@
     <div>
       <h2>프로젝트 관리</h2>
       <project-detail :project="project"></project-detail>
-      <user-list></user-list>
+      <user-list :members="members"></user-list>
     </div>
   </section>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import { store } from "../store/index.js";
+import bus from "../utils/bus.js";
 import ProjectDetail from "../components/ProjectManageView/ProjectDetail.vue";
 import UserList from "../components/ProjectManageView/UserList.vue";
 export default {
@@ -20,13 +22,24 @@ export default {
 
   computed: {
     ...mapGetters({
-      project: "fetchedMyProject"
+      project: "fetchedMyProject",
+      members: "fetchedMyProjectMembers"
     })
   },
 
-  created() {
-    const idx = this.$route.params.idx;
-    this.$store.dispatch("GET_MY_PROJECT_BY_IDX", { idx });
+  async beforeRouteEnter(to, from, next) {
+    bus.$emit("start:spinner");
+    try {
+      const idx = to.params.idx;
+
+      await store.dispatch("GET_MY_PROJECT_BY_IDX", { idx });
+      await store.dispatch("GET_MY_PROJECT_MEMBERS_BY_IDX", { idx });
+      bus.$emit("end:spinner");
+      next();
+    } catch {
+      console.log("to: ", to);
+      bus.$emit("end:spinner");
+    }
   }
 };
 </script>

@@ -44,14 +44,17 @@
       @blur="$v.project.content.$touch()"
       outline
     ></v-textarea>
+
     <date-picker
       v-model="project.startDate"
       :labelName="'프로젝트 시작일'"
     ></date-picker>
+
     <date-picker
       v-model="project.endDate"
       :labelName="'프로젝트 종료일'"
     ></date-picker>
+
     <v-layout>
       <v-spacer></v-spacer>
       <v-btn flat @click="submit">submit</v-btn>
@@ -62,6 +65,7 @@
 <script>
 import DatePicker from "./DatePicker.vue";
 import VueTagsInput from "@johmun/vue-tags-input";
+import { mapGetters } from "vuex";
 import { validationMixin } from "vuelidate";
 import { required, maxLength } from "vuelidate/lib/validators";
 
@@ -90,45 +94,19 @@ export default {
 
   data() {
     return {
-      tag: "",
-      autocompleteItems: [
-        {
-          id: 1,
-          text: "Spain"
-        },
-        {
-          id: 2,
-          text: "France"
-        },
-        {
-          id: 3,
-          text: "USA"
-        },
-        {
-          id: 4,
-          text: "Germany"
-        },
-        {
-          id: 5,
-          text: "China"
-        },
-        {
-          id: 6,
-          text: "한글"
-        },
-        {
-          id: 7,
-          text: "앱 기획"
-        },
-        {
-          id: 8,
-          text: "웹 기획"
-        }
-      ]
+      tag: ""
     };
   },
 
+  created() {
+    this.$store.dispatch("FETCH_PROJECT_TAGS");
+  },
+
   computed: {
+    ...mapGetters({
+      autocompleteItems: "fetchedTags"
+    }),
+
     filteredItems() {
       return this.autocompleteItems.filter(i => {
         return i.text.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;

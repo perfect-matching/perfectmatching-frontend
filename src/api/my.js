@@ -2,20 +2,28 @@
 import axios from "axios";
 import { backend } from "./config.js";
 
-function getUserProfileByIdx(userIdx) {
-  return axios.get(`${backend.baseUrl}/profile/${userIdx}`);
+function getUserProfileByIdx(userIdx, token) {
+  return axios.get(`${backend.baseUrl}/profile/${userIdx}`, {
+    headers: { Authorization: token }
+  });
 }
 
-function getUserSkillsByUserIdx(userIdx) {
-  return axios.get(`${backend.baseUrl}/profile/${userIdx}/skills`);
+function getUserSkillsByUserIdx(userIdx, token) {
+  return axios.get(`${backend.baseUrl}/profile/${userIdx}/skills`, {
+    headers: { Authorization: token }
+  });
 }
 
-function getUserProjectsByUserIdx(userIdx) {
-  return axios.get(`${backend.baseUrl}/profile/${userIdx}/projects`);
+function getUserProjectsByUserIdx(userIdx, token) {
+  return axios.get(`${backend.baseUrl}/profile/${userIdx}/projects`, {
+    headers: { Authorization: token }
+  });
 }
 
-function getDoneProjectsByUserIdx(userIdx) {
-  return axios.get(`${backend.baseUrl}/profile/${userIdx}/doneprojects`);
+function getDoneProjectsByUserIdx(userIdx, token) {
+  return axios.get(`${backend.baseUrl}/profile/${userIdx}/doneprojects`, {
+    headers: { Authorization: token }
+  });
 }
 
 export const my = {

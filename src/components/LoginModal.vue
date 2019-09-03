@@ -1,12 +1,20 @@
 <template>
   <v-dialog v-model="dialog" persistent max-width="600px">
     <template v-slot:activator="{ on }">
-      <v-btn flat color="black" dark v-on="on">로그인/회원가입</v-btn>
+      <v-btn flat color="black" dark v-on="on" v-show="!loggenIn"
+        >로그인/회원가입</v-btn
+      >
+      <v-btn flat color="black" dark @click="logout" v-show="loggenIn"
+        >로그아웃</v-btn
+      >
     </template>
     <v-card>
       <v-card-title class="modal_title">
         <div class="headline">로그인</div>
-        <div class="welcome_text">퍼펙트 매칭에 오신 걸 환영합니다!</div>
+        <div class="welcome_text">
+          입력안하고 로그인만 눌려도 로그인 되게 되어있음
+        </div>
+        <!-- <div class="welcome_text">퍼펙트 매칭에 오신 걸 환영합니다!</div> -->
       </v-card-title>
 
       <v-container>
@@ -61,6 +69,7 @@
   </v-dialog>
 </template>
 <script>
+import { mapGetters } from "vuex";
 import { validationMixin } from "vuelidate";
 import {
   required,
@@ -86,6 +95,9 @@ export default {
   }),
 
   computed: {
+    ...mapGetters({
+      loggenIn: "isAuthenticated"
+    }),
     emailErrors() {
       const errors = [];
       if (!this.$v.email.$dirty) return errors;
@@ -110,6 +122,12 @@ export default {
   methods: {
     submit() {
       this.$v.$touch();
+      const { email, password } = this;
+      this.$store.dispatch("AUTH_REQUEST", { email, password }).then(() => {
+        console.log("로그인 개성공!");
+        this.dialog = false;
+        this.$router.push("/");
+      });
     },
 
     clear() {
@@ -123,6 +141,20 @@ export default {
       this.email = "";
       this.password = "";
       this.dialog = false;
+    },
+
+    login() {
+      const { email, password } = this;
+      this.$store.dispatch("AUTH_REQUEST", { email, password }).then(() => {
+        console.log("로그인 개성공!");
+        this.$router.push("/");
+      });
+    },
+
+    logout() {
+      this.$store.dispatch("AUTH_LOGOUT").then(() => {
+        this.$router.push("/");
+      });
     }
   }
 };

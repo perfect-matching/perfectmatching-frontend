@@ -1,4 +1,5 @@
 import { userProfile } from "../../api/userProfile.js";
+import { handleException } from "../../utils/errorHandler.js";
 
 export const userProfileModule = {
   state: {
@@ -46,8 +47,9 @@ export const userProfileModule = {
 
   actions: {
     GET_USER_PROFILE_BY_IDX({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
       return userProfile
-        .getUserProfileByIdx(idx)
+        .getUserProfileByIdx(idx, token)
         .then(({ data }) => {
           commit("SET_USER_PROFILE", data);
         })
@@ -57,8 +59,9 @@ export const userProfileModule = {
     },
 
     GET_USER_SKILLS_BY_USER_IDX({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
       return userProfile
-        .getUserSkillsByUserIdx(idx)
+        .getUserSkillsByUserIdx(idx, token)
         .then(({ data }) => {
           const userSkills = data._embedded.datas;
           commit("SET_USER_SKILLS", userSkills);
@@ -67,8 +70,9 @@ export const userProfileModule = {
     },
 
     GET_USER_PROJECTS_BY_USER_IDX({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
       return userProfile
-        .getUserProjectsByUserIdx(idx)
+        .getUserProjectsByUserIdx(idx, token)
         .then(({ data }) => {
           const userProjects = data._embedded.datas;
           commit("SET_USER_PROJECTS", userProjects);
@@ -77,8 +81,9 @@ export const userProfileModule = {
     },
 
     GET_DONE_PROJECTS_BY_USER_IDX({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
       return userProfile
-        .getDoneProjectsByUserIdx(idx)
+        .getDoneProjectsByUserIdx(idx, token)
         .then(({ data }) => {
           const doneProjects = data._embedded.datas;
           commit("SET_DONE_PROJECTS", doneProjects);

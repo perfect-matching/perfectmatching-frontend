@@ -29,7 +29,9 @@
         요약정보입니다. 요약정보입니다. 요약정보입니다.
       </v-card-text>
       <div class="require_skill">
-        <v-chip v-for="tag in tags" :key="tag">{{ tag }}</v-chip>
+        <v-chip v-for="tag in project.tags" :key="tag.text">{{
+          tag.text
+        }}</v-chip>
       </div>
     </v-card>
   </v-hover>
@@ -81,6 +83,8 @@ export default {
 .project_card {
   position: relative;
   max-width: 410px;
+  min-height: 439px;
+  overflow-y: auto;
   border: 1px solid #dbdbdb;
 }
 
@@ -91,9 +95,8 @@ export default {
 }
 
 .deadline {
-  position: absolute;
   top: -15px;
-  right: 5px;
+
   background-color: #fafafa;
   padding: 0 3px 0 10px;
 }

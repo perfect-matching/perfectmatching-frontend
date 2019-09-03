@@ -1,10 +1,14 @@
 import { project } from "../../api/prorject.js";
+import { handleException } from "../../utils/errorHandler.js";
 
 export const projectModule = {
   state: {
     projects: [],
+    projectMembers: {},
     projectDetail: {},
-    nextUrl: ""
+    usedSkills: [],
+    nextUrl: "",
+    tags: []
   },
 
   getters: {
@@ -13,6 +17,13 @@ export const projectModule = {
     },
     fetchedProjectDetail(state) {
       return state.projectDetail;
+    },
+    fetchedTags(state) {
+      return state.tags;
+    },
+
+    fetchedUsedSkills(state) {
+      return state.usedSkills;
     }
   },
 
@@ -29,10 +40,29 @@ export const projectModule = {
     ADD_MORE_PROJECTS(state, projects) {
       state.projects = state.projects.concat(projects.datas);
       state.nextUrl = projects.nextUrl;
+    },
+
+    SET_RPOJECT_TAGS(state, tags) {
+      state.tags = tags;
+    },
+
+    SET_PROJECT_MEMBERS(state, members) {
+      state.projectMembers = members;
+    },
+
+    SET_USED_SKILLS(state, skills) {
+      state.usedSkills = skills;
     }
   },
 
   actions: {
+    POST_PROJECT(project) {
+      return project
+        .postProject(project)
+        .then()
+        .catch();
+    },
+
     FETCH_PROJECTS({ commit }) {
       return project
         .getProjects()
@@ -49,13 +79,14 @@ export const projectModule = {
     },
 
     FETCH_PROJECT_BY_IDX({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
       return project
-        .getProjectByIdx(idx)
+        .getProjectByIdx(idx, token)
         .then(({ data }) => {
           commit("SET_PROJECT_DETAIL", data);
         })
         .catch(err => {
-          console.log(err);
+          handleException(err);
         });
     },
 
@@ -79,6 +110,45 @@ export const projectModule = {
           };
 
           commit("SET_PROJECTS", projects);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
+    FETCH_PROJECT_MEMBERS({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .getProjectMemebersByIdx(idx, token)
+        .then(({ data }) => {
+          const members = data._embedded.datas;
+          commit("SET_PROJECT_MEMBERS", members);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
+    FETCH_PROJECT_TAGS({ commit }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .getProjectTags(token)
+        .then(({ data }) => {
+          const tags = data._embedded.datas;
+          commit("SET_RPOJECT_TAGS", tags);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
+    FETCH_PROJECT_USED_SKILLS({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .getProjectUsedSkillsByIdx(idx, token)
+        .then(({ data }) => {
+          const skills = data._embedded.datas;
+          commit("SET_USED_SKILLS", skills);
         })
         .catch(err => {
           console.log(err);
