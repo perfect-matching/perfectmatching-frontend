@@ -6,6 +6,7 @@ export const projectModule = {
     projects: [],
     projectMembers: {},
     projectDetail: {},
+    usedSkills: [],
     nextUrl: "",
     tags: []
   },
@@ -19,6 +20,10 @@ export const projectModule = {
     },
     fetchedTags(state) {
       return state.tags;
+    },
+
+    fetchedUsedSkills(state) {
+      return state.usedSkills;
     }
   },
 
@@ -43,6 +48,10 @@ export const projectModule = {
 
     SET_PROJECT_MEMBERS(state, members) {
       state.projectMembers = members;
+    },
+
+    SET_USED_SKILLS(state, skills) {
+      state.usedSkills = skills;
     }
   },
 
@@ -127,6 +136,19 @@ export const projectModule = {
         .then(({ data }) => {
           const tags = data._embedded.datas;
           commit("SET_RPOJECT_TAGS", tags);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
+    FETCH_PROJECT_USED_SKILLS({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .getProjectUsedSkillsByIdx(idx, token)
+        .then(({ data }) => {
+          const skills = data._embedded.datas;
+          commit("SET_USED_SKILLS", skills);
         })
         .catch(err => {
           console.log(err);

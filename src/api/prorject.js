@@ -41,6 +41,12 @@ function getProjectMemebersByIdx(idx, token) {
   });
 }
 
+function getProjectUsedSkillsByIdx(idx, token) {
+  return axios.get(`${backend.baseUrl}/usedskill/${idx}`, {
+    headers: { Authorization: token }
+  });
+}
+
 export const project = {
   postProject,
   getProjects,
@@ -49,5 +55,6 @@ export const project = {
   getProjectsWithQueries,
   getDoneProjectByIdx,
   getProjectTags,
-  getProjectMemebersByIdx
+  getProjectMemebersByIdx,
+  getProjectUsedSkillsByIdx
 };

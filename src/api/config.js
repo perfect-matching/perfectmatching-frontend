@@ -1,3 +1,5 @@
-export const backend = {
+const backend = {
   baseUrl: process.env.VUE_APP_API_URL
 };
+
+export { backend };

@@ -14,7 +14,9 @@
 
     <div class="require_skill">
       <div class="skill_title content_title">기술 스택</div>
-      <v-chip v-for="tag in tags" :key="tag">{{ tag }}</v-chip>
+      <v-chip v-for="skill in usedSkills" :key="skill.idx">{{
+        skill.text
+      }}</v-chip>
     </div>
 
     <div class="project_detail">
@@ -30,21 +32,15 @@ export default {
     project: {
       type: Object,
       required: true
+    },
+
+    usedSkills: {
+      type: Array,
+      required: false
     }
   },
   data: () => ({
-    content: "",
-    tags: [
-      "Work",
-      "Home Improvement",
-      "Vacation",
-      "Food",
-      "Drawers",
-      "Shopping",
-      "Art",
-      "Tech",
-      "Creative Writing"
-    ]
+    content: ""
   }),
 
   methods: {
