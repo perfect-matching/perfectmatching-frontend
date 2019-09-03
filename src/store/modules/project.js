@@ -5,7 +5,8 @@ export const projectModule = {
   state: {
     projects: [],
     projectDetail: {},
-    nextUrl: ""
+    nextUrl: "",
+    tags: []
   },
 
   getters: {
@@ -14,6 +15,9 @@ export const projectModule = {
     },
     fetchedProjectDetail(state) {
       return state.projectDetail;
+    },
+    fetchedTags(state) {
+      return state.tags;
     }
   },
 
@@ -30,6 +34,10 @@ export const projectModule = {
     ADD_MORE_PROJECTS(state, projects) {
       state.projects = state.projects.concat(projects.datas);
       state.nextUrl = projects.nextUrl;
+    },
+
+    SET_RPOJECT_TAGS(state, tags) {
+      state.tags = tags;
     }
   },
 
@@ -92,6 +100,17 @@ export const projectModule = {
         .catch(err => {
           console.log(err);
         });
+    },
+
+    FETCH_PROJECT_TAGS({ commit }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .getProjectTags(token)
+        .then(({ data }) => {
+          const tags = data._embedded.datas;
+          commit("SET_RPOJECT_TAGS", tags);
+        })
+        .catch();
     }
   }
 };

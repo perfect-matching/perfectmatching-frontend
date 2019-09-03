@@ -29,11 +29,18 @@ function postProject(project) {
   return axios.post(`${backend.baseUrl}/project`, project);
 }
 
+function getProjectTags(token) {
+  return axios.get(`${backend.baseUrl}/tags`, {
+    headers: { Authorization: token }
+  });
+}
+
 export const project = {
   postProject,
   getProjects,
   getNextProjects,
   getProjectByIdx,
   getProjectsWithQueries,
-  getDoneProjectByIdx
+  getDoneProjectByIdx,
+  getProjectTags
 };

@@ -16,7 +16,7 @@ import DoneProjectView from "../views/DoneProjectView.vue";
 import DoneProjectEditView from "../views/DoneProjectEditView.vue";
 import DoneProjectStateChangeView from "../views/DoneProjectStateChangeView.vue";
 import ErrorView from "../views/ErrorView.vue";
-
+import bus from "../utils/bus.js";
 import { store } from "../store/index.js";
 import { needLogin } from "./guards.js";
 
@@ -45,7 +45,11 @@ export const router = new Router({
       name: "projectList",
       component: ProjectListView,
       beforeEnter: (to, from, next) => {
-        store.dispatch("FETCH_PROJECTS").then(() => next());
+        bus.$emit("start:spinner");
+        store.dispatch("FETCH_PROJECTS").then(() => {
+          bus.$emit("end:spinner");
+          next();
+        });
       }
     },
     {
