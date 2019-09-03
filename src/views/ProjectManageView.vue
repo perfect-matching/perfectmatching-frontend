@@ -10,6 +10,8 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { store } from "../store/index.js";
+import bus from "../utils/bus.js";
 import ProjectDetail from "../components/ProjectManageView/ProjectDetail.vue";
 import UserList from "../components/ProjectManageView/UserList.vue";
 export default {
@@ -24,9 +26,19 @@ export default {
     })
   },
 
-  created() {
-    const idx = this.$route.params.idx;
-    this.$store.dispatch("GET_MY_PROJECT_BY_IDX", { idx });
+  async beforeRouteEnter(to, from, next) {
+    bus.$emit("start:spinner");
+    try {
+      const idx = to.params.idx;
+
+      await store.dispatch("GET_MY_PROJECT_BY_IDX", { idx });
+
+      bus.$emit("end:spinner");
+      next();
+    } catch {
+      console.log("to: ", to);
+      bus.$emit("end:spinner");
+    }
   }
 };
 </script>

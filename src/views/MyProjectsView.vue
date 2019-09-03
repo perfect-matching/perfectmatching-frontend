@@ -30,8 +30,8 @@ export default {
     try {
       const idx = store.state.myModule.myProfile.userIdx;
 
-      store.dispatch("GET_MY_DOING_PROJECTS_BY_IDX", { idx });
-      store.dispatch("GET_MY_DONE_PROJECTS_BY_IDX", { idx });
+      await store.dispatch("GET_MY_DOING_PROJECTS_BY_IDX", { idx });
+      await store.dispatch("GET_MY_DONE_PROJECTS_BY_IDX", { idx });
       bus.$emit("end:spinner");
       next();
     } catch {

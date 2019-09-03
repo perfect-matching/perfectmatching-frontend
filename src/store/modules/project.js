@@ -110,7 +110,9 @@ export const projectModule = {
           const tags = data._embedded.datas;
           commit("SET_RPOJECT_TAGS", tags);
         })
-        .catch();
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
