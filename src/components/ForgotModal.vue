@@ -22,7 +22,9 @@
           ></v-text-field>
 
           <div class="form_buttons">
-            <v-btn flat color="secondary" dark @click="submit">이메일 전송</v-btn>
+            <v-btn flat color="secondary" dark @click="submit"
+              >이메일 전송</v-btn
+            >
             <v-btn flat color="secondary" dark @click="clear">취소</v-btn>
           </div>
         </form>
