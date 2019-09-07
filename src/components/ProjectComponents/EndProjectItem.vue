@@ -14,7 +14,9 @@
 
       <div class="require_skill">
         <div class="skill_title content_title">기술 스택</div>
-        <v-chip v-for="tag in tags" :key="tag">{{ tag }}</v-chip>
+        <v-chip v-for="skill in project.usedSkills" :key="skill.idx">{{
+          skill.text
+        }}</v-chip>
       </div>
 
       <div class="github">
