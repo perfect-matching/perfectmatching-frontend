@@ -67,7 +67,7 @@ export const projectModule = {
           commit("SET_PROJECTS", projects);
         })
         .catch(err => {
-          console.log(err);
+          handleException(err);
         });
     },
 
@@ -151,23 +151,23 @@ export const projectModule = {
     POST_NEW_PROJECT({ commit }, { postProject }) {
       console.log("액션 프로젝트", postProject);
       const result = {
-        content: "fewaf",
+        title: "프로젝트 인원을 모집femaklfaewmk합니다.",
+        location: "서울",
+        summary: "~ 이러한 프로젝트의 인원을 찾고 있어요.",
+        content: "edwfew",
+        developerRecruits: 2,
         designerRecruits: 1,
-        developerRecruits: 0,
-        etcRecruits: 2,
-        location: "부산",
-        marketerRecruits: 2,
-        plannerRecruits: 1,
-        socialUrl: "",
-        summary: "awer",
-        tags: [],
-        title: "feafaew"
+        plannerRecruits: 4,
+        marketerRecruits: 4,
+        etcRecruits: 4,
+        socialUrl: "https://github.com/testUser/testProject",
+        tags: []
       };
+
       const token = localStorage.getItem("user-token");
       return project
         .postNewProject(result, token)
         .then(() => {
-          commit();
           console.log("성공@!!@");
         })
         .catch(err => {

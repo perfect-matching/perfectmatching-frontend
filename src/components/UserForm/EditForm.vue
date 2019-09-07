@@ -109,6 +109,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import { validationMixin } from "vuelidate";
 import VueTagsInput from "@johmun/vue-tags-input";
 import {
@@ -139,7 +140,18 @@ export default {
 
   validations: {
     myProfile: {
-      email: { required, email, maxLength: maxLength(50) },
+      email: {
+        required,
+        email,
+        maxLength: maxLength(50)
+        // async isUnique(value) {
+        //   // standalone validator ideally should not assume a field is required
+        //   if (value === "") return true;
+
+        //   // simulate async call, fail for all logins with even length
+        //   return this.$store.dispatch("CHECK_EMAIL", { email: value });
+        // }
+      },
       nickname: { required, maxLength: maxLength(20) },
       password: { required, minLength: minLength(8), strength },
       repeatPassword: {
@@ -158,47 +170,16 @@ export default {
   data: () => ({
     valid: false,
     showPassword: false,
-    repeatPassword: "",
     tag: "",
-    autocompleteItems: [
-      {
-        id: 1,
-        text: "Spain"
-      },
-      {
-        id: 2,
-        text: "France"
-      },
-      {
-        id: 3,
-        text: "USA"
-      },
-      {
-        id: 4,
-        text: "Germany"
-      },
-      {
-        id: 5,
-        text: "China"
-      },
-      {
-        id: 6,
-        text: "한글"
-      },
-      {
-        id: 7,
-        text: "앱 기획"
-      },
-      {
-        id: 8,
-        text: "웹 기획"
-      }
-    ],
 
     checkbox: false
   }),
 
   computed: {
+    ...mapGetters({
+      autocompleteItems: "fetchedDbUserSkills"
+    }),
+
     filteredItems() {
       return this.autocompleteItems.filter(i => {
         return i.text.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
@@ -276,7 +257,17 @@ export default {
       if (this.$v.$invalid) {
         console.log("형식 불일치");
       } else {
-        console.log("제출!!:");
+        const user = {
+          email: this.myProfile.email,
+          password: this.myProfile.password,
+          confirmPassword: this.myProfile.repeatPassword,
+          nickname: this.myProfile.nickname,
+          summary: this.myProfile.summary, // 현재 가입부분 description 으로 되어있어서 오류남 백엔드가 바뀌면 오류 안날듯
+          investTime: this.myProfile.investTime,
+          userSkills: []
+        };
+        console.log("제출!!:", user);
+        this.$store.dispatch("JOIN_USER", { user });
       }
     },
 
@@ -284,6 +275,10 @@ export default {
       this.$v.$reset();
       this.clearDatas();
     }
+  },
+
+  created() {
+    this.$store.dispatch("FETCH_USER_SKILLS");
   }
 };
 </script>
