@@ -268,8 +268,20 @@ export default {
       if (this.$v.$invalid) {
         console.log("형식 불일치");
       } else {
-        console.log("제출!!:", this.project);
-        this.$store.dispatch("POST_NEW_PROJECT", { postProject: this.project });
+        const postProject = {
+          title: this.project.title,
+          location: this.project.location,
+          summary: this.project.summary,
+          content: this.project.content,
+          developerRecruits: 1,
+          designerRecruits: 2,
+          plannerRecruits: 1,
+          marketerRecruits: 2,
+          etcRecruits: 2,
+          socialUrl: "https://github.com/testUser/testProject",
+          tags: []
+        };
+        this.$store.dispatch("POST_NEW_PROJECT", { postProject });
       }
     },
 
