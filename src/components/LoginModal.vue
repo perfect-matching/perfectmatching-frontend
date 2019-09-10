@@ -56,12 +56,8 @@
         <v-spacer></v-spacer>
         <div class="find_actions">
           <small class="action_item">
-            가입한 이메일을 잊으셨습니까?
-            <a href>이메일 찾기</a>
-          </small>
-          <small class="action_item">
             비밀번호을 잊으셨습니까?
-            <a href>비밀번호 찾기</a>
+            <forgot-modal></forgot-modal>
           </small>
         </div>
       </v-card-actions>
@@ -71,6 +67,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { validationMixin } from "vuelidate";
+import ForgotModal from "./ForgotModal.vue";
 import {
   required,
   minLength,
@@ -79,6 +76,10 @@ import {
 } from "vuelidate/lib/validators";
 
 export default {
+  components: {
+    ForgotModal
+  },
+
   mixins: [validationMixin],
 
   validations: {

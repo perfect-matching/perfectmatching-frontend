@@ -56,13 +56,6 @@ export const projectModule = {
   },
 
   actions: {
-    POST_PROJECT(project) {
-      return project
-        .postProject(project)
-        .then()
-        .catch();
-    },
-
     FETCH_PROJECTS({ commit }) {
       return project
         .getProjects()
@@ -74,7 +67,7 @@ export const projectModule = {
           commit("SET_PROJECTS", projects);
         })
         .catch(err => {
-          console.log(err);
+          handleException(err);
         });
     },
 
@@ -152,6 +145,20 @@ export const projectModule = {
         })
         .catch(err => {
           console.log(err);
+        });
+    },
+
+    POST_NEW_PROJECT({ commit }, { postProject }) {
+      console.log("액션 프로젝트", postProject);
+
+      const token = localStorage.getItem("user-token");
+      return project
+        .postNewProject(postProject, token)
+        .then(() => {
+          console.log("성공@!!@");
+        })
+        .catch(err => {
+          console.log("어?", err);
         });
     }
   }

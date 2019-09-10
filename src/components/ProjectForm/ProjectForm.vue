@@ -126,7 +126,19 @@
 import VueTagsInput from "@johmun/vue-tags-input";
 import { mapGetters } from "vuex";
 import { validationMixin } from "vuelidate";
-import { required, maxLength } from "vuelidate/lib/validators";
+import { required, maxLength, helpers } from "vuelidate/lib/validators";
+
+const minMember = project => {
+  return !!(
+    project.developerRecruits +
+      project.designerRecruits +
+      project.plannerRecruits +
+      project.marketerRecruits +
+      project.etcRecruits +
+      project.etcRecruits <=
+    0
+  );
+};
 
 export default {
   props: {
@@ -195,30 +207,6 @@ export default {
       return errors;
     },
 
-    positionErrors() {
-      const errors = [];
-
-      let positions = [
-        this.developer,
-        this.designer,
-        this.planner,
-        this.marketer
-      ];
-
-      let counter = 0;
-      positions.forEach(position => {
-        if (position === null) {
-          counter++;
-        } else {
-          return errors;
-        }
-      });
-
-      if (counter === 4) errors.push("직군을 최소 1개 선택해주세요");
-
-      return errors;
-    },
-
     titleErrors() {
       const errors = [];
       if (!this.$v.project.title.$dirty) return errors;
@@ -254,20 +242,24 @@ export default {
       return errors;
     },
 
-    endDateErrors() {
+    recruitsErrors() {
       const errors = [];
+
+      !this.$v.project.minMember &&
+        errors.push("최소 1명 이상의 팀원이 있어야 합니다.");
+
       return errors;
     }
   },
 
   methods: {
     clearDatas() {
-      // this.title = "";
-      // this.summary = "";
-      // this.content = "";
-      // this.location = null;
-      // this.tag = "";
-      // this.tags = [];
+      this.project.title = "";
+      this.project.summary = "";
+      this.project.content = "";
+      this.project.location = null;
+      this.project.tag = "";
+      this.project.tags = [];
     },
 
     submit() {
@@ -276,15 +268,20 @@ export default {
       if (this.$v.$invalid) {
         console.log("형식 불일치");
       } else {
-        const project = {
-          title: this.title,
-          summary: this.summary,
-          content: this.content,
-          location: this.location,
-          tag: this.tag,
-          tags: this.tags
+        const postProject = {
+          title: this.project.title,
+          location: this.project.location,
+          summary: this.project.summary,
+          content: this.project.content,
+          developerRecruits: 1,
+          designerRecruits: 2,
+          plannerRecruits: 1,
+          marketerRecruits: 2,
+          etcRecruits: 2,
+          socialUrl: "https://github.com/testUser/testProject",
+          tags: []
         };
-        console.log("제출!!:", project);
+        this.$store.dispatch("POST_NEW_PROJECT", { postProject });
       }
     },
 
