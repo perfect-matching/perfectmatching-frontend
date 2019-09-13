@@ -4,7 +4,8 @@ import { handleException } from "../../utils/errorHandler.js";
 export const authModule = {
   state: {
     token: localStorage.getItem("user-token") || "",
-    status: ""
+    status: "",
+    loginModal: false
   },
 
   getters: {
@@ -13,6 +14,10 @@ export const authModule = {
     },
     authStatus(state) {
       return state.status;
+    },
+
+    loginModalStatus(state) {
+      return state.loginModal;
     }
   },
 
@@ -33,6 +38,10 @@ export const authModule = {
     AUTH_LOGOUT(state) {
       state.status = "";
       state.token = "";
+    },
+
+    TOGGLE_LOGIN_MODAL_STATUS(state) {
+      state.loginModal = !state.loginModal;
     }
   },
 
@@ -74,6 +83,10 @@ export const authModule = {
 
         resolve();
       });
+    },
+
+    TOGGLE_LOGIN_MODAL({ commit }) {
+      commit("TOGGLE_LOGIN_MODAL_STATUS");
     }
   }
 };

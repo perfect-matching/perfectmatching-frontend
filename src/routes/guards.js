@@ -1,14 +1,21 @@
 import { store } from "../store/index.js";
 
+let entryUrl = null;
+
 async function needLogin(to, from, next) {
   if (store.state.authModule.token) {
-    console.log("to: ", to);
-    console.log("너 로그인한 유저구나!");
-
-    next();
+    if (entryUrl) {
+      const url = entryUrl;
+      entryUrl = null;
+      next(url);
+    } else {
+      next();
+    }
   } else {
     console.log("로그인 하렴");
-    next("/home");
+    entryUrl = to.path;
+    store.dispatch("TOGGLE_LOGIN_MODAL");
+    // next("/home");
   }
 }
 

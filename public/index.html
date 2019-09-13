@@ -7,10 +7,6 @@
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
     />
-    <meta
-      name="google-site-verification"
-      content="EHrY8zUK0GlctqIt-INq4scUmSdHyprRtUKoXhoHtQ4"
-    />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title>퍼펙트매칭</title>
     <link
@@ -36,4 +32,18 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=UA-103959984-2"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "UA-103959984-2");
+  </script>
 </html>

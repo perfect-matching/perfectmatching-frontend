@@ -5,17 +5,14 @@
       <h3 class="article_title news_header">새소식</h3>
       <carousel></carousel>
     </article>
-    <article class="new_projects">
-      <new-project-list></new-project-list>
-    </article>
   </section>
 </template>
 
 <script>
 import Carousel from "../components/HomeView/Carousel.vue";
-import NewProjectList from "../components/HomeView/NewProjectList.vue";
+
 export default {
-  components: { Carousel, NewProjectList }
+  components: { Carousel }
 };
 </script>
 <style scoped>

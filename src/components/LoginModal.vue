@@ -1,10 +1,16 @@
 <template>
-  <v-dialog v-model="dialog" persistent max-width="600px">
+  <v-dialog v-model="loginModalStatus" persistent max-width="600px">
     <template v-slot:activator="{ on }">
-      <v-btn flat color="black" dark v-on="on" v-show="!loggenIn"
+      <v-btn
+        flat
+        color="black"
+        dark
+        v-on="on"
+        @click="openModal"
+        v-show="!loggedIn"
         >로그인/회원가입</v-btn
       >
-      <v-btn flat color="black" dark @click="logout" v-show="loggenIn"
+      <v-btn flat color="black" dark @click="logout" v-show="loggedIn"
         >로그아웃</v-btn
       >
     </template>
@@ -88,7 +94,6 @@ export default {
   },
 
   data: () => ({
-    dialog: false,
     valid: false,
     showPassword: false,
     email: "",
@@ -97,7 +102,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      loggenIn: "isAuthenticated"
+      loggedIn: "isAuthenticated",
+      loginModalStatus: "loginModalStatus"
     }),
     emailErrors() {
       const errors = [];
@@ -126,7 +132,7 @@ export default {
       const { email, password } = this;
       this.$store.dispatch("AUTH_REQUEST", { email, password }).then(() => {
         console.log("로그인 개성공!");
-        this.dialog = false;
+        this.$store.dispatch("TOGGLE_LOGIN_MODAL");
         this.$router.push("/");
       });
     },
@@ -135,19 +141,24 @@ export default {
       this.$v.$reset();
       this.email = "";
       this.password = "";
-      this.dialog = false;
+      this.$store.dispatch("TOGGLE_LOGIN_MODAL");
     },
 
     clickedJoin() {
       this.email = "";
       this.password = "";
-      this.dialog = false;
+      this.$store.dispatch("TOGGLE_LOGIN_MODAL");
+    },
+
+    openModal() {
+      this.$store.dispatch("TOGGLE_LOGIN_MODAL");
     },
 
     login() {
       const { email, password } = this;
       this.$store.dispatch("AUTH_REQUEST", { email, password }).then(() => {
         console.log("로그인 개성공!");
+        this.$store.dispatch("TOGGLE_LOGIN_MODAL");
         this.$router.push("/");
       });
     },
