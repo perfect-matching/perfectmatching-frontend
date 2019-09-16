@@ -64,11 +64,7 @@
       @blur="$v.myProfile.summary.$touch()"
     ></v-textarea>
 
-    <v-text-field
-      outline
-      v-model="myProfile.socialUrl"
-      label="소셜 URL"
-    ></v-text-field>
+    <v-text-field outline v-model="myProfile.socialUrl" label="소셜 URL"></v-text-field>
 
     <vue-tags-input
       class="tag_input"
@@ -81,12 +77,7 @@
 
     <div class="time">
       <v-subheader class="pl-0">투자시간(?)</v-subheader>
-      <v-slider
-        v-model="myProfile.investTime"
-        thumb-label="always"
-        min="0"
-        max="24"
-      ></v-slider>
+      <v-slider v-model="myProfile.investTime" thumb-label="always" min="0" max="24"></v-slider>
       <div>
         저는 하루 중
         <span style="color:red;">{{ myProfile.investTime }}시간</span> 정도
@@ -143,16 +134,27 @@ export default {
       email: {
         required,
         email,
-        maxLength: maxLength(50)
-        // async isUnique(value) {
-        //   // standalone validator ideally should not assume a field is required
-        //   if (value === "") return true;
+        maxLength: maxLength(50),
+        async isUnique(value) {
+          // standalone validator ideally should not assume a field is required
+          if (value === "") return true;
 
-        //   // simulate async call, fail for all logins with even length
-        //   return this.$store.dispatch("CHECK_EMAIL", { email: value });
-        // }
+          // simulate async call, fail for all logins with even length
+          return this.$store.dispatch("CHECK_EMAIL", { email: value });
+        }
       },
-      nickname: { required, maxLength: maxLength(20) },
+
+      nickname: {
+        required,
+        maxLength: maxLength(20),
+        async isUnique(value) {
+          // standalone validator ideally should not assume a field is required
+          if (value === "") return true;
+
+          // simulate async call, fail for all logins with even length
+          return this.$store.dispatch("CHECK_NICK", { nick: value });
+        }
+      },
       password: { required, minLength: minLength(8), strength },
       repeatPassword: {
         sameAsPassword: sameAs("password")
@@ -195,6 +197,8 @@ export default {
         errors.push("이메일 형식이 틀렸습니다.");
       !this.$v.myProfile.email.required &&
         errors.push("이메일을 입력해주세요.");
+      !this.$v.myProfile.email.isUnique &&
+        errors.push("이미 존재하는 이메일입니다.");
       return errors;
     },
 
@@ -212,6 +216,8 @@ export default {
         errors.push("닉네임은 최대 20자 이내이어야 합니다.");
       !this.$v.myProfile.nickname.required &&
         errors.push("닉네임을 입력해주세요.");
+      !this.$v.myProfile.nickname.isUnique &&
+        errors.push("이미 존재하는 닉네임입니다.");
       return errors;
     },
 
