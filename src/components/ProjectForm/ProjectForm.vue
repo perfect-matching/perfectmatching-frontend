@@ -273,15 +273,17 @@ export default {
           location: this.project.location,
           summary: this.project.summary,
           content: this.project.content,
-          developerRecruits: 1,
-          designerRecruits: 2,
-          plannerRecruits: 1,
-          marketerRecruits: 2,
-          etcRecruits: 2,
-          socialUrl: "https://github.com/testUser/testProject",
-          tags: []
+          developerRecruits: parseInt(this.project.developerRecruits, 10),
+          designerRecruits: parseInt(this.project.designerRecruits, 10),
+          plannerRecruits: parseInt(this.project.plannerRecruits, 10),
+          marketerRecruits: parseInt(this.project.marketerRecruits, 10),
+          etcRecruits: parseInt(this.project.etcRecruits, 10),
+          socialUrl: this.project.socialUrl,
+          tags: this.project.tags
         };
-        this.$store.dispatch("POST_NEW_PROJECT", { postProject });
+        this.$store.dispatch("POST_NEW_PROJECT", { postProject }).then(() => {
+          this.$router.push("/projects");
+        });
       }
     },
 

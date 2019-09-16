@@ -1,4 +1,5 @@
 import { auth } from "../../api/login.js";
+import Swal from "sweetalert2";
 import { handleException } from "../../utils/errorHandler.js";
 
 export const authModule = {
@@ -52,8 +53,8 @@ export const authModule = {
         commit("AUTH_REQUEST");
         auth
           .authRequest({
-            username: "test1@email.com",
-            password: "testpassword"
+            username: email,
+            password: password
           })
           .then(res => {
             const token = res.headers.authorization;
@@ -63,7 +64,12 @@ export const authModule = {
             resolve(res);
           })
           .catch(err => {
-            commit("AUTH_ERROR", err);
+            Swal.fire({
+              title: "로그인 실패",
+              text: "이메일 혹은 패스워드를 확인해주세요.",
+              type: "error",
+              confirmButtonText: "확인"
+            });
             localStorage.removeItem("user-token"); // 로그인 실패시 가능성 있는 모든 토큰 삭제
             reject(err);
           });

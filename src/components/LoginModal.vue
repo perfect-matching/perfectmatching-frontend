@@ -47,7 +47,14 @@
             @click:append="showPassword = !showPassword"
           ></v-text-field>
           <div class="form_buttons">
-            <v-btn flat color="secondary" dark @click="submit">로그인</v-btn>
+            <v-btn
+              flat
+              color="secondary"
+              dark
+              @click="submit"
+              @keyup.enter="submit"
+              >로그인</v-btn
+            >
             <v-btn flat color="secondary" dark @click="clear">취소</v-btn>
             <div>
               퍼펙트 매칭이 처음이신가요?
@@ -105,6 +112,7 @@ export default {
       loggedIn: "isAuthenticated",
       loginModalStatus: "loginModalStatus"
     }),
+
     emailErrors() {
       const errors = [];
       if (!this.$v.email.$dirty) return errors;
@@ -131,7 +139,12 @@ export default {
       this.$v.$touch();
       const { email, password } = this;
       this.$store.dispatch("AUTH_REQUEST", { email, password }).then(() => {
-        console.log("로그인 개성공!");
+        this.$_swal.fire({
+          title: "로그인 완료!",
+          text: "퍼펙트 매칭에 오신 걸 환영합니다.",
+          type: "success",
+          confirmButtonText: "확인"
+        });
         this.$store.dispatch("TOGGLE_LOGIN_MODAL");
         this.$router.push("/");
       });
@@ -157,7 +170,6 @@ export default {
     login() {
       const { email, password } = this;
       this.$store.dispatch("AUTH_REQUEST", { email, password }).then(() => {
-        console.log("로그인 개성공!");
         this.$store.dispatch("TOGGLE_LOGIN_MODAL");
         this.$router.push("/");
       });

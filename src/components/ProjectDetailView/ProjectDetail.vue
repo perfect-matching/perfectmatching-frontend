@@ -1,9 +1,9 @@
 <template>
   <div class="prject_info" grow>
     <v-layout class="project_status_container" align-center justify-center>
-      <v-chip class="status" color="primary" text-color="white">
-        {{ project.status }}
-      </v-chip>
+      <v-chip class="status" color="primary" text-color="white">{{
+        project.status
+      }}</v-chip>
       <div class="create_date">
         {{ setDateFormat(project.startDate) }} -
         {{ setDateFormat(project.endDate) }}
@@ -29,7 +29,7 @@
         기타:{{ project.currentEtc }}/{{ project.etcRecruits }}
       </v-layout>
     </div>
-
+    <div class="project_summary">{{ project.summary }}</div>
     <div class="project_content">{{ project.content }}</div>
     <div class="leader_info">
       <div>팀장</div>
@@ -107,7 +107,8 @@ img {
   padding: 0 7px;
 }
 
-.project_content {
+.project_content,
+.project_summary {
   padding: 40px 18px;
 }
 
