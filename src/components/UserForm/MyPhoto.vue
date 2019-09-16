@@ -12,16 +12,15 @@
         </div>
         <div class="user_nick">user nick name</div>
         <div class="info_change_btn">
-          <v-btn
-            :loading="loading"
-            :disabled="loading"
-            color="blue-grey"
-            class="ma-2 white--text"
-            @click="loader = 'loading3'"
+          <v-btn depressed small @click="$refs.inputUpload.click()"
+            >사진 변경</v-btn
           >
-            Upload
-            <v-icon right dark>mdi-cloud-upload</v-icon>
-          </v-btn>
+          <input
+            v-show="false"
+            ref="inputUpload"
+            type="file"
+            @change="yourFunction"
+          />
           <!-- <v-btn depressed small>사진 변경</v-btn> -->
         </div>
       </v-flex>
