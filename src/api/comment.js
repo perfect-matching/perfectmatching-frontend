@@ -6,4 +6,17 @@ function getCommentsByProejectIdx(idx, token) {
     headers: { Authorization: token }
   });
 }
-export const comment = { getCommentsByProejectIdx };
+
+function postCommentAtProject(content, token) {
+  return axios.post(
+    `${backend.baseUrl}/comment`,
+    { content },
+    {
+      headers: { Authorization: token }
+    }
+  );
+}
+export const comment = {
+  getCommentsByProejectIdx,
+  postCommentAtProject
+};

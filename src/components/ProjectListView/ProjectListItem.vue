@@ -12,7 +12,9 @@
         <div class="leader_name">{{ project.leader }}</div>
       </v-layout>
 
-      <v-card-title class="headline">{{ project.title }}</v-card-title>
+      <v-card-title class="headline justify-center">
+        {{ project.title }}
+      </v-card-title>
       <v-chip
         class="status"
         :color="setChipColor(project.status)"
@@ -29,9 +31,9 @@
         요약정보입니다. 요약정보입니다. 요약정보입니다.
       </v-card-text>
       <div class="require_skill">
-        <v-chip v-for="tag in project.tags" :key="tag.text">{{
-          tag.text
-        }}</v-chip>
+        <v-chip v-for="tag in project.tags" :key="tag.text">
+          {{ tag.text }}
+        </v-chip>
       </div>
     </v-card>
   </v-hover>
@@ -90,7 +92,6 @@ export default {
 
 .headline {
   padding-bottom: 0;
-  text-align: center;
   font-weight: bold;
 }
 
