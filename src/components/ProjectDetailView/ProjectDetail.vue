@@ -1,9 +1,9 @@
 <template>
   <div class="prject_info" grow>
     <v-layout class="project_status_container" align-center justify-center>
-      <v-chip class="status" color="primary" text-color="white">{{
-        project.status
-      }}</v-chip>
+      <v-chip class="status" color="primary" text-color="white">
+        {{ project.status }}
+      </v-chip>
       <div class="create_date">
         {{ setDateFormat(project.startDate) }} -
         {{ setDateFormat(project.endDate) }}
@@ -49,6 +49,9 @@
       </v-btn>
 
       <v-btn
+        v-if="
+          project.leaderIdx !== this.$store.state.myModule.myProfile.userIdx
+        "
         class="apply_btn"
         block
         color="secondary"
