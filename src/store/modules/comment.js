@@ -43,6 +43,19 @@ export const commentModule = {
         .catch(err => {
           console.log(err);
         });
+    },
+
+    DELETE_COMMENT({ dispatch }, { idx }) {
+      const token = localStorage.getItem("user-token");
+      return comment
+        .deleteComment(idx, token)
+        .then(() => {
+          const idx = router.currentRoute.params.idx;
+          dispatch("FETCH_COMMENTS", { idx });
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
