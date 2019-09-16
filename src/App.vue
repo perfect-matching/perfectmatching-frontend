@@ -21,7 +21,7 @@ export default {
   },
 
   beforeDestroy() {
-    this.$store.dispatch("AUTH_LOGOUT");
+    localStorage.removeItem("user-token");
   }
 };
 </script>

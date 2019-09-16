@@ -22,10 +22,14 @@ export const joinModule = {
     CHECK_EMAIL({ commit }, { email }) {
       return join
         .emailCheck({ email })
-        .then(() => {
-          console.log("이메일 체크!");
+        .then(({ data }) => {
+          console.log("이메일 체크! :", data);
+          return true;
         })
-        .catch(err => {});
+        .catch(err => {
+          console.log(err);
+          return false;
+        });
     },
 
     CHECK_NICK({ commit }, { nick }) {
@@ -33,9 +37,11 @@ export const joinModule = {
         .nicknameCheck({ nick })
         .then(() => {
           console.log("닉네임 체크");
+          return true;
         })
         .catch(err => {
           console.log("err");
+          return false;
         });
     },
 

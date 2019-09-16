@@ -1,4 +1,5 @@
 import { comment } from "../../api/comment.js";
+import { router } from "../../routes/index.js";
 import { handleException } from "../../utils/errorHandler.js";
 
 export const commentModule = {
@@ -28,6 +29,19 @@ export const commentModule = {
         })
         .catch(err => {
           commit("SET_COMMENTS", {}); // 이전 댓글 state를 지워야함
+        });
+    },
+
+    POST_COMMENT_ON_PROJECT({ dispatch }, { content, projectIdx }) {
+      const token = localStorage.getItem("user-token");
+      return comment
+        .postCommentAtProject({ content, projectIdx }, token)
+        .then(() => {
+          const idx = router.currentRoute.params.idx;
+          dispatch("FETCH_COMMENTS", { idx });
+        })
+        .catch(err => {
+          console.log(err);
         });
     }
   }

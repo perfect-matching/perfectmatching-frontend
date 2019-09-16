@@ -1,10 +1,16 @@
 <template>
-  <v-dialog v-model="dialog" persistent max-width="600px">
+  <v-dialog v-model="loginModalStatus" persistent max-width="600px">
     <template v-slot:activator="{ on }">
-      <v-btn flat color="black" dark v-on="on" v-show="!loggenIn"
+      <v-btn
+        flat
+        color="black"
+        dark
+        v-on="on"
+        @click="openModal"
+        v-show="!loggedIn"
         >로그인/회원가입</v-btn
       >
-      <v-btn flat color="black" dark @click="logout" v-show="loggenIn"
+      <v-btn flat color="black" dark @click="logout" v-show="loggedIn"
         >로그아웃</v-btn
       >
     </template>
@@ -41,7 +47,14 @@
             @click:append="showPassword = !showPassword"
           ></v-text-field>
           <div class="form_buttons">
-            <v-btn flat color="secondary" dark @click="submit">로그인</v-btn>
+            <v-btn
+              flat
+              color="secondary"
+              dark
+              @click="submit"
+              @keyup.enter="submit"
+              >로그인</v-btn
+            >
             <v-btn flat color="secondary" dark @click="clear">취소</v-btn>
             <div>
               퍼펙트 매칭이 처음이신가요?
@@ -88,7 +101,6 @@ export default {
   },
 
   data: () => ({
-    dialog: false,
     valid: false,
     showPassword: false,
     email: "",
@@ -97,8 +109,10 @@ export default {
 
   computed: {
     ...mapGetters({
-      loggenIn: "isAuthenticated"
+      loggedIn: "isAuthenticated",
+      loginModalStatus: "loginModalStatus"
     }),
+
     emailErrors() {
       const errors = [];
       if (!this.$v.email.$dirty) return errors;
@@ -125,8 +139,13 @@ export default {
       this.$v.$touch();
       const { email, password } = this;
       this.$store.dispatch("AUTH_REQUEST", { email, password }).then(() => {
-        console.log("로그인 개성공!");
-        this.dialog = false;
+        this.$_swal.fire({
+          title: "로그인 완료!",
+          text: "퍼펙트 매칭에 오신 걸 환영합니다.",
+          type: "success",
+          confirmButtonText: "확인"
+        });
+        this.$store.dispatch("TOGGLE_LOGIN_MODAL");
         this.$router.push("/");
       });
     },
@@ -135,19 +154,23 @@ export default {
       this.$v.$reset();
       this.email = "";
       this.password = "";
-      this.dialog = false;
+      this.$store.dispatch("TOGGLE_LOGIN_MODAL");
     },
 
     clickedJoin() {
       this.email = "";
       this.password = "";
-      this.dialog = false;
+      this.$store.dispatch("TOGGLE_LOGIN_MODAL");
+    },
+
+    openModal() {
+      this.$store.dispatch("TOGGLE_LOGIN_MODAL");
     },
 
     login() {
       const { email, password } = this;
       this.$store.dispatch("AUTH_REQUEST", { email, password }).then(() => {
-        console.log("로그인 개성공!");
+        this.$store.dispatch("TOGGLE_LOGIN_MODAL");
         this.$router.push("/");
       });
     },

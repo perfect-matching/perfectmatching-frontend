@@ -14,6 +14,7 @@ import { store } from "../store/index.js";
 import bus from "../utils/bus.js";
 import ProjectDetail from "../components/ProjectManageView/ProjectDetail.vue";
 import UserList from "../components/ProjectManageView/UserList.vue";
+
 export default {
   components: {
     ProjectDetail,

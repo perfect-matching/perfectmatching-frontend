@@ -21,13 +21,14 @@ export default {
 
   computed: {
     ...mapGetters({
-      myProfile: "fetchedMyProfile"
+      myProfile: "fetchedMyProfile",
+      mySkills: "fetchedMySkills"
     })
   },
 
   created() {
-    const idx = 1;
-    this.$store.dispatch("GET_MY_PROFILE", { idx });
+    this.$store.dispatch("GET_MY_PROFILE");
+    this.$store.dispatch("GET_MY_SKILLS_BY_IDX");
   }
 };
 </script>

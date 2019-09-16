@@ -29,7 +29,7 @@
         기타:{{ project.currentEtc }}/{{ project.etcRecruits }}
       </v-layout>
     </div>
-
+    <div class="project_summary">{{ project.summary }}</div>
     <div class="project_content">{{ project.content }}</div>
     <div class="leader_info">
       <div>팀장</div>
@@ -49,6 +49,9 @@
       </v-btn>
 
       <v-btn
+        v-if="
+          project.leaderIdx !== this.$store.state.myModule.myProfile.userIdx
+        "
         class="apply_btn"
         block
         color="secondary"
@@ -107,7 +110,8 @@ img {
   padding: 0 7px;
 }
 
-.project_content {
+.project_content,
+.project_summary {
   padding: 40px 18px;
 }
 
