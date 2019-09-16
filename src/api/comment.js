@@ -10,16 +10,21 @@ function getCommentsByProejectIdx(idx, token) {
 function postCommentAtProject({ content, projectIdx }, token) {
   return axios.post(
     `${backend.baseUrl}/comment`,
-    {
-      content,
-      projectIdx
-    },
+    { content, projectIdx },
     {
       headers: { Authorization: token }
     }
   );
 }
+
+function deleteComment(idx, token) {
+  return axios.delete(`${backend.baseUrl}/comment/${idx}`, {
+    headers: { Authorization: token }
+  });
+}
+
 export const comment = {
   getCommentsByProejectIdx,
-  postCommentAtProject
+  postCommentAtProject,
+  deleteComment
 };
