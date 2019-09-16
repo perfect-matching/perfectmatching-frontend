@@ -32,13 +32,13 @@ export const commentModule = {
         });
     },
 
-    POST_COMMENT_ON_PROJECT({ dispatch }, { content }) {
+    POST_COMMENT_ON_PROJECT({ dispatch }, { content, projectIdx }) {
       const token = localStorage.getItem("user-token");
       return comment
-        .postCommentAtProject({ content }, token)
+        .postCommentAtProject({ content, projectIdx }, token)
         .then(() => {
           const idx = router.currentRoute.params.idx;
-          dispatch("FETCH_COMMENTS", idx);
+          dispatch("FETCH_COMMENTS", { idx });
         })
         .catch(err => {
           console.log(err);

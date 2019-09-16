@@ -1,9 +1,13 @@
 <template>
   <v-container>
     <article class="doing_project_article">
-      <h3>참여중인 프로젝트</h3>
+      <h3>주최한 프로젝트</h3>
       <ul class="doing_project_list">
-        <li class="list_item" v-for="project in projects" :key="project.projectIdx">
+        <li
+          class="list_item"
+          v-for="project in projects"
+          :key="project.projectIdx"
+        >
           <router-link :to="{ path: `${url}/${project.projectIdx}` }">
             <project-list-item :project="project"></project-list-item>
           </router-link>

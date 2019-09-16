@@ -7,10 +7,13 @@ function getCommentsByProejectIdx(idx, token) {
   });
 }
 
-function postCommentAtProject(content, token) {
+function postCommentAtProject({ content, projectIdx }, token) {
   return axios.post(
     `${backend.baseUrl}/comment`,
-    { content },
+    {
+      content,
+      projectIdx
+    },
     {
       headers: { Authorization: token }
     }

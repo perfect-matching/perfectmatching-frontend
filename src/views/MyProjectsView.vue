@@ -1,6 +1,7 @@
 <template>
   <section class="my_projects_section">
     <h2>프로젝트 관리</h2>
+    <leading-project-list :projects="doingProjects"></leading-project-list>
     <doing-project-list :projects="doingProjects"></doing-project-list>
     <end-project-list :projects="doneProjects"></end-project-list>
   </section>
@@ -10,10 +11,12 @@
 import { store } from "../store/index.js";
 import { mapGetters } from "vuex";
 import bus from "../utils/bus.js";
+import LeadingProjectList from "../components/ProjectComponents/LeadingProjectList.vue";
 import DoingProjectList from "../components/ProjectComponents/DoingProjectList.vue";
 import EndProjectList from "../components/ProjectComponents/EndProjectList.vue";
 export default {
   components: {
+    LeadingProjectList,
     DoingProjectList,
     EndProjectList
   },
