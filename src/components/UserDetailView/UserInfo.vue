@@ -9,23 +9,37 @@
           />
         </v-avatar>
         <div class="user_nick">{{ userProfile.nickname }}</div>
+        <div class="info_change_btn">
+          <v-btn
+            depressed
+            small
+            to="/my/edit"
+            v-if="this.$route.name === 'myPage'"
+            >정보 수정</v-btn
+          >
+        </div>
       </div>
-      <v-btn class="email_btn" icon>
-        <v-icon>mail_outline</v-icon>
-      </v-btn>
+      <article class="user_article email">
+        <v-btn class="email_btn" icon>
+          <v-icon>mail_outline</v-icon>
+        </v-btn>
+        <br />
+        {{ userProfile.email }}
+      </article>
 
-      <div class="introduce">
+      <article class="user_article introduce">
+        <h3>소개</h3>
         <p>{{ userProfile.summary }}</p>
-      </div>
-      <article class="skill_group">
+      </article>
+      <article v-if="userSkills.length !== 0" class="user_article skill_group">
         <h3 class="article_title">스킬</h3>
         <v-chip v-for="skill in userSkills" :key="skill.text">{{
           skill.text
         }}</v-chip>
       </article>
 
-      <div class="time">
-        <v-subheader class="pl-0">투자 시간</v-subheader>
+      <article class="user_article time">
+        <h3>투자 시간</h3>
         <v-slider
           :value="userProfile.investTime"
           thumb-label="always"
@@ -38,9 +52,15 @@
           <span style="color:red;">{{ userProfile.investTime }}시간</span> 정도
           사이드 프로젝트에 투자하고 싶어요 :D
         </div>
-      </div>
+      </article>
 
-      <div class="social_url">{{ userProfile.socialUrl }}</div>
+      <article
+        v-if="userProfile.socialUrl !== null"
+        class="user_article social_url"
+      >
+        <h3>소셜 URL</h3>
+        {{ userProfile.socialUrl }}
+      </article>
     </v-flex>
   </v-container>
 </template>
@@ -71,6 +91,7 @@ export default {
   margin: 0;
 }
 
-.introduce {
+.user_article {
+  margin-bottom: 30px;
 }
 </style>
