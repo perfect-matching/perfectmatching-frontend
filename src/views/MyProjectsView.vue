@@ -1,7 +1,7 @@
 <template>
   <section class="my_projects_section">
     <h2>프로젝트 관리</h2>
-    <leading-project-list :projects="doingProjects"></leading-project-list>
+    <leading-project-list :projects="LeadingProjects"></leading-project-list>
     <doing-project-list :projects="doingProjects"></doing-project-list>
     <end-project-list :projects="doneProjects"></end-project-list>
   </section>
@@ -23,6 +23,7 @@ export default {
 
   computed: {
     ...mapGetters({
+      LeadingProjects: "fetchedMyLeadingProjects",
       doingProjects: "fetchedMyDoingProjects",
       doneProjects: "fetchedMyDoneProjects"
     })
@@ -33,8 +34,10 @@ export default {
     try {
       const idx = store.state.myModule.myProfile.userIdx;
 
+      await store.dispatch("GET_MY_LEADING_PROJECTS_BY_IDX", { idx });
       await store.dispatch("GET_MY_DOING_PROJECTS_BY_IDX", { idx });
       await store.dispatch("GET_MY_DONE_PROJECTS_BY_IDX", { idx });
+
       bus.$emit("end:spinner");
       next();
     } catch {

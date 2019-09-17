@@ -1,11 +1,15 @@
 <template>
   <article>
     <v-container class="user_list_container">
-      <h3>참여자 목록:</h3>
+      <h3>지원자 목록:</h3>
 
       <ul class="applicant_list">
-        <li class="list_item" v-for="member in members" :key="member.memberIdx">
-          <user-list-item :member="member"></user-list-item>
+        <li
+          class="list_item"
+          v-for="applicant in applicants"
+          :key="applicant.memberIdx"
+        >
+          <applicants-list-item :member="applicant"></applicants-list-item>
         </li>
       </ul>
     </v-container>
@@ -13,14 +17,14 @@
 </template>
 
 <script>
-import UserListItem from "./UserListItem.vue";
+import ApplicantsListItem from "./ApplicantsListItem.vue";
 export default {
   components: {
-    UserListItem
+    ApplicantsListItem
   },
 
   props: {
-    members: {
+    applicants: {
       type: Array,
       required: false
     }

@@ -31,12 +31,6 @@ function getProjectTags(token) {
   });
 }
 
-function getProjectMemebersByIdx(idx, token) {
-  return axios.get(`${backend.baseUrl}/project/${idx}/members`, {
-    headers: { Authorization: token }
-  });
-}
-
 function getProjectUsedSkillsByIdx(idx, token) {
   return axios.get(`${backend.baseUrl}/usedskill/${idx}`, {
     headers: { Authorization: token }
@@ -44,8 +38,21 @@ function getProjectUsedSkillsByIdx(idx, token) {
 }
 
 function postNewProject(project, token) {
-  console.log("axios 프로젝트", project);
   return axios.post(`${backend.baseUrl}/project`, project, {
+    headers: { Authorization: token }
+  });
+}
+
+// 참여 확정된 멤버
+function getProjectMemebersByIdx(idx, token) {
+  return axios.get(`${backend.baseUrl}/project/${idx}/members`, {
+    headers: { Authorization: token }
+  });
+}
+
+// 지원한 멤버 (참여확정 x)
+function getApplicantsByProjectIdx(projectIdx, token) {
+  return axios.get(`${backend.baseUrl}/project/${projectIdx}/joinmembers`, {
     headers: { Authorization: token }
   });
 }
@@ -57,7 +64,8 @@ export const project = {
   getProjectsWithQueries,
   getDoneProjectByIdx,
   getProjectTags,
-  getProjectMemebersByIdx,
   getProjectUsedSkillsByIdx,
-  postNewProject
+  postNewProject,
+  getProjectMemebersByIdx,
+  getApplicantsByProjectIdx
 };

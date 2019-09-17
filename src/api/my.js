@@ -14,6 +14,12 @@ function getUserSkillsByUserIdx(userIdx, token) {
   });
 }
 
+function getLeadingProjectByUserIdx(userIdx, token) {
+  return axios.get(`${backend.baseUrl}/profile/${userIdx}/myprojects`, {
+    headers: { Authorization: token }
+  });
+}
+
 function getUserProjectsByUserIdx(userIdx, token) {
   return axios.get(`${backend.baseUrl}/profile/${userIdx}/projects`, {
     headers: { Authorization: token }
@@ -29,6 +35,7 @@ function getDoneProjectsByUserIdx(userIdx, token) {
 export const my = {
   getUserProfileByIdx,
   getUserSkillsByUserIdx,
+  getLeadingProjectByUserIdx,
   getUserProjectsByUserIdx,
   getDoneProjectsByUserIdx
 };

@@ -3,6 +3,7 @@
     <div>
       <h2>프로젝트 관리</h2>
       <project-detail :project="project"></project-detail>
+      <applicants-list :applicants="applicants"></applicants-list>
       <user-list :members="members"></user-list>
     </div>
   </section>
@@ -13,17 +14,20 @@ import { mapGetters } from "vuex";
 import { store } from "../store/index.js";
 import bus from "../utils/bus.js";
 import ProjectDetail from "../components/ProjectManageView/ProjectDetail.vue";
+import ApplicantsList from "../components/ProjectManageView/ApplicantsList.vue";
 import UserList from "../components/ProjectManageView/UserList.vue";
 
 export default {
   components: {
     ProjectDetail,
+    ApplicantsList,
     UserList
   },
 
   computed: {
     ...mapGetters({
       project: "fetchedMyProject",
+      applicants: "fetchedMyProjectApplicants",
       members: "fetchedMyProjectMembers"
     })
   },
@@ -34,7 +38,9 @@ export default {
       const idx = to.params.idx;
 
       await store.dispatch("GET_MY_PROJECT_BY_IDX", { idx });
+      await store.dispatch("GET_PROJECT_APPLICANTS_BY_IDX", { idx });
       await store.dispatch("GET_MY_PROJECT_MEMBERS_BY_IDX", { idx });
+
       bus.$emit("end:spinner");
       next();
     } catch {

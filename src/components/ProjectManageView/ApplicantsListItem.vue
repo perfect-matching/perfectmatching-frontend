@@ -16,6 +16,11 @@
       개발자에요전 스프링 개발자에요전 스프링 개발자에요전 스프링 개발자에요전
       스프링 개발자에요전 스프링 개발자에요
     </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn flat text @click="apply">수락</v-btn>
+      <v-btn flat @click="decline">거절</v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 <script>
@@ -54,7 +59,7 @@ export default {
   color: #b6b6b6;
 }
 .content {
-  padding: 10px 16px;
+  padding: 0 16px;
   color: #898989;
 }
 </style>

@@ -4,6 +4,7 @@ import { handleException } from "../../utils/errorHandler.js";
 export const projectModule = {
   state: {
     projects: [],
+    projectApplicants: [],
     projectMembers: {},
     projectDetail: {},
     usedSkills: [],
@@ -15,9 +16,11 @@ export const projectModule = {
     fetchedProjects(state) {
       return state.projects;
     },
+
     fetchedProjectDetail(state) {
       return state.projectDetail;
     },
+
     fetchedTags(state) {
       return state.tags;
     },
