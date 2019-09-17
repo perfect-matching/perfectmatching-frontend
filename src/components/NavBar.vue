@@ -30,10 +30,7 @@
 
         <v-btn icon to="/my">
           <v-avatar :tile="false" :size="36" color="grey lighten-4">
-            <img
-              src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
-              alt="avatar"
-            />
+            <img :src="myProfile.profileImg" alt="avatar" />
           </v-avatar>
         </v-btn>
       </div>
@@ -82,7 +79,10 @@ export default {
   },
 
   computed: {
-    ...mapGetters({ loggedIn: "isAuthenticated" })
+    ...mapGetters({
+      loggedIn: "isAuthenticated",
+      myProfile: "fetchedMyProfile"
+    })
   },
 
   data() {

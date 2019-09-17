@@ -204,12 +204,13 @@ export const myModule = {
         .catch(err => console.log(err));
     },
 
-    PUT_MY_PHOTO({ commit }, { formData }) {
+    PUT_MY_PHOTO({ dispatch }, { formData }) {
       const token = localStorage.getItem("user-token");
       return fileUpload
         .uploadProfileImg(formData, token)
         .then(({ data }) => {
           console.log("파일 업로드 완료!!", data);
+          dispatch("GET_MY_PROFILE");
         })
         .catch(err => {
           console.log(err);

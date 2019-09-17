@@ -12,7 +12,6 @@ import UserInfo from "../components/UserDetailView/UserInfo.vue";
 export default {
   components: {
     UserInfo
-    // MyInfo
   },
 
   computed: {
