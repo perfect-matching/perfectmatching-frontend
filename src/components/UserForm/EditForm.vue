@@ -157,10 +157,8 @@ export default {
         required,
         maxLength: maxLength(20),
         async isUnique(value) {
-          // standalone validator ideally should not assume a field is required
           if (value === "") return true;
 
-          // simulate async call, fail for all logins with even length
           return this.$store.dispatch("CHECK_NICK", { nick: value });
         }
       },
@@ -182,7 +180,6 @@ export default {
     valid: false,
     showPassword: false,
     tag: "",
-
     checkbox: false
   }),
 

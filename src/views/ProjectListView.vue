@@ -34,6 +34,7 @@ export default {
   data() {
     return {
       location: "",
+      position: "",
       locations: [
         "서울",
         "부산",
@@ -49,6 +50,7 @@ export default {
         "경상남도",
         "제주도"
       ],
+      positions: ["개발자", "디자이너", "기획자", "마케터", "기타"],
       infiniteId: +new Date()
     };
   },
@@ -77,6 +79,20 @@ export default {
         경상남도: "GYENONGSANGNAMDO",
         제주도: "JEJUDO"
       };
+
+      const positions = {
+        개발자: "DEVELOPER",
+        디자이너: "DESIGNER",
+        마케터: "MARKETER",
+        기획자: "PLANNER",
+        기타: "ETC"
+      };
+
+      // // position + location
+      // this.$store.dispatch("FETCH_PROJECTS_WITH_QURIES", {
+      //   location: locations[this.location],
+      //   position: positions[this.position]
+      // });
 
       this.$store.dispatch("FETCH_PROJECTS_WITH_QURIES", {
         location: locations[this.location]

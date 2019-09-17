@@ -56,6 +56,19 @@ export const commentModule = {
         .catch(err => {
           console.log(err);
         });
+    },
+
+    // dispatch 로직 작성중
+    PUT_COMMENT_ON_PROJECT({ dispatch }, { commentIdx, content, projectIdx }) {
+      const token = localStorage.getItem("user-token");
+      return comment
+        .putCommentAtProject(commentIdx, { content, projectIdx }, token)
+        .then(() => {
+          dispatch("FETCH_COMMENTS", { idx: projectIdx });
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
