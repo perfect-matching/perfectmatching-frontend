@@ -15,7 +15,6 @@ export const commentModule = {
 
   mutations: {
     SET_COMMENTS(state, commentDatas) {
-      console.log("뮤테이션 들어옴");
       state.comments = commentDatas;
     }
   },
@@ -65,7 +64,6 @@ export const commentModule = {
       return comment
         .putCommentAtProject(commentIdx, { content, projectIdx }, token)
         .then(() => {
-          console.log("완료!!");
           dispatch("FETCH_COMMENTS", { idx: projectIdx });
         })
         .catch(err => {

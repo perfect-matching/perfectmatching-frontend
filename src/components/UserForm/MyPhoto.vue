@@ -4,23 +4,13 @@
       <v-flex class="user_info" text-xs-center>
         <div>
           <v-avatar :tile="false" :size="170" color="black lighten-4">
-            <img
-              src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
-              alt="avatar"
-            />
+            <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar" />
           </v-avatar>
         </div>
         <div class="user_nick">user nick name</div>
         <div class="info_change_btn">
-          <v-btn depressed small @click="$refs.inputUpload.click()"
-            >사진 변경</v-btn
-          >
-          <input
-            v-show="false"
-            ref="inputUpload"
-            type="file"
-            @change="yourFunction"
-          />
+          <v-btn depressed small @click="$refs.inputUpload.click()">사진 변경</v-btn>
+          <input v-show="false" ref="inputUpload" type="file" @change="fileUpload" />
           <!-- <v-btn depressed small>사진 변경</v-btn> -->
         </div>
       </v-flex>
@@ -32,7 +22,8 @@
 export default {
   data() {
     return {
-      loading: false
+      loading: false,
+      file: null
     };
   },
 
@@ -44,6 +35,17 @@ export default {
       setTimeout(() => (this[l] = false), 3000);
 
       this.loader = null;
+    }
+  },
+
+  methods: {
+    fileUpload() {
+      this.file = this.$refs.inputUpload.files[0];
+
+      const formData = new FormData();
+      formData.append("file", this.file);
+
+      this.$store.dispatch("PUT_MY_PHOTO", { formData });
     }
   }
 };

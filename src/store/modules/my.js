@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { my } from "../../api/my.js";
 import { project } from "../../api/prorject.js";
+import { fileUpload } from "../../api/fileUpload.js";
 import { handleException } from "../../utils/errorHandler.js";
 
 export const myModule = {
@@ -157,6 +158,18 @@ export const myModule = {
           commit("SET_MY_DONE_PROJECT", data);
         })
         .catch(err => console.log(err));
+    },
+
+    PUT_MY_PHOTO({ commit }, { formData }) {
+      const token = localStorage.getItem("user-token");
+      return fileUpload
+        .uploadProfileImg(formData, token)
+        .then(({ data }) => {
+          console.log("파일 업로드 완료!!", data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
