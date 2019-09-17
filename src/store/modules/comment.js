@@ -15,6 +15,7 @@ export const commentModule = {
 
   mutations: {
     SET_COMMENTS(state, commentDatas) {
+      console.log("뮤테이션 들어옴");
       state.comments = commentDatas;
     }
   },
@@ -52,6 +53,20 @@ export const commentModule = {
         .then(() => {
           const idx = router.currentRoute.params.idx;
           dispatch("FETCH_COMMENTS", { idx });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
+    // dispatch 로직 작성중
+    PUT_COMMENT_ON_PROJECT({ dispatch }, { commentIdx, content, projectIdx }) {
+      const token = localStorage.getItem("user-token");
+      return comment
+        .putCommentAtProject(commentIdx, { content, projectIdx }, token)
+        .then(() => {
+          console.log("완료!!");
+          dispatch("FETCH_COMMENTS", { idx: projectIdx });
         })
         .catch(err => {
           console.log(err);

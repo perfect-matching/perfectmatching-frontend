@@ -17,8 +17,18 @@ function postCommentAtProject({ content, projectIdx }, token) {
   );
 }
 
-function deleteComment(idx, token) {
-  return axios.delete(`${backend.baseUrl}/comment/${idx}`, {
+function putCommentAtProject(commentIdx, { content, projectIdx }, token) {
+  return axios.put(
+    `${backend.baseUrl}/comment/${commentIdx}`,
+    { content, projectIdx },
+    {
+      headers: { Authorization: token }
+    }
+  );
+}
+
+function deleteComment(commentIdx, token) {
+  return axios.delete(`${backend.baseUrl}/comment/${commentIdx}`, {
     headers: { Authorization: token }
   });
 }
@@ -26,5 +36,6 @@ function deleteComment(idx, token) {
 export const comment = {
   getCommentsByProejectIdx,
   postCommentAtProject,
-  deleteComment
+  deleteComment,
+  putCommentAtProject
 };

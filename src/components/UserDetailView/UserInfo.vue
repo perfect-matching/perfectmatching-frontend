@@ -33,9 +33,9 @@
       </article>
       <article v-if="userSkills.length !== 0" class="user_article skill_group">
         <h3 class="article_title">스킬</h3>
-        <v-chip v-for="skill in userSkills" :key="skill.text">{{
-          skill.text
-        }}</v-chip>
+        <v-chip v-for="skill in userSkills" :key="skill.text">
+          {{ skill.text }}
+        </v-chip>
       </article>
 
       <article class="user_article time">
