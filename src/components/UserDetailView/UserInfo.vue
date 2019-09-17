@@ -2,11 +2,8 @@
   <v-container>
     <v-flex class="user_info" text-xs-center>
       <div>
-        <v-avatar :tile="false" :size="170" color="purple lighten-4">
-          <img
-            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
-            alt="avatar"
-          />
+        <v-avatar :tile="false" :size="170" color="white lighten-4">
+          <img :src="userProfile.profileImg" alt="avatar" />
         </v-avatar>
         <div class="user_nick">{{ userProfile.nickname }}</div>
         <div class="info_change_btn">

@@ -9,7 +9,8 @@ import ProjectListView from "../views/ProjectListView.vue";
 import ProfileEditView from "../views/ProfileEditView.vue";
 import MyProjectsView from "../views/MyProjectsView.vue";
 import MyProjectEditView from "../views/MyProjectEditView.vue";
-import ProjectManageView from "../views/ProjectManageView.vue";
+import LeadingProjectManageView from "../views/LeadingProjectManageView.vue";
+import DoingProjectManageView from "../views/DoingProjectManageView.vue";
 import NewProjectView from "../views/NewProjectView.vue";
 import ApplicationView from "../views/ApplicationView.vue";
 import DoneProjectView from "../views/DoneProjectView.vue";
@@ -89,9 +90,15 @@ export const router = new Router({
       beforeEnter: needLogin
     },
     {
-      path: "/my/projects/:idx",
-      name: "projectManage",
-      component: ProjectManageView,
+      path: "/my/leading/:idx",
+      name: "leadingProjectManage",
+      component: LeadingProjectManageView,
+      beforeEnter: needLogin
+    },
+    {
+      path: "/my/doing/:idx",
+      name: "doingProjectManage",
+      component: DoingProjectManageView,
       beforeEnter: needLogin
     },
     {

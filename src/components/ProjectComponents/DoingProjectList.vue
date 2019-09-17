@@ -3,7 +3,11 @@
     <article class="doing_project_article">
       <h3>참여중인 프로젝트</h3>
       <ul class="doing_project_list">
-        <li class="list_item" v-for="project in projects" :key="project.projectIdx">
+        <li
+          class="list_item"
+          v-for="project in projects"
+          :key="project.projectIdx"
+        >
           <router-link :to="{ path: `${url}/${project.projectIdx}` }">
             <project-list-item :project="project"></project-list-item>
           </router-link>
@@ -33,7 +37,7 @@ export default {
 
   created() {
     if (this.$route.name == "myProjects") {
-      this.url = "/my/projects";
+      this.url = "/my/doing";
     } else if (this.$route.name == "userDetail") {
       this.url = "/project";
     }

@@ -16,7 +16,7 @@ function joinUser(user) {
 }
 
 function getAllUserSkills() {
-  return axios.get(`${backend.baseUrl}/userskills`);
+  return axios.get(`${backend.baseUrl}/tags`);
 }
 
 export const join = {

@@ -8,9 +8,11 @@ export const myModule = {
   state: {
     myProfile: {},
     mySkills: [],
+    myLeadingProjects: [],
     myDoingProjects: [],
     myDoneProjects: [],
     myProject: {},
+    myProjectApplicants: [],
     myProjectMembers: [],
     myDoneProject: {}
   },
@@ -24,6 +26,10 @@ export const myModule = {
       return state.mySkills;
     },
 
+    fetchedMyLeadingProjects(state) {
+      return state.myLeadingProjects;
+    },
+
     fetchedMyDoingProjects(state) {
       return state.myDoingProjects;
     },
@@ -34,6 +40,10 @@ export const myModule = {
 
     fetchedMyProject(state) {
       return state.myProject;
+    },
+
+    fetchedMyProjectApplicants(state) {
+      return state.myProjectApplicants;
     },
 
     fetchedMyProjectMembers(state) {
@@ -54,6 +64,10 @@ export const myModule = {
       state.mySkills = data;
     },
 
+    SET_MY_LEADING_PROJECTS(state, data) {
+      state.myLeadingProjects = data;
+    },
+
     SET_MY_DOING_PROJECTS(state, data) {
       state.myDoingProjects = data;
     },
@@ -72,6 +86,10 @@ export const myModule = {
 
     SET_MY_PROJECT_MEMBERS(state, members) {
       state.myProjectMembers = members;
+    },
+
+    SET_APPLICANTS(state, applicants) {
+      state.myProjectApplicants = applicants;
     }
   },
 
@@ -103,10 +121,23 @@ export const myModule = {
         .catch(err => console.log(err));
     },
 
+    GET_MY_LEADING_PROJECTS_BY_IDX({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
+      return my
+        .getLeadingProjectByUserIdx(idx, token)
+        .then(({ data }) => {
+          const myLeadingProjects = data._embedded.datas;
+          commit("SET_MY_LEADING_PROJECTS", myLeadingProjects);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
     GET_MY_DOING_PROJECTS_BY_IDX({ commit }, { idx }) {
       const token = localStorage.getItem("user-token");
       return my
-        .getUserProjectsByUserIdx(idx, token)
+        .getDoingProjectsByUserIdx(idx, token)
         .then(({ data }) => {
           const myDoingProjects = data._embedded.datas;
           commit("SET_MY_DOING_PROJECTS", myDoingProjects, token);
@@ -135,6 +166,19 @@ export const myModule = {
         .catch(err => console.log(err));
     },
 
+    GET_PROJECT_APPLICANTS_BY_IDX({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .getApplicantsByProjectIdx(idx, token)
+        .then(({ data }) => {
+          const applicants = data._embedded.datas;
+          commit("SET_APPLICANTS", applicants);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
     GET_MY_PROJECT_MEMBERS_BY_IDX({ commit }, { idx }) {
       const token = localStorage.getItem("user-token");
       return project
@@ -160,12 +204,13 @@ export const myModule = {
         .catch(err => console.log(err));
     },
 
-    PUT_MY_PHOTO({ commit }, { formData }) {
+    PUT_MY_PHOTO({ dispatch }, { formData }) {
       const token = localStorage.getItem("user-token");
       return fileUpload
         .uploadProfileImg(formData, token)
         .then(({ data }) => {
           console.log("파일 업로드 완료!!", data);
+          dispatch("GET_MY_PROFILE");
         })
         .catch(err => {
           console.log(err);

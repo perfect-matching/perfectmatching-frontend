@@ -135,11 +135,13 @@ export default {
       if (this.$v.$invalid) {
         console.log("형식 불일치");
       } else {
-        const application = {
+        const projectIdx = this.$route.params.idx;
+
+        this.$store.dispatch("APPLY_TO_PROJECT", {
+          projectIdx,
           position: this.position,
-          content: this.content
-        };
-        console.log("제출!!:", application);
+          simpleProfile: this.content
+        });
       }
     },
 

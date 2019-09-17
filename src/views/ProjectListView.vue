@@ -4,9 +4,20 @@
     <v-layout>
       <v-flex xs12 sm4>
         <v-select
+          class="select_menu"
           :items="locations"
           label="지역"
           v-model="location"
+          value="value"
+          @change="findLocationQuery"
+        ></v-select>
+      </v-flex>
+      <v-flex xs12 sm4>
+        <v-select
+          class="select_menu"
+          :items="positions"
+          label="직군"
+          v-model="position"
           value="value"
           @change="findLocationQuery"
         ></v-select>
@@ -33,9 +44,10 @@ export default {
 
   data() {
     return {
-      location: "",
-      position: "",
+      location: "전체",
+      position: "전체",
       locations: [
+        "전체",
         "서울",
         "부산",
         "대구",
@@ -50,7 +62,7 @@ export default {
         "경상남도",
         "제주도"
       ],
-      positions: ["개발자", "디자이너", "기획자", "마케터", "기타"],
+      positions: ["전체", "개발자", "디자이너", "기획자", "마케터", "기타"],
       infiniteId: +new Date()
     };
   },
@@ -65,6 +77,7 @@ export default {
     // 지역 쿼리를 영어로 넘기기로 하였음. 선택한 한글 지역 이름을 영어로 리턴하는 함수
     findLocationQuery() {
       const locations = {
+        전체: "ALL",
         서울: "SEOUL",
         부산: "BUSAN",
         대구: "DAEGU",
@@ -81,6 +94,7 @@ export default {
       };
 
       const positions = {
+        전체: "ALL",
         개발자: "DEVELOPER",
         디자이너: "DESIGNER",
         마케터: "MARKETER",
@@ -88,15 +102,15 @@ export default {
         기타: "ETC"
       };
 
-      // // position + location
-      // this.$store.dispatch("FETCH_PROJECTS_WITH_QURIES", {
-      //   location: locations[this.location],
-      //   position: positions[this.position]
-      // });
-
+      // position + location
       this.$store.dispatch("FETCH_PROJECTS_WITH_QURIES", {
-        location: locations[this.location]
+        location: locations[this.location],
+        position: positions[this.position]
       });
+
+      // this.$store.dispatch("FETCH_PROJECTS_WITH_QURIES", {
+      //   location: locations[this.location]
+      // });
 
       this.infiniteId += 1;
     },
@@ -124,7 +138,14 @@ export default {
 </script>
 
 <style scoped>
+.section_title {
+  display: none;
+}
 .next_btn {
   margin-bottom: 20px;
+}
+
+.select_menu {
+  margin-left: 20px;
 }
 </style>
