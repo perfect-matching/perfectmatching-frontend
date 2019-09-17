@@ -15,9 +15,14 @@ function getProjectByIdx(idx, token) {
   });
 }
 
-// function getProjectsWithQueries(location) {
-//   return axios.get(`${backend.baseUrl}/projects?location=${location}`);
-// }
+// 프로젝트 상태 변경
+// progress -> 진행중   그외 -> complete
+function changeProjectStatus({ projectIdx, status }, token) {
+  return axios.put(
+    `${backend.baseUrl}/project/${projectIdx}/status?status=${status}`,
+    { headers: { Authorization: token } }
+  );
+}
 
 function getProjectsWithQueries(location, position) {
   return axios.get(
@@ -73,5 +78,6 @@ export const project = {
   getProjectUsedSkillsByIdx,
   postNewProject,
   getProjectMemebersByIdx,
-  getApplicantsByProjectIdx
+  getApplicantsByProjectIdx,
+  changeProjectStatus
 };

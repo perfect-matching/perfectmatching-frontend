@@ -152,8 +152,6 @@ export const projectModule = {
     },
 
     POST_NEW_PROJECT({ commit }, { postProject }) {
-      console.log("액션 프로젝트", postProject);
-
       const token = localStorage.getItem("user-token");
       return project
         .postNewProject(postProject, token)
@@ -162,6 +160,19 @@ export const projectModule = {
         })
         .catch(err => {
           console.log("어?", err);
+        });
+    },
+
+    CHANGE_PROJECT_STATUS({ dispatch }, { projectIdx, status }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .changeProjectStatus({ projectIdx, status }, token)
+        .then(({ data }) => {
+          console.log("프로젝트 상태변경 완료");
+          dispatch("GET_MY_PROJECT_BY_IDX", { idx: projectIdx });
+        })
+        .catch(err => {
+          console.log(err);
         });
     }
   }

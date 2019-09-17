@@ -1,15 +1,15 @@
 <template>
   <v-container class="project_detail_container">
     <v-card flat class="project_card">
-      <v-chip class="status" color="green" text-color="white">
-        {{ project.status }}
-      </v-chip>
+      <v-chip class="status" color="green" text-color="white">{{
+        project.status
+      }}</v-chip>
       <div class="project_title">{{ project.title }}</div>
       <div class="deadline">{{ setDateFormat(project.createdDate) }} 개설</div>
       <div class="require_skill">
-        <v-chip v-for="tag in project.tags" :key="tag.idx">{{
-          tag.text
-        }}</v-chip>
+        <v-chip v-for="tag in project.tags" :key="tag.idx">
+          {{ tag.text }}
+        </v-chip>
       </div>
       <div class="project_content">
         <p>{{ project.summary }}</p>
@@ -29,7 +29,7 @@
             v-if="project.status === '모집중'"
             depressed
             color="grey"
-            :to="`/my/projects/${project.projectIdx}/done`"
+            @click="changeStatus"
             >프로젝트 시작하기</v-btn
           >
           <v-btn
@@ -56,23 +56,17 @@ export default {
       required: true
     }
   },
-  data: () => ({
-    tags: [
-      "Work",
-      "Home Improvement",
-      "Vacation",
-      "Food",
-      "Drawers",
-      "Shopping",
-      "Art",
-      "Tech",
-      "Creative Writing"
-    ]
-  }),
 
   methods: {
     setDateFormat(date) {
       return this.$_moment(date).format("LL");
+    },
+
+    changeStatus() {
+      this.$store.dispatch("CHANGE_PROJECT_STATUS", {
+        projectIdx: this.project.projectIdx,
+        status: "progress"
+      });
     }
   }
 };
