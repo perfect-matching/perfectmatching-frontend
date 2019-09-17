@@ -1,9 +1,8 @@
 <template>
   <section class="project_manage_section">
     <div>
-      <h2>프로젝트 관리</h2>
+      <h2>참여 프로젝트 관리</h2>
       <project-detail :project="project"></project-detail>
-      <applicants-list :applicants="applicants"></applicants-list>
       <user-list :members="members"></user-list>
     </div>
   </section>
@@ -14,20 +13,17 @@ import { mapGetters } from "vuex";
 import { store } from "../store/index.js";
 import bus from "../utils/bus.js";
 import ProjectDetail from "../components/ProjectManageView/ProjectDetail.vue";
-import ApplicantsList from "../components/ProjectManageView/ApplicantsList.vue";
 import UserList from "../components/ProjectManageView/UserList.vue";
 
 export default {
   components: {
     ProjectDetail,
-    ApplicantsList,
     UserList
   },
 
   computed: {
     ...mapGetters({
       project: "fetchedMyProject",
-      applicants: "fetchedMyProjectApplicants",
       members: "fetchedMyProjectMembers"
     })
   },

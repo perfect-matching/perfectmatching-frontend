@@ -17,19 +17,22 @@
       </div>
 
       <v-layout wrap>
-        <v-btn depressed color="grey">프로젝트 삭제</v-btn>
-        <v-btn
-          depressed
-          color="grey"
-          :to="`/my/projects/${project.projectIdx}/edit`"
-          >프로젝트 수정</v-btn
-        >
-        <v-btn
-          depressed
-          color="grey"
-          :to="`/my/projects/${project.projectIdx}/done`"
-          >프로젝트 완료</v-btn
-        >
+        <div>
+          <v-btn depressed color="grey">프로젝트 삭제</v-btn>
+          <v-btn
+            depressed
+            color="grey"
+            :to="`/my/projects/${project.projectIdx}/edit`"
+            >프로젝트 수정</v-btn
+          >
+          <v-btn
+            depressed
+            color="grey"
+            :to="`/my/projects/${project.projectIdx}/done`"
+            >프로젝트 완료</v-btn
+          >
+        </div>
+
         <v-spacer></v-spacer>
         <v-btn depressed color="grey">지원 취소</v-btn>
       </v-layout>

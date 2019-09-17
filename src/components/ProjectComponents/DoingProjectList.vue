@@ -37,7 +37,7 @@ export default {
 
   created() {
     if (this.$route.name == "myProjects") {
-      this.url = "/my/projects";
+      this.url = "/my/doing";
     } else if (this.$route.name == "userDetail") {
       this.url = "/project";
     }

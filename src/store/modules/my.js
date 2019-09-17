@@ -137,7 +137,7 @@ export const myModule = {
     GET_MY_DOING_PROJECTS_BY_IDX({ commit }, { idx }) {
       const token = localStorage.getItem("user-token");
       return my
-        .getUserProjectsByUserIdx(idx, token)
+        .getDoingProjectsByUserIdx(idx, token)
         .then(({ data }) => {
           const myDoingProjects = data._embedded.datas;
           commit("SET_MY_DOING_PROJECTS", myDoingProjects, token);

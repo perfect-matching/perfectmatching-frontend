@@ -96,9 +96,9 @@ export const projectModule = {
       });
     },
 
-    FETCH_PROJECTS_WITH_QURIES({ commit }, { location }) {
+    FETCH_PROJECTS_WITH_QURIES({ commit }, { location, position }) {
       return project
-        .getProjectsWithQueries(location)
+        .getProjectsWithQueries(location, position)
         .then(({ data }) => {
           const projects = {
             datas: data._embedded.datas,

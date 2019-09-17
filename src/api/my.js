@@ -14,13 +14,15 @@ function getUserSkillsByUserIdx(userIdx, token) {
   });
 }
 
+// GET 개설한 프로젝트들
 function getLeadingProjectByUserIdx(userIdx, token) {
   return axios.get(`${backend.baseUrl}/profile/${userIdx}/myprojects`, {
     headers: { Authorization: token }
   });
 }
 
-function getUserProjectsByUserIdx(userIdx, token) {
+// GET 참여중인 프로젝트들
+function getDoingProjectsByUserIdx(userIdx, token) {
   return axios.get(`${backend.baseUrl}/profile/${userIdx}/projects`, {
     headers: { Authorization: token }
   });
@@ -36,6 +38,6 @@ export const my = {
   getUserProfileByIdx,
   getUserSkillsByUserIdx,
   getLeadingProjectByUserIdx,
-  getUserProjectsByUserIdx,
+  getDoingProjectsByUserIdx,
   getDoneProjectsByUserIdx
 };

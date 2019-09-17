@@ -8,10 +8,27 @@
         :error-messages="positionErrors"
       >
         <v-layout class="position_group">
-          <v-radio label="개발자" value="DEVELOPER" v-if="developerAvailable"></v-radio>
-          <v-radio label="디자이너" value="DESIGNER" v-if="designerAvailable"></v-radio>
-          <v-radio label="마케터" value="MARKETER" checked="checked" v-if="marketerAvailable"></v-radio>
-          <v-radio label="기획자" value="PLANNER" v-if="plannerAvailable"></v-radio>
+          <v-radio
+            label="개발자"
+            value="DEVELOPER"
+            v-if="developerAvailable"
+          ></v-radio>
+          <v-radio
+            label="디자이너"
+            value="DESIGNER"
+            v-if="designerAvailable"
+          ></v-radio>
+          <v-radio
+            label="마케터"
+            value="MARKETER"
+            checked="checked"
+            v-if="marketerAvailable"
+          ></v-radio>
+          <v-radio
+            label="기획자"
+            value="PLANNER"
+            v-if="plannerAvailable"
+          ></v-radio>
           <v-radio label="기타" value="ETC" v-if="etcAvailable"></v-radio>
         </v-layout>
       </v-radio-group>

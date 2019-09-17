@@ -4,6 +4,7 @@
       <h3>지원자 목록:</h3>
 
       <ul class="applicant_list">
+        <div v-if="applicants === null">지원자가 없습니다.</div>
         <li
           class="list_item"
           v-for="applicant in applicants"

@@ -15,8 +15,14 @@ function getProjectByIdx(idx, token) {
   });
 }
 
-function getProjectsWithQueries(location) {
-  return axios.get(`${backend.baseUrl}/projects?location=${location}`);
+// function getProjectsWithQueries(location) {
+//   return axios.get(`${backend.baseUrl}/projects?location=${location}`);
+// }
+
+function getProjectsWithQueries(location, position) {
+  return axios.get(
+    `${backend.baseUrl}/projects?location=${location}&position=${position}`
+  );
 }
 
 function getDoneProjectByIdx(doneProjectIdx, token) {

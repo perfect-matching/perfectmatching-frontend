@@ -1,7 +1,7 @@
 <template>
   <section class="my_projects_section">
     <h2>프로젝트 관리</h2>
-    <leading-project-list :projects="LeadingProjects"></leading-project-list>
+    <leading-project-list :projects="leadingProjects"></leading-project-list>
     <doing-project-list :projects="doingProjects"></doing-project-list>
     <end-project-list :projects="doneProjects"></end-project-list>
   </section>
@@ -23,7 +23,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      LeadingProjects: "fetchedMyLeadingProjects",
+      leadingProjects: "fetchedMyLeadingProjects",
       doingProjects: "fetchedMyDoingProjects",
       doneProjects: "fetchedMyDoneProjects"
     })
