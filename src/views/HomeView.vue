@@ -4,15 +4,17 @@
     <article class="news_slide">
       <h3 class="article_title news_header">새소식</h3>
       <carousel></carousel>
+      <introduce></introduce>
     </article>
   </section>
 </template>
 
 <script>
 import Carousel from "../components/HomeView/Carousel.vue";
+import Introduce from "../components/HomeView/Introduce.vue"
 
 export default {
-  components: { Carousel }
+  components: { Carousel,Introduce }
 };
 </script>
 <style scoped>
