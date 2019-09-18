@@ -74,6 +74,13 @@ function postDoneProject(doneProject, token) {
   });
 }
 
+function putProject(projectIdx, project, token) {
+  console.log("넘긴 put 값", project);
+  return axios.put(`${backend.baseUrl}/project/${projectIdx}`, project, {
+    headers: { Authorization: token }
+  });
+}
+
 function putDoneProject(doneProjectIdx, doneProject, token) {
   return axios.put(
     `${backend.baseUrl}/doneproject/${doneProjectIdx}`,
@@ -106,6 +113,7 @@ export const project = {
   getProjectUsedSkillsByIdx,
   postNewProject,
   postDoneProject,
+  putProject,
   putDoneProject,
   deleteDoneProject,
   deleteProject,

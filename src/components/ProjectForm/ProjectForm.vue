@@ -268,7 +268,7 @@ export default {
       if (this.$v.$invalid) {
         console.log("형식 불일치");
       } else {
-        const postProject = {
+        const project = {
           title: this.project.title,
           location: this.project.location,
           summary: this.project.summary,
@@ -281,9 +281,24 @@ export default {
           socialUrl: this.project.socialUrl,
           tags: this.project.tags
         };
-        this.$store.dispatch("POST_NEW_PROJECT", { postProject }).then(() => {
-          this.$router.push("/projects");
-        });
+
+        const routeName = this.$route.name;
+        if (routeName == "NewProjectView") {
+          this.$store
+            .dispatch("POST_NEW_PROJECT", { postProject: project })
+            .then(() => {
+              this.$router.push("/projects");
+            });
+        } else if (routeName == "editProject") {
+          this.$store
+            .dispatch("PUT_PROJECT", {
+              projectIdx: this.project.projectIdx,
+              putProject: project
+            })
+            .then(() => {
+              this.$router.push(`/my/leading/${this.project.projectIdx}`);
+            });
+        }
       }
     },
 

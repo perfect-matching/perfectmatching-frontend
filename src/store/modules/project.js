@@ -173,6 +173,18 @@ export const projectModule = {
         });
     },
 
+    PUT_PROJECT({ commit }, { projectIdx, putProject }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .putProject(projectIdx, putProject, token)
+        .then(() => {
+          console.log("수정 성공!");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
     PUT_DONE_PROJECT({ commit }, { doneProjectIdx, doneProject }) {
       const token = localStorage.getItem("user-token");
       return project
