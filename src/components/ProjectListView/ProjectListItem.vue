@@ -25,11 +25,7 @@
       <!-- <div class="create_date">
         {{ setLLFormat(project.deadline) }} 까지 모집
       </div>-->
-      <v-card-text>
-        요약정보입니다. 요약정보입니다. 요약정보입니다. 요약정보입니다.
-        요약정보입니다. 요약정보입니다. 요약정보입니다. 요약정보입니다.
-        요약정보입니다. 요약정보입니다. 요약정보입니다.
-      </v-card-text>
+      <v-card-text>{{ project.summary }}</v-card-text>
       <div class="require_skill">
         <v-chip v-for="tag in project.tags" :key="tag.text">
           {{ tag.text }}
@@ -84,7 +80,7 @@ export default {
 <style scoped>
 .project_card {
   position: relative;
-  max-width: 410px;
+  width: 410px;
   min-height: 439px;
   overflow-y: auto;
   border: 1px solid #dbdbdb;

@@ -17,7 +17,10 @@
       </div>
 
       <v-layout wrap>
-        <div>
+        <div
+          class="leading_project_btns"
+          v-if="this.$route.name === 'leadingProjectManage'"
+        >
           <v-btn depressed color="grey">프로젝트 삭제</v-btn>
           <v-btn
             depressed
@@ -42,7 +45,12 @@
         </div>
 
         <v-spacer></v-spacer>
-        <v-btn depressed color="grey">지원 취소</v-btn>
+        <v-btn
+          depressed
+          color="grey"
+          v-if="this.$route.name === 'doingProjectManage'"
+          >지원 취소</v-btn
+        >
       </v-layout>
     </v-card>
   </v-container>
