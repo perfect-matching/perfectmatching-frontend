@@ -49,7 +49,6 @@ export const authModule = {
   actions: {
     AUTH_REQUEST({ commit, dispatch }, { email, password }) {
       return new Promise((resolve, reject) => {
-        console.log("드러왔다!");
         commit("AUTH_REQUEST");
         auth
           .authRequest({
@@ -78,7 +77,6 @@ export const authModule = {
 
     AUTH_LOGOUT({ commit, dispatch }) {
       return new Promise((resolve, reject) => {
-        console.log("로그아웃 해뿟다");
         commit("AUTH_LOGOUT");
         // const token = localStorage.getItem("user-token");
         localStorage.removeItem("user-token");

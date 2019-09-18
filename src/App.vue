@@ -18,10 +18,6 @@ export default {
 
   props: {
     source: String
-  },
-
-  beforeDestroy() {
-    localStorage.removeItem("user-token");
   }
 };
 </script>

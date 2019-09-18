@@ -175,7 +175,7 @@ export const myModule = {
           commit("SET_APPLICANTS", applicants);
         })
         .catch(err => {
-          console.log(err);
+          commit("SET_APPLICANTS", []);
         });
     },
 

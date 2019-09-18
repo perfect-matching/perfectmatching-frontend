@@ -2,7 +2,6 @@ import axios from "axios";
 import { backend } from "./config.js";
 
 function emailCheck({ email }) {
-  console.log("요청함수 진입! user: ", email);
   return axios.post(`${backend.baseUrl}/register/emailcheck`, { email });
 }
 

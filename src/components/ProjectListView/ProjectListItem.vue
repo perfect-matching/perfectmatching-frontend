@@ -4,23 +4,21 @@
       <div class="deadline">{{ setFromNow(project.createdDate) }}</div>
       <v-layout class="leader_info" justify-center align-center>
         <v-avatar :tile="false" :size="40" color="grey lighten-4">
-          <img
-            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
-            alt="avatar"
-          />
+          <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar" />
         </v-avatar>
         <div class="leader_name">{{ project.leader }}</div>
       </v-layout>
 
       <v-card-title class="headline justify-center">
-        {{ project.title }}
+        {{
+        project.title
+        }}
       </v-card-title>
       <v-chip
         class="status"
         :color="setChipColor(project.status)"
         text-color="white"
-        >{{ project.status }}</v-chip
-      >
+      >{{ project.status }}</v-chip>
       <div class="location">{{ project.location }}</div>
       <!-- <div class="create_date">
         {{ setLLFormat(project.deadline) }} 까지 모집
@@ -28,8 +26,18 @@
       <v-card-text>{{ project.summary }}</v-card-text>
       <div class="require_skill">
         <v-chip v-for="tag in project.tags" :key="tag.text">
-          {{ tag.text }}
+          {{
+          tag.text
+          }}
         </v-chip>
+      </div>
+      <div class="need_positions" justify-center>
+        <div class="title">구해요!</div>
+        <img class="position_img developer_img" src="../../assets/monitor.svg" alt />
+        <img class="position_img developer_img" src="../../assets/paint-palette.svg" alt />
+        <img class="position_img developer_img" src="../../assets/workspace.svg" alt />
+        <img class="position_img developer_img" src="../../assets/megaphone.svg" alt />
+        <img class="position_img developer_img" src="../../assets/monitor.svg" alt />
       </div>
     </v-card>
   </v-hover>
@@ -43,19 +51,7 @@ export default {
       require: true
     }
   },
-  data: () => ({
-    tags: [
-      "Work",
-      "Home Improvement",
-      "Vacation",
-      "Food",
-      "Drawers",
-      "Shopping",
-      "Art",
-      "Tech",
-      "Creative Writing"
-    ]
-  }),
+  data: () => ({}),
 
   methods: {
     setLLFormat(date) {
@@ -93,7 +89,6 @@ export default {
 
 .deadline {
   top: -15px;
-
   background-color: #fafafa;
   padding: 0 3px 0 10px;
 }
@@ -130,5 +125,34 @@ export default {
 
 .require_skill {
   padding: 0 20px 20px 20px;
+}
+
+.position_img {
+  width: 40px;
+  height: 40px;
+  margin: 0 3px;
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575px) {
+  .project_card {
+    max-width: 310px;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767px) {
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199px) {
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
 }
 </style>
