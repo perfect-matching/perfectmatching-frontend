@@ -22,6 +22,15 @@
           @change="findLocationQuery"
         ></v-select>
       </v-flex>
+      <v-flex>
+        <v-autocomplete
+          class="select_menu"
+          label="기술"
+          :items="tags"
+          v-model="tag"
+          @change="findLocationQuery"
+        ></v-autocomplete>
+      </v-flex>
     </v-layout>
     <project-list :projects="projects"></project-list>
     <infinite-loading
@@ -46,6 +55,7 @@ export default {
     return {
       location: "전체",
       position: "전체",
+      tag: "",
       locations: [
         "전체",
         "서울",
@@ -69,8 +79,13 @@ export default {
 
   computed: {
     ...mapGetters({
-      projects: "fetchedProjects"
+      projects: "fetchedProjects",
+      tags: "fetchedTags"
     })
+  },
+
+  created() {
+    this.$store.dispatch("FETCH_PROJECT_TAGS");
   },
 
   methods: {
@@ -105,7 +120,8 @@ export default {
       // position + location
       this.$store.dispatch("FETCH_PROJECTS_WITH_QURIES", {
         location: locations[this.location],
-        position: positions[this.position]
+        position: positions[this.position],
+        tag: this.tag
       });
 
       // this.$store.dispatch("FETCH_PROJECTS_WITH_QURIES", {
