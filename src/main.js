@@ -17,5 +17,6 @@ new Vue({
   beforeCreate() {
     this.$store.dispatch("GET_MY_PROFILE");
   },
+
   render: h => h(App)
 }).$mount("#app");

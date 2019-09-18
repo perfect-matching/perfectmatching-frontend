@@ -59,10 +59,6 @@ li {
   text-align: center;
 }
 
-.project_list {
-  1max-width: 1660px;
-}
-
 .list_item {
   margin: 30px;
 }
