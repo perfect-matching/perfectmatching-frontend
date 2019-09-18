@@ -215,7 +215,16 @@ export default {
 
         const routeName = this.$route.name;
         if (routeName == "newDoneProject") {
-          this.$store.dispatch("POST_DONE_PROJECT", { doneProject });
+          this.$store
+            .dispatch("POST_DONE_PROJECT", { doneProject })
+            .then(() => {
+              this.$_swal.fire(
+                "추가 완료",
+                "프로젝트가 추가되었습니다.",
+                "success"
+              );
+              this.$router.push("/my/projects");
+            });
         } else if (routeName == "editDoneProject") {
           this.$store.dispatch("PUT_DONE_PROJECT", {
             doneProjectIdx: this.project.doneProjectIdx,
