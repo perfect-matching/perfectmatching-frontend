@@ -183,6 +183,18 @@ export const projectModule = {
         });
     },
 
+    DELETE_PROJECT({ commit }, { projectIdx }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .deleteProject(projectIdx, token)
+        .then(() => {
+          console.log("삭제 성공");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
     DELETE_DONE_PROJECT({ dispatch }, { doneProjectIdx, userIdx }) {
       const token = localStorage.getItem("user-token");
       return project

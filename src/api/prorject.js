@@ -84,6 +84,12 @@ function putDoneProject(doneProjectIdx, doneProject, token) {
   );
 }
 
+function deleteProject(projectIdx, token) {
+  return axios.delete(`${backend.baseUrl}/project/${projectIdx}`, {
+    headers: { Authorization: token }
+  });
+}
+
 function deleteDoneProject(doneProjectIdx, token) {
   return axios.delete(`${backend.baseUrl}/doneproject/${doneProjectIdx}`, {
     headers: { Authorization: token }
@@ -102,6 +108,7 @@ export const project = {
   postDoneProject,
   putDoneProject,
   deleteDoneProject,
+  deleteProject,
   getProjectMemebersByIdx,
   getApplicantsByProjectIdx,
   changeProjectStatus
