@@ -1,15 +1,15 @@
 <template>
   <v-container class="project_detail_container">
     <v-card flat class="project_card">
-      <v-chip class="status" color="green" text-color="white">{{
-        project.status
-      }}</v-chip>
+      <v-chip class="status" color="green" text-color="white">
+        {{ project.status }}
+      </v-chip>
       <div class="project_title">{{ project.title }}</div>
       <div class="deadline">{{ setDateFormat(project.createdDate) }} 개설</div>
       <div class="require_skill">
-        <v-chip v-for="tag in project.tags" :key="tag.idx">
-          {{ tag.text }}
-        </v-chip>
+        <v-chip v-for="tag in project.tags" :key="tag.idx">{{
+          tag.text
+        }}</v-chip>
       </div>
       <div class="project_content">
         <p>{{ project.summary }}</p>
@@ -33,7 +33,7 @@
             depressed
             color="grey"
             @click="changeStatus"
-            >프로젝트 시작하기</v-btn
+            >프로젝트 진행하기</v-btn
           >
           <v-btn
             v-else-if="project.status === '진행중'"

@@ -163,6 +163,31 @@ export const projectModule = {
         });
     },
 
+    POST_DONE_PROJECT({ commit }, { doneProject }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .postDoneProject(doneProject, token)
+        .then(() => {
+          console.log("doneproject 성공");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
+    PUT_DONE_PROJECT({ commit }, { doneProjectIdx, doneProject }) {
+      console.log("doneProject 들어옴", doneProject);
+      const token = localStorage.getItem("user-token");
+      return project
+        .putDoneProject(doneProjectIdx, doneProject, token)
+        .then(() => {
+          console.log("doneproject 성공");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
     CHANGE_PROJECT_STATUS({ dispatch }, { projectIdx, status }) {
       const token = localStorage.getItem("user-token");
       return project

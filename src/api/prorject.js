@@ -16,7 +16,7 @@ function getProjectByIdx(idx, token) {
 }
 
 // 프로젝트 상태 변경
-// progress -> 진행중   그외 -> complete
+// progress -> 진행중   그 외 -> complete
 function changeProjectStatus({ projectIdx, status }, token) {
   return axios.put(
     `${backend.baseUrl}/project/${projectIdx}/status?status=${status}`,
@@ -68,6 +68,23 @@ function getApplicantsByProjectIdx(projectIdx, token) {
   });
 }
 
+function postDoneProject(doneProject, token) {
+  return axios.post(`${backend.baseUrl}/doneproject`, doneProject, {
+    headers: { Authorization: token }
+  });
+}
+
+function putDoneProject(doneProjectIdx, doneProject, token) {
+  console.log(doneProjectIdx);
+  return axios.put(
+    `${backend.baseUrl}/doneproject/${doneProjectIdx}`,
+    doneProject,
+    {
+      headers: { Authorization: token }
+    }
+  );
+}
+
 export const project = {
   getProjects,
   getNextProjects,
@@ -77,6 +94,8 @@ export const project = {
   getProjectTags,
   getProjectUsedSkillsByIdx,
   postNewProject,
+  postDoneProject,
+  putDoneProject,
   getProjectMemebersByIdx,
   getApplicantsByProjectIdx,
   changeProjectStatus

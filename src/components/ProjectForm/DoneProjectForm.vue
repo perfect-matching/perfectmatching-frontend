@@ -27,8 +27,8 @@
     <vue-tags-input
       class="tag_input"
       v-model="tag"
-      :tags="project.tags"
-      @tags-changed="newTags => (project.tags = newTags)"
+      :tags="project.usedSkills"
+      @tags-changed="newTags => (project.usedSkills = newTags)"
       :autocomplete-items="filteredItems"
       add-only-from-autocomplete
     />
@@ -44,6 +44,12 @@
       @blur="$v.project.content.$touch()"
       outline
     ></v-textarea>
+
+    <v-text-field
+      outline
+      v-model="project.socialUrl"
+      label="소셜 URL"
+    ></v-text-field>
 
     <date-picker
       v-model="project.startDate"
@@ -197,7 +203,25 @@ export default {
       if (this.$v.$invalid) {
         console.log("형식 불일치");
       } else {
-        console.log("제출!!:");
+        const doneProject = {
+          title: this.project.title,
+          summary: this.project.summary,
+          content: this.project.content,
+          socialUrl: this.project.socialUrl,
+          startDate: this.project.startDate,
+          endDate: this.project.endDate,
+          usedSkills: this.project.usedSkills
+        };
+
+        const routeName = this.$route.name;
+        if (routeName == "newDoneProject") {
+          this.$store.dispatch("POST_DONE_PROJECT", { doneProject });
+        } else if (routeName == "editDoneProject") {
+          this.$store.dispatch("PUT_DONE_PROJECT", {
+            doneProjectIdx: this.project.doneProjectIdx,
+            doneProject
+          });
+        }
       }
     },
 
