@@ -167,21 +167,28 @@ export const projectModule = {
       const token = localStorage.getItem("user-token");
       return project
         .postDoneProject(doneProject, token)
-        .then(() => {
-          console.log("doneproject 성공");
-        })
+        .then(() => {})
         .catch(err => {
           console.log(err);
         });
     },
 
     PUT_DONE_PROJECT({ commit }, { doneProjectIdx, doneProject }) {
-      console.log("doneProject 들어옴", doneProject);
       const token = localStorage.getItem("user-token");
       return project
         .putDoneProject(doneProjectIdx, doneProject, token)
+        .then(() => {})
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
+    DELETE_DONE_PROJECT({ dispatch }, { doneProjectIdx, userIdx }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .deleteDoneProject(doneProjectIdx, token)
         .then(() => {
-          console.log("doneproject 성공");
+          dispatch("GET_MY_DONE_PROJECTS_BY_IDX", { idx: userIdx });
         })
         .catch(err => {
           console.log(err);
