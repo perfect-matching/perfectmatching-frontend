@@ -19,6 +19,7 @@ export default {
       project: {
         title: "",
         summary: "",
+        socialUrl: "",
         content: "",
         tags: [],
         startDate: "",

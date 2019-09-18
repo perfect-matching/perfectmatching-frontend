@@ -278,8 +278,13 @@ export default {
           investTime: this.myProfile.investTime,
           userSkills: this.myProfile.tags
         };
-        console.log("제출!!:", user);
-        this.$store.dispatch("JOIN_USER", { user });
+
+        const routeName = this.$route.name;
+        if (routeName == "join") {
+          this.$store.dispatch("JOIN_USER", { user });
+        } else if (routeName == "profileEdit") {
+          console.log("프로필 변경");
+        }
       }
     },
 

@@ -14,9 +14,9 @@
 
       <div class="require_skill">
         <div class="skill_title content_title">기술 스택</div>
-        <v-chip v-for="skill in project.usedSkills" :key="skill.idx">{{
-          skill.text
-        }}</v-chip>
+        <v-chip v-for="skill in project.usedSkills" :key="skill.idx">
+          {{ skill.text }}
+        </v-chip>
       </div>
 
       <div class="github">
@@ -37,7 +37,7 @@
 
       <v-layout wrap v-if="this.$route.name == 'myProjects'">
         <v-spacer></v-spacer>
-        <v-btn depressed color="grey">프로젝트 삭제</v-btn>
+        <v-btn depressed color="grey" @click="remove">프로젝트 삭제</v-btn>
         <v-btn
           depressed
           color="grey"
@@ -58,23 +58,16 @@ export default {
     }
   },
 
-  data: () => ({
-    tags: [
-      "Work",
-      "Home Improvement",
-      "Vacation",
-      "Food",
-      "Drawers",
-      "Shopping",
-      "Art",
-      "Tech",
-      "Creative Writing"
-    ]
-  }),
-
   methods: {
     setDateFormat(date) {
       return this.$_moment(date).format("LL");
+    },
+
+    remove() {
+      this.$store.dispatch("DELETE_DONE_PROJECT", {
+        doneProjectIdx: this.project.doneProjectIdx,
+        userIdx: this.project.userIdx
+      });
     }
   }
 };

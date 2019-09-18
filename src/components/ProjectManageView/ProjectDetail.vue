@@ -1,15 +1,15 @@
 <template>
   <v-container class="project_detail_container">
     <v-card flat class="project_card">
-      <v-chip class="status" color="green" text-color="white">{{
-        project.status
-      }}</v-chip>
+      <v-chip class="status" color="green" text-color="white">
+        {{ project.status }}
+      </v-chip>
       <div class="project_title">{{ project.title }}</div>
       <div class="deadline">{{ setDateFormat(project.createdDate) }} 개설</div>
       <div class="require_skill">
-        <v-chip v-for="tag in project.tags" :key="tag.idx">
-          {{ tag.text }}
-        </v-chip>
+        <v-chip v-for="tag in project.tags" :key="tag.idx">{{
+          tag.text
+        }}</v-chip>
       </div>
       <div class="project_content">
         <p>{{ project.summary }}</p>
@@ -21,7 +21,7 @@
           class="leading_project_btns"
           v-if="this.$route.name === 'leadingProjectManage'"
         >
-          <v-btn depressed color="grey">프로젝트 삭제</v-btn>
+          <v-btn depressed color="grey" @click="remove">프로젝트 삭제</v-btn>
           <v-btn
             depressed
             color="grey"
@@ -33,7 +33,7 @@
             depressed
             color="grey"
             @click="changeStatus"
-            >프로젝트 시작하기</v-btn
+            >프로젝트 진행하기</v-btn
           >
           <v-btn
             v-else-if="project.status === '진행중'"
@@ -75,6 +75,16 @@ export default {
         projectIdx: this.project.projectIdx,
         status: "progress"
       });
+    },
+
+    remove() {
+      this.$store
+        .dispatch("DELETE_PROJECT", {
+          projectIdx: this.project.projectIdx
+        })
+        .then(() => {
+          this.$router.push("/my/projects");
+        });
     }
   }
 };

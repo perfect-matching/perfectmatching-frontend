@@ -163,6 +163,62 @@ export const projectModule = {
         });
     },
 
+    POST_DONE_PROJECT({ commit }, { doneProject }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .postDoneProject(doneProject, token)
+        .then(() => {})
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
+    PUT_PROJECT({ commit }, { projectIdx, putProject }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .putProject(projectIdx, putProject, token)
+        .then(() => {
+          console.log("수정 성공!");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
+    PUT_DONE_PROJECT({ commit }, { doneProjectIdx, doneProject }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .putDoneProject(doneProjectIdx, doneProject, token)
+        .then(() => {})
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
+    DELETE_PROJECT({ commit }, { projectIdx }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .deleteProject(projectIdx, token)
+        .then(() => {
+          console.log("삭제 성공");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
+    DELETE_DONE_PROJECT({ dispatch }, { doneProjectIdx, userIdx }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .deleteDoneProject(doneProjectIdx, token)
+        .then(() => {
+          dispatch("GET_MY_DONE_PROJECTS_BY_IDX", { idx: userIdx });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
     CHANGE_PROJECT_STATUS({ dispatch }, { projectIdx, status }) {
       const token = localStorage.getItem("user-token");
       return project
