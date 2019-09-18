@@ -12,10 +12,7 @@
           :size="45"
           color="grey lighten-4"
         >
-          <img
-            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
-            alt="avatar"
-          />
+          <img :src="project.profileImage" alt="avatar" />
         </v-avatar>
         <div class="user_nick">{{ project.leaderNick }}</div>
         <v-spacer></v-spacer>

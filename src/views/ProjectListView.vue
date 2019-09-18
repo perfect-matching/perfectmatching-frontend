@@ -22,6 +22,13 @@
           @change="findLocationQuery"
         ></v-select>
       </v-flex>
+      <v-flex>
+        <v-autocomplete
+          class="select_menu"
+          label="기술"
+          :items="tags"
+        ></v-autocomplete>
+      </v-flex>
     </v-layout>
     <project-list :projects="projects"></project-list>
     <infinite-loading
@@ -69,8 +76,13 @@ export default {
 
   computed: {
     ...mapGetters({
-      projects: "fetchedProjects"
+      projects: "fetchedProjects",
+      tags: "fetchedTags"
     })
+  },
+
+  created() {
+    this.$store.dispatch("FETCH_PROJECT_TAGS");
   },
 
   methods: {

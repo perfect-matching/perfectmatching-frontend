@@ -3,11 +3,8 @@
     <v-card-title>
       <router-link :to="`/profile/${member.memberIdx}`">
         <v-layout align-center>
-          <v-avatar :tile="false" :size="36" color="black lighten-4">
-            <img
-              src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
-              alt="avatar"
-            />
+          <v-avatar :tile="false" :size="36" color="white lighten-4">
+            <img :src="member.profileImage" alt="avatar" />
           </v-avatar>
           <div class="my_nick">{{ member.memberNick }}</div>
         </v-layout>

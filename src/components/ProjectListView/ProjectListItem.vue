@@ -4,10 +4,7 @@
       <div class="deadline">{{ setFromNow(project.createdDate) }}</div>
       <v-layout class="leader_info" justify-center align-center>
         <v-avatar :tile="false" :size="40" color="grey lighten-4">
-          <img
-            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
-            alt="avatar"
-          />
+          <img :src="project.profileImage" alt="avatar" />
         </v-avatar>
         <div class="leader_name">{{ project.leader }}</div>
       </v-layout>

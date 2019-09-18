@@ -1,11 +1,8 @@
 <template>
   <v-card class="user_card mx-auto" flat>
     <v-card-title>
-      <v-avatar :tile="false" :size="36" color="black lighten-4">
-        <img
-          src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
-          alt="avatar"
-        />
+      <v-avatar :tile="false" :size="36" color="white lighten-4">
+        <img :src="member.profileImage" alt="avatar" />
       </v-avatar>
       <div class="my_nick">{{ member.memberNick }}</div>
       <v-spacer></v-spacer>

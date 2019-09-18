@@ -26,7 +26,7 @@ function changeProjectStatus({ projectIdx, status }, token) {
 
 function getProjectsWithQueries(location, position) {
   return axios.get(
-    `${backend.baseUrl}/projects?location=${location}&position=${position}`
+    `${backend.baseUrl}/projects?location=${location}&position=${position}&`
   );
 }
 

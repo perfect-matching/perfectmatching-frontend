@@ -1,9 +1,9 @@
 <template>
   <div class="prject_info" grow>
     <v-layout class="project_status_container" align-center justify-center>
-      <v-chip class="status" color="primary" text-color="white">{{
-        project.status
-      }}</v-chip>
+      <v-chip class="status" color="primary" text-color="white">
+        {{ project.status }}
+      </v-chip>
       <div class="create_date">
         {{ setDateFormat(project.startDate) }} -
         {{ setDateFormat(project.endDate) }}
@@ -35,10 +35,7 @@
       <div>팀장</div>
       <router-link :to="`/profile/${project.leaderIdx}`">
         <v-avatar :tile="false" :size="56" color="grey lighten-4">
-          <img
-            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
-            alt="avatar"
-          />
+          <img :src="project.profileImage" alt="avatar" />
         </v-avatar>
       </router-link>
 
