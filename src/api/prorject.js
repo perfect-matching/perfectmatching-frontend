@@ -24,9 +24,9 @@ function changeProjectStatus({ projectIdx, status }, token) {
   );
 }
 
-function getProjectsWithQueries(location, position) {
+function getProjectsWithQueries(location, position, tag) {
   return axios.get(
-    `${backend.baseUrl}/projects?location=${location}&position=${position}&`
+    `${backend.baseUrl}/projects?location=${location}&position=${position}&tag=${tag}`
   );
 }
 

@@ -27,6 +27,8 @@
           class="select_menu"
           label="기술"
           :items="tags"
+          v-model="tag"
+          @change="findLocationQuery"
         ></v-autocomplete>
       </v-flex>
     </v-layout>
@@ -53,6 +55,7 @@ export default {
     return {
       location: "전체",
       position: "전체",
+      tag: "",
       locations: [
         "전체",
         "서울",
@@ -117,7 +120,8 @@ export default {
       // position + location
       this.$store.dispatch("FETCH_PROJECTS_WITH_QURIES", {
         location: locations[this.location],
-        position: positions[this.position]
+        position: positions[this.position],
+        tag: this.tag
       });
 
       // this.$store.dispatch("FETCH_PROJECTS_WITH_QURIES", {

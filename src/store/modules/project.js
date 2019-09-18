@@ -96,19 +96,18 @@ export const projectModule = {
       });
     },
 
-    FETCH_PROJECTS_WITH_QURIES({ commit }, { location, position }) {
+    FETCH_PROJECTS_WITH_QURIES({ commit }, { location, position, tag }) {
       return project
-        .getProjectsWithQueries(location, position)
+        .getProjectsWithQueries(location, position, tag)
         .then(({ data }) => {
           const projects = {
             datas: data._embedded.datas,
             nextUrl: data._links.next.href
           };
-
           commit("SET_PROJECTS", projects);
         })
         .catch(err => {
-          console.log(err);
+          commit("SET_PROJECTS", []);
         });
     },
 
