@@ -46,6 +46,7 @@
 
         <v-spacer></v-spacer>
         <v-btn
+          @click="cancelApply"
           depressed
           color="grey"
           v-if="this.$route.name === 'doingProjectManage'"
@@ -75,6 +76,35 @@ export default {
         projectIdx: this.project.projectIdx,
         status: "progress"
       });
+    },
+
+    cancelApply() {
+      this.$_swal
+        .fire({
+          title: "지원 취소하겠습니까?",
+          text: "지원 취소하게되면 이전 기록은 사라지게 됩니다.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "지원 취소"
+        })
+        .then(result => {
+          if (result.value) {
+            this.$_swal.fire(
+              "지원 취소 완료",
+              "지원을 취소하였습니다.",
+              "success"
+            );
+            this.$store
+              .dispatch("CANCLE_APPLY", {
+                projectIdx: this.project.projectIdx
+              })
+              .then(() => {
+                this.$router.push("/my/projects");
+              });
+          }
+        });
     },
 
     remove() {

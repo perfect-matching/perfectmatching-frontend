@@ -23,11 +23,24 @@ export const applyModule = {
       return apply
         .confirmApplicants({ projectIdx, userIdx, status }, token)
         .then(({ data }) => {
-          console.log("지원 완료!!");
           dispatch("GET_PROJECT_APPLICANTS_BY_IDX", { idx: projectIdx });
           dispatch("GET_MY_PROJECT_MEMBERS_BY_IDX", { idx: projectIdx });
         })
         .catch(err => console.log(err));
+    },
+
+    CANCLE_APPLY({ dispatch }, { projectIdx }) {
+      const token = localStorage.getItem("user-token");
+      return apply
+        .applyCancel(projectIdx, token)
+        .then(() => {
+          console.log("지원 취소 완료!");
+          dispatch("GET_PROJECT_APPLICANTS_BY_IDX", { idx: projectIdx });
+          dispatch("GET_MY_PROJECT_MEMBERS_BY_IDX", { idx: projectIdx });
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };

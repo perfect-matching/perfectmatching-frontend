@@ -1,13 +1,17 @@
 <template>
   <v-card class="user_card mx-auto" flat>
     <v-card-title>
-      <v-avatar :tile="false" :size="36" color="black lighten-4">
-        <img
-          src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
-          alt="avatar"
-        />
-      </v-avatar>
-      <div class="my_nick">{{ member.memberNick }}</div>
+      <router-link :to="`/profile/${member.memberIdx}`">
+        <v-layout align-center>
+          <v-avatar :tile="false" :size="36" color="black lighten-4">
+            <img
+              src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
+              alt="avatar"
+            />
+          </v-avatar>
+          <div class="my_nick">{{ member.memberNick }}</div>
+        </v-layout>
+      </router-link>
       <v-spacer></v-spacer>
       <div class="create_date">하루 전</div>
     </v-card-title>
@@ -48,6 +52,10 @@ export default {
 </script>
 
 <style scoped>
+a {
+  color: black;
+  text-decoration: none;
+}
 .my_nick {
   margin-left: 10px;
 }

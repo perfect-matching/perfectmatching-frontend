@@ -1,8 +1,8 @@
 <template>
   <v-card class="comment_card mx-auto" color="#fff" flat>
-    <v-card-text v-if="!showUpdate" class="headline font-weight-bold">{{
-      comment.content
-    }}</v-card-text>
+    <v-card-text v-if="!showUpdate" class="headline font-weight-bold">
+      {{ comment.content }}
+    </v-card-text>
     <v-textarea
       v-if="showUpdate"
       class="update_textarea"
@@ -37,26 +37,23 @@
     </v-card-actions>
     <v-card-actions>
       <v-list-tile class="grow">
-        <v-list-tile-avatar color="grey darken-3">
+        <v-list-tile-avatar color="white darken-3">
           <v-btn icon>
             <v-avatar :tile="false" :size="36">
-              <img
-                src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-                alt="avatar"
-              />
+              <img :src="comment.profileImageURL" alt="avatar" />
             </v-avatar>
           </v-btn>
         </v-list-tile-avatar>
 
         <v-list-tile-content>
-          <v-list-tile-title class="nick_name">
-            {{ comment.userName }}
-          </v-list-tile-title>
+          <v-list-tile-title class="nick_name">{{
+            comment.userName
+          }}</v-list-tile-title>
         </v-list-tile-content>
         <v-layout align-center justify-end>
-          <span class="create_date subheading mr-2">
-            {{ setDateFormat(comment.createdDate) }}
-          </span>
+          <span class="create_date subheading mr-2">{{
+            setDateFormat(comment.createdDate)
+          }}</span>
         </v-layout>
       </v-list-tile>
     </v-card-actions>

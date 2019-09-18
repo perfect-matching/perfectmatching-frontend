@@ -25,7 +25,14 @@ function confirmApplicants({ projectIdx, userIdx, status }, token) {
   );
 }
 
+function applyCancel(projectIdx, token) {
+  return axios.delete(`${backend.baseUrl}/project/cancel/${projectIdx}`, {
+    headers: { Authorization: token }
+  });
+}
+
 export const apply = {
   applyToProject,
-  confirmApplicants
+  confirmApplicants,
+  applyCancel
 };
