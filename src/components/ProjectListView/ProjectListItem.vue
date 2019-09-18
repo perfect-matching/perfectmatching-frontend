@@ -4,21 +4,23 @@
       <div class="deadline">{{ setFromNow(project.createdDate) }}</div>
       <v-layout class="leader_info" justify-center align-center>
         <v-avatar :tile="false" :size="40" color="grey lighten-4">
-          <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar" />
+          <img
+            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
+            alt="avatar"
+          />
         </v-avatar>
         <div class="leader_name">{{ project.leader }}</div>
       </v-layout>
 
       <v-card-title class="headline justify-center">
-        {{
-        project.title
-        }}
+        {{ project.title }}
       </v-card-title>
       <v-chip
         class="status"
         :color="setChipColor(project.status)"
         text-color="white"
-      >{{ project.status }}</v-chip>
+        >{{ project.status }}</v-chip
+      >
       <div class="location">{{ project.location }}</div>
       <!-- <div class="create_date">
         {{ setLLFormat(project.deadline) }} 까지 모집
@@ -26,18 +28,41 @@
       <v-card-text>{{ project.summary }}</v-card-text>
       <div class="require_skill">
         <v-chip v-for="tag in project.tags" :key="tag.text">
-          {{
-          tag.text
-          }}
+          {{ tag.text }}
         </v-chip>
       </div>
       <div class="need_positions" justify-center>
-        <div class="title">구해요!</div>
-        <img class="position_img developer_img" src="../../assets/monitor.svg" alt />
-        <img class="position_img developer_img" src="../../assets/paint-palette.svg" alt />
-        <img class="position_img developer_img" src="../../assets/workspace.svg" alt />
-        <img class="position_img developer_img" src="../../assets/megaphone.svg" alt />
-        <img class="position_img developer_img" src="../../assets/monitor.svg" alt />
+        <div class="position_title">구해요!</div>
+        <img
+          v-if="project.developerRecruits"
+          class="position_img developer_img"
+          src="../../assets/monitor.svg"
+          alt
+        />
+        <img
+          v-if="project.designerRecruits"
+          class="position_img developer_img"
+          src="../../assets/paint-palette.svg"
+          alt
+        />
+        <img
+          v-if="project.plannerRecruits"
+          class="position_img developer_img"
+          src="../../assets/workspace.svg"
+          alt
+        />
+        <img
+          v-if="project.marketerRecruits"
+          class="position_img developer_img"
+          src="../../assets/megaphone.svg"
+          alt
+        />
+        <img
+          v-if="project.etcRecruits"
+          class="position_img developer_img"
+          src="../../assets/monitor.svg"
+          alt
+        />
       </div>
     </v-card>
   </v-hover>
@@ -77,7 +102,9 @@ export default {
 .project_card {
   position: relative;
   width: 410px;
-  min-height: 439px;
+  min-height: 500px;
+
+  padding-bottom: 20px;
   overflow-y: auto;
   border: 1px solid #dbdbdb;
 }
@@ -127,6 +154,10 @@ export default {
   padding: 0 20px 20px 20px;
 }
 
+.position_title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
 .position_img {
   width: 40px;
   height: 40px;
