@@ -129,19 +129,57 @@ export default {
       this.content = "";
     },
 
-    submit() {
+    async submit() {
+      const positions = {
+        DEVELOPER: "'개발자'",
+        DESIGNER: "'디자이너'",
+        MARKETER: "'마케터'",
+        PLANNER: "'기획자'",
+        ETC: "'기타'"
+      };
       this.$v.$touch();
 
       if (this.$v.$invalid) {
         console.log("형식 불일치");
       } else {
-        const projectIdx = this.$route.params.idx;
+        try {
+          const result = await this.$_swal.fire({
+            title: "프로젝트에 지원하시겠습니까?",
+            text: `${positions[this.position]} 역할을 맡게 됩니다!`,
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "지원하기"
+          });
 
-        this.$store.dispatch("APPLY_TO_PROJECT", {
-          projectIdx,
-          position: this.position,
-          simpleProfile: this.content
-        });
+          if (result.value) {
+            this.$_swal.fire(
+              "지원 완료!",
+              "지원이 완료되었습니다. 주최자의 응답을 기다려주세요",
+              "success"
+            );
+          }
+
+          const projectIdx = this.$route.params.idx;
+          await this.$store
+            .dispatch("APPLY_TO_PROJECT", {
+              projectIdx,
+              position: this.position,
+              simpleProfile: this.content
+            })
+            .then(() => {
+              this.$router.push("/my/projects");
+            });
+        } catch {
+          await this.$_swal.fire(
+            "지원 실패",
+            "예기치 못한 오류가 발생하였습니다. 다시 지원해주세요.",
+            "error"
+          );
+
+          this.$router.push("/projects");
+        }
       }
     },
 

@@ -153,7 +153,9 @@ export const myModule = {
           const myDoneProjects = data._embedded.datas;
           commit("SET_DONE_PROJECTS", myDoneProjects);
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          commit("SET_DONE_PROJECTS", []);
+        });
     },
 
     GET_MY_PROJECT_BY_IDX({ commit }, { idx }) {

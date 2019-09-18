@@ -1,15 +1,15 @@
 <template>
   <v-container class="project_detail_container">
     <v-card flat class="project_card">
-      <v-chip class="status" color="green" text-color="white">
-        {{ project.status }}
-      </v-chip>
+      <v-chip class="status" color="green" text-color="white">{{
+        project.status
+      }}</v-chip>
       <div class="project_title">{{ project.title }}</div>
       <div class="deadline">{{ setDateFormat(project.createdDate) }} 개설</div>
       <div class="require_skill">
-        <v-chip v-for="tag in project.tags" :key="tag.idx">{{
-          tag.text
-        }}</v-chip>
+        <v-chip v-for="tag in project.tags" :key="tag.idx">
+          {{ tag.text }}
+        </v-chip>
       </div>
       <div class="project_content">
         <p>{{ project.summary }}</p>
@@ -78,12 +78,31 @@ export default {
     },
 
     remove() {
-      this.$store
-        .dispatch("DELETE_PROJECT", {
-          projectIdx: this.project.projectIdx
+      this.$_swal
+        .fire({
+          title: "삭제하시겠습니까?",
+          text: "한번 삭제한 프로젝트는 다시 복구 할 수 없습니다.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "삭제"
         })
-        .then(() => {
-          this.$router.push("/my/projects");
+        .then(result => {
+          if (result.value) {
+            this.$_swal.fire(
+              "삭제 완료",
+              "프로젝트가 삭제되었습니다.",
+              "success"
+            );
+            this.$store
+              .dispatch("DELETE_PROJECT", {
+                projectIdx: this.project.projectIdx
+              })
+              .then(() => {
+                this.$router.push("/my/projects");
+              });
+          }
         });
     }
   }

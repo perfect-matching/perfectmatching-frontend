@@ -11,11 +11,7 @@
       <v-spacer></v-spacer>
       <div class="create_date">하루 전</div>
     </v-card-title>
-    <v-card-text class="content">
-      전 스프링 개발자에요전 스프링 개발자에요전 스프링 개발자에요전 스프링
-      개발자에요전 스프링 개발자에요전 스프링 개발자에요전 스프링 개발자에요전
-      스프링 개발자에요전 스프링 개발자에요
-    </v-card-text>
+    <v-card-text class="content">{{ member.simpleProfile }}</v-card-text>
   </v-card>
 </template>
 <script>

@@ -287,6 +287,11 @@ export default {
           this.$store
             .dispatch("POST_NEW_PROJECT", { postProject: project })
             .then(() => {
+              this.$_swal.fire(
+                "프로젝트 개설 완료!",
+                "프로젝트가 개설되었습니다. :D",
+                "success"
+              );
               this.$router.push("/projects");
             });
         } else if (routeName == "editProject") {
@@ -296,6 +301,11 @@ export default {
               putProject: project
             })
             .then(() => {
+              this.$_swal.fire(
+                "프로젝트 수정 완료!",
+                "프로젝트가 수정되었습니다. :D",
+                "success"
+              );
               this.$router.push(`/my/leading/${this.project.projectIdx}`);
             });
         }

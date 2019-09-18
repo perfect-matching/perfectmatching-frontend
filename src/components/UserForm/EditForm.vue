@@ -103,8 +103,8 @@
       @blur="$v.checkbox.$touch()"
     ></v-checkbox>
 
-    <v-btn @click="submit">가입하기</v-btn>
-    <v-btn @click="clear">clear</v-btn>
+    <v-btn @click="submit">제출</v-btn>
+    <v-btn @click="clear">취소</v-btn>
   </form>
 </template>
 
@@ -281,7 +281,15 @@ export default {
 
         const routeName = this.$route.name;
         if (routeName == "join") {
-          this.$store.dispatch("JOIN_USER", { user });
+          this.$store.dispatch("JOIN_USER", { user }).then(() => {
+            this.$_swal.fire({
+              title: "회원가입 완료!",
+              text: "가입하신 이메일과 비밀번호로 로그인해주세요 :)",
+              type: "success",
+              confirmButtonText: "확인"
+            });
+            this.$router.push("/home");
+          });
         } else if (routeName == "profileEdit") {
           console.log("프로필 변경");
         }

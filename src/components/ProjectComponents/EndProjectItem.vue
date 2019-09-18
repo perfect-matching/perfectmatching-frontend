@@ -64,10 +64,29 @@ export default {
     },
 
     remove() {
-      this.$store.dispatch("DELETE_DONE_PROJECT", {
-        doneProjectIdx: this.project.doneProjectIdx,
-        userIdx: this.project.userIdx
-      });
+      this.$_swal
+        .fire({
+          title: "삭제 하시겠습니까?",
+          text: "삭제하시면 다시 되돌릴 수 없습니다.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "삭제"
+        })
+        .then(result => {
+          if (result.value) {
+            this.$_swal.fire(
+              "삭제되었습니다!",
+              "프로젝트가 삭제되었습니다.",
+              "success"
+            );
+            this.$store.dispatch("DELETE_DONE_PROJECT", {
+              doneProjectIdx: this.project.doneProjectIdx,
+              userIdx: this.project.userIdx
+            });
+          }
+        });
     }
   }
 };
