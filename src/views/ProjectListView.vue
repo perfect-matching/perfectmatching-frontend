@@ -26,7 +26,7 @@
         <v-autocomplete
           class="select_menu"
           label="기술"
-          :items="tags"
+          :items="['전체'].concat(tags)"
           v-model="tag"
           @change="findLocationQuery"
         ></v-autocomplete>
@@ -55,7 +55,7 @@ export default {
     return {
       location: "전체",
       position: "전체",
-      tag: "",
+      tag: "전체",
       locations: [
         "전체",
         "서울",
@@ -117,16 +117,13 @@ export default {
         기타: "ETC"
       };
 
+      const tag = this.tag === "전체" ? "ALL" : this.tag;
       // position + location
       this.$store.dispatch("FETCH_PROJECTS_WITH_QURIES", {
         location: locations[this.location],
         position: positions[this.position],
-        tag: this.tag
+        tag
       });
-
-      // this.$store.dispatch("FETCH_PROJECTS_WITH_QURIES", {
-      //   location: locations[this.location]
-      // });
 
       this.infiniteId += 1;
     },
