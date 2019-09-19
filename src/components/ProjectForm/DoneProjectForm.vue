@@ -27,8 +27,8 @@
     <vue-tags-input
       class="tag_input"
       v-model="tag"
-      :tags="project.usedSkills"
-      @tags-changed="newTags => (project.usedSkills = newTags)"
+      :tags="project.tags"
+      @tags-changed="newTags => (project.tags = newTags)"
       :autocomplete-items="filteredItems"
       placeholder="사용한 기술스택을 입력해주세요."
       add-only-from-autocomplete
@@ -194,7 +194,7 @@ export default {
       this.project.title = "";
       this.project.summary = "";
       this.project.content = "";
-      this.project.usedSkills = [];
+      this.project.tags = [];
       this.project.socialUrl = "";
       this.project.startDate = "";
       this.project.endDate = "";
@@ -202,7 +202,6 @@ export default {
 
     submit() {
       this.$v.$touch();
-      console.log(this.project);
       if (this.$v.$invalid) {
         console.log("형식 불일치");
       } else {
@@ -213,7 +212,7 @@ export default {
           socialUrl: this.project.socialUrl,
           startDate: this.project.startDate,
           endDate: this.project.endDate,
-          usedSkills: this.project.usedSkills
+          tags: this.project.tags
         };
 
         const routeName = this.$route.name;
@@ -233,6 +232,23 @@ export default {
             doneProjectIdx: this.project.doneProjectIdx,
             doneProject
           });
+        } else if (routeName == "doneProjectStateChange") {
+          this.$store
+            .dispatch("POST_DONE_PROJECT", { doneProject })
+            .then(() => {
+              this.$store.dispatch("CHANGE_PROJECT_STATUS", {
+                projectIdx: this.project.projectIdx,
+                status: "COMPLETE"
+              });
+
+              this.$_swal.fire(
+                "프로젝트 완료",
+                "프로젝트가 완료되었습니다.",
+                "success"
+              );
+
+              this.$router.push("/my/projects");
+            });
         }
       }
     },

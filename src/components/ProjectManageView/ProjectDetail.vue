@@ -1,15 +1,15 @@
 <template>
   <v-container class="project_detail_container">
     <v-card flat class="project_card">
-      <v-chip class="status" color="green" text-color="white">{{
-        project.status
-      }}</v-chip>
+      <v-chip class="status" color="green" text-color="white">
+        {{ project.status }}
+      </v-chip>
       <div class="project_title">{{ project.title }}</div>
       <div class="deadline">{{ setDateFormat(project.createdDate) }} 개설</div>
       <div class="require_skill">
-        <v-chip v-for="tag in project.tags" :key="tag.idx">
-          {{ tag.text }}
-        </v-chip>
+        <v-chip v-for="tag in project.tags" :key="tag.idx">{{
+          tag.text
+        }}</v-chip>
       </div>
       <div class="project_content">
         <p>{{ project.summary }}</p>
@@ -72,10 +72,29 @@ export default {
     },
 
     changeStatus() {
-      this.$store.dispatch("CHANGE_PROJECT_STATUS", {
-        projectIdx: this.project.projectIdx,
-        status: "progress"
-      });
+      this.$_swal
+        .fire({
+          title: "프로젝트를 진행하시겠습니까?",
+          text: "프로젝트 상태가 '모집중'에서 '진행중'으로 바뀌게됩니다.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "프로젝트 진행하기"
+        })
+        .then(result => {
+          if (result.value) {
+            this.$_swal.fire(
+              "상태 변경 완료 ",
+              "프로젝트 상태가 '진행중'으로 바뀌었습니다.",
+              "success"
+            );
+            this.$store.dispatch("CHANGE_PROJECT_STATUS", {
+              projectIdx: this.project.projectIdx,
+              status: "PROGRESS"
+            });
+          }
+        });
     },
 
     cancelApply() {

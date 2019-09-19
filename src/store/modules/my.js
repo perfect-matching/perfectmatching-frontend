@@ -164,12 +164,13 @@ export const myModule = {
         });
     },
 
-    GET_MY_PROJECT_BY_IDX({ commit }, { idx }) {
+    GET_MY_PROJECT_BY_IDX({ commit, dispatch }, { idx }) {
       const token = localStorage.getItem("user-token");
       return project
         .getProjectByIdx(idx, token)
         .then(({ data }) => {
           commit("SET_MY_PROJECT", data);
+          dispatch("FETCH_PROJECT_USED_SKILLS", { idx });
         })
         .catch(err => console.log(err));
     },

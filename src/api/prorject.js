@@ -16,11 +16,14 @@ function getProjectByIdx(idx, token) {
 }
 
 // 프로젝트 상태 변경
-// progress -> 진행중   그 외 -> complete
+// PROJECT -> 진행중   COMPLETE -> 완료
 function changeProjectStatus({ projectIdx, status }, token) {
   return axios.put(
     `${backend.baseUrl}/project/${projectIdx}/status?status=${status}`,
-    { headers: { Authorization: token } }
+    project,
+    {
+      headers: { Authorization: token }
+    }
   );
 }
 

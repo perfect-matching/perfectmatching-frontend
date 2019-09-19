@@ -30,7 +30,7 @@
 
         <v-btn icon to="/my">
           <v-avatar :tile="false" :size="36" color="grey lighten-4">
-            <img :src="myProfile.profileImg" alt="avatar" />
+            <img :src="myProfile.profileImage" alt="avatar" />
           </v-avatar>
         </v-btn>
       </div>
