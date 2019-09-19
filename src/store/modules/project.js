@@ -166,7 +166,7 @@ export const projectModule = {
       const token = localStorage.getItem("user-token");
       return project
         .postDoneProject(doneProject, token)
-        .then(() => {})
+        .then(() => { })
         .catch(err => {
           console.log(err);
         });
@@ -188,7 +188,7 @@ export const projectModule = {
       const token = localStorage.getItem("user-token");
       return project
         .putDoneProject(doneProjectIdx, doneProject, token)
-        .then(() => {})
+        .then(() => { })
         .catch(err => {
           console.log(err);
         });

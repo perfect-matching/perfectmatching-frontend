@@ -59,7 +59,7 @@
       add-only-from-autocomplete
     />
     <v-layout>필요 직군( 단위: 명 )</v-layout>
-    <div v-if="recruitsErrors">최소 1명 이상의 멤버가 있어야 합니다.</div>
+
     <v-layout wrap>
       <v-flex>
         <v-text-field
