@@ -2,7 +2,7 @@
   <section class="profile_edit_section">
     <v-card>
       <h2 class="section_title">회원 정보 수정</h2>
-      <my-photo :profileImg="myProfile.profileImg"></my-photo>
+      <my-photo :profileImage="myProfile.profileImage"></my-photo>
       <edit-form :myProfile="myProfile"></edit-form>
     </v-card>
   </section>

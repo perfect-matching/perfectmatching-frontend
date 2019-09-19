@@ -14,6 +14,7 @@ export const myModule = {
     myProject: {},
     myProjectApplicants: [],
     myProjectMembers: [],
+    myApplyProjects: [],
     myDoneProject: {}
   },
 
@@ -52,6 +53,10 @@ export const myModule = {
 
     fetchedMyDoneProject(state) {
       return state.myDoneProject;
+    },
+
+    fetchedMyApplyProjects(state) {
+      return state.myApplyProjects;
     }
   },
 
@@ -90,6 +95,10 @@ export const myModule = {
 
     SET_APPLICANTS(state, applicants) {
       state.myProjectApplicants = applicants;
+    },
+
+    SET_APPLY_PROJECTS(state, datas) {
+      state.myApplyProjects = datas;
     }
   },
 
@@ -199,6 +208,20 @@ export const myModule = {
         .catch(err => {
           // 멤버가 없어도 일로 옴
           commit("SET_MY_PROJECT_MEMBERS", []);
+        });
+    },
+
+    GET_MY_APPLY_PROJECTS({ commit }, { idx }) {
+      const token = localStorage.getItem("user-token");
+      return project
+        .getApplyProjects(idx, token)
+        .then(({ data }) => {
+          const applyProjects = data._embedded.datas;
+          commit("SET_APPLY_PROJECTS", applyProjects);
+        })
+        .catch(err => {
+          console.log(err);
+          commit("SET_APPLY_PROJECTS", []);
         });
     },
 

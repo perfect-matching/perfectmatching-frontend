@@ -71,6 +71,12 @@ function getApplicantsByProjectIdx(projectIdx, token) {
   });
 }
 
+function getApplyProjects(userIdx, token) {
+  return axios.get(`${backend.baseUrl}/profile/${userIdx}/applyprojects`, {
+    headers: { Authorization: token }
+  });
+}
+
 function postDoneProject(doneProject, token) {
   return axios.post(`${backend.baseUrl}/doneproject`, doneProject, {
     headers: { Authorization: token }
@@ -122,5 +128,6 @@ export const project = {
   deleteProject,
   getProjectMemebersByIdx,
   getApplicantsByProjectIdx,
-  changeProjectStatus
+  changeProjectStatus,
+  getApplyProjects
 };
