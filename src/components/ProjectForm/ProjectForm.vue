@@ -59,6 +59,7 @@
       add-only-from-autocomplete
     />
     <v-layout>필요 직군( 단위: 명 )</v-layout>
+    <div v-if="recruitsErrors">최소 1명 이상의 멤버가 있어야 합니다.</div>
     <v-layout wrap>
       <v-flex>
         <v-text-field
@@ -137,7 +138,14 @@
 import VueTagsInput from "@johmun/vue-tags-input";
 import { mapGetters } from "vuex";
 import { validationMixin } from "vuelidate";
-import { required, maxLength, helpers } from "vuelidate/lib/validators";
+import {
+  required,
+  maxLength,
+  minValue,
+  helpers
+} from "vuelidate/lib/validators";
+
+// const greaterThanZero = value => value > 0;
 
 export default {
   props: {
@@ -159,7 +167,8 @@ export default {
       summary: { required, maxLength: maxLength(100) },
       content: { maxLength: maxLength(5000) },
       location: { required }
-    }
+    },
+    totalRecruits: { minValue: minValue(1) }
   },
 
   created() {
@@ -184,7 +193,13 @@ export default {
         "경상남도",
         "제주도"
       ],
-      tag: ""
+      tag: "",
+      totalRecruits:
+        this.project.developerRecruits +
+        this.project.designerRecruits +
+        this.project.plannerRecruits +
+        this.project.marketerRecruits +
+        this.project.etcRecruits
     };
   },
 
@@ -243,8 +258,9 @@ export default {
 
     recruitsErrors() {
       const errors = [];
+      if (!this.$v.totalRecruits.$dirty) return errors;
 
-      !this.$v.project.minMember &&
+      !this.$v.totalRecruits.minValue &&
         errors.push("최소 1명 이상의 팀원이 있어야 합니다.");
 
       return errors;
@@ -257,6 +273,7 @@ export default {
       this.project.summary = "";
       this.project.content = "";
       this.project.location = null;
+      this.project.socialUrl = "";
       this.project.developerRecruits = 0;
       this.project.designerRecruits = 0;
       this.project.plannerRecruits = 0;

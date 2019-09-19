@@ -20,7 +20,10 @@ function getProjectByIdx(idx, token) {
 function changeProjectStatus({ projectIdx, status }, token) {
   return axios.put(
     `${backend.baseUrl}/project/${projectIdx}/status?status=${status}`,
-    { headers: { Authorization: token } }
+    project,
+    {
+      headers: { Authorization: token }
+    }
   );
 }
 

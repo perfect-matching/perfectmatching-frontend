@@ -5,7 +5,7 @@
 
       <ul class="applicant_list">
         <div class="no_applicants" v-if="applicants.length === 0">
-          현재 참여자가 없습니다.
+          현재 지원자가 없습니다.
         </div>
         <li
           class="list_item"
