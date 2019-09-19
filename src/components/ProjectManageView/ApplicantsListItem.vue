@@ -13,7 +13,7 @@
       <div class="create_date">하루 전</div>
     </v-card-title>
     <v-card-text class="content">{{ member.simpleProfile }}</v-card-text>
-    <v-card-actions>
+    <v-card-actions v-if="this.$route.name != 'applyProjectManage'">
       <v-spacer></v-spacer>
       <v-btn flat text @click="apply">수락</v-btn>
       <v-btn flat @click="decline">거절</v-btn>

@@ -2,6 +2,7 @@
   <section class="my_projects_section">
     <h2>프로젝트 관리</h2>
     <leading-project-list :projects="leadingProjects"></leading-project-list>
+    <apply-project-list :projects="applyPorjects"></apply-project-list>
     <doing-project-list :projects="doingProjects"></doing-project-list>
     <end-project-list :projects="doneProjects"></end-project-list>
   </section>
@@ -13,17 +14,20 @@ import { mapGetters } from "vuex";
 import bus from "../utils/bus.js";
 import LeadingProjectList from "../components/ProjectComponents/LeadingProjectList.vue";
 import DoingProjectList from "../components/ProjectComponents/DoingProjectList.vue";
+import ApplyProjectList from "../components/ProjectComponents/ApplyProjectList.vue";
 import EndProjectList from "../components/ProjectComponents/EndProjectList.vue";
 export default {
   components: {
     LeadingProjectList,
     DoingProjectList,
+    ApplyProjectList,
     EndProjectList
   },
 
   computed: {
     ...mapGetters({
       leadingProjects: "fetchedMyLeadingProjects",
+      applyPorjects: "fetchedMyApplyProjects",
       doingProjects: "fetchedMyDoingProjects",
       doneProjects: "fetchedMyDoneProjects"
     })
@@ -39,7 +43,7 @@ export default {
       await store.dispatch("GET_MY_LEADING_PROJECTS_BY_IDX", { idx });
       await store.dispatch("GET_MY_DOING_PROJECTS_BY_IDX", { idx });
       await store.dispatch("GET_MY_DONE_PROJECTS_BY_IDX", { idx });
-
+      await store.dispatch("GET_MY_APPLY_PROJECTS", { idx });
       bus.$emit("end:spinner");
       next();
     } catch {

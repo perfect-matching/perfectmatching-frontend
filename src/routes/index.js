@@ -10,6 +10,7 @@ import ProfileEditView from "../views/ProfileEditView.vue";
 import MyProjectsView from "../views/MyProjectsView.vue";
 import MyProjectEditView from "../views/MyProjectEditView.vue";
 import LeadingProjectManageView from "../views/LeadingProjectManageView.vue";
+import ApplyProjectManageView from "../views/ApplyProjectManageView.vue";
 import DoingProjectManageView from "../views/DoingProjectManageView.vue";
 import NewProjectView from "../views/NewProjectView.vue";
 import ApplicationView from "../views/ApplicationView.vue";
@@ -101,6 +102,13 @@ export const router = new Router({
       component: DoingProjectManageView,
       beforeEnter: needLogin
     },
+    {
+      path: "/my/apply/:idx",
+      name: "applyProjectManage",
+      component: ApplyProjectManageView,
+      beforeEnter: needLogin
+    },
+
     {
       path: "/my/projects/:idx/edit",
       name: "editProject",
