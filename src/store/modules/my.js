@@ -98,6 +98,7 @@ export const myModule = {
       const token = localStorage.getItem("user-token");
       const newToken = token.substring(7, token.length); // Bearer 삭제
       const decoded = jwt.decode(newToken, { complete: true });
+      localStorage.setItem("user-idx", decoded.payload.idx);
       return my
         .getUserProfileByIdx(decoded.payload.idx, token)
         .then(({ data }) => {
@@ -131,6 +132,7 @@ export const myModule = {
         })
         .catch(err => {
           console.log(err);
+          commit("SET_MY_LEADING_PROJECTS", []);
         });
     },
 
@@ -140,9 +142,12 @@ export const myModule = {
         .getDoingProjectsByUserIdx(idx, token)
         .then(({ data }) => {
           const myDoingProjects = data._embedded.datas;
-          commit("SET_MY_DOING_PROJECTS", myDoingProjects, token);
+          commit("SET_MY_DOING_PROJECTS", myDoingProjects);
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          commit("SET_MY_DOING_PROJECTS", []);
+        });
     },
 
     GET_MY_DONE_PROJECTS_BY_IDX({ commit }, { idx }) {
@@ -154,6 +159,7 @@ export const myModule = {
           commit("SET_DONE_PROJECTS", myDoneProjects);
         })
         .catch(err => {
+          console.log(err);
           commit("SET_DONE_PROJECTS", []);
         });
     },
@@ -192,7 +198,6 @@ export const myModule = {
         .catch(err => {
           // 멤버가 없어도 일로 옴
           commit("SET_MY_PROJECT_MEMBERS", []);
-          console.log(err);
         });
     },
 
@@ -211,7 +216,18 @@ export const myModule = {
       return fileUpload
         .uploadProfileImg(formData, token)
         .then(({ data }) => {
-          console.log("파일 업로드 완료!!", data);
+          dispatch("GET_MY_PROFILE");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
+    DELETE_MY_PHOTO({ dispatch }) {
+      const token = localStorage.getItem("user-token");
+      return fileUpload
+        .deleteProfileImg(token)
+        .then(({ data }) => {
           dispatch("GET_MY_PROFILE");
         })
         .catch(err => {

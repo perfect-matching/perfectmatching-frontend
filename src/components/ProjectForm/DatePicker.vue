@@ -37,8 +37,8 @@ export default {
   },
 
   data: () => ({
-    date: "",
-    menu: false
+    menu: false,
+    date: ""
   }),
 
   methods: {

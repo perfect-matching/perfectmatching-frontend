@@ -27,7 +27,8 @@ export default {
     return {
       comment: {
         nickname: store.state.myModule.myProfile.nickname,
-        content: ""
+        content: "",
+        profileImage: store.state.myModule.myProfile.profileImage
       }
     };
   },

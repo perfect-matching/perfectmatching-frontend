@@ -9,9 +9,9 @@
         <div class="leader_name">{{ project.leader }}</div>
       </v-layout>
 
-      <v-card-title class="headline justify-center">
-        {{ project.title }}
-      </v-card-title>
+      <v-card-title class="headline justify-center">{{
+        project.title
+      }}</v-card-title>
       <v-chip
         class="status"
         :color="setChipColor(project.status)"
@@ -19,48 +19,60 @@
         >{{ project.status }}</v-chip
       >
       <div class="location">{{ project.location }}</div>
-      <!-- <div class="create_date">
-        {{ setLLFormat(project.deadline) }} 까지 모집
-      </div>-->
+
       <v-card-text>{{ project.summary }}</v-card-text>
       <div class="require_skill">
-        <v-chip v-for="tag in project.tags" :key="tag.text">
-          {{ tag.text }}
-        </v-chip>
+        <v-chip v-for="tag in project.tags" :key="tag.text">{{
+          tag.text
+        }}</v-chip>
       </div>
-      <div class="need_positions" justify-center>
-        <div class="position_title">구해요!</div>
-        <img
-          v-if="project.developerRecruits"
-          class="position_img developer_img"
-          src="../../assets/monitor.svg"
-          alt
-        />
-        <img
-          v-if="project.designerRecruits"
-          class="position_img developer_img"
-          src="../../assets/paint-palette.svg"
-          alt
-        />
-        <img
-          v-if="project.plannerRecruits"
-          class="position_img developer_img"
-          src="../../assets/workspace.svg"
-          alt
-        />
-        <img
-          v-if="project.marketerRecruits"
-          class="position_img developer_img"
-          src="../../assets/megaphone.svg"
-          alt
-        />
-        <img
-          v-if="project.etcRecruits"
-          class="position_img developer_img"
-          src="../../assets/monitor.svg"
-          alt
-        />
-      </div>
+      <div class="position_group_title">구해요!</div>
+      <v-layout class="need_positions" justify-center>
+        <div class="position" v-if="project.developerRecruits">
+          <div class="img_title">개발자</div>
+          <img
+            class="position_img developer_img"
+            src="../../assets/monitor.svg"
+            alt
+          />
+        </div>
+
+        <div class="position" v-if="project.designerRecruits">
+          <div class="img_title">디자이너</div>
+          <img
+            class="position_img designer_img"
+            src="../../assets/paint-palette.svg"
+            alt
+          />
+        </div>
+
+        <div class="position" v-if="project.plannerRecruits">
+          <div class="img_title">기획자</div>
+          <img
+            class="position_img planner_img"
+            src="../../assets/workspace.svg"
+            alt
+          />
+        </div>
+
+        <div class="position" v-if="project.marketerRecruits">
+          <div class="img_title">마케터</div>
+          <img
+            class="position_img developer_img"
+            src="../../assets/megaphone.svg"
+            alt
+          />
+        </div>
+
+        <div class="position" v-if="project.etcRecruits">
+          <div class="img_title">기타</div>
+          <img
+            class="position_img developer_img"
+            src="../../assets/more.svg"
+            alt
+          />
+        </div>
+      </v-layout>
     </v-card>
   </v-hover>
 </template>
@@ -151,9 +163,12 @@ export default {
   padding: 0 20px 20px 20px;
 }
 
-.position_title {
+.position {
+  margin: 5px;
+}
+
+.position_group_title {
   font-weight: bold;
-  margin-bottom: 5px;
 }
 .position_img {
   width: 40px;

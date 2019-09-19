@@ -55,6 +55,7 @@
       :tags="project.tags"
       @tags-changed="newTags => (project.tags = newTags)"
       :autocomplete-items="filteredItems"
+      placeholder="사용할 기술 스택을 입력해주세요."
       add-only-from-autocomplete
     />
     <v-layout>필요 직군( 단위: 명 )</v-layout>
@@ -65,7 +66,9 @@
           label="개발자"
           v-model="project.developerRecruits"
           type="number"
+          min="0"
           onkeydown="return event.keyCode !== 69"
+          oninput="validity.valid||(value='')"
           outline
         ></v-text-field>
       </v-flex>
@@ -76,7 +79,9 @@
           label="디자이너"
           v-model="project.designerRecruits"
           type="number"
+          min="0"
           onkeydown="return event.keyCode !== 69"
+          oninput="validity.valid||(value='')"
           outline
         ></v-text-field>
       </v-flex>
@@ -86,8 +91,10 @@
           class="job_input"
           label="기획자"
           type="number"
+          min="0"
           v-model="project.plannerRecruits"
           onkeydown="return event.keyCode !== 69"
+          oninput="validity.valid||(value='')"
           outline
         ></v-text-field>
       </v-flex>
@@ -97,8 +104,10 @@
           class="job_input"
           label="마케터"
           type="number"
+          min="0"
           v-model="project.marketerRecruits"
           onkeydown="return event.keyCode !== 69"
+          oninput="validity.valid||(value='')"
           outline
         ></v-text-field>
       </v-flex>
@@ -108,8 +117,10 @@
           class="job_input"
           label="기타"
           type="number"
+          min="0"
           v-model="project.etcRecruits"
           onkeydown="return event.keyCode !== 69"
+          oninput="validity.valid||(value='')"
           outline
         ></v-text-field>
       </v-flex>
@@ -127,18 +138,6 @@ import VueTagsInput from "@johmun/vue-tags-input";
 import { mapGetters } from "vuex";
 import { validationMixin } from "vuelidate";
 import { required, maxLength, helpers } from "vuelidate/lib/validators";
-
-const minMember = project => {
-  return !!(
-    project.developerRecruits +
-      project.designerRecruits +
-      project.plannerRecruits +
-      project.marketerRecruits +
-      project.etcRecruits +
-      project.etcRecruits <=
-    0
-  );
-};
 
 export default {
   props: {
@@ -258,6 +257,11 @@ export default {
       this.project.summary = "";
       this.project.content = "";
       this.project.location = null;
+      this.project.developerRecruits = 0;
+      this.project.designerRecruits = 0;
+      this.project.plannerRecruits = 0;
+      this.project.marketerRecruits = 0;
+      this.project.etcRecruits = 0;
       this.project.tag = "";
       this.project.tags = [];
     },
@@ -317,9 +321,24 @@ export default {
     },
 
     clear() {
-      this.$v.$reset();
-      console.log(this.tags);
-      this.clearDatas();
+      this.$_swal
+        .fire({
+          title: "초기화 하시겠습니까?",
+          text: "작성한 내용이 전부 빈칸으로 처리됩니다.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "초기화"
+        })
+        .then(result => {
+          if (result.value) {
+            this.$_swal.fire("초기화 완료", "내용이 지워졌습니다.", "success");
+
+            this.$v.$reset();
+            this.clearDatas();
+          }
+        });
     }
   }
 };

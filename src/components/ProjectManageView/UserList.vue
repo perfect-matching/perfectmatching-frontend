@@ -4,6 +4,9 @@
       <h3>참여자 목록:</h3>
 
       <ul class="applicant_list">
+        <div class="no_members" v-if="members.length === 0">
+          현재 참여자가 없습니다.
+        </div>
         <li class="list_item" v-for="member in members" :key="member.memberIdx">
           <user-list-item :member="member"></user-list-item>
         </li>
@@ -41,6 +44,10 @@ ul {
   border-color: #b6b6b6;
   border-style: solid;
   border-width: 1px 0 1px 0;
+}
+
+.no_members {
+  text-align: center;
 }
 
 .applicant_list {

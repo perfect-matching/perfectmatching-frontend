@@ -17,10 +17,7 @@
     <v-card>
       <v-card-title class="modal_title">
         <div class="headline">로그인</div>
-        <div class="welcome_text">
-          입력안하고 로그인만 눌려도 로그인 되게 되어있음
-        </div>
-        <!-- <div class="welcome_text">퍼펙트 매칭에 오신 걸 환영합니다!</div> -->
+        <div class="welcome_text">퍼펙트 매칭에 오신 걸 환영합니다!</div>
       </v-card-title>
 
       <v-container>

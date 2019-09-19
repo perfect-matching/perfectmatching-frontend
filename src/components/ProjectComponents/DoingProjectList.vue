@@ -3,6 +3,9 @@
     <article class="doing_project_article">
       <h3>참여중인 프로젝트</h3>
       <ul class="doing_project_list">
+        <div class="no_project" v-if="projects.length === 0">
+          현재 참여중인 프로젝트가 없습니다.
+        </div>
         <li
           class="list_item"
           v-for="project in projects"
@@ -59,5 +62,9 @@ li {
 
 .list_item {
   margin: 15px;
+}
+
+.no_project {
+  text-align: center;
 }
 </style>
