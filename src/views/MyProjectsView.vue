@@ -32,7 +32,9 @@ export default {
   async beforeRouteEnter(to, from, next) {
     bus.$emit("start:spinner");
     try {
-      const idx = store.state.myModule.myProfile.userIdx;
+      console.log("들어감");
+      // const idx = store.state.myModule.myProfile.userIdx;
+      const idx = localStorage.getItem("user-idx");
 
       await store.dispatch("GET_MY_LEADING_PROJECTS_BY_IDX", { idx });
       await store.dispatch("GET_MY_DOING_PROJECTS_BY_IDX", { idx });

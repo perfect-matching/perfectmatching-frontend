@@ -1,5 +1,6 @@
 import { auth } from "../../api/login.js";
 import Swal from "sweetalert2";
+import jwt from "jsonwebtoken";
 import { handleException } from "../../utils/errorHandler.js";
 
 export const authModule = {
@@ -58,6 +59,9 @@ export const authModule = {
           .then(res => {
             const token = res.headers.authorization;
             localStorage.setItem("user-token", token);
+            const newToken = token.substring(7, token.length); // Bearer 삭제
+            const decoded = jwt.decode(newToken, { complete: true });
+            localStorage.setItem("user-idx", decoded.payload.idx);
             commit("AUTH_SUCCESS", token);
             dispatch("GET_MY_PROFILE");
             resolve(res);
@@ -80,6 +84,7 @@ export const authModule = {
         commit("AUTH_LOGOUT");
         // const token = localStorage.getItem("user-token");
         localStorage.removeItem("user-token");
+        localStorage.removeItem("user-idx");
 
         // auth.authLogout(token).then(res => { // 굳이 필요한 작업일까?
         //   console.log("엑시오스 로그아웃:", res);

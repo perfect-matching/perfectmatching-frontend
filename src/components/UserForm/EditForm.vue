@@ -76,11 +76,12 @@
       :tags="myProfile.tags"
       @tags-changed="newTags => (myProfile.tags = newTags)"
       :autocomplete-items="filteredItems"
+      placeholder="자신의 기술스택을 입력해주세요."
       add-only-from-autocomplete
     />
 
     <div class="time">
-      <v-subheader class="pl-0">투자시간(?)</v-subheader>
+      <v-subheader class="pl-0">투자시간</v-subheader>
       <v-slider
         v-model="myProfile.investTime"
         thumb-label="always"
@@ -103,8 +104,8 @@
       @blur="$v.checkbox.$touch()"
     ></v-checkbox>
 
-    <v-btn @click="submit">제출</v-btn>
-    <v-btn @click="clear">취소</v-btn>
+    <v-btn flat @click="submit">submit</v-btn>
+    <v-btn flat @click="clear">clear</v-btn>
   </form>
 </template>
 
@@ -261,7 +262,15 @@ export default {
   },
 
   methods: {
-    clearDatas() {},
+    clearDatas() {
+      this.myProfile.password = "";
+      this.myProfile.repeatPassword = "";
+      this.myProfile.nickname = "";
+      this.myProfile.summary = ""; // 현재 가입부분 description 으로 되어있어서 오류남 백엔드가 바뀌면 오류 안날듯
+      this.myProfile.socialUrl = "";
+      this.myProfile.investTime = 12;
+      this.myProfile.tags = [];
+    },
 
     submit() {
       this.$v.$touch();
@@ -297,8 +306,24 @@ export default {
     },
 
     clear() {
-      this.$v.$reset();
-      this.clearDatas();
+      this.$_swal
+        .fire({
+          title: "초기화 하시겠습니까?",
+          text: "작성한 내용이 전부 빈칸으로 처리됩니다.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "초기화"
+        })
+        .then(result => {
+          if (result.value) {
+            this.$_swal.fire("초기화 완료", "내용이 지워졌습니다.", "success");
+
+            this.$v.$reset();
+            this.clearDatas();
+          }
+        });
     }
   },
 

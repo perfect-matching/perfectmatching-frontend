@@ -12,10 +12,12 @@
           <v-btn depressed small @click="$refs.inputUpload.click()"
             >사진 변경</v-btn
           >
+          <v-btn depressed small @click="ImageRemove">기본 이미지로 설정</v-btn>
           <input
             v-show="false"
             ref="inputUpload"
             type="file"
+            accept=".jpg, .pdf, .jpeg"
             @change="fileUpload"
           />
           <!-- <v-btn depressed small>사진 변경</v-btn> -->
@@ -59,6 +61,10 @@ export default {
       formData.append("file", this.file);
 
       this.$store.dispatch("PUT_MY_PHOTO", { formData });
+    },
+
+    ImageRemove() {
+      this.$store.dispatch("DELETE_MY_PHOTO");
     }
   }
 };

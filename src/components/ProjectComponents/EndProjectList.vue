@@ -3,6 +3,9 @@
     <article class="end_project_article">
       <h3>진행했던 프로젝트</h3>
       <ul class="end_project_list">
+        <div class="no_project" v-if="projects.length === 0">
+          현재 진행했던 프로젝트가 없습니다.
+        </div>
         <li
           class="list_item"
           v-for="project in projects"
@@ -13,6 +16,7 @@
       </ul>
     </article>
     <v-btn
+      class="add_project_btn"
       v-if="this.$route.name == 'myProjects'"
       block
       color="secondary"
@@ -49,5 +53,13 @@ li {
 
 .list_item {
   margin-bottom: 10px;
+}
+
+.no_project {
+  text-align: center;
+}
+
+.add_project_btn {
+  margin: 30px 0;
 }
 </style>

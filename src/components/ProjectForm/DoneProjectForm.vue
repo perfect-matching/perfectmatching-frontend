@@ -30,6 +30,7 @@
       :tags="project.usedSkills"
       @tags-changed="newTags => (project.usedSkills = newTags)"
       :autocomplete-items="filteredItems"
+      placeholder="사용한 기술스택을 입력해주세요."
       add-only-from-autocomplete
     />
 
@@ -53,6 +54,7 @@
 
     <date-picker
       v-model="project.startDate"
+      :date="project.startDate"
       :labelName="'프로젝트 시작일'"
     ></date-picker>
 
@@ -192,7 +194,8 @@ export default {
       this.project.title = "";
       this.project.summary = "";
       this.project.content = "";
-      this.project.tags = [];
+      this.project.usedSkills = [];
+      this.project.socialUrl = "";
       this.project.startDate = "";
       this.project.endDate = "";
     },
@@ -235,9 +238,24 @@ export default {
     },
 
     clear() {
-      this.$v.$reset();
-      console.log(this.tags);
-      this.clearDatas();
+      this.$_swal
+        .fire({
+          title: "초기화 하시겠습니까?",
+          text: "작성한 내용이 전부 빈칸으로 처리됩니다.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "초기화"
+        })
+        .then(result => {
+          if (result.value) {
+            this.$_swal.fire("초기화 완료", "내용이 지워졌습니다.", "success");
+
+            this.$v.$reset();
+            this.clearDatas();
+          }
+        });
     }
   }
 };

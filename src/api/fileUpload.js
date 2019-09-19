@@ -11,6 +11,15 @@ function uploadProfileImg(data, token) {
   });
 }
 
+function deleteProfileImg(token) {
+  return axios.delete(`${backend.baseUrl}/image`, {
+    headers: {
+      Authorization: token
+    }
+  });
+}
+
 export const fileUpload = {
-  uploadProfileImg
+  uploadProfileImg,
+  deleteProfileImg
 };

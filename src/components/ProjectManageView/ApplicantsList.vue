@@ -4,7 +4,9 @@
       <h3>지원자 목록:</h3>
 
       <ul class="applicant_list">
-        <div v-if="applicants === null">지원자가 없습니다.</div>
+        <div class="no_applicants" v-if="applicants.length === 0">
+          현재 참여자가 없습니다.
+        </div>
         <li
           class="list_item"
           v-for="applicant in applicants"
@@ -46,6 +48,10 @@ ul {
   border-color: #b6b6b6;
   border-style: solid;
   border-width: 1px 0 1px 0;
+}
+
+.no_applicants {
+  text-align: center;
 }
 
 .applicant_list {
