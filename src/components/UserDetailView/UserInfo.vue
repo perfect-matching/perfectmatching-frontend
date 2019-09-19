@@ -3,7 +3,7 @@
     <v-flex class="user_info" text-xs-center>
       <div>
         <v-avatar :tile="false" :size="170" color="white lighten-4">
-          <img :src="userProfile.profileImg" alt="avatar" />
+          <img :src="userProfile.profileImage" alt="avatar" />
         </v-avatar>
         <div class="user_nick">{{ userProfile.nickname }}</div>
         <div class="info_change_btn">
@@ -30,9 +30,9 @@
       </article>
       <article v-if="userSkills.length !== 0" class="user_article skill_group">
         <h3 class="article_title">스킬</h3>
-        <v-chip v-for="skill in userSkills" :key="skill.text">
-          {{ skill.text }}
-        </v-chip>
+        <v-chip v-for="skill in userSkills" :key="skill.text">{{
+          skill.text
+        }}</v-chip>
       </article>
 
       <article class="user_article time">
