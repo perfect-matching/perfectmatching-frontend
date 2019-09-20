@@ -23,7 +23,6 @@ export const joinModule = {
       return join
         .emailCheck({ email })
         .then(({ data }) => {
-          console.log("이메일 체크! :", data);
           return true;
         })
         .catch(err => {
@@ -36,7 +35,6 @@ export const joinModule = {
       return join
         .nicknameCheck({ nick })
         .then(() => {
-          console.log("닉네임 체크");
           return true;
         })
         .catch(err => {
@@ -50,6 +48,7 @@ export const joinModule = {
       return join
         .joinUser(user)
         .then(({ data }) => {
+          commit("DELETE_MY_PHOTO");
           console.log("가입성공", data);
         })
         .catch(err => {
