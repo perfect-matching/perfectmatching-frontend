@@ -166,7 +166,7 @@ export const projectModule = {
       const token = localStorage.getItem("user-token");
       return project
         .postDoneProject(doneProject, token)
-        .then(() => {})
+        .then(() => { })
         .catch(err => {
           console.log(err);
         });
@@ -188,7 +188,7 @@ export const projectModule = {
       const token = localStorage.getItem("user-token");
       return project
         .putDoneProject(doneProjectIdx, doneProject, token)
-        .then(() => {})
+        .then(() => { })
         .catch(err => {
           console.log(err);
         });
@@ -220,9 +220,11 @@ export const projectModule = {
 
     CHANGE_PROJECT_STATUS({ dispatch }, { projectIdx, status }) {
       const token = localStorage.getItem("user-token");
+      const userIdx = localStorage.getItem("user-idx");
       return project
         .changeProjectStatus({ projectIdx, status }, token)
         .then(({ data }) => {
+          dispatch("GET_MY_LEADING_PROJECTS_BY_IDX", { idx: userIdx });
           dispatch("GET_MY_PROJECT_BY_IDX", { idx: projectIdx });
         })
         .catch(err => {

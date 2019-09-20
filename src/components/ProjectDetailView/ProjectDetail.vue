@@ -4,16 +4,12 @@
       <v-chip class="status" color="primary" text-color="white">
         {{ project.status }}
       </v-chip>
-      <div class="create_date">
-        {{ setDateFormat(project.startDate) }} -
-        {{ setDateFormat(project.endDate) }}
-      </div>
     </v-layout>
     <div class="detail_header" justify-center>
       <h3 class="project_title">{{ project.title }}</h3>
       <v-layout class="proejct_detail" justify-center>
-        {{ project.location }} &nbsp;|&nbsp; 모집 마감일:
-        {{ setDateFormat(project.deadline) }}
+        {{ project.location }} &nbsp;|&nbsp; 프로젝트 개설일:
+        {{ setDateFormat(project.createDate) }}
         &nbsp;|&nbsp; 개발자 :{{ project.currentDeveloper }}/{{
           project.developerRecruits
         }}
