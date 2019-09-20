@@ -1,7 +1,10 @@
 <template>
   <header>
     <v-toolbar class="tool_bar" flat fixed>
-      <v-toolbar-side-icon class="hidden-md-and-up" @click="toggleDrawer"></v-toolbar-side-icon>
+      <v-toolbar-side-icon
+        class="hidden-md-and-up"
+        @click="toggleDrawer"
+      ></v-toolbar-side-icon>
       <v-btn flat to="/">
         <v-toolbar-title>퍼펙트 매칭</v-toolbar-title>
       </v-btn>
