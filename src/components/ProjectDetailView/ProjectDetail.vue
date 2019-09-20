@@ -1,9 +1,12 @@
 <template>
   <div class="prject_info" grow>
     <v-layout class="project_status_container" align-center justify-center>
-      <v-chip class="status" color="primary" text-color="white">
-        {{ project.status }}
-      </v-chip>
+      <v-chip
+        class="status"
+        :color="setChipColor(project.status)"
+        text-color="white"
+        >{{ project.status }}</v-chip
+      >
     </v-layout>
     <div class="detail_header" justify-center>
       <h3 class="project_title">{{ project.title }}</h3>
@@ -43,7 +46,8 @@
 
       <v-btn
         v-if="
-          project.leaderIdx !== this.$store.state.myModule.myProfile.userIdx
+          project.leaderIdx !== this.$store.state.myModule.myProfile.userIdx &&
+            project.status !== '완료'
         "
         class="apply_btn"
         block
@@ -51,6 +55,18 @@
         dark
         :to="`/projects/${project.projectIdx}/application`"
         >지원 하기</v-btn
+      >
+      <v-btn
+        v-if="
+          project.leaderIdx !== this.$store.state.myModule.myProfile.userIdx &&
+            project.status === '완료'
+        "
+        class="apply_btn"
+        block
+        color="secondary"
+        dark
+        disable
+        >이미 완료된 프로젝트입니다.</v-btn
       >
     </div>
   </div>
@@ -68,6 +84,15 @@ export default {
   methods: {
     setDateFormat(date) {
       return this.$_moment(date).format("ll");
+    },
+    setChipColor(status) {
+      const colors = {
+        모집중: "primary",
+        진행중: "green",
+        완료: ""
+      };
+
+      return colors[status];
     }
   }
 };
@@ -113,6 +138,7 @@ img {
 }
 
 .status {
+  font-weight: bold;
   height: 28px;
 }
 
