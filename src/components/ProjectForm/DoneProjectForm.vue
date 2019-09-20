@@ -57,16 +57,70 @@
       @blur="$v.project.socialUrl.$touch()"
     ></v-text-field>
 
-    <date-picker
-      v-model="project.startDate"
-      :date="project.startDate"
-      :labelName="'프로젝트 시작일'"
-    ></date-picker>
+    <!-- 시작 날짜 -->
+    <v-menu
+      ref="startMenu"
+      v-model="startMenu"
+      :close-on-content-click="false"
+      :nudge-right="40"
+      :return-value.sync="project.startDate"
+      lazy
+      transition="scale-transition"
+      offset-y
+      full-width
+      min-width="290px"
+    >
+      <template v-slot:activator="{ on }">
+        <v-text-field
+          v-model="project.startDate"
+          label="프로젝트 시작 날짜"
+          prepend-icon="event"
+          readonly
+          v-on="on"
+        ></v-text-field>
+      </template>
+      <v-date-picker v-model="project.startDate" no-title scrollable>
+        <v-spacer></v-spacer>
+        <v-btn flat color="primary" @click="startMenu = false">Cancel</v-btn>
+        <v-btn
+          flat
+          color="primary"
+          @click="$refs.startMenu.save(project.startDate)"
+          >OK</v-btn
+        >
+      </v-date-picker>
+    </v-menu>
 
-    <date-picker
-      v-model="project.endDate"
-      :labelName="'프로젝트 종료일'"
-    ></date-picker>
+    <!-- 종료 날짜 -->
+    <v-menu
+      ref="endMenu"
+      v-model="endMenu"
+      :close-on-content-click="false"
+      :nudge-right="40"
+      :return-value.sync="project.endDate"
+      lazy
+      transition="scale-transition"
+      offset-y
+      full-width
+      min-width="290px"
+    >
+      <template v-slot:activator="{ on }">
+        <v-text-field
+          v-model="project.endDate"
+          label="프로젝트 종료 날짜"
+          prepend-icon="event"
+          readonly
+          v-on="on"
+        ></v-text-field>
+      </template>
+      <v-date-picker v-model="project.endDate" no-title scrollable>
+        <v-spacer></v-spacer>
+        <v-btn flat color="primary" @click="endMenu = false">Cancel</v-btn>
+        <v-btn flat color="primary" @click="$refs.endMenu.save(project.endDate)"
+          >OK</v-btn
+        >
+      </v-date-picker>
+    </v-menu>
 
     <v-layout>
       <v-spacer></v-spacer>
@@ -108,7 +162,9 @@ export default {
 
   data() {
     return {
-      tag: ""
+      tag: "",
+      startMenu: false,
+      endMenu: false
     };
   },
 
@@ -197,11 +253,6 @@ export default {
         errors.push("URL은 반드시 100자 이내이어야 합니다.");
 
       return errors;
-    },
-
-    endDateErrors() {
-      const errors = [];
-      return errors;
     }
   },
 
@@ -221,14 +272,6 @@ export default {
       if (this.$v.$invalid) {
         console.log("형식 불일치");
       } else {
-        // const socialUrlTemp = this.project.socialUrl;
-        // if (
-        //   socialUrlTemp.indexOf("http://") !== 0 ||
-        //   socialUrlTemp.indexOf("https://") !== 0
-        // ) {
-        //   this.project.socialUrl = "http://" + this.project.socialUrl;
-        // }
-
         var re = new RegExp("^(http|https)://", "i");
         if (!re.test(this.project.socialUrl)) {
           this.project.socialUrl = "http://" + this.project.socialUrl;
@@ -239,8 +282,12 @@ export default {
           summary: this.project.summary,
           content: this.project.content,
           socialUrl: this.project.socialUrl,
-          startDate: this.project.startDate,
-          endDate: this.project.endDate,
+          startDate: this.$_moment(this.project.startDate).format(
+            "YYYY-MM-DDTHH:mm:ss"
+          ),
+          endDate: this.$_moment(this.project.endDate).format(
+            "YYYY-MM-DDTHH:mm:ss"
+          ),
           tags: this.project.tags
         };
 
@@ -261,6 +308,14 @@ export default {
             doneProjectIdx: this.project.doneProjectIdx,
             doneProject
           });
+
+          this.$_swal.fire(
+            "수정 완료",
+            "프로젝트가 수정되었습니다.",
+            "success"
+          );
+
+          this.$router.push("/my/projects");
         } else if (routeName == "doneProjectStateChange") {
           this.$store
             .dispatch("POST_DONE_PROJECT", { doneProject })

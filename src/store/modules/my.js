@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import Moment from "moment";
 import { my } from "../../api/my.js";
 import { project } from "../../api/prorject.js";
 import { fileUpload } from "../../api/fileUpload.js";
@@ -86,6 +87,8 @@ export const myModule = {
     },
 
     SET_MY_DONE_PROJECT(state, data) {
+      data.startDate = Moment(data.startDate).format("YYYY-MM-DD");
+      data.endDate = Moment(data.endDate).format("YYYY-MM-DD");
       state.myDoneProject = data;
     },
 
