@@ -1,7 +1,14 @@
 <template>
   <v-card class="comment_card mx-auto" color="#fff" flat>
-    <v-card-text v-if="!showUpdate" class="headline font-weight-bold">{{ comment.content }}</v-card-text>
-    <v-textarea v-if="showUpdate" class="update_textarea" outline v-model="updatedContent"></v-textarea>
+    <v-card-text v-if="!showUpdate" class="headline font-weight-bold">{{
+      comment.content
+    }}</v-card-text>
+    <v-textarea
+      v-if="showUpdate"
+      class="update_textarea"
+      outline
+      v-model="updatedContent"
+    ></v-textarea>
     <v-card-actions
       class="handle_button"
       v-if="comment.userIdx === this.$store.state.myModule.myProfile.userIdx"
@@ -41,17 +48,13 @@
         <v-list-tile-content>
           <router-link icon :to="`/profile/${comment.userIdx}`">
             <v-list-tile-title class="nick_name">
-              {{
-              comment.userName
-              }}
+              {{ comment.userName }}
             </v-list-tile-title>
           </router-link>
         </v-list-tile-content>
         <v-layout align-center justify-end>
           <span class="create_date subheading mr-2">
-            {{
-            setDateFormat(comment.createdDate)
-            }}
+            {{ setDateFormat(comment.createdDate) }}
           </span>
         </v-layout>
       </v-list-tile>
