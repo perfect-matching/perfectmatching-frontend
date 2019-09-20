@@ -1,10 +1,7 @@
 <template>
   <header>
     <v-toolbar class="tool_bar" flat fixed>
-      <v-toolbar-side-icon
-        class="hidden-md-and-up"
-        @click="toggleDrawer"
-      ></v-toolbar-side-icon>
+      <v-toolbar-side-icon class="hidden-md-and-up" @click="toggleDrawer"></v-toolbar-side-icon>
       <v-btn flat to="/">
         <v-toolbar-title>퍼펙트 매칭</v-toolbar-title>
       </v-btn>
@@ -23,10 +20,10 @@
         <!-- <v-btn icon>
           <v-icon>notifications_none</v-icon>
         </v-btn>-->
-
+        <!-- 
         <v-btn icon>
           <v-icon>mail_outline</v-icon>
-        </v-btn>
+        </v-btn>-->
 
         <v-btn icon to="/my">
           <v-avatar :tile="false" :size="36" color="grey lighten-4">

@@ -173,11 +173,12 @@ span {
 }
 
 .button_container {
+  text-align: center;
   padding: 0px 0px 50px 0px;
 }
 
 .intro_btn {
-  width: 330px;
+  min-width: 220px;
   background-color: #2e9afe !important;
   color: #fff !important;
   border-radius: 10px;
