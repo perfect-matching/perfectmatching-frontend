@@ -94,9 +94,10 @@ export default {
 
   validations: {
     project: {
-      title: { required, maxLength: maxLength(20) },
-      summary: { required, maxLength: maxLength(500) },
-      content: { required, maxLength: maxLength(500) }
+      title: { required, maxLength: maxLength(255) },
+      summary: { required, maxLength: maxLength(100) },
+      content: { required, maxLength: maxLength(5000) },
+      socialUrl: { maxLength: maxLength(100) }
     }
   },
 
@@ -179,6 +180,16 @@ export default {
 
       !this.$v.project.content.required &&
         errors.push("상세업무 및 성과를 반드시 입력해주세요.");
+
+      return errors;
+    },
+
+    socialUrlErrors() {
+      const errors = [];
+      if (!this.$v.project.socialUrl.$dirty) return errors;
+
+      !this.$v.project.socialUrl.maxLength &&
+        errors.push("내용은 반드시 100자 이내이어야 합니다.");
 
       return errors;
     },

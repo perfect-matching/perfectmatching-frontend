@@ -49,10 +49,7 @@
           @click="cancelApply"
           depressed
           color="grey"
-          v-if="
-            this.$route.name === 'doingProjectManage' ||
-              this.$route.name === 'applyProjectManage'
-          "
+          v-if="this.$route.name === 'applyProjectManage'"
           >지원 취소</v-btn
         >
       </v-layout>
@@ -118,6 +115,7 @@ export default {
               "지원을 취소하였습니다.",
               "success"
             );
+
             this.$store
               .dispatch("CANCLE_APPLY", {
                 projectIdx: this.project.projectIdx

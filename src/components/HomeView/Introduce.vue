@@ -78,8 +78,12 @@
         프로젝트 관련 경험을 쌓고 싶으신 분
       </div>
       <div class="button_container">
-        <input type="button" value="프로젝트 생성페이지" />
-        <input type="button" value="프로젝트 페이지" />
+        <v-btn class="intro_btn new_project" to="/new/project"
+          >프로젝트 개설하기</v-btn
+        >
+        <v-btn class="intro_btn new_project" to="/projects"
+          >프로젝트 참가하기</v-btn
+        >
       </div>
     </div>
   </div>
@@ -159,7 +163,7 @@ span {
 }
 
 .recommend_intro_img {
-  width: 680px;
+  width: 100%;
   height: auto;
 }
 
@@ -170,5 +174,14 @@ span {
 
 .button_container {
   padding: 0px 0px 50px 0px;
+}
+
+.intro_btn {
+  width: 330px;
+  background-color: #2e9afe !important;
+  color: #fff !important;
+  border-radius: 10px;
+  font-size: 18px;
+  height: 50px;
 }
 </style>

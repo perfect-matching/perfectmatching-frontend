@@ -131,11 +131,11 @@ export default {
 
     async submit() {
       const positions = {
-        DEVELOPER: "'개발자'",
-        DESIGNER: "'디자이너'",
-        MARKETER: "'마케터'",
-        PLANNER: "'기획자'",
-        ETC: "'기타'"
+        DEVELOPER: "개발자",
+        DESIGNER: "디자이너",
+        MARKETER: "마케터",
+        PLANNER: "기획자",
+        ETC: "기타"
       };
       this.$v.$touch();
 
@@ -161,15 +161,16 @@ export default {
             );
           }
 
+          console.log("내가보낸거:", positions[this.position]);
           const projectIdx = this.$route.params.idx;
           await this.$store
             .dispatch("APPLY_TO_PROJECT", {
               projectIdx,
-              position: this.position,
+              position: positions[this.position],
               simpleProfile: this.content
             })
             .then(() => {
-              this.$router.push("/my/projects");
+              this.$router.push(`/my/apply/${projectIdx}`);
             });
         } catch {
           await this.$_swal.fire(
