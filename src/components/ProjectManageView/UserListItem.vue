@@ -10,9 +10,63 @@
         </v-layout>
       </router-link>
       <v-spacer></v-spacer>
+
       <div class="create_date">하루 전</div>
     </v-card-title>
-    <v-card-text class="content">{{ member.simpleProfile }}</v-card-text>
+    <v-layout>
+      <v-card-text class="content">{{ member.simpleProfile }}</v-card-text>
+      <div class="position" v-if="member.position === '리더'">
+        <div class="img_title">리더</div>
+        <img
+          class="position_img developer_img"
+          src="../../assets/crown.svg"
+          alt
+        />
+      </div>
+      <div class="position" v-if="member.position === '개발자'">
+        <div class="img_title">개발자</div>
+        <img
+          class="position_img developer_img"
+          src="../../assets/monitor.svg"
+          alt
+        />
+      </div>
+      <div class="position" v-else-if="member.position === '디자이너'">
+        <div class="img_title">디자이너</div>
+        <img
+          class="position_img designer_img"
+          src="../../assets/paint-palette.svg"
+          alt
+        />
+      </div>
+
+      <div class="position" v-else-if="member.position === '기획자'">
+        <div class="img_title">기획자</div>
+        <img
+          class="position_img planner_img"
+          src="../../assets/workspace.svg"
+          alt
+        />
+      </div>
+
+      <div class="position" v-else-if="member.position === '마케터'">
+        <div class="img_title">마케터</div>
+        <img
+          class="position_img developer_img"
+          src="../../assets/megaphone.svg"
+          alt
+        />
+      </div>
+
+      <div class="position" v-else-if="member.position === '기타'">
+        <div class="img_title">기타</div>
+        <img
+          class="position_img developer_img"
+          src="../../assets/more.svg"
+          alt
+        />
+      </div>
+    </v-layout>
   </v-card>
 </template>
 <script>
@@ -57,5 +111,14 @@ a {
 .content {
   padding: 10px 16px;
   color: #898989;
+}
+
+.position {
+  text-align: center;
+  margin-right: 20px;
+}
+.position_img {
+  width: 40px;
+  height: 40px;
 }
 </style>
