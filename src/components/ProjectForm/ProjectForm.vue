@@ -48,6 +48,10 @@
       outline
       v-model="project.socialUrl"
       label="소셜 URL"
+      :error-messages="socialUrlErrors"
+      :counter="100"
+      @input="$v.project.socialUrl.$touch()"
+      @blur="$v.project.socialUrl.$touch()"
     ></v-text-field>
     <vue-tags-input
       class="tag_input"
@@ -166,9 +170,10 @@ export default {
       title: { required, maxLength: maxLength(255) },
       summary: { required, maxLength: maxLength(100) },
       content: { maxLength: maxLength(5000) },
-      location: { required }
-    },
-    totalRecruits: { minValue: minValue(1) }
+      location: { required },
+      socialUrl: { maxLength: maxLength(100) }
+    }
+    // totalRecruits: { minValue: minValue(1) }
   },
 
   created() {
@@ -193,13 +198,13 @@ export default {
         "경상남도",
         "제주도"
       ],
-      tag: "",
-      totalRecruits:
-        this.project.developerRecruits +
-        this.project.designerRecruits +
-        this.project.plannerRecruits +
-        this.project.marketerRecruits +
-        this.project.etcRecruits
+      tag: ""
+      // totalRecruits:
+      //   this.project.developerRecruits +
+      //   this.project.designerRecruits +
+      //   this.project.plannerRecruits +
+      //   this.project.marketerRecruits +
+      //   this.project.etcRecruits
     };
   },
 
@@ -238,7 +243,7 @@ export default {
       if (!this.$v.project.summary.$dirty) return errors;
 
       !this.$v.project.summary.maxLength &&
-        errors.push("내용은 반드시 100자 이내이어야 합니다.");
+        errors.push("요약은 반드시 100자 이내이어야 합니다.");
 
       !this.$v.project.summary.required &&
         errors.push("요약 정보를 반드시 입력해주세요.");
@@ -256,15 +261,25 @@ export default {
       return errors;
     },
 
-    recruitsErrors() {
+    socialUrlErrors() {
       const errors = [];
-      if (!this.$v.totalRecruits.$dirty) return errors;
+      if (!this.$v.project.socialUrl.$dirty) return errors;
 
-      !this.$v.totalRecruits.minValue &&
-        errors.push("최소 1명 이상의 팀원이 있어야 합니다.");
+      !this.$v.project.socialUrl.maxLength &&
+        errors.push("URL은 반드시 100자 이내이어야 합니다.");
 
       return errors;
     }
+
+    // recruitsErrors() {
+    //   const errors = [];
+    //   if (!this.$v.totalRecruits.$dirty) return errors;
+
+    //   !this.$v.totalRecruits.minValue &&
+    //     errors.push("최소 1명 이상의 팀원이 있어야 합니다.");
+
+    //   return errors;
+    // }
   },
 
   methods: {
