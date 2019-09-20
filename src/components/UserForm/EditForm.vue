@@ -64,11 +64,7 @@
       @blur="$v.myProfile.summary.$touch()"
     ></v-textarea>
 
-    <v-text-field
-      outline
-      v-model="myProfile.socialUrl"
-      label="소셜 URL"
-    ></v-text-field>
+    <v-text-field outline v-model="myProfile.socialUrl" label="소셜 URL"></v-text-field>
 
     <vue-tags-input
       class="tag_input"
@@ -82,12 +78,7 @@
 
     <div class="time">
       <v-subheader class="pl-0">투자시간</v-subheader>
-      <v-slider
-        v-model="myProfile.investTime"
-        thumb-label="always"
-        min="0"
-        max="24"
-      ></v-slider>
+      <v-slider v-model="myProfile.investTime" thumb-label="always" min="0" max="24"></v-slider>
       <div>
         저는 하루 중
         <span style="color:red;">{{ myProfile.investTime }}시간</span> 정도
@@ -98,7 +89,7 @@
     <v-checkbox
       v-model="checkbox"
       :error-messages="checkboxErrors"
-      label="Do you agree?"
+      label="위 작성된 정보가 정확합니다."
       required
       @change="$v.checkbox.$touch()"
       @blur="$v.checkbox.$touch()"

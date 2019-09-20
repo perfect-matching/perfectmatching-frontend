@@ -23,11 +23,11 @@ export default {
         content: "",
         socialUrl: "",
         tags: [],
-        developerRecruits: 0,
-        designerRecruits: 0,
-        plannerRecruits: 0,
-        marketerRecruits: 0,
-        etcRecruits: 0
+        developerRecruits: null,
+        designerRecruits: null,
+        plannerRecruits: null,
+        marketerRecruits: null,
+        etcRecruits: null
       }
     };
   }
