@@ -21,7 +21,7 @@
 
     <div class="project_detail">
       <div class="detail_title content_title">상세설명</div>
-      <p>{{ project.content }}</p>
+      <div v-html="project.content"></div>
     </div>
   </v-card>
 </template>

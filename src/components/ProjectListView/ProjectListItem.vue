@@ -9,9 +9,9 @@
         <div class="leader_name">{{ project.leader }}</div>
       </v-layout>
 
-      <v-card-title class="headline justify-center">
-        {{ project.title }}
-      </v-card-title>
+      <v-card-title class="headline justify-center">{{
+        project.title
+      }}</v-card-title>
       <v-chip
         class="status"
         :color="setChipColor(project.status)"
@@ -22,9 +22,9 @@
 
       <v-card-text>{{ project.summary }}</v-card-text>
       <div class="require_skill">
-        <v-chip v-for="tag in project.tags" :key="tag.text">
-          {{ tag.text }}
-        </v-chip>
+        <v-chip v-for="tag in project.tags" :key="tag.text">{{
+          tag.text
+        }}</v-chip>
       </div>
       <div class="position_group_title">구해요!</div>
       <v-layout class="need_positions" justify-center>
