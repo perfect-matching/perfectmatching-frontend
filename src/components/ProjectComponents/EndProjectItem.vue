@@ -23,10 +23,7 @@
         <div class="github_title content_title" v-if="!!project.socialUrl">
           깃허브 저장소
         </div>
-        <a
-          href="https://github.com/perfect-matching/perfectmatching-frontend"
-          >{{ project.socialUrl }}</a
-        >
+        <a :href="project.socialUrl">{{ project.socialUrl }}</a>
       </div>
       <br />
 

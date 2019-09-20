@@ -52,6 +52,7 @@
       label="소셜 URL"
       :error-messages="socialUrlErrors"
       :counter="100"
+      placeholder="https://github.com/project"
       @input="$v.project.socialUrl.$touch()"
       @blur="$v.project.socialUrl.$touch()"
     ></v-text-field>
@@ -220,6 +221,19 @@ export default {
       if (this.$v.$invalid) {
         console.log("형식 불일치");
       } else {
+        // const socialUrlTemp = this.project.socialUrl;
+        // if (
+        //   socialUrlTemp.indexOf("http://") !== 0 ||
+        //   socialUrlTemp.indexOf("https://") !== 0
+        // ) {
+        //   this.project.socialUrl = "http://" + this.project.socialUrl;
+        // }
+
+        var re = new RegExp("^(http|https)://", "i");
+        if (!re.test(this.project.socialUrl)) {
+          this.project.socialUrl = "http://" + this.project.socialUrl;
+        }
+
         const doneProject = {
           title: this.project.title,
           summary: this.project.summary,

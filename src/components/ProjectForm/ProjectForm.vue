@@ -304,6 +304,12 @@ export default {
       if (this.$v.$invalid) {
         console.log("형식 불일치");
       } else {
+        if (!/^http:\/\//.test(this.project.socialUrl)) {
+          this.project.socialUrl = "http://" + this.project.socialUrl;
+        }
+
+        console.log(this.project.socialUrl);
+
         const project = {
           title: this.project.title,
           location: this.project.location,
