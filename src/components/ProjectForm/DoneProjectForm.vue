@@ -74,20 +74,18 @@
         <v-text-field
           v-model="project.startDate"
           label="프로젝트 시작 날짜"
+          :error-messages="startDateErrors"
           prepend-icon="event"
           readonly
           v-on="on"
+          @input="$v.project.startDate.$touch()"
+          @blur="$v.project.startDate.$touch()"
         ></v-text-field>
       </template>
       <v-date-picker v-model="project.startDate" no-title scrollable>
         <v-spacer></v-spacer>
         <v-btn flat color="primary" @click="startMenu = false">Cancel</v-btn>
-        <v-btn
-          flat
-          color="primary"
-          @click="$refs.startMenu.save(project.startDate)"
-          >OK</v-btn
-        >
+        <v-btn flat color="primary" @click="$refs.startMenu.save(project.startDate)">OK</v-btn>
       </v-date-picker>
     </v-menu>
 
@@ -109,16 +107,17 @@
           v-model="project.endDate"
           label="프로젝트 종료 날짜"
           prepend-icon="event"
+          :error-messages="endDateErrors"
           readonly
           v-on="on"
+          @input="$v.project.endDate.$touch()"
+          @blur="$v.project.endDate.$touch()"
         ></v-text-field>
       </template>
       <v-date-picker v-model="project.endDate" no-title scrollable>
         <v-spacer></v-spacer>
         <v-btn flat color="primary" @click="endMenu = false">Cancel</v-btn>
-        <v-btn flat color="primary" @click="$refs.endMenu.save(project.endDate)"
-          >OK</v-btn
-        >
+        <v-btn flat color="primary" @click="$refs.endMenu.save(project.endDate)">OK</v-btn>
       </v-date-picker>
     </v-menu>
 
@@ -130,7 +129,6 @@
   </form>
 </template>
 <script>
-import DatePicker from "./DatePicker.vue";
 import VueTagsInput from "@johmun/vue-tags-input";
 import { mapGetters } from "vuex";
 import { validationMixin } from "vuelidate";
@@ -145,7 +143,6 @@ export default {
   },
 
   components: {
-    DatePicker,
     VueTagsInput
   },
 
@@ -156,7 +153,9 @@ export default {
       title: { required, maxLength: maxLength(255) },
       summary: { required, maxLength: maxLength(100) },
       content: { required, maxLength: maxLength(5000) },
-      socialUrl: { maxLength: maxLength(100) }
+      socialUrl: { maxLength: maxLength(100) },
+      startDate: { required },
+      endDate: { required }
     }
   },
 
@@ -251,6 +250,25 @@ export default {
 
       !this.$v.project.socialUrl.maxLength &&
         errors.push("URL은 반드시 100자 이내이어야 합니다.");
+
+      return errors;
+    },
+
+    startDateErrors() {
+      const errors = [];
+      if (!this.$v.project.startDate.$dirty) return errors;
+
+      !this.$v.project.startDate.required &&
+        errors.push("프로젝트 시작 날짜를 반드시 입력해주세요.");
+
+      return errors;
+    },
+    endDateErrors() {
+      const errors = [];
+      if (!this.$v.project.endDate.$dirty) return errors;
+
+      !this.$v.project.endDate.required &&
+        errors.push("프로젝트 종료 날짜를 반드시 입력해주세요.");
 
       return errors;
     }
