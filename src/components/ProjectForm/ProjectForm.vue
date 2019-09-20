@@ -243,7 +243,7 @@ export default {
       if (!this.$v.project.summary.$dirty) return errors;
 
       !this.$v.project.summary.maxLength &&
-        errors.push("내용은 반드시 100자 이내이어야 합니다.");
+        errors.push("요약은 반드시 100자 이내이어야 합니다.");
 
       !this.$v.project.summary.required &&
         errors.push("요약 정보를 반드시 입력해주세요.");
@@ -266,7 +266,7 @@ export default {
       if (!this.$v.project.socialUrl.$dirty) return errors;
 
       !this.$v.project.socialUrl.maxLength &&
-        errors.push("내용은 반드시 100자 이내이어야 합니다.");
+        errors.push("URL은 반드시 100자 이내이어야 합니다.");
 
       return errors;
     }

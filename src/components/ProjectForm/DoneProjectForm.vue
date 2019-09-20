@@ -3,7 +3,7 @@
     <v-text-field
       v-model="project.title"
       :error-messages="titleErrors"
-      :counter="20"
+      :counter="255"
       label="Title"
       placeholder="프로젝트 명을 입력해주세요."
       required
@@ -15,7 +15,7 @@
     <v-textarea
       v-model="project.summary"
       :error-messages="summaryErrors"
-      :counter="500"
+      :counter="100"
       label="summary"
       placeholder="요약 내용을 입력해주세요"
       required
@@ -38,7 +38,7 @@
       class="content_input"
       v-model="project.content"
       :error-messages="contentErrors"
-      :counter="500"
+      :counter="5000"
       label="Content"
       placeholder="프로젝트 내용을 입력해주세요"
       @input="$v.project.content.$touch()"
@@ -50,6 +50,10 @@
       outline
       v-model="project.socialUrl"
       label="소셜 URL"
+      :error-messages="socialUrlErrors"
+      :counter="100"
+      @input="$v.project.socialUrl.$touch()"
+      @blur="$v.project.socialUrl.$touch()"
     ></v-text-field>
 
     <date-picker
@@ -189,7 +193,7 @@ export default {
       if (!this.$v.project.socialUrl.$dirty) return errors;
 
       !this.$v.project.socialUrl.maxLength &&
-        errors.push("내용은 반드시 100자 이내이어야 합니다.");
+        errors.push("URL은 반드시 100자 이내이어야 합니다.");
 
       return errors;
     },

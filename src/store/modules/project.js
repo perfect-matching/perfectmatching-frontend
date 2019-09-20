@@ -166,7 +166,7 @@ export const projectModule = {
       const token = localStorage.getItem("user-token");
       return project
         .postDoneProject(doneProject, token)
-        .then(() => { })
+        .then(() => {})
         .catch(err => {
           console.log(err);
         });
@@ -188,7 +188,7 @@ export const projectModule = {
       const token = localStorage.getItem("user-token");
       return project
         .putDoneProject(doneProjectIdx, doneProject, token)
-        .then(() => { })
+        .then(() => {})
         .catch(err => {
           console.log(err);
         });
@@ -223,7 +223,6 @@ export const projectModule = {
       return project
         .changeProjectStatus({ projectIdx, status }, token)
         .then(({ data }) => {
-          console.log("프로젝트 상태변경 완료");
           dispatch("GET_MY_PROJECT_BY_IDX", { idx: projectIdx });
         })
         .catch(err => {
