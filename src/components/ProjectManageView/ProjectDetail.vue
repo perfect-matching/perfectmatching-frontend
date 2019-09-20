@@ -5,15 +5,14 @@
         class="status"
         :color="setChipColor(project.status)"
         text-color="white"
+        >{{ project.status }}</v-chip
       >
-        {{ project.status }}
-      </v-chip>
       <div class="project_title">{{ project.title }}</div>
       <div class="deadline">{{ setDateFormat(project.createdDate) }} 개설</div>
       <div class="require_skill">
-        <v-chip v-for="tag in project.tags" :key="tag.idx">{{
-          tag.text
-        }}</v-chip>
+        <v-chip v-for="tag in project.tags" :key="tag.idx">
+          {{ tag.text }}
+        </v-chip>
       </div>
       <div class="project_content">
         <p>{{ project.summary }}</p>

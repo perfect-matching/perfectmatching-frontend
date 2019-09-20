@@ -1,7 +1,6 @@
 <template>
   <v-container class="project_detail_container">
     <v-card flat class="project_card">
-      <!-- <v-chip class="status" color="green" text-color="white">진행중</v-chip> -->
       <div class="project_title">{{ project.title }}</div>
       <div class="project_date">
         {{ setDateFormat(project.startDate) }} -
@@ -13,8 +12,10 @@
       </div>
 
       <div class="require_skill">
-        <div class="skill_title content_title">기술 스택</div>
-        <v-chip v-for="skill in project.usedSkills" :key="skill.idx">
+        <div class="skill_title content_title" v-if="project.tags.length !== 0">
+          기술 스택
+        </div>
+        <v-chip v-for="skill in project.tags" :key="skill.idx">
           {{ skill.text }}
         </v-chip>
       </div>

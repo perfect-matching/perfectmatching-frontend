@@ -1,14 +1,7 @@
 <template>
   <v-card class="comment_card mx-auto" color="#fff" flat>
-    <v-card-text v-if="!showUpdate" class="headline font-weight-bold">
-      {{ comment.content }}
-    </v-card-text>
-    <v-textarea
-      v-if="showUpdate"
-      class="update_textarea"
-      outline
-      v-model="updatedContent"
-    ></v-textarea>
+    <v-card-text v-if="!showUpdate" class="headline font-weight-bold">{{ comment.content }}</v-card-text>
+    <v-textarea v-if="showUpdate" class="update_textarea" outline v-model="updatedContent"></v-textarea>
     <v-card-actions
       class="handle_button"
       v-if="comment.userIdx === this.$store.state.myModule.myProfile.userIdx"
@@ -38,7 +31,7 @@
     <v-card-actions>
       <v-list-tile class="grow">
         <v-list-tile-avatar color="white darken-3">
-          <v-btn icon>
+          <v-btn icon :to="`/profile/${comment.userIdx}`">
             <v-avatar :tile="false" :size="36">
               <img :src="comment.profileImageURL" alt="avatar" />
             </v-avatar>
@@ -46,14 +39,20 @@
         </v-list-tile-avatar>
 
         <v-list-tile-content>
-          <v-list-tile-title class="nick_name">{{
-            comment.userName
-          }}</v-list-tile-title>
+          <router-link icon :to="`/profile/${comment.userIdx}`">
+            <v-list-tile-title class="nick_name">
+              {{
+              comment.userName
+              }}
+            </v-list-tile-title>
+          </router-link>
         </v-list-tile-content>
         <v-layout align-center justify-end>
-          <span class="create_date subheading mr-2">{{
+          <span class="create_date subheading mr-2">
+            {{
             setDateFormat(comment.createdDate)
-          }}</span>
+            }}
+          </span>
         </v-layout>
       </v-list-tile>
     </v-card-actions>
@@ -123,6 +122,9 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+}
 .headline {
   color: #898989;
   font-size: 17px !important;
