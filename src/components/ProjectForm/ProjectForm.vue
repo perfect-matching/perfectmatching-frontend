@@ -22,6 +22,8 @@
       outline
     ></v-select>
     <v-textarea
+      class="summary_input"
+      height="70"
       v-model="project.summary"
       :error-messages="summaryErrors"
       :counter="100"
@@ -33,7 +35,14 @@
       outline
     ></v-textarea>
     <v-switch v-model="detailSwitch" :label="`상세 내용 입력`"></v-switch>
-    <v-textarea
+    <tiptap-vuetify
+      v-if="detailSwitch"
+      class="content_textarea"
+      v-model="project.content"
+      :extensions="extensions"
+      placeholder="상세 내용을 작성해주세요."
+    />
+    <!-- <v-textarea
       v-if="detailSwitch"
       v-model="project.content"
       :error-messages="contentErrors"
@@ -43,7 +52,7 @@
       @input="$v.project.content.$touch()"
       @blur="$v.project.content.$touch()"
       outline
-    ></v-textarea>
+    ></v-textarea>-->
     <v-text-field
       outline
       v-model="project.socialUrl"
@@ -166,7 +175,25 @@
 import VueTagsInput from "@johmun/vue-tags-input";
 import { mapGetters } from "vuex";
 import { validationMixin } from "vuelidate";
-
+import {
+  TiptapVuetify,
+  Heading,
+  Bold,
+  Italic,
+  Strike,
+  Underline,
+  Code,
+  CodeBlock,
+  Paragraph,
+  BulletList,
+  OrderedList,
+  ListItem,
+  Link,
+  Blockquote,
+  HardBreak,
+  HorizontalRule,
+  History
+} from "tiptap-vuetify";
 import {
   required,
   maxLength,
@@ -183,7 +210,8 @@ export default {
   },
 
   components: {
-    VueTagsInput
+    VueTagsInput,
+    TiptapVuetify
   },
 
   mixins: [validationMixin],
@@ -205,6 +233,26 @@ export default {
 
   data() {
     return {
+      extensions: [
+        new Heading({
+          levels: [1, 2, 3]
+        }),
+        new Bold(),
+        new Italic(),
+        new Strike(),
+        new Underline(),
+        new Code(),
+        new CodeBlock(),
+        new Paragraph(),
+        new BulletList(),
+        new OrderedList(),
+        new ListItem(),
+        new Link(),
+        new Blockquote(),
+        new HardBreak(),
+        new HorizontalRule(),
+        new History()
+      ],
       detailSwitch: false,
       locations: [
         "서울",
@@ -418,7 +466,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .form_container {
   padding: 25px;
 }
@@ -429,5 +477,13 @@ export default {
 
 .job_input {
   max-width: 130px;
+}
+
+.content_textarea {
+  margin-bottom: 20px;
+}
+
+.tiptap-vuetify-editor__content {
+  height: 400px;
 }
 </style>

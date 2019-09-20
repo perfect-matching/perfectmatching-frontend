@@ -116,6 +116,7 @@ a {
 .position {
   text-align: center;
   margin-right: 20px;
+  width: 80px;
 }
 .position_img {
   width: 40px;

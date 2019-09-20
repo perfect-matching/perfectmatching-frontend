@@ -29,7 +29,7 @@
       </v-layout>
     </div>
     <div class="project_summary">{{ project.summary }}</div>
-    <div class="project_content">{{ project.content }}</div>
+    <div class="project_content" v-html="project.content"></div>
     <div class="leader_info">
       <div>팀장</div>
       <router-link :to="`/profile/${project.leaderIdx}`">

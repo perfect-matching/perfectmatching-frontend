@@ -85,7 +85,12 @@
       <v-date-picker v-model="project.startDate" no-title scrollable>
         <v-spacer></v-spacer>
         <v-btn flat color="primary" @click="startMenu = false">Cancel</v-btn>
-        <v-btn flat color="primary" @click="$refs.startMenu.save(project.startDate)">OK</v-btn>
+        <v-btn
+          flat
+          color="primary"
+          @click="$refs.startMenu.save(project.startDate)"
+          >OK</v-btn
+        >
       </v-date-picker>
     </v-menu>
 
@@ -117,7 +122,9 @@
       <v-date-picker v-model="project.endDate" no-title scrollable>
         <v-spacer></v-spacer>
         <v-btn flat color="primary" @click="endMenu = false">Cancel</v-btn>
-        <v-btn flat color="primary" @click="$refs.endMenu.save(project.endDate)">OK</v-btn>
+        <v-btn flat color="primary" @click="$refs.endMenu.save(project.endDate)"
+          >OK</v-btn
+        >
       </v-date-picker>
     </v-menu>
 
