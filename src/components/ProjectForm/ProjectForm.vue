@@ -62,7 +62,16 @@
       placeholder="사용할 기술 스택을 입력해주세요."
       add-only-from-autocomplete
     />
-    <v-layout>필요 직군( 단위: 명 )</v-layout>
+    <v-layout
+      >필요 직군( 단위: 명 ) 전체 인원:{{ watchTotalRecruits }}</v-layout
+    >
+    <div
+      class="recruits_error"
+      v-if="!$v.watchTotalRecruits.watchTotalRecruitsErrors"
+      style="color:red;"
+    >
+      {{ watchTotalRecruitsErrors[0] }}
+    </div>
 
     <v-layout wrap>
       <v-flex>
@@ -74,6 +83,8 @@
           min="0"
           onkeydown="return event.keyCode !== 69"
           oninput="validity.valid||(value='')"
+          @input="$v.watchTotalRecruits.$touch()"
+          @blur="$v.watchTotalRecruits.$touch()"
           outline
         ></v-text-field>
       </v-flex>
@@ -87,6 +98,8 @@
           min="0"
           onkeydown="return event.keyCode !== 69"
           oninput="validity.valid||(value='')"
+          @input="$v.watchTotalRecruits.$touch()"
+          @blur="$v.watchTotalRecruits.$touch()"
           outline
         ></v-text-field>
       </v-flex>
@@ -100,6 +113,8 @@
           v-model="project.plannerRecruits"
           onkeydown="return event.keyCode !== 69"
           oninput="validity.valid||(value='')"
+          @input="$v.watchTotalRecruits.$touch()"
+          @blur="$v.watchTotalRecruits.$touch()"
           outline
         ></v-text-field>
       </v-flex>
@@ -113,6 +128,8 @@
           v-model="project.marketerRecruits"
           onkeydown="return event.keyCode !== 69"
           oninput="validity.valid||(value='')"
+          @input="$v.watchTotalRecruits.$touch()"
+          @blur="$v.watchTotalRecruits.$touch()"
           outline
         ></v-text-field>
       </v-flex>
@@ -126,6 +143,8 @@
           v-model="project.etcRecruits"
           onkeydown="return event.keyCode !== 69"
           oninput="validity.valid||(value='')"
+          @input="$v.watchTotalRecruits.$touch()"
+          @blur="$v.watchTotalRecruits.$touch()"
           outline
         ></v-text-field>
       </v-flex>
@@ -142,14 +161,13 @@
 import VueTagsInput from "@johmun/vue-tags-input";
 import { mapGetters } from "vuex";
 import { validationMixin } from "vuelidate";
+
 import {
   required,
   maxLength,
   minValue,
   helpers
 } from "vuelidate/lib/validators";
-
-// const greaterThanZero = value => value > 0;
 
 export default {
   props: {
@@ -172,8 +190,8 @@ export default {
       content: { maxLength: maxLength(5000) },
       location: { required },
       socialUrl: { maxLength: maxLength(100) }
-    }
-    // totalRecruits: { minValue: minValue(1) }
+    },
+    watchTotalRecruits: { minValue: minValue(1) }
   },
 
   created() {
@@ -199,16 +217,28 @@ export default {
         "제주도"
       ],
       tag: ""
-      // totalRecruits:
-      //   this.project.developerRecruits +
-      //   this.project.designerRecruits +
-      //   this.project.plannerRecruits +
-      //   this.project.marketerRecruits +
-      //   this.project.etcRecruits
     };
   },
 
   computed: {
+    watchTotalRecruits() {
+      const developerRecruits =
+        parseInt(this.project.developerRecruits, 10) || 0;
+      const designerRecruits = parseInt(this.project.designerRecruits, 10) || 0;
+      const plannerRecruits = parseInt(this.project.plannerRecruits, 10) || 0;
+      const marketerRecruits = parseInt(this.project.marketerRecruits, 10) || 0;
+      const etcRecruits = parseInt(this.project.etcRecruits, 10) || 0;
+
+      const sum =
+        developerRecruits +
+        designerRecruits +
+        plannerRecruits +
+        marketerRecruits +
+        etcRecruits;
+
+      return sum;
+    },
+
     ...mapGetters({
       autocompleteItems: "fetchedTags"
     }),
@@ -269,17 +299,17 @@ export default {
         errors.push("URL은 반드시 100자 이내이어야 합니다.");
 
       return errors;
+    },
+
+    watchTotalRecruitsErrors() {
+      const errors = [];
+      if (!this.$v.watchTotalRecruits.$dirty) return errors;
+
+      !this.$v.watchTotalRecruits.minValue &&
+        errors.push("최소 1명 이상의 팀원이 있어야 합니다.");
+
+      return errors;
     }
-
-    // recruitsErrors() {
-    //   const errors = [];
-    //   if (!this.$v.totalRecruits.$dirty) return errors;
-
-    //   !this.$v.totalRecruits.minValue &&
-    //     errors.push("최소 1명 이상의 팀원이 있어야 합니다.");
-
-    //   return errors;
-    // }
   },
 
   methods: {
@@ -300,7 +330,7 @@ export default {
 
     submit() {
       this.$v.$touch();
-      console.log(this.project);
+
       if (this.$v.$invalid) {
         console.log("형식 불일치");
       } else {
@@ -315,11 +345,11 @@ export default {
           location: this.project.location,
           summary: this.project.summary,
           content: this.project.content,
-          developerRecruits: parseInt(this.project.developerRecruits, 10),
-          designerRecruits: parseInt(this.project.designerRecruits, 10),
-          plannerRecruits: parseInt(this.project.plannerRecruits, 10),
-          marketerRecruits: parseInt(this.project.marketerRecruits, 10),
-          etcRecruits: parseInt(this.project.etcRecruits, 10),
+          developerRecruits: parseInt(this.project.developerRecruits, 10) || 0,
+          designerRecruits: parseInt(this.project.designerRecruits, 10) || 0,
+          plannerRecruits: parseInt(this.project.plannerRecruits, 10) || 0,
+          marketerRecruits: parseInt(this.project.marketerRecruits, 10) || 0,
+          etcRecruits: parseInt(this.project.etcRecruits, 10) || 0,
           socialUrl: this.project.socialUrl,
           tags: this.project.tags
         };
