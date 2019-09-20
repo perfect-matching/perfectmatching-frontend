@@ -71,16 +71,12 @@
       placeholder="사용할 기술 스택을 입력해주세요."
       add-only-from-autocomplete
     />
-    <v-layout
-      >필요 직군( 단위: 명 ) 전체 인원:{{ watchTotalRecruits }}</v-layout
-    >
+    <v-layout>필요 직군( 단위: 명 ) 전체 인원:{{ watchTotalRecruits }}</v-layout>
     <div
       class="recruits_error"
       v-if="!$v.watchTotalRecruits.watchTotalRecruitsErrors"
       style="color:red;"
-    >
-      {{ watchTotalRecruitsErrors[0] }}
-    </div>
+    >{{ watchTotalRecruitsErrors[0] }}</div>
 
     <v-layout wrap>
       <v-flex>
@@ -188,7 +184,6 @@ import {
   BulletList,
   OrderedList,
   ListItem,
-  Link,
   Blockquote,
   HardBreak,
   HorizontalRule,
@@ -247,7 +242,6 @@ export default {
         new BulletList(),
         new OrderedList(),
         new ListItem(),
-        new Link(),
         new Blockquote(),
         new HardBreak(),
         new HorizontalRule(),
