@@ -43,7 +43,6 @@
 <script>
 import { mapGetters } from "vuex";
 import InfiniteLoading from "vue-infinite-loading";
-
 import ProjectList from "../components/ProjectListView/ProjectList.vue";
 export default {
   components: {
@@ -135,22 +134,27 @@ export default {
     },
 
     infiniteHandler($state) {
-      this.$store
-        .dispatch("FETCH_NEXT_PROJECTS", {
-          nextUrl: this.$store.state.projectModule.nextUrl
-        })
-        .then(() => {
-          $state.loaded();
-        })
-        .catch(() => {
-          $state.complete();
-        });
+      setTimeout(() => {
+        this.$store
+          .dispatch("FETCH_NEXT_PROJECTS", {
+            nextUrl: this.$store.state.projectModule.nextUrl
+          })
+          .then(() => {
+            $state.loaded();
+          })
+          .catch(() => {
+            $state.complete();
+          });
+      }, 800);
     }
   }
 };
 </script>
 
 <style scoped>
+.project_list_section {
+  min-height: 2000px;
+}
 .section_title {
   display: none;
 }
