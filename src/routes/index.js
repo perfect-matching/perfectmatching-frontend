@@ -8,10 +8,19 @@ import MyPageView from "../views/MyPageView.vue";
 import ProjectListView from "../views/ProjectListView.vue";
 import ProfileEditView from "../views/ProfileEditView.vue";
 import MyProjectsView from "../views/MyProjectsView.vue";
-import ProjectManageView from "../views/ProjectManageView.vue";
+import MyProjectEditView from "../views/MyProjectEditView.vue";
+import LeadingProjectManageView from "../views/LeadingProjectManageView.vue";
+import ApplyProjectManageView from "../views/ApplyProjectManageView.vue";
+import DoingProjectManageView from "../views/DoingProjectManageView.vue";
 import NewProjectView from "../views/NewProjectView.vue";
 import ApplicationView from "../views/ApplicationView.vue";
 import DoneProjectView from "../views/DoneProjectView.vue";
+import DoneProjectEditView from "../views/DoneProjectEditView.vue";
+import DoneProjectStateChangeView from "../views/DoneProjectStateChangeView.vue";
+import ErrorView from "../views/ErrorView.vue";
+import bus from "../utils/bus.js";
+import { store } from "../store/index.js";
+import { needLogin } from "./guards.js";
 
 Vue.use(Router);
 
@@ -36,67 +45,104 @@ export const router = new Router({
     {
       path: "/projects",
       name: "projectList",
-      component: ProjectListView
+      component: ProjectListView,
+      beforeEnter: (to, from, next) => {
+        bus.$emit("start:spinner");
+        store.dispatch("FETCH_PROJECTS").then(() => {
+          bus.$emit("end:spinner");
+          next();
+        });
+      }
     },
     {
       path: "/project/:idx",
       name: "projectDetail",
-      component: ProjectDetailView
+      component: ProjectDetailView,
+      beforeEnter: needLogin
     },
     {
       path: "/new/project",
       name: "NewProjectView",
-      component: NewProjectView
+      component: NewProjectView,
+      beforeEnter: needLogin
     },
     {
       path: "/profile/:idx",
       name: "userDetail",
-      component: UserDetailView
+      component: UserDetailView,
+      beforeEnter: needLogin
     },
     {
       path: "/my",
       name: "myPage",
-      component: MyPageView
+      component: MyPageView,
+      beforeEnter: needLogin
     },
     {
       path: "/my/edit",
       name: "profileEdit",
-      component: ProfileEditView
+      component: ProfileEditView,
+      beforeEnter: needLogin
     },
     {
       path: "/my/projects",
       name: "myProjects",
-      component: MyProjectsView
+      component: MyProjectsView,
+      beforeEnter: needLogin
     },
     {
-      path: "/my/projects/:id",
-      name: "projectManage",
-      component: ProjectManageView
+      path: "/my/leading/:idx",
+      name: "leadingProjectManage",
+      component: LeadingProjectManageView,
+      beforeEnter: needLogin
     },
     {
-      path: "/my/projects/:id/edit",
+      path: "/my/doing/:idx",
+      name: "doingProjectManage",
+      component: DoingProjectManageView,
+      beforeEnter: needLogin
+    },
+    {
+      path: "/my/apply/:idx",
+      name: "applyProjectManage",
+      component: ApplyProjectManageView,
+      beforeEnter: needLogin
+    },
+
+    {
+      path: "/my/projects/:idx/edit",
       name: "editProject",
-      component: NewProjectView // 컴포넌트 이름 수정하기
+      component: MyProjectEditView,
+      beforeEnter: needLogin
     },
     {
-      path: "/projects/:id/application",
+      path: "/projects/:idx/application",
       name: "projectApplication",
-      component: ApplicationView
+      component: ApplicationView,
+      beforeEnter: needLogin
     },
     {
-      path: "/my/projects/:id/done",
-      name: "doneProject",
-      component: DoneProjectView
+      path: "/my/projects/:idx/done",
+      name: "doneProjectStateChange",
+      component: DoneProjectStateChangeView,
+      beforeEnter: needLogin
     },
     {
       path: "/new/done",
       name: "newDoneProject",
-      component: DoneProjectView
+      component: DoneProjectView,
+      beforeEnter: needLogin
     },
     {
-      path: "/my/done/:id/edit",
+      path: "/my/done/:idx/edit",
       name: "editDoneProject",
-      component: DoneProjectView
+      component: DoneProjectEditView,
+      beforeEnter: needLogin
+    },
+    {
+      path: "*",
+      name: "Error",
+      component: ErrorView
     }
   ],
   scrollBehavior() {

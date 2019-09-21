@@ -1,8 +1,11 @@
 <template>
   <v-container>
     <article class="doing_project_article">
-      <h3>진행중인 프로젝트</h3>
+      <h3>참여중인 프로젝트</h3>
       <ul class="doing_project_list">
+        <div class="no_project" v-if="projects.length === 0">
+          현재 참여중인 프로젝트가 없습니다.
+        </div>
         <li
           class="list_item"
           v-for="project in projects"
@@ -37,7 +40,7 @@ export default {
 
   created() {
     if (this.$route.name == "myProjects") {
-      this.url = "/my/projects/:id";
+      this.url = "/my/doing";
     } else if (this.$route.name == "userDetail") {
       this.url = "/project";
     }
@@ -59,5 +62,9 @@ li {
 
 .list_item {
   margin: 15px;
+}
+
+.no_project {
+  text-align: center;
 }
 </style>

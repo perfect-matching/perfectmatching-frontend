@@ -4,27 +4,75 @@
       <div class="deadline">{{ setFromNow(project.createdDate) }}</div>
       <v-layout class="leader_info" justify-center align-center>
         <v-avatar :tile="false" :size="40" color="grey lighten-4">
-          <img
-            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
-            alt="avatar"
-          />
+          <img :src="project.profileImage" alt="avatar" />
         </v-avatar>
         <div class="leader_name">{{ project.leader }}</div>
       </v-layout>
 
-      <v-card-title class="headline">{{ project.title }}</v-card-title>
-      <v-chip class="status" color="green" text-color="white">진행중</v-chip>
-      <div class="create_date">
-        {{ setLLFormat(project.deadline) }} 까지 모집
-      </div>
-      <v-card-text>
-        요약정보입니다. 요약정보입니다. 요약정보입니다. 요약정보입니다.
-        요약정보입니다. 요약정보입니다. 요약정보입니다. 요약정보입니다.
-        요약정보입니다. 요약정보입니다. 요약정보입니다.
-      </v-card-text>
+      <v-card-title class="headline justify-center">{{
+        project.title
+      }}</v-card-title>
+      <v-chip
+        class="status"
+        :color="setChipColor(project.status)"
+        text-color="white"
+        >{{ project.status }}</v-chip
+      >
+      <div class="location">{{ project.location }}</div>
+
+      <v-card-text>{{ project.summary }}</v-card-text>
       <div class="require_skill">
-        <v-chip v-for="tag in tags" :key="tag">{{ tag }}</v-chip>
+        <v-chip v-for="tag in project.tags" :key="tag.text">{{
+          tag.text
+        }}</v-chip>
       </div>
+      <div class="position_group_title">구해요!</div>
+      <v-layout class="need_positions" justify-center>
+        <div class="position" v-if="project.developerRecruits">
+          <div class="img_title">개발자</div>
+          <img
+            class="position_img developer_img"
+            src="../../assets/monitor.svg"
+            alt
+          />
+        </div>
+
+        <div class="position" v-if="project.designerRecruits">
+          <div class="img_title">디자이너</div>
+          <img
+            class="position_img designer_img"
+            src="../../assets/paint-palette.svg"
+            alt
+          />
+        </div>
+
+        <div class="position" v-if="project.plannerRecruits">
+          <div class="img_title">기획자</div>
+          <img
+            class="position_img planner_img"
+            src="../../assets/workspace.svg"
+            alt
+          />
+        </div>
+
+        <div class="position" v-if="project.marketerRecruits">
+          <div class="img_title">마케터</div>
+          <img
+            class="position_img developer_img"
+            src="../../assets/megaphone.svg"
+            alt
+          />
+        </div>
+
+        <div class="position" v-if="project.etcRecruits">
+          <div class="img_title">기타</div>
+          <img
+            class="position_img developer_img"
+            src="../../assets/more.svg"
+            alt
+          />
+        </div>
+      </v-layout>
     </v-card>
   </v-hover>
 </template>
@@ -37,19 +85,7 @@ export default {
       require: true
     }
   },
-  data: () => ({
-    tags: [
-      "Work",
-      "Home Improvement",
-      "Vacation",
-      "Food",
-      "Drawers",
-      "Shopping",
-      "Art",
-      "Tech",
-      "Creative Writing"
-    ]
-  }),
+  data: () => ({}),
 
   methods: {
     setLLFormat(date) {
@@ -57,6 +93,15 @@ export default {
     },
     setFromNow(date) {
       return this.$_moment(date).fromNow();
+    },
+    setChipColor(status) {
+      const colors = {
+        모집중: "primary",
+        진행중: "green",
+        완료: ""
+      };
+
+      return colors[status];
     }
   }
 };
@@ -65,20 +110,21 @@ export default {
 <style scoped>
 .project_card {
   position: relative;
-  max-width: 410px;
+  width: 410px;
+  min-height: 500px;
+
+  padding-bottom: 20px;
+  overflow-y: auto;
   border: 1px solid #dbdbdb;
 }
 
 .headline {
   padding-bottom: 0;
-  text-align: center;
   font-weight: bold;
 }
 
 .deadline {
-  position: absolute;
   top: -15px;
-  right: 5px;
   background-color: #fafafa;
   padding: 0 3px 0 10px;
 }
@@ -89,6 +135,11 @@ export default {
 
 .leader_name {
   margin-left: 10px;
+}
+
+.location {
+  font-weight: bold;
+  color: #9a9a9a;
 }
 
 .create_date {
@@ -110,5 +161,41 @@ export default {
 
 .require_skill {
   padding: 0 20px 20px 20px;
+}
+
+.position {
+  margin: 5px;
+}
+
+.position_group_title {
+  font-weight: bold;
+}
+.position_img {
+  width: 40px;
+  height: 40px;
+  margin: 0 3px;
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575px) {
+  .project_card {
+    max-width: 310px;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767px) {
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199px) {
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
 }
 </style>

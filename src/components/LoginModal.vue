@@ -1,7 +1,18 @@
 <template>
-  <v-dialog v-model="dialog" persistent max-width="600px">
+  <v-dialog v-model="loginModalStatus" persistent max-width="600px">
     <template v-slot:activator="{ on }">
-      <v-btn flat color="black" dark v-on="on">로그인/회원가입</v-btn>
+      <v-btn
+        flat
+        color="black"
+        dark
+        v-on="on"
+        @click="openModal"
+        v-show="!loggedIn"
+        >로그인/회원가입</v-btn
+      >
+      <v-btn flat color="black" dark @click="logout" v-show="loggedIn"
+        >로그아웃</v-btn
+      >
     </template>
     <v-card>
       <v-card-title class="modal_title">
@@ -33,7 +44,14 @@
             @click:append="showPassword = !showPassword"
           ></v-text-field>
           <div class="form_buttons">
-            <v-btn flat color="secondary" dark @click="submit">로그인</v-btn>
+            <v-btn
+              flat
+              color="secondary"
+              dark
+              @click="submit"
+              @keyup.enter="submit"
+              >로그인</v-btn
+            >
             <v-btn flat color="secondary" dark @click="clear">취소</v-btn>
             <div>
               퍼펙트 매칭이 처음이신가요?
@@ -48,12 +66,8 @@
         <v-spacer></v-spacer>
         <div class="find_actions">
           <small class="action_item">
-            가입한 이메일을 잊으셨습니까?
-            <a href>이메일 찾기</a>
-          </small>
-          <small class="action_item">
             비밀번호을 잊으셨습니까?
-            <a href>비밀번호 찾기</a>
+            <forgot-modal></forgot-modal>
           </small>
         </div>
       </v-card-actions>
@@ -61,7 +75,9 @@
   </v-dialog>
 </template>
 <script>
+import { mapGetters } from "vuex";
 import { validationMixin } from "vuelidate";
+import ForgotModal from "./ForgotModal.vue";
 import {
   required,
   minLength,
@@ -70,6 +86,10 @@ import {
 } from "vuelidate/lib/validators";
 
 export default {
+  components: {
+    ForgotModal
+  },
+
   mixins: [validationMixin],
 
   validations: {
@@ -78,7 +98,6 @@ export default {
   },
 
   data: () => ({
-    dialog: false,
     valid: false,
     showPassword: false,
     email: "",
@@ -86,6 +105,11 @@ export default {
   }),
 
   computed: {
+    ...mapGetters({
+      loggedIn: "isAuthenticated",
+      loginModalStatus: "loginModalStatus"
+    }),
+
     emailErrors() {
       const errors = [];
       if (!this.$v.email.$dirty) return errors;
@@ -110,19 +134,48 @@ export default {
   methods: {
     submit() {
       this.$v.$touch();
+      const { email, password } = this;
+      this.$store.dispatch("AUTH_REQUEST", { email, password }).then(() => {
+        this.$_swal.fire({
+          title: "로그인 완료!",
+          text: "퍼펙트 매칭에 오신 걸 환영합니다.",
+          type: "success",
+          confirmButtonText: "확인"
+        });
+        this.$store.dispatch("TOGGLE_LOGIN_MODAL");
+        this.$router.push("/");
+      });
     },
 
     clear() {
       this.$v.$reset();
       this.email = "";
       this.password = "";
-      this.dialog = false;
+      this.$store.dispatch("TOGGLE_LOGIN_MODAL");
     },
 
     clickedJoin() {
       this.email = "";
       this.password = "";
-      this.dialog = false;
+      this.$store.dispatch("TOGGLE_LOGIN_MODAL");
+    },
+
+    openModal() {
+      this.$store.dispatch("TOGGLE_LOGIN_MODAL");
+    },
+
+    login() {
+      const { email, password } = this;
+      this.$store.dispatch("AUTH_REQUEST", { email, password }).then(() => {
+        this.$store.dispatch("TOGGLE_LOGIN_MODAL");
+        this.$router.push("/");
+      });
+    },
+
+    logout() {
+      this.$store.dispatch("AUTH_LOGOUT").then(() => {
+        this.$router.push("/");
+      });
     }
   }
 };

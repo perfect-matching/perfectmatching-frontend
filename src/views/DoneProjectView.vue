@@ -1,17 +1,8 @@
 <template>
   <section class="done_project_section">
     <v-card>
-      <h2 class="section_title" v-if="this.$route.name == 'newDoneProject'">
-        프로젝트 추가하기
-      </h2>
-      <h2
-        class="section_title"
-        v-else-if="this.$route.name == 'editDoneProject'"
-      >
-        프로젝트 수정하기
-      </h2>
-      <h2 class="section_title" v-else>프로젝트 완료</h2>
-      <done-project-form></done-project-form>
+      <h2 class="section_title">프로젝트 추가하기</h2>
+      <done-project-form :project="project"></done-project-form>
     </v-card>
   </section>
 </template>
@@ -23,7 +14,19 @@ export default {
     DoneProjectForm
   },
 
-  created() {}
+  data() {
+    return {
+      project: {
+        title: "",
+        summary: "",
+        socialUrl: "",
+        content: "",
+        tags: [],
+        startDate: "",
+        endDate: ""
+      }
+    };
+  }
 };
 </script>
 

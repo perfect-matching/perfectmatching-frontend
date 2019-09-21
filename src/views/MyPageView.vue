@@ -1,16 +1,29 @@
 <template>
   <section class="mypage_section">
     <h2 class="section_title">My Page</h2>
-    <my-info></my-info>
+    <user-info :userProfile="myProfile" :userSkills="mySkills"></user-info>
   </section>
 </template>
 
 <script>
-import MyInfo from "../components/MyPageView/MyInfo.vue";
+import { mapGetters } from "vuex";
+import UserInfo from "../components/UserDetailView/UserInfo.vue";
 
 export default {
   components: {
-    MyInfo
+    UserInfo
+  },
+
+  computed: {
+    ...mapGetters({
+      myProfile: "fetchedMyProfile",
+      mySkills: "fetchedMySkills"
+    })
+  },
+
+  created() {
+    this.$store.dispatch("GET_MY_PROFILE");
+    this.$store.dispatch("GET_MY_SKILLS_BY_IDX");
   }
 };
 </script>

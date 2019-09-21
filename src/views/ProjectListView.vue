@@ -4,6 +4,7 @@
     <v-layout>
       <v-flex xs12 sm4>
         <v-select
+          class="select_menu"
           :items="locations"
           label="지역"
           v-model="location"
@@ -11,26 +12,52 @@
           @change="findLocationQuery"
         ></v-select>
       </v-flex>
+      <v-flex xs12 sm4>
+        <v-select
+          class="select_menu"
+          :items="positions"
+          label="직군"
+          v-model="position"
+          value="value"
+          @change="findLocationQuery"
+        ></v-select>
+      </v-flex>
+      <v-flex>
+        <v-autocomplete
+          class="select_menu"
+          label="기술"
+          :items="['전체'].concat(tags)"
+          v-model="tag"
+          @change="findLocationQuery"
+        ></v-autocomplete>
+      </v-flex>
     </v-layout>
     <project-list :projects="projects"></project-list>
-    <v-btn class="next_btn" block color="secondary" dark @click="nextProjects"
-      >더 보기</v-btn
-    >
+    <infinite-loading
+      :identifier="infiniteId"
+      @infinite="infiniteHandler"
+    ></infinite-loading>
   </section>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import InfiniteLoading from "vue-infinite-loading";
+
 import ProjectList from "../components/ProjectListView/ProjectList.vue";
 export default {
   components: {
-    ProjectList
+    ProjectList,
+    InfiniteLoading
   },
 
   data() {
     return {
-      location: "",
+      location: "전체",
+      position: "전체",
+      tag: "전체",
       locations: [
+        "전체",
         "서울",
         "부산",
         "대구",
@@ -44,24 +71,28 @@ export default {
         "경상북도",
         "경상남도",
         "제주도"
-      ]
+      ],
+      positions: ["전체", "개발자", "디자이너", "기획자", "마케터", "기타"],
+      infiniteId: +new Date()
     };
   },
 
   computed: {
     ...mapGetters({
-      projects: "fetchedProjects"
+      projects: "fetchedProjects",
+      tags: "fetchedTags"
     })
   },
 
   created() {
-    this.$store.dispatch("FETCH_PROJECTS");
+    this.$store.dispatch("FETCH_PROJECT_TAGS");
   },
 
   methods: {
     // 지역 쿼리를 영어로 넘기기로 하였음. 선택한 한글 지역 이름을 영어로 리턴하는 함수
     findLocationQuery() {
       const locations = {
+        전체: "ALL",
         서울: "SEOUL",
         부산: "BUSAN",
         대구: "DAEGU",
@@ -77,22 +108,57 @@ export default {
         제주도: "JEJUDO"
       };
 
+      const positions = {
+        전체: "ALL",
+        개발자: "DEVELOPER",
+        디자이너: "DESIGNER",
+        마케터: "MARKETER",
+        기획자: "PLANNER",
+        기타: "ETC"
+      };
+
+      const tag = this.tag === "전체" ? "ALL" : this.tag;
+      // position + location
       this.$store.dispatch("FETCH_PROJECTS_WITH_QURIES", {
-        location: locations[this.location]
+        location: locations[this.location],
+        position: positions[this.position],
+        tag
       });
+
+      this.infiniteId += 1;
     },
 
     nextProjects() {
       this.$store.dispatch("FETCH_NEXT_PROJECTS", {
         nextUrl: this.$store.state.projectModule.nextUrl
       });
+    },
+
+    infiniteHandler($state) {
+      this.$store
+        .dispatch("FETCH_NEXT_PROJECTS", {
+          nextUrl: this.$store.state.projectModule.nextUrl
+        })
+        .then(() => {
+          $state.loaded();
+        })
+        .catch(() => {
+          $state.complete();
+        });
     }
   }
 };
 </script>
 
 <style scoped>
+.section_title {
+  display: none;
+}
 .next_btn {
   margin-bottom: 20px;
+}
+
+.select_menu {
+  margin-left: 20px;
 }
 </style>

@@ -1,36 +1,45 @@
 <template>
   <v-container class="project_detail_container">
     <v-card flat class="project_card">
-      <v-chip class="status" color="green" text-color="white">진행중</v-chip>
-      <div class="project_title">모든 정보를 다 얻을 수 있는 몽땅</div>
-      <div class="project_date">2019년 03월 30일 - 2019년 04월 22일</div>
+      <div class="project_title">{{ project.title }}</div>
+      <div class="project_date">
+        {{ setDateFormat(project.startDate) }} -
+        {{ setDateFormat(project.endDate) }}
+      </div>
       <div class="project_summery">
         <div class="summery_title content_title">요약내용</div>
-        <p>이 프로젝트는 모든 정보를 얻는 프로젝트입니다!</p>
+        <p>{{ project.summary }}}</p>
       </div>
 
       <div class="require_skill">
-        <div class="skill_title content_title">기술 스택</div>
-        <v-chip v-for="tag in tags" :key="tag">{{ tag }}</v-chip>
+        <div class="skill_title content_title" v-if="project.tags.length !== 0">
+          기술 스택
+        </div>
+        <v-chip v-for="skill in project.tags" :key="skill.idx">{{
+          skill.text
+        }}</v-chip>
       </div>
 
       <div class="github">
-        <div class="github_title content_title">깃허브 저장소</div>
-        <a href="https://github.com/perfect-matching/perfectmatching-frontend"
-          >https://github.com/perfect-matching/perfectmatching-frontend</a
-        >
+        <div class="github_title content_title" v-if="!!project.socialUrl">
+          깃허브 저장소
+        </div>
+        <a :href="project.socialUrl">{{ project.socialUrl }}</a>
       </div>
       <br />
 
       <div class="project_detail">
         <div class="detail_title content_title">상세설명</div>
-        <p>이 프로젝트는 모든 정보를 얻는 프로젝트입니다!</p>
+        <div v-html="project.content"></div>
       </div>
 
       <v-layout wrap v-if="this.$route.name == 'myProjects'">
         <v-spacer></v-spacer>
-        <v-btn depressed color="grey">프로젝트 삭제</v-btn>
-        <v-btn depressed color="grey" to="/my/done/:id/edit"
+        <v-btn depressed color="grey" @click="remove">프로젝트 삭제</v-btn>
+        <v-btn
+          depressed
+          color="grey"
+          :to="`/my/done/${project.doneProjectIdx}/edit`"
           >프로젝트 수정</v-btn
         >
       </v-layout>
@@ -40,19 +49,44 @@
 
 <script>
 export default {
-  data: () => ({
-    tags: [
-      "Work",
-      "Home Improvement",
-      "Vacation",
-      "Food",
-      "Drawers",
-      "Shopping",
-      "Art",
-      "Tech",
-      "Creative Writing"
-    ]
-  })
+  props: {
+    project: {
+      type: Object,
+      required: true
+    }
+  },
+
+  methods: {
+    setDateFormat(date) {
+      return this.$_moment(date).format("LL");
+    },
+
+    remove() {
+      this.$_swal
+        .fire({
+          title: "삭제 하시겠습니까?",
+          text: "삭제하시면 다시 되돌릴 수 없습니다.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "삭제"
+        })
+        .then(result => {
+          if (result.value) {
+            this.$_swal.fire(
+              "삭제되었습니다!",
+              "프로젝트가 삭제되었습니다.",
+              "success"
+            );
+            this.$store.dispatch("DELETE_DONE_PROJECT", {
+              doneProjectIdx: this.project.doneProjectIdx,
+              userIdx: this.project.userIdx
+            });
+          }
+        });
+    }
+  }
 };
 </script>
 

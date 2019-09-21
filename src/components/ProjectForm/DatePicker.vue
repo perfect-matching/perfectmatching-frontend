@@ -37,14 +37,17 @@ export default {
   },
 
   data: () => ({
-    date: "",
-    menu: false
+    menu: false,
+    date: ""
   }),
 
   methods: {
     setDate() {
       this.$refs.menu.save(this.date);
-      this.$emit("input", this.$_moment(this.date).format());
+      this.$emit(
+        "input",
+        this.$_moment(this.date).format("YYYY-MM-DDTHH:mm:ss")
+      );
     }
   }
 };

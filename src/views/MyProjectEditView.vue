@@ -2,16 +2,23 @@
   <section class="project_edit_section">
     <v-card>
       <h2 class="section_title">프로젝트 수정</h2>
-      <project-form></project-form>
+      <project-form :project="project"></project-form>
     </v-card>
   </section>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import ProjectForm from "../components/ProjectForm/ProjectForm.vue";
 export default {
   components: {
     ProjectForm
+  },
+
+  computed: {
+    ...mapGetters({
+      project: "fetchedMyProject"
+    })
   }
 };
 </script>

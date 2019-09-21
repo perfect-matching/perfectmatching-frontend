@@ -33,7 +33,7 @@ Moment.locale("kr", {
     y: "일년",
     yy: "%d년"
   },
-  ordinal: function(number) {
+  ordinal: function (number) {
     return "일";
   }
 });

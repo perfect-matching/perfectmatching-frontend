@@ -1,21 +1,22 @@
 <template>
   <section class="home_section">
-    <h2 class="section_title">퍼펙트 매칭</h2>
+    <h2 class="section_title">메인 페이지</h2>
     <article class="news_slide">
       <h3 class="article_title news_header">새소식</h3>
       <carousel></carousel>
     </article>
-    <article class="new_projects">
-      <new-project-list></new-project-list>
+    <article class="introduce">
+      <introduce></introduce>
     </article>
   </section>
 </template>
 
 <script>
 import Carousel from "../components/HomeView/Carousel.vue";
-import NewProjectList from "../components/HomeView/NewProjectList.vue";
+import Introduce from "../components/HomeView/Introduce.vue";
+
 export default {
-  components: { Carousel, NewProjectList }
+  components: { Carousel, Introduce }
 };
 </script>
 <style scoped>

@@ -3,24 +3,20 @@
     <article class="end_project_article">
       <h3>진행했던 프로젝트</h3>
       <ul class="end_project_list">
-        <li class="list_item">
-          <end-project-item></end-project-item>
-        </li>
-        <li class="list_item">
-          <end-project-item></end-project-item>
-        </li>
-        <li class="list_item">
-          <end-project-item></end-project-item>
-        </li>
-        <li class="list_item">
-          <end-project-item></end-project-item>
-        </li>
-        <li class="list_item">
-          <end-project-item></end-project-item>
+        <div class="no_project" v-if="projects.length === 0">
+          현재 진행했던 프로젝트가 없습니다.
+        </div>
+        <li
+          class="list_item"
+          v-for="project in projects"
+          :key="project.doneProjectIdx"
+        >
+          <end-project-item :project="project"></end-project-item>
         </li>
       </ul>
     </article>
     <v-btn
+      class="add_project_btn"
       v-if="this.$route.name == 'myProjects'"
       block
       color="secondary"
@@ -35,7 +31,15 @@
 import EndProjectItem from "./EndProjectItem";
 
 export default {
-  components: { EndProjectItem }
+  components: {
+    EndProjectItem
+  },
+  props: {
+    projects: {
+      type: Array,
+      required: true
+    }
+  }
 };
 </script>
 
@@ -49,5 +53,13 @@ li {
 
 .list_item {
   margin-bottom: 10px;
+}
+
+.no_project {
+  text-align: center;
+}
+
+.add_project_btn {
+  margin: 30px 0;
 }
 </style>

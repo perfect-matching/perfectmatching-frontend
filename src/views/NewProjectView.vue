@@ -1,11 +1,8 @@
 <template>
   <section class="new_project_section">
     <v-card>
-      <h2 class="section_title" v-if="this.$route.name == 'editProject'">
-        프로젝트 수정
-      </h2>
-      <h2 class="section_title" v-else>프로젝트 개설</h2>
-      <project-form></project-form>
+      <h2 class="section_title">프로젝트 개설</h2>
+      <project-form :project="project"></project-form>
     </v-card>
   </section>
 </template>
@@ -15,6 +12,24 @@ import ProjectForm from "../components/ProjectForm/ProjectForm.vue";
 export default {
   components: {
     ProjectForm
+  },
+
+  data() {
+    return {
+      project: {
+        title: "",
+        location: "",
+        summary: "",
+        content: "",
+        socialUrl: "",
+        tags: [],
+        developerRecruits: null,
+        designerRecruits: null,
+        plannerRecruits: null,
+        marketerRecruits: null,
+        etcRecruits: null
+      }
+    };
   }
 };
 </script>
