@@ -15,9 +15,9 @@
         <div class="skill_title content_title" v-if="project.tags.length !== 0">
           기술 스택
         </div>
-        <v-chip v-for="skill in project.tags" :key="skill.idx">
-          {{ skill.text }}
-        </v-chip>
+        <v-chip v-for="skill in project.tags" :key="skill.idx">{{
+          skill.text
+        }}</v-chip>
       </div>
 
       <div class="github">
@@ -30,7 +30,7 @@
 
       <div class="project_detail">
         <div class="detail_title content_title">상세설명</div>
-        <p>{{ project.content }}</p>
+        <div v-html="project.content"></div>
       </div>
 
       <v-layout wrap v-if="this.$route.name == 'myProjects'">
