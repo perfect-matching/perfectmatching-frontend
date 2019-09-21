@@ -44,12 +44,10 @@ export const joinModule = {
     },
 
     JOIN_USER({ commit }, { user }) {
-      console.log("가입 액션", user);
       return join
         .joinUser(user)
         .then(({ data }) => {
           commit("DELETE_MY_PHOTO");
-          console.log("가입성공", data);
         })
         .catch(err => {
           console.log("가입실패:", err);

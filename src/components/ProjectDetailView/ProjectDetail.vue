@@ -15,19 +15,23 @@
       <div class="location">지역: {{ project.location }}</div>
       <v-spacer></v-spacer>
       <div class="createdate">
-        <span class="createdate_title">프로젝트 개설일:</span>
+        <span class="createdate_title">개설일:</span>
         {{ setDateFormat(project.createDate) }}
       </div>
     </v-layout>
 
     <div class="detail_body">
-      <div class="project_content" v-html="project.content"></div>
+      <div
+        v-if="project.content !== ''"
+        class="project_content"
+        v-html="project.content"
+      ></div>
       <div class="summary_container">
         <div class="require_skill">
           <h4>요구 기술</h4>
-          <v-chip v-for="tag in project.tags" :key="tag.text">
-            {{ tag.text }}
-          </v-chip>
+          <v-chip v-for="tag in project.tags" :key="tag.text">{{
+            tag.text
+          }}</v-chip>
         </div>
         <div class="project_summary">
           <h4 class="summary_title">요약</h4>
@@ -168,16 +172,16 @@ img {
   border: 1px solid #dbdbdb;
   margin-bottom: 15px;
 }
-/* .detail_header::after {
+.detail_header::after {
   position: absolute;
-  left: 10%;
+  left: 17%;
 
   background-color: #fafafa;
   content: "";
   display: inline-block;
-  width: 80%;
+  width: 65%;
   height: 15px;
-} */
+}
 
 .proejct_detail {
   padding: 0 7px;
@@ -195,9 +199,8 @@ img {
 }
 
 .project_status_container {
-  position: absolute;
-  top: 75%;
-  right: 45%;
+  1position: absolute;
+
   1margin: 100px 0 10px 0;
 }
 
