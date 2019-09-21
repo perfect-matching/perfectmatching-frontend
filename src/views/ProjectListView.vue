@@ -43,16 +43,11 @@
 <script>
 import { mapGetters } from "vuex";
 import InfiniteLoading from "vue-infinite-loading";
-import infiniteScroll from "vue-infinite-scroll";
 import ProjectList from "../components/ProjectListView/ProjectList.vue";
 export default {
   components: {
     ProjectList,
     InfiniteLoading
-  },
-
-  directives: {
-    infiniteScroll
   },
 
   data() {
@@ -93,17 +88,6 @@ export default {
   },
 
   methods: {
-    // loadMore: function() {
-    //   this.busy = true;
-
-    //   setTimeout(() => {
-    //     for (var i = 0, j = 10; i < j; i++) {
-    //       this.data.push({ name: count++ });
-    //     }
-    //     this.busy = false;
-    //   }, 1000);
-    // },
-
     // 지역 쿼리를 영어로 넘기기로 하였음. 선택한 한글 지역 이름을 영어로 리턴하는 함수
     findLocationQuery() {
       const locations = {

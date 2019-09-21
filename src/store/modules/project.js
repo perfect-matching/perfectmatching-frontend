@@ -107,7 +107,11 @@ export const projectModule = {
           commit("SET_PROJECTS", projects);
         })
         .catch(err => {
-          commit("SET_PROJECTS", []);
+          const projects = {
+            datas: [],
+            nextUrl: null
+          };
+          commit("SET_PROJECTS", projects);
         });
     },
 
