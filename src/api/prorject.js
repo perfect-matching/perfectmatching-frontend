@@ -6,6 +6,8 @@ function getProjects() {
 }
 
 function getNextProjects(url) {
+  console.log(url);
+  console.log(axios.get(url));
   return axios.get(url);
 }
 
@@ -28,6 +30,13 @@ function changeProjectStatus({ projectIdx, status }, token) {
 }
 
 function getProjectsWithQueries(location, position, tag) {
+  const encodedTag = encodeURIComponent(tag);
+  console.log(encodedTag);
+  console.log(
+    axios.get(
+      `${backend.baseUrl}/projects?location=${location}&position=${position}&tag=${tag}`
+    )
+  );
   return axios.get(
     `${backend.baseUrl}/projects?location=${location}&position=${position}&tag=${tag}`
   );

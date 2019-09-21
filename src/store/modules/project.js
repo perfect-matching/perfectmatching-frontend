@@ -154,9 +154,7 @@ export const projectModule = {
       const token = localStorage.getItem("user-token");
       return project
         .postNewProject(postProject, token)
-        .then(() => {
-          console.log("성공@!!@");
-        })
+        .then(() => {})
         .catch(err => {
           console.log("어?", err);
         });
@@ -166,7 +164,7 @@ export const projectModule = {
       const token = localStorage.getItem("user-token");
       return project
         .postDoneProject(doneProject, token)
-        .then(() => { })
+        .then(() => {})
         .catch(err => {
           console.log(err);
         });
@@ -176,9 +174,7 @@ export const projectModule = {
       const token = localStorage.getItem("user-token");
       return project
         .putProject(projectIdx, putProject, token)
-        .then(() => {
-          console.log("수정 성공!");
-        })
+        .then(() => {})
         .catch(err => {
           console.log(err);
         });
@@ -188,7 +184,7 @@ export const projectModule = {
       const token = localStorage.getItem("user-token");
       return project
         .putDoneProject(doneProjectIdx, doneProject, token)
-        .then(() => { })
+        .then(() => {})
         .catch(err => {
           console.log(err);
         });
@@ -198,9 +194,7 @@ export const projectModule = {
       const token = localStorage.getItem("user-token");
       return project
         .deleteProject(projectIdx, token)
-        .then(() => {
-          console.log("삭제 성공");
-        })
+        .then(() => {})
         .catch(err => {
           console.log(err);
         });

@@ -12,9 +12,7 @@ export const applyModule = {
       const token = localStorage.getItem("user-token");
       return apply
         .applyToProject({ projectIdx, position, simpleProfile }, token)
-        .then(({ data }) => {
-          console.log("지원 완료!!");
-        })
+        .then(({ data }) => {})
         .catch(err => console.log(err));
     },
 
@@ -34,7 +32,6 @@ export const applyModule = {
       return apply
         .applyCancel(projectIdx, token)
         .then(() => {
-          console.log("지원 취소 완료!");
           dispatch("GET_PROJECT_APPLICANTS_BY_IDX", { idx: projectIdx });
           dispatch("GET_MY_PROJECT_MEMBERS_BY_IDX", { idx: projectIdx });
         })
