@@ -4,6 +4,7 @@
     <v-content>
       <v-container class="view_wrapper" fluid>
         <router-view></router-view>
+        <spinner></spinner>
       </v-container>
     </v-content>
   </v-app>
@@ -11,9 +12,11 @@
 
 <script>
 import NavBar from "./components/NavBar.vue";
+import Spinner from "./components/Spinner.vue";
 export default {
   components: {
-    NavBar
+    NavBar,
+    Spinner
   },
 
   props: {

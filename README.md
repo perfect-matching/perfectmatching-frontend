@@ -1,4 +1,17 @@
-# perfectmatching-frontend
+# 퍼펙트 매칭 프론트엔드 레포지토리(perfectmatching-frontend)
+
+사용자가 원하는대로 사이드 프로젝트를 함께할 팀원들을 모집할 수 있고 또는 사용자가 원하는 사이드 프로젝트에 참여하기 위해서 프로젝트를 찾을 수 있는 매칭 플랫폼 프로젝트.
+
+## 개발 환경
+
+| TYPE      | SPEC                 |
+| --------- | -------------------- |
+| OS        | Mac OS, Windows 10   |
+| Vue.js    | v3.9.3               |
+| yarn      | v1.16.0              |
+| Node.js   | v10.15.3             |
+| ESlint    | Standard for vue-cli |
+| Test Tool | Jest                 |
 
 ## Project setup
 
@@ -54,7 +67,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### URL 명세
 
-#### 메인페이지
+<details>
+
+<summary>접기/펼치기 버튼</summary>
 
 | URL                       | 페이지 이름                                                                         |
 | ------------------------- | ----------------------------------------------------------------------------------- |
@@ -74,8 +89,13 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 | /my/done/:idx/edit        | [진행했던 프로젝트 수정 페이지](https://perfectmatching.netlify.com/my/done/1/edit) |
 | /profile/:idx             | [유저 상세페이지](https://perfectmatching.netlify.com/profile/1)                    |
 
+</details>
+
 ---
+
 ## Git 컨벤션
+
+<details><summary>접기/펼치기 버튼</summary>
 
 ### 공통사항
 
@@ -97,4 +117,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
   git commit -m "Update: HomeView, add login button"
   git commit -m "Add: LoginModal.vue"
   ```
+
+  </details>
+
 ---
