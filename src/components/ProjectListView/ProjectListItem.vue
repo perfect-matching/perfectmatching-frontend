@@ -9,68 +9,51 @@
         <div class="leader_name">{{ project.leader }}</div>
       </v-layout>
 
-      <v-card-title class="headline justify-center">{{
+      <v-card-title class="headline justify-center">
+        {{
         project.title
-      }}</v-card-title>
+        }}
+      </v-card-title>
       <v-chip
         class="status"
         :color="setChipColor(project.status)"
         text-color="white"
-        >{{ project.status }}</v-chip
-      >
+      >{{ project.status }}</v-chip>
       <div class="location">{{ project.location }}</div>
 
       <v-card-text>{{ project.summary }}</v-card-text>
       <div class="require_skill">
-        <v-chip v-for="tag in project.tags" :key="tag.text">{{
+        <v-chip v-for="tag in project.tags" :key="tag.text">
+          {{
           tag.text
-        }}</v-chip>
+          }}
+        </v-chip>
       </div>
       <div class="position_group_title">구해요!</div>
       <v-layout class="need_positions" justify-center>
         <div class="position" v-if="project.developerRecruits">
           <div class="img_title">개발자</div>
-          <img
-            class="position_img developer_img"
-            src="../../assets/monitor.svg"
-            alt
-          />
+          <img class="position_img developer_img" src="../../assets/monitor.svg" alt />
         </div>
 
         <div class="position" v-if="project.designerRecruits">
           <div class="img_title">디자이너</div>
-          <img
-            class="position_img designer_img"
-            src="../../assets/paint-palette.svg"
-            alt
-          />
+          <img class="position_img designer_img" src="../../assets/paint-palette.svg" alt />
         </div>
 
         <div class="position" v-if="project.plannerRecruits">
           <div class="img_title">기획자</div>
-          <img
-            class="position_img planner_img"
-            src="../../assets/workspace.svg"
-            alt
-          />
+          <img class="position_img planner_img" src="../../assets/workspace.svg" alt />
         </div>
 
         <div class="position" v-if="project.marketerRecruits">
           <div class="img_title">마케터</div>
-          <img
-            class="position_img developer_img"
-            src="../../assets/megaphone.svg"
-            alt
-          />
+          <img class="position_img developer_img" src="../../assets/megaphone.svg" alt />
         </div>
 
         <div class="position" v-if="project.etcRecruits">
           <div class="img_title">기타</div>
-          <img
-            class="position_img developer_img"
-            src="../../assets/more.svg"
-            alt
-          />
+          <img class="position_img developer_img" src="../../assets/more.svg" alt />
         </div>
       </v-layout>
     </v-card>
@@ -112,7 +95,6 @@ export default {
   position: relative;
   width: 410px;
   min-height: 500px;
-
   padding-bottom: 20px;
   overflow-y: auto;
   border: 1px solid #dbdbdb;
@@ -121,6 +103,14 @@ export default {
 .headline {
   padding-bottom: 0;
   font-weight: bold;
+  line-height: 40px;
+  min-height: 80px; /* webkit 외 브라우저 대응, line-height*line수 */
+  max-height: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .deadline {
@@ -161,6 +151,9 @@ export default {
 
 .require_skill {
   padding: 0 20px 20px 20px;
+  min-height: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .position {
@@ -179,7 +172,8 @@ export default {
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575px) {
   .project_card {
-    max-width: 310px;
+    max-width: 350px;
+    margin: 0 auto;
   }
 }
 
