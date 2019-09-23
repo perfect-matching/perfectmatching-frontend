@@ -1,10 +1,7 @@
 <template>
   <header>
     <v-toolbar class="tool_bar" flat fixed>
-      <v-toolbar-side-icon
-        class="hidden-md-and-up"
-        @click="toggleDrawer"
-      ></v-toolbar-side-icon>
+      <v-toolbar-side-icon class="hidden-md-and-up" @click="toggleDrawer"></v-toolbar-side-icon>
       <v-btn flat to="/">
         <v-toolbar-title>퍼펙트 매칭</v-toolbar-title>
       </v-btn>
@@ -35,7 +32,7 @@
         </v-btn>
       </div>
     </v-toolbar>
-    <spinner></spinner>
+
     <v-navigation-drawer v-model="drawer" app dark temporary>
       <v-list dense>
         <v-list-tile to="/new/project">
@@ -68,13 +65,11 @@
 </template>
 
 <script>
-import Spinner from "./Spinner.vue";
 import { mapGetters } from "vuex";
 import LoginModal from "./LoginModal.vue";
 export default {
   name: "navBar",
   components: {
-    Spinner,
     LoginModal
   },
 

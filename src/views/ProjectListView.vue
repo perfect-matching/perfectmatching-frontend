@@ -153,6 +153,7 @@ export default {
 
 <style scoped>
 .project_list_section {
+  padding-top: 20px;
   min-height: 2000px;
 }
 .section_title {
