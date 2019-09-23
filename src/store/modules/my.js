@@ -106,7 +106,7 @@ export const myModule = {
   },
 
   actions: {
-    GET_MY_PROFILE({ commit }) {
+    GET_MY_PROFILE({ commit, dispatch }) {
       const token = localStorage.getItem("user-token");
       const newToken = token.substring(7, token.length); // Bearer 삭제
       const decoded = jwt.decode(newToken, { complete: true });
@@ -117,7 +117,8 @@ export const myModule = {
           commit("SET_MY_PROFILE", data);
         })
         .catch(err => {
-          console.log(err);
+          // 세션이 만료된 상태에서 정보를 가져오면 자동 로그아웃
+          dispatch("AUTH_LOGOUT");
         });
     },
 
