@@ -59,6 +59,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 - [각 페이지 와이어프레임](./References/wireframe.md)
 
+### 중간 발표
+- [URL](https://www.youtube.com/watch?v=Z-qjY1SGmF8)
+
 ### <del>배포 주소</del>(배포 중단)
 
 - <del>[테스트 보러가기](https://perfectmatching.netlify.com/)</del>
