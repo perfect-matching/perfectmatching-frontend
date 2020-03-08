@@ -59,11 +59,17 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 - [각 페이지 와이어프레임](./References/wireframe.md)
 
-### 테스트 배포 주소
+### <del>배포 주소</del>(배포 중단)
 
-- 일부 로직 미구현 부분은 하드코딩으로 되어 있음.
-- 백엔들 개발자확인용
-- [테스트 보러가기](https://perfectmatching.netlify.com/)
+- <del>[테스트 보러가기](https://perfectmatching.netlify.com/)</del>
+
+### 구동 화면
+
+![](./readmeImages/perfectmatching1.png)
+
+<br>
+
+![](./readmeImages/perfectmatching2.png)
 
 ### URL 명세
 

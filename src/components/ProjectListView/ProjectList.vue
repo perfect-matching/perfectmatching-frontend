@@ -4,11 +4,7 @@
       <ul class="project_list">
         <v-layout wrap>
           <v-flex>
-            <li
-              class="list_item"
-              v-for="(project, index) in projects"
-              :key="index"
-            >
+            <li class="list_item" v-for="(project, index) in projects" :key="index">
               <router-link :to="`/project/${project.projectIdx}`">
                 <project-list-item :project="project"></project-list-item>
               </router-link>
@@ -61,5 +57,29 @@ li {
 
 .list_item {
   margin: 30px;
+} /* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575px) {
+  li {
+    width: 100%;
+  }
+  .list_item {
+    margin: 30px 0;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767px) {
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199px) {
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
 }
 </style>
