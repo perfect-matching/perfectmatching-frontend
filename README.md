@@ -130,3 +130,21 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
   </details>
 
 ---
+
+## 프로젝트 구조
+
+```
+├── root
+│   └── src
+│       ├── api             # 외부 서버 요청함수
+│       ├── assets          # 리소스 파일(이미지 같은거)
+│       ├── components      # 재사용 가능한 컴포넌트 and view 컴포넌트(views)에 쓰이는 컴포넌트
+│       ├── plugins         # 외부 라이브러리 관리
+│       ├── routes          # 라우팅
+│       ├── store           # vuex 상태 관리
+│       ├── utils           # 유틸 함수
+│       └── validation      # 유효성 검증
+│       └── views           # 페이지별 화면 컴포넌트
+│
+...
+```
